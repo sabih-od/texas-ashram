@@ -21,8 +21,8 @@ export class UsersService {
                 first_name: createUserDto.first_name,
                 last_name: createUserDto.last_name,
                 email: createUserDto.email,
+                phone: createUserDto.phone,
                 password: hashedPassword,
-                role_id: createUserDto.role_id,
             });
 
             await this.userRepository.save(user);
@@ -31,7 +31,7 @@ export class UsersService {
         } catch (error) {
             if (error instanceof QueryFailedError) {
                 return {
-                    error: error
+                    error: error['sqlMessage']
                 };
             }
         }
@@ -60,6 +60,24 @@ export class UsersService {
         }
     }
 
+    async findOneByEmail(email: string): Promise<any> {
+        try {
+            const user = await this.userRepository.findOneOrFail({
+                where: {
+                    email: email
+                }
+            });
+
+            return user;
+        } catch (error) {
+            if (error instanceof EntityNotFoundError) {
+                return {
+                    error: 'User Not Found'
+                };
+            }
+        }
+    }
+
     async update(id: number, updateUserDto: UpdateUserDto): Promise<any> {
         try {
             const user = await this.findOne(id);
@@ -78,7 +96,7 @@ export class UsersService {
         } catch (error) {
             if (error instanceof QueryFailedError) {
                 return {
-                    error: error
+                    error: error['sqlMessage']
                 };
             }
         }
