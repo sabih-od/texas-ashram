@@ -11,12 +11,12 @@ export class User {
     @Column('text')
     last_name: string;
 
-    @Column('text')
+    @Column({ type: 'varchar', unique: true })
     email: string;
 
     @Column('text')
     password: string;
 
-    @Column('int')
+    @Column({ type: 'int', default: 2 })
     role_id: number;
 }

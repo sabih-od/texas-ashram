@@ -1,8 +1,9 @@
 import { Injectable, Inject, Catch } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository, EntityNotFoundError } from 'typeorm';
+import {Repository, EntityNotFoundError, QueryFailedError} from 'typeorm';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -12,15 +13,28 @@ export class UsersService {
     ) {}
 
     async create(createUserDto: CreateUserDto): Promise<any> {
-        const user = await this.userRepository.create({
-            first_name: createUserDto.first_name,
-            last_name: createUserDto.last_name,
-            email: createUserDto.email,
-            password: createUserDto.password,
-            role_id: createUserDto.role_id,
-        });
+        try {
+            let hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+            // const isMatch = await bcrypt.compare(password, hash);
 
-        return await this.userRepository.save(user);
+            const user = await this.userRepository.create({
+                first_name: createUserDto.first_name,
+                last_name: createUserDto.last_name,
+                email: createUserDto.email,
+                password: hashedPassword,
+                role_id: createUserDto.role_id,
+            });
+
+            await this.userRepository.save(user);
+
+            return await this.findOne(user.id);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                return {
+                    error: error
+                };
+            }
+        }
     }
 
     async findAll(): Promise<User[]> {
@@ -29,11 +43,14 @@ export class UsersService {
 
     async findOne(id: number): Promise<any> {
         try {
-            return await this.userRepository.findOneOrFail({
+            const user = await this.userRepository.findOneOrFail({
                 where: {
                     id: id
                 }
             });
+
+            delete user.password;
+            return user;
         } catch (error) {
             if (error instanceof EntityNotFoundError) {
                 return {
@@ -44,15 +61,27 @@ export class UsersService {
     }
 
     async update(id: number, updateUserDto: UpdateUserDto): Promise<any> {
-        const user = await this.findOne(id);
+        try {
+            const user = await this.findOne(id);
 
-        if (user.error) {
-            return user;
+            if (user.error) {
+                return user;
+            }
+
+            if (updateUserDto.password) {
+                updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+            }
+
+            await this.userRepository.update(user, updateUserDto);
+
+            return await this.findOne(id);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                return {
+                    error: error
+                };
+            }
         }
-
-        await this.userRepository.update(user, updateUserDto);
-
-        return await this.findOne(id);
     }
 
     async remove(id: number): Promise<any> {
