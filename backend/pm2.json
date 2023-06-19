@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "Texas Ashram API (3023)",
+            "script": "npm start",
+            "instances": "1",
+            "autorestart": true,
+            "max_restarts": 100,
+            "time": true
+        }
+    ]
+}
