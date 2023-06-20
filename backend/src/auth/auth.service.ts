@@ -20,7 +20,9 @@ export class AuthService {
         }
 
         if (!await bcrypt.compare(signInDto.password, user?.password)) {
-            throw new UnauthorizedException();
+            return {
+                error: 'Unauthorized'
+            };
         }
         const { password, ...result } = user;
         const payload = { sub: user.id, ...user};

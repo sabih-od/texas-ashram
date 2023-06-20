@@ -12,20 +12,36 @@ export class AuthController {
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
-    signIn(@Body() signInDto: SigninDto) {
-        return this.authService.signIn(signInDto);
+    async signIn(@Body() signInDto: SigninDto) {
+        let res = await this.authService.signIn(signInDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Sign In successful!',
+            data: res.error ? [] : res,
+        }
     }
 
     @HttpCode(HttpStatus.OK)
     @Post('signup')
-    signUp(@Body() signUpDto: CreateUserDto) {
-        return this.authService.signup(signUpDto);
+    async signUp(@Body() signUpDto: CreateUserDto) {
+        let res = await this.authService.signup(signUpDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Sign Up successful!',
+            data: res.error ? [] : res,
+        }
     }
 
     @UseGuards(AuthGuard)
     @Get('me')
     @ApiBearerAuth()
     me(@Request() req) {
-        return req.user;
+        return {
+            success: true,
+            message: '',
+            data: req.user,
+        }
     }
 }
