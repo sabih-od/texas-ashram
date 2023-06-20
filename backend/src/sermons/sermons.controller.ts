@@ -92,7 +92,7 @@ export class SermonsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
       let sermon = await this.sermonsService.findOne(+id);
 
       //delete uploaded file
