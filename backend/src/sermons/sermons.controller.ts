@@ -49,17 +49,35 @@ export class SermonsController {
             createSermonDto.media = dir_path + file_name;
         }
 
-        return this.sermonsService.create(createSermonDto);
+        let res = await this.sermonsService.create(createSermonDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Sermon created successfully!',
+            data: res.error ? [] : res,
+        }
   }
 
   @Get()
-  findAll() {
-    return this.sermonsService.findAll();
+  async findAll() {
+      let res = await this.sermonsService.findAll();
+
+      return {
+          success: true,
+          message: '',
+          data: res,
+      }
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.sermonsService.findOne(+id);
+    let res = await this.sermonsService.findOne(+id);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : '',
+          data: res.error ? [] : res,
+      }
   }
 
   @Patch(':id')
@@ -88,7 +106,13 @@ export class SermonsController {
           await fsPromises.writeFile(filepath, media.buffer);
       }
 
-    return this.sermonsService.update(+id, updateSermonDto);
+    let res = await this.sermonsService.update(+id, updateSermonDto);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'Sermon updated successfully!',
+          data: res.error ? [] : res,
+      }
   }
 
   @Delete(':id')
@@ -102,6 +126,12 @@ export class SermonsController {
               return fsPromises.unlink(delete_path);
           });
 
-      return this.sermonsService.remove(+id);
+      let res = await this.sermonsService.remove(+id);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'Sermon deleted successfully!',
+          data: res.error ? [] : res,
+      }
   }
 }

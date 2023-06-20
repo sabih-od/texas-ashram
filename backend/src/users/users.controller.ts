@@ -13,27 +13,57 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    let res = await this.usersService.create(createUserDto);
+
+    return {
+        success: !res.error,
+        message: res.error ? res.error : 'User created successfully!',
+        data: res.error ? [] : res,
+    }
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    let res = await this.usersService.findAll();
+
+      return {
+          success: true,
+          message: '',
+          data: res,
+      }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    let res = await this.usersService.findOne(+id);
+
+    return {
+        success: !res.error,
+        message: res.error ? res.error : '',
+        data: res.error ? [] : res,
+    }
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    let res = await this.usersService.update(+id, updateUserDto);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'User updated successfully!',
+          data: res.error ? [] : res,
+      }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    let res = await this.usersService.remove(+id);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'User deleted successfully!',
+          data: res.error ? [] : res,
+      }
   }
 }
