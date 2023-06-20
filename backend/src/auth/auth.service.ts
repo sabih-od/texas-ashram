@@ -23,9 +23,10 @@ export class AuthService {
             throw new UnauthorizedException();
         }
         const { password, ...result } = user;
-        const payload = { sub: user.id, email: user.email, ...user};
+        const payload = { sub: user.id, ...user};
 
         return {
+            ...payload,
             access_token: await this.jwtService.signAsync(payload),
         };
     }
@@ -40,6 +41,7 @@ export class AuthService {
         const payload = { sub: user.id, ...user};
 
         return {
+            ...payload,
             access_token: await this.jwtService.signAsync(payload),
         };
     }
