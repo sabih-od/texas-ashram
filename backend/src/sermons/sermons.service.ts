@@ -31,8 +31,20 @@ export class SermonsService {
         }
     }
 
-    async findAll(): Promise<any> {
-        return await this.sermonRepository.find();
+    async findAll(page: number = 1, limit: number = 10): Promise<any> {
+        const [data, total] = await this.sermonRepository.findAndCount({
+            skip: (page - 1) * limit,
+            take: limit,
+        });
+
+        const totalPages = Math.ceil(total / limit);
+
+        return {
+            data,
+            total,
+            currentPage: page,
+            totalPages,
+        };
     }
 
     async findOne(id: number): Promise<any> {

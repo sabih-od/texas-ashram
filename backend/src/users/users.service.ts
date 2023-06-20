@@ -37,8 +37,20 @@ export class UsersService {
         }
     }
 
-    async findAll(): Promise<User[]> {
-        return await this.userRepository.find();
+    async findAll(page: number = 1, limit: number = 10): Promise<any> {
+        const [data, total] = await this.userRepository.findAndCount({
+            skip: (page - 1) * limit,
+            take: limit,
+        });
+
+        const totalPages = Math.ceil(total / limit);
+
+        return {
+            data,
+            total,
+            currentPage: page,
+            totalPages,
+        };
     }
 
     async findOne(id: number): Promise<any> {

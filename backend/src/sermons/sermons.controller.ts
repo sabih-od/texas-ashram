@@ -8,7 +8,7 @@ import {
     Delete,
     UseGuards,
     UseInterceptors,
-    UploadedFile, ParseFilePipe, MaxFileSizeValidator, Req
+    UploadedFile, ParseFilePipe, MaxFileSizeValidator, Req, Query
 } from '@nestjs/common';
 import { SermonsService } from './sermons.service';
 import { CreateSermonDto } from './dto/create-sermon.dto';
@@ -59,13 +59,13 @@ export class SermonsController {
   }
 
   @Get()
-  async findAll() {
-      let res = await this.sermonsService.findAll();
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+      let res = await this.sermonsService.findAll(page, limit);
 
       return {
           success: true,
           message: '',
-          data: res,
+          ...res
       }
   }
 

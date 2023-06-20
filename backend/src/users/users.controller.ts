@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -24,13 +24,13 @@ export class UsersController {
   }
 
   @Get()
-  async findAll() {
-    let res = await this.usersService.findAll();
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+    let res = await this.usersService.findAll(page, limit);
 
       return {
           success: true,
           message: '',
-          data: res,
+          ...res
       }
   }
 
