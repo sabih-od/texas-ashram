@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class User {
@@ -22,4 +22,7 @@ export class User {
 
     @Column({ type: 'int', default: 2 })
     role_id: number;
+
+    @Column({ type: 'text', nullable: true})
+    profile_picture: number;
 }

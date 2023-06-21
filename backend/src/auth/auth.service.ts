@@ -1,15 +1,19 @@
-import {Injectable, UnauthorizedException} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import { UsersService } from "../users/users.service";
 import * as bcrypt from 'bcrypt';
 import {JwtService} from "@nestjs/jwt";
 import {SigninDto} from "./dto/signin.dto";
 import {CreateUserDto} from "../users/dto/create-user.dto";
+import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
+import {User} from "../users/entities/user.entity";
 
 @Injectable()
 export class AuthService {
     constructor(
         private usersService: UsersService,
         private jwtService: JwtService,
+        @Inject('USER_REPOSITORY')
+        private userRepository: Repository<User>,
     ) {}
 
     async signIn(signInDto: SigninDto): Promise<any> {
@@ -46,5 +50,40 @@ export class AuthService {
             ...payload,
             access_token: await this.jwtService.signAsync(payload),
         };
+    }
+
+    async uploadProfilePicture(user_id: number, file_path): Promise<any> {
+        try {
+            let user = await this.userRepository.findOneOrFail({
+                where: {
+                    id: user_id
+                }
+            });
+
+            return await this.userRepository.update(user.id, {
+                profile_picture: file_path
+            });
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                return {
+                    error: error['sqlMessage']
+                };
+            }
+        }
+    }
+
+    async getUserByEmail (email: string): Promise<any> {
+        try {
+            const user = await this.usersService.findOneByEmail(email);
+
+            delete user.password;
+            return user;
+        } catch (error) {
+            if (error instanceof EntityNotFoundError) {
+                return {
+                    error: 'User Not Found'
+                };
+            }
+        }
     }
 }
