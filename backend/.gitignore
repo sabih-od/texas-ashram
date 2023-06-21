@@ -36,5 +36,4 @@ lerna-debug.log*
 
 .env
 
-src/database.providers.ts
 uploads/*
