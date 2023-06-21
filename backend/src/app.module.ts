@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { SermonsModule } from './sermons/sermons.module';
 import { PostsModule } from './posts/posts.module';
 import { PrayerRequestsModule } from './prayer-requests/prayer-requests.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PrayerRequestsModule } from './prayer-requests/prayer-requests.module';
       SermonsModule,
       PostsModule,
       PrayerRequestsModule,
+      AnnouncementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
