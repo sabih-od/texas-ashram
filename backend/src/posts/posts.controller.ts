@@ -86,9 +86,10 @@ export class PostsController {
       new ParseFilePipe({
           validators: [
               new MaxFileSizeValidator({maxSize: 100000000})
-          ]
+          ],
+          fileIsRequired: false
       })
-  ) media: Express.Multer.File) {
+  ) media?: Express.Multer.File) {
       let post = await this.postsService.findOne(+id);
       if (post.error) {
           return {
@@ -125,7 +126,7 @@ export class PostsController {
 
           return {
               success: !res.error,
-              message: res.error ? res.error : 'Sermon updated successfully!',
+              message: res.error ? res.error : 'Post updated successfully!',
               data: res.error ? [] : res,
           }
       }

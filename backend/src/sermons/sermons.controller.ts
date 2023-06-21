@@ -86,9 +86,10 @@ export class SermonsController {
       new ParseFilePipe({
           validators: [
               new MaxFileSizeValidator({maxSize: 100000000})
-          ]
+          ],
+          fileIsRequired: false
       })
-  ) media: Express.Multer.File) {
+  ) media?: Express.Multer.File) {
       let sermon = await this.sermonsService.findOne(+id);
       if (sermon.error) {
           return {
