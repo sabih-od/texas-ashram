@@ -18,6 +18,7 @@ async function bootstrap() {
         .addTag('Auth')
         .addTag('Users')
         .addTag('Sermons')
+        .addTag('Posts')
         .addSecurity('bearer', {
             type: 'http',
             scheme: 'bearer',

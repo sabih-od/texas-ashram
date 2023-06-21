@@ -47,6 +47,15 @@ export class UsersController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    let user = await this.usersService.findOne(+id);
+    if (user.error) {
+      return {
+          success: false,
+          message: user.error,
+          data: [],
+      }
+    }
+
     let res = await this.usersService.update(+id, updateUserDto);
 
       return {
@@ -58,6 +67,15 @@ export class UsersController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
+    let user = await this.usersService.findOne(+id);
+    if (user.error) {
+      return {
+          success: false,
+          message: user.error,
+          data: [],
+      }
+    }
+
     let res = await this.usersService.remove(+id);
 
       return {

@@ -3,7 +3,6 @@ import {ApiProperty} from "@nestjs/swagger";
 
 export class CreateSermonDto {
     @IsNotEmpty()
-    @MaxLength(20)
     @ApiProperty({ example: 'Sermon title' })
     title: string;
 
