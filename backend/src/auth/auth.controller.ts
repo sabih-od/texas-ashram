@@ -51,11 +51,13 @@ export class AuthController {
     @UseGuards(AuthGuard)
     @Get('me')
     @ApiBearerAuth()
-    me(@Request() req) {
+    async me(@Request() req) {
+        let user = await this.authService.getUserByEmail(req.user.email);
+
         return {
-            success: true,
-            message: '',
-            data: req.user,
+            success: !user.error,
+            message: user.error ? user.error : '',
+            data: user.error ? [] : user,
         }
     }
 
