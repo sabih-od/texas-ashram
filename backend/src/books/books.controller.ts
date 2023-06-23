@@ -3,15 +3,19 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
     UseInterceptors,
-    UploadedFile,
-    ParseFilePipe, Query, UseGuards, UploadedFiles
+    Query, UseGuards, UploadedFiles
 } from '@nestjs/common';
 import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express";
-import { generateRandomString, getFileExtension } from "../helpers/helper";
+import {
+    deleteFileFromUploads,
+    generateRandomString,
+    getFileExtension,
+    getRandomFileName,
+    uploadFile
+} from "../helpers/helper";
 import { promises as fsPromises } from "fs";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "../auth/auth.guard";
@@ -67,30 +71,28 @@ export class BooksController {
         @UploadedFiles() files: { image: Express.Multer.File[], file?: Express.Multer.File[] },
     ) {
         try {
+            let app_url = process.env.APP_URL + ':' + process.env.PORT;
+
             // File upload work
             if (files.file && files.file[0] && files.file[0].originalname && files.file[0].buffer) {
-                const randomString = generateRandomString(20);
-                const fileExtension = getFileExtension(files.file[0].originalname);
-                const fileName = `${randomString}.${fileExtension}`;
-                const dirPath = '/uploads/books';
-                const filePath = `.${dirPath}/${fileName}`;
+                let file_name = getRandomFileName(files.file[0]);
 
-                await fsPromises.mkdir(`.${dirPath}`, { recursive: true });
-                await fsPromises.writeFile(filePath, files.file[0].buffer);
-                createBookDto.file = `${dirPath}/${fileName}`;
+                let dir_path = '/uploads/books/';
+                let file_path = '.' + dir_path + file_name;
+                await uploadFile('.' + dir_path, file_path, files.file[0]);
+
+                createBookDto.file = app_url + dir_path + file_name;
             }
 
             // Image upload work
             if (files.image && files.image[0] && files.image[0].originalname && files.image[0].buffer) {
-                const randomString = generateRandomString(20);
-                const fileExtension = getFileExtension(files.image[0].originalname);
-                const fileName = `${randomString}.${fileExtension}`;
-                const dirPath = '/uploads/books';
-                const filePath = `.${dirPath}/${fileName}`;
+                let file_name = getRandomFileName(files.image[0]);
 
-                await fsPromises.mkdir(`.${dirPath}`, { recursive: true });
-                await fsPromises.writeFile(filePath, files.image[0].buffer);
-                createBookDto.image = `${dirPath}/${fileName}`;
+                let dir_path = '/uploads/books/';
+                let file_path = '.' + dir_path + file_name;
+                await uploadFile('.' + dir_path, file_path, files.image[0]);
+
+                createBookDto.image = app_url + dir_path + file_name;
             }
 
             const res = await this.booksService.create(createBookDto);
@@ -129,7 +131,7 @@ export class BooksController {
         }
     }
 
-    @Patch(':id')
+    @Post(':id')
     @UseInterceptors(
         FileFieldsInterceptor([
             { name: 'file', maxCount: 1 },
@@ -153,30 +155,30 @@ export class BooksController {
                 };
             }
 
+            let app_url = process.env.APP_URL + ':' + process.env.PORT;
+
             // File upload work
             if (files.file[0] && files.file[0].originalname && files.file[0].buffer) {
                 // Delete existing file
-                const deletePath = '.' + book.file;
-                await fsPromises.unlink(deletePath);
+                await deleteFileFromUploads(app_url, book.file);
 
-                const dirPath = '/uploads/books';
-                const filePath = '.' + dirPath + files.file[0].originalname;
+                let dir_path = '/uploads/books/';
+                let file_name = getRandomFileName(files.file[0]);
+                let file_path = '.' + dir_path + file_name;
 
-                await fsPromises.mkdir('.' + dirPath, {recursive: true});
-                await fsPromises.writeFile(filePath, files.file[0].buffer);
+                await uploadFile('.' + dir_path, file_path, files.file[0]);
             }
 
             // Image upload work
             if (files.image[0] && files.image[0].originalname && files.image[0].buffer) {
                 // Delete existing image
-                const deletePath = '.' + book.image;
-                await fsPromises.unlink(deletePath);
+                await deleteFileFromUploads(app_url, book.image);
 
-                const dirPath = '/uploads/books';
-                const filePath = '.' + dirPath + files.image[0].originalname;
+                let dir_path = '/uploads/books/';
+                let file_name = getRandomFileName(files.image[0]);
+                let file_path = '.' + dir_path + file_name;
 
-                await fsPromises.mkdir('.' + dirPath, {recursive: true});
-                await fsPromises.writeFile(filePath, files.image[0].buffer);
+                await uploadFile('.' + dir_path, file_path, files.image[0]);
             }
 
             if (!Object.keys(updateBookDto).length) {
@@ -201,29 +203,25 @@ export class BooksController {
 
     @Delete(':id')
     async remove(@Param('id') id: string) {
-        let books = await this.booksService.findOne(+id);
-        if (books.error) {
+        let book = await this.booksService.findOne(+id);
+        if (book.error) {
             return {
                 success: false,
-                message: books.error,
+                message: book.error,
                 data: [],
             };
         }
 
         // Delete uploaded file
-        let deletePath = '.' + books.media;
-        try {
-            await fsPromises.access(deletePath);
-            await fsPromises.unlink(deletePath);
-        } catch (error) {
-            // Handle file deletion error if necessary
-        }
+        let app_url = process.env.APP_URL + ':' + process.env.PORT;
+        await deleteFileFromUploads(app_url, book.file);
+        await deleteFileFromUploads(app_url, book.image);
 
         let res = await this.booksService.remove(+id);
 
         return {
             success: !res.error,
-            message: res.error ? res.error : 'Books deleted successfully!',
+            message: res.error ? res.error : 'Book deleted successfully!',
             data: res.error ? [] : res,
         };
     }

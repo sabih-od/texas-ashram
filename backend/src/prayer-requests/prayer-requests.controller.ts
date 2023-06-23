@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query} from '@nestjs/common';
 import { PrayerRequestsService } from './prayer-requests.service';
 import { CreatePrayerRequestDto } from './dto/create-prayer-request.dto';
 import { UpdatePrayerRequestDto } from './dto/update-prayer-request.dto';
@@ -45,7 +45,7 @@ export class PrayerRequestsController {
       }
   }
 
-  @Patch(':id')
+  @Post(':id')
   async update(@Param('id') id: string, @Body() updatePrayerRequestDto: UpdatePrayerRequestDto) {
       let prayer_request = await this.prayerRequestsService.findOne(+id);
       if (prayer_request.error) {

@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query} from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
@@ -45,7 +45,7 @@ export class AnnouncementsController {
       }
   }
 
-  @Patch(':id')
+  @Post(':id')
   async update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto) {
       let announcement = await this.announcementsService.findOne(+id);
       if (announcement.error) {

@@ -3,7 +3,6 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
     UseGuards,
@@ -16,8 +15,11 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {FileInterceptor} from "@nestjs/platform-express";
-import {generateRandomString, getFileExtension} from "../helpers/helper";
-import {promises as fsPromises} from "fs";
+import {
+    deleteFileFromUploads,
+    getRandomFileName,
+    uploadFile
+} from "../helpers/helper";
 
 @ApiTags('Posts')
 @ApiBearerAuth()
@@ -37,16 +39,14 @@ export class PostsController {
   ) media: Express.Multer.File) {
       //file upload work
       if (media && media.originalname && media.buffer) {
-          let random_string = generateRandomString(20);
-          let file_extension = getFileExtension(media.originalname);
-          let file_name = random_string + '.' + file_extension;
+          let file_name = getRandomFileName(media);
 
           let dir_path = '/uploads/posts/';
-          let filepath = '.' + dir_path + file_name;
+          let file_path = '.' + dir_path + file_name;
+          await uploadFile('.' + dir_path, file_path, media);
 
-          await fsPromises.mkdir('.' + dir_path, { recursive: true });
-          await fsPromises.writeFile(filepath, media.buffer);
-          createPostDto.media = dir_path + file_name;
+          let app_url = process.env.APP_URL + ':' + process.env.PORT;
+          createPostDto.media =  app_url + dir_path + file_name;
       }
 
       let res = await this.postsService.create(createPostDto);
@@ -80,7 +80,7 @@ export class PostsController {
       }
   }
 
-  @Patch(':id')
+  @Post(':id')
   @UseInterceptors(FileInterceptor('media'))
   async update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto, @UploadedFile(
       new ParseFilePipe({
@@ -99,20 +99,20 @@ export class PostsController {
           }
       }
 
+      let app_url = process.env.APP_URL + ':' + process.env.PORT;
+
       //file upload work
       if (media && media.originalname && media.buffer) {
           //delete file
-          let delete_path = '.' + post.media;
-          fsPromises.access(delete_path)
-              .then(() => {
-                  return fsPromises.unlink(delete_path);
-              });
+          await deleteFileFromUploads(app_url, post.media);
 
           let dir_path = '/uploads/posts/';
-          let filepath = delete_path;
+          let file_name = getRandomFileName(media);
+          let file_path = '.' + dir_path + file_name;
 
-          await fsPromises.mkdir('.' + dir_path, { recursive: true });
-          await fsPromises.writeFile(filepath, media.buffer);
+          await uploadFile('.' + dir_path, file_path, media);
+
+          updatePostDto.media = app_url + dir_path + file_name;
       }
 
       if (!Object.keys(updatePostDto).length) {
@@ -144,11 +144,8 @@ export class PostsController {
       }
 
       //delete uploaded file
-      let delete_path = '.' + post.media;
-      fsPromises.access(delete_path)
-          .then(() => {
-              return fsPromises.unlink(delete_path);
-          });
+      let app_url = process.env.APP_URL + ':' + process.env.PORT;
+      await deleteFileFromUploads(app_url, post.media);
 
       let res = await this.postsService.remove(+id);
 

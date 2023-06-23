@@ -3,7 +3,6 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
     UseGuards,
@@ -15,9 +14,12 @@ import { CreateSermonDto } from './dto/create-sermon.dto';
 import { UpdateSermonDto } from './dto/update-sermon.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
-import {FileInterceptor, MulterModule} from "@nestjs/platform-express";
-import {generateRandomString, getFileExtension} from "../helpers/helper";
-import {promises as fsPromises} from "fs";
+import {FileInterceptor} from "@nestjs/platform-express";
+import {
+    deleteFileFromUploads,
+    getRandomFileName,
+    uploadFile
+} from "../helpers/helper";
 
 @ApiTags('Sermons')
 @ApiBearerAuth()
@@ -37,16 +39,14 @@ export class SermonsController {
   ) media: Express.Multer.File) {
         //file upload work
         if (media && media.originalname && media.buffer) {
-            let random_string = generateRandomString(20);
-            let file_extension = getFileExtension(media.originalname);
-            let file_name = random_string + '.' + file_extension;
+            let file_name = getRandomFileName(media);
 
             let dir_path = '/uploads/sermons/';
-            let filepath = '.' + dir_path + file_name;
+            let file_path = '.' + dir_path + file_name;
+            await uploadFile('.' + dir_path, file_path, media);
 
-            await fsPromises.mkdir('.' + dir_path, { recursive: true });
-            await fsPromises.writeFile(filepath, media.buffer);
-            createSermonDto.media = dir_path + file_name;
+            let app_url = process.env.APP_URL + ':' + process.env.PORT;
+            createSermonDto.media = app_url + dir_path + file_name;
         }
 
         let res = await this.sermonsService.create(createSermonDto);
@@ -80,7 +80,7 @@ export class SermonsController {
       }
   }
 
-  @Patch(':id')
+  @Post(':id')
   @UseInterceptors(FileInterceptor('media'))
   async update(@Param('id') id: string, @Body() updateSermonDto: UpdateSermonDto, @UploadedFile(
       new ParseFilePipe({
@@ -99,21 +99,20 @@ export class SermonsController {
           }
       }
 
+      let app_url = process.env.APP_URL + ':' + process.env.PORT;
+
       //file upload work
       if (media && media.originalname && media.buffer) {
           //delete file
-          let sermon = await this.sermonsService.findOne(+id);
-          let delete_path = '.' + sermon.media;
-          fsPromises.access(delete_path)
-              .then(() => {
-                  return fsPromises.unlink(delete_path);
-              });
+          await deleteFileFromUploads(app_url, sermon.media);
 
           let dir_path = '/uploads/sermons/';
-          let filepath = delete_path;
+          let file_name = getRandomFileName(media);
+          let file_path = '.' + dir_path + file_name;
 
-          await fsPromises.mkdir('.' + dir_path, { recursive: true });
-          await fsPromises.writeFile(filepath, media.buffer);
+          await uploadFile('.' + dir_path, file_path, media);
+
+          updateSermonDto.media = app_url + dir_path + file_name;
       }
 
       if (!Object.keys(updateSermonDto).length) {
@@ -145,11 +144,8 @@ export class SermonsController {
       }
 
       //delete uploaded file
-      let delete_path = '.' + sermon.media;
-      fsPromises.access(delete_path)
-          .then(() => {
-              return fsPromises.unlink(delete_path);
-          });
+      let app_url = process.env.APP_URL + ':' + process.env.PORT;
+      await deleteFileFromUploads(app_url, sermon.media);
 
       let res = await this.sermonsService.remove(+id);
 

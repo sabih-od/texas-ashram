@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseInterceptors,
@@ -16,8 +15,11 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import {FileInterceptor} from "@nestjs/platform-express";
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
-import {generateRandomString, getFileExtension} from "../helpers/helper";
-import {promises as fsPromises} from "fs";
+import {
+    deleteFileFromUploads,
+    getRandomFileName,
+    uploadFile
+} from "../helpers/helper";
 
 @ApiTags('Events')
 @ApiBearerAuth()
@@ -37,16 +39,14 @@ export class EventsController {
   ) image: Express.Multer.File) {
     //file upload work
     if (image && image.originalname && image.buffer) {
-      let random_string = generateRandomString(20);
-      let file_extension = getFileExtension(image.originalname);
-      let file_name = random_string + '.' + file_extension;
+        let file_name = getRandomFileName(image);
 
-      let dir_path = '/uploads/events/';
-      let filepath = '.' + dir_path + file_name;
+        let dir_path = '/uploads/events/';
+        let file_path = '.' + dir_path + file_name;
+        await uploadFile('.' + dir_path, file_path, image);
 
-      await fsPromises.mkdir('.' + dir_path, { recursive: true });
-      await fsPromises.writeFile(filepath, image.buffer);
-      createEventDto.image = dir_path + file_name;
+        let app_url = process.env.APP_URL + ':' + process.env.PORT;
+        createEventDto.image = app_url + dir_path + file_name;
     }
 
     let res = await this.eventsService.create(createEventDto);
@@ -80,7 +80,7 @@ export class EventsController {
     }
   }
 
-  @Patch(':id')
+  @Post(':id')
   @UseInterceptors(FileInterceptor('image'))
   async update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto, @UploadedFile(
       new ParseFilePipe({
@@ -99,21 +99,20 @@ export class EventsController {
       }
     }
 
+      let app_url = process.env.APP_URL + ':' + process.env.PORT;
+
     //file upload work
     if (image && image.originalname && image.buffer) {
       //delete file
-      let event = await this.eventsService.findOne(+id);
-      let delete_path = '.' + event.image;
-      fsPromises.access(delete_path)
-          .then(() => {
-            return fsPromises.unlink(delete_path);
-          });
+      await deleteFileFromUploads(app_url, event.image);
 
       let dir_path = '/uploads/events/';
-      let filepath = delete_path;
+      let file_name = getRandomFileName(image);
+      let file_path = '.' + dir_path + file_name;
 
-      await fsPromises.mkdir('.' + dir_path, { recursive: true });
-      await fsPromises.writeFile(filepath, image.buffer);
+      await uploadFile('.' + dir_path, file_path, image);
+
+      updateEventDto.image = app_url + dir_path + file_name;
     }
 
     if (!Object.keys(updateEventDto).length) {
@@ -145,11 +144,8 @@ export class EventsController {
     }
 
     //delete uploaded file
-    let delete_path = '.' + event.media;
-    fsPromises.access(delete_path)
-        .then(() => {
-          return fsPromises.unlink(delete_path);
-        });
+    let app_url = process.env.APP_URL + ':' + process.env.PORT;
+    await deleteFileFromUploads(app_url, event.image);
 
     let res = await this.eventsService.remove(+id);
 

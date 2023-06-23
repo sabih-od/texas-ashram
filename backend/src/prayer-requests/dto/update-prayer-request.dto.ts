@@ -1,6 +1,6 @@
 import {ApiProperty, PartialType} from '@nestjs/swagger';
 import { CreatePrayerRequestDto } from './create-prayer-request.dto';
-import {IsEmail, IsNotEmpty} from "class-validator";
+import {IsEmail} from "class-validator";
 
 export class UpdatePrayerRequestDto extends PartialType(CreatePrayerRequestDto) {
     @ApiProperty({ example: 'Name' })
