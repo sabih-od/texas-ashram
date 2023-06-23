@@ -20,13 +20,14 @@ async function bootstrap() {
         .setDescription('Texas Ashram API Documentation')
         .setVersion('1.0')
         .addTag('Auth')
+        .addTag('Announcements')
         .addTag('Books')
+        .addTag('Contacts')
         .addTag('Events')
-        .addTag('Users')
-        .addTag('Sermons')
         .addTag('Posts')
         .addTag('Prayer Requests')
-        .addTag('Announcements')
+        .addTag('Sermons')
+        .addTag('Users')
         .addSecurity('bearer', {
             type: 'http',
             scheme: 'bearer',

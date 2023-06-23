@@ -67,11 +67,11 @@ export class AnnouncementsController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-      let user = await this.announcementsService.findOne(+id);
-      if (user.error) {
+      let announcement = await this.announcementsService.findOne(+id);
+      if (announcement.error) {
           return {
               success: false,
-              message: user.error,
+              message: announcement.error,
               data: [],
           }
       }

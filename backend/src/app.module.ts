@@ -10,6 +10,7 @@ import { PrayerRequestsModule } from './prayer-requests/prayer-requests.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { EventsModule } from './events/events.module';
 import { BooksModule } from './books/books.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { BooksModule } from './books/books.module';
       AnnouncementsModule,
       EventsModule,
       BooksModule,
+      ContactsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
