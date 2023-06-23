@@ -11,6 +11,8 @@ import { AnnouncementsModule } from './announcements/announcements.module';
 import { EventsModule } from './events/events.module';
 import { BooksModule } from './books/books.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { SpeakersModule } from './speakers/speakers.module';
+import { StaffMembersModule } from './staff-members/staff-members.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { ContactsModule } from './contacts/contacts.module';
       EventsModule,
       BooksModule,
       ContactsModule,
+      SpeakersModule,
+      StaffMembersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

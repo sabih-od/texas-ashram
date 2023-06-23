@@ -27,6 +27,8 @@ async function bootstrap() {
         .addTag('Posts')
         .addTag('Prayer Requests')
         .addTag('Sermons')
+        .addTag('Speakers')
+        .addTag('Staff Members')
         .addTag('Users')
         .addSecurity('bearer', {
             type: 'http',
