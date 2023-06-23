@@ -8,6 +8,8 @@ import { SermonsModule } from './sermons/sermons.module';
 import { PostsModule } from './posts/posts.module';
 import { PrayerRequestsModule } from './prayer-requests/prayer-requests.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
+import { EventsModule } from './events/events.module';
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { AnnouncementsModule } from './announcements/announcements.module';
       PostsModule,
       PrayerRequestsModule,
       AnnouncementsModule,
+      EventsModule,
+      BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

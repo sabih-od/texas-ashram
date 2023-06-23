@@ -24,5 +24,5 @@ export class User {
     role_id: number;
 
     @Column({ type: 'text', nullable: true})
-    profile_picture: number;
+    profile_picture: string;
 }

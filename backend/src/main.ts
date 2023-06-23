@@ -20,6 +20,8 @@ async function bootstrap() {
         .setDescription('Texas Ashram API Documentation')
         .setVersion('1.0')
         .addTag('Auth')
+        .addTag('Books')
+        .addTag('Events')
         .addTag('Users')
         .addTag('Sermons')
         .addTag('Posts')
