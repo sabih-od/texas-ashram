@@ -59,8 +59,8 @@ export class EventsController {
   }
 
   @Get()
-  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
-    let res = await this.eventsService.findAll(page, limit);
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number, @Query('is_upcoming_event') is_upcoming_event?: string) {
+    let res = await this.eventsService.findAll(page, limit, is_upcoming_event);
 
     return {
       success: true,
