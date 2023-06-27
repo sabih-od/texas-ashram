@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+<p align="center">
+    <h1>Windmill Dashboard Next.js Typescript</h1>
+    <a href="https://windmill-dashboard-nextjs-typescript.vercel.app/example">
+      <img alt="Windmill Dashboard React" width="600" src=".github/windmill-dashboard-thumbnail.jpg">
+    </a><br>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+See the [Original Project by @estevanmaito](https://github.com/estevanmaito/windmill-dashboard-react/)
 
-## Available Scripts
+With help from other contributors :
+- [Typescript version by @neutralboy](https://github.com/neutralboy/windmill-dashboard-react-ts)
+- [Nextjs version by @Aldhanekaa](https://github.com/Aldhanekaa/windmill-dashboard-nextjs)
 
-In the project directory, you can run:
 
-### `npm start`
+🚀 [See it live](https://windmill-dashboard-nextjs-typescript.vercel.app/example)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is not a template. This is a complete application, built on top of React, with all tiny details taken care of so you just need to bring the data to feed it.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Accessibility is a priority in my projects and I think it should be in yours too, so this was developed listening to real screen readers, focus traps and keyboard navigation are available everywhere.
 
-### `npm test`
+## 📦 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 🦮 Throughly accessible (developed using screen readers)
+- 🌗 Dark theme enabled (load even different images based on theme)
+- 🧩 Multiple (custom) components
+- ⚡ Code splitting
+- Tailwind CSS
+- [Windmill React UI](https://windmillui.com/react-ui)
+- Heroicons
+- Chart.js
 
-### `npm run build`
+## 📚 Docs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### General components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Windmill Dashboard React is built on top of [Windmill React UI](https://windmillui.com/react-ui). You will find the documentation for every small component there.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Example Boilerplate
 
-### `npm run eject`
+All components and containers are saved in folder [example](example)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Routing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Change default redirecting when hit the `/` or `home` in file [next.config.js](next.config.js)
+```js
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/example/login',
+        permanent: false,
+      },
+    ]
+  }
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Sidebar routes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To configure sidebar menus, see file ([routes/sidebar.tsx](routes/sidebar.tsx)).
+
+These are the routes that will show in the sidebar. They expect three properties:
+
+- `path`: the destination;
+- `name`: the name to be shown;
+- `icon`: an icon to illustrate the item
+
+Item that are used as dropdowns, like the Pages option, don't need a `path`, but expect a `routes` array of objects with `path` and `name`:
+
+```js
+// sidebar.js
+{
+  path: '/example/tables',
+  icon: 'TablesIcon',
+  name: 'Tables',
+},
+{
+  icon: 'PagesIcon', // <-- this is used as a submenu, so no path
+  name: 'Pages',
+  routes: [
+    // submenu
+    {
+      path: '/example/login',
+      name: 'Login', // <-- these don't have icons
+    },
+    {
+      path: '/example/create-account',
+      name: 'Create account',
+    },
+```
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Getting Started
+
+First, install dependencies :
+```bash
+npm install
+# or
+yarn install
+```
+
+then, you can run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To learn more about Next.js, take a look at the following resources:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Code Splitting
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Deploy on Vercel
 
-### Analyzing the Bundle Size
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
