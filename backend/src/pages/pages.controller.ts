@@ -96,6 +96,19 @@ export class PagesController {
       }
   }
 
+  @Get('home-banner/get')
+  async getHomeBanner() {
+      let res = await this.pagesService.getByName('home');
+
+      res = JSON.parse(res.content)
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : [],
+          data: res.error ? [] : res,
+      }
+  }
+
     @Get('seeder/seed')
     async seed() {
         let res = await this.pagesService.seed();
