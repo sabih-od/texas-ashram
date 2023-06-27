@@ -14,6 +14,7 @@ import { ContactsModule } from './contacts/contacts.module';
 import { SpeakersModule } from './speakers/speakers.module';
 import { StaffMembersModule } from './staff-members/staff-members.module';
 import { PagesModule } from './pages/pages.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PagesModule } from './pages/pages.module';
       SpeakersModule,
       StaffMembersModule,
       PagesModule,
+      MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

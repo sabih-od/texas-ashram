@@ -72,11 +72,12 @@ export class UsersService {
         }
     }
 
-    async findOneByEmail(email: string): Promise<any> {
+    async findOneByEmail(email: string, args?: Object): Promise<any> {
         try {
             const user = await this.userRepository.findOneOrFail({
                 where: {
-                    email: email
+                    email: email,
+                    ...args
                 }
             });
 

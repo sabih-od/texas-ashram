@@ -42,3 +42,15 @@ export const deleteFileFromUploads = async (app_url, delete_path) => {
 export const getRandomFileName = (file) => {
     return generateRandomString(20) + '.' + getFileExtension(file.originalname);
 }
+
+export const generateOTP = (length: number = 6) => {
+    let result = '';
+    const characters = '123456789';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+
+    return result;
+}

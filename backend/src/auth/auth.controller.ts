@@ -18,16 +18,19 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {
     deleteFileFromUploads,
-    generateRandomString,
-    getFileExtension,
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
+import {ForgotPasswordDto} from "./dto/forgot-password.dto";
+import {SubmitOTPDto} from "./dto/submit-otp.dto";
+import {UsersService} from "../users/users.service";
+import {UpdateUserDto} from "../users/dto/update-user.dto";
+import {ResetPasswordDto} from "./dto/reset-password.dto";
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private userService: UsersService) {}
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
@@ -108,6 +111,60 @@ export class AuthController {
             success: !res.error,
             message: res.error ? res.error : 'Profile picture updated successfully!',
             data: res.error ? [] : {profile_picture: file_path},
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('forgot-password')
+    async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+        let res = await this.authService.forgotPassword(forgotPasswordDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'An OTP was sent to your email',
+            data: res.error ? [] : res,
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('resend-otp')
+    async resendOTP(@Body() forgotPasswordDto: ForgotPasswordDto) {
+        let res = await this.authService.forgotPassword(forgotPasswordDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'An OTP was sent to your email',
+            data: res.error ? [] : res,
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('submit-otp')
+    async submitOTP(@Body() submitOTPDto: SubmitOTPDto) {
+        let res = await this.authService.submitOTP(submitOTPDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Your OTP was correct.',
+            data: res.error ? [] : res,
+        }
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('reset-password')
+    @ApiBearerAuth()
+    async resetPassword(@Request() req, @Body() resetPasswordDto: ResetPasswordDto) {
+        let user = await this.authService.getUserByEmail(req.user.email);
+
+        let updateUserDto = new UpdateUserDto();
+        updateUserDto.password = resetPasswordDto.password
+
+        let res = await this.userService.update(user.id, updateUserDto);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Your password was reset',
+            data: res.error ? [] : res,
         }
     }
 }

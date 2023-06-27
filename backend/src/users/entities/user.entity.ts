@@ -25,4 +25,7 @@ export class User {
 
     @Column({ type: 'text', nullable: true})
     profile_picture: string;
+
+    @Column({ type: 'text', nullable: true})
+    otp: string;
 }

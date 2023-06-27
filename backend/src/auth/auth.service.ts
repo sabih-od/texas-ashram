@@ -6,6 +6,10 @@ import {SigninDto} from "./dto/signin.dto";
 import {CreateUserDto} from "../users/dto/create-user.dto";
 import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
 import {User} from "../users/entities/user.entity";
+import {ForgotPasswordDto} from "./dto/forgot-password.dto";
+import {generateOTP} from "../helpers/helper";
+import {MailService} from "../mail/mail.service";
+import {SubmitOTPDto} from "./dto/submit-otp.dto";
 
 @Injectable()
 export class AuthService {
@@ -82,6 +86,54 @@ export class AuthService {
             if (error instanceof EntityNotFoundError) {
                 return {
                     error: 'User Not Found'
+                };
+            }
+        }
+    }
+
+    async forgotPassword (forgotPasswordDto: ForgotPasswordDto): Promise<any> {
+        try {
+            const user = await this.usersService.findOneByEmail(forgotPasswordDto.email);
+            let generated_otp = generateOTP();
+
+            //save otp to database
+            await this.userRepository.update(user.id, {
+                otp: generated_otp
+            });
+
+            let mailService = new MailService();
+            await mailService.sendEmail(user.email, 'Texas Ashram | OTP', 'Your OTP is: ' + generated_otp);
+
+            return 'An OTP was sent to your email';
+        } catch (error) {
+            if (error instanceof EntityNotFoundError) {
+                return {
+                    error: 'No user with the provided email was found.'
+                };
+            }
+        }
+    }
+
+    async submitOTP (submitOTPDto: SubmitOTPDto): Promise<any> {
+        try {
+            const user = await this.usersService.findOneByEmail(submitOTPDto.email, {otp: submitOTPDto.otp});
+
+            if (!user.otp) {
+                return {
+                    error: 'Your OTP was incorrect'
+                };
+            }
+
+            const payload = { sub: user.id, ...user};
+
+            return {
+                ...payload,
+                access_token: await this.jwtService.signAsync(payload),
+            };
+        } catch (error) {
+            if (error instanceof EntityNotFoundError) {
+                return {
+                    error: 'No user with the provided email was found.'
                 };
             }
         }
