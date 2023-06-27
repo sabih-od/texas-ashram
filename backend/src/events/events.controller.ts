@@ -65,7 +65,7 @@ export class EventsController {
     return {
       success: true,
       message: '',
-      res
+      ...res
     }
   }
 
