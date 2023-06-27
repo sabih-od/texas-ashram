@@ -13,11 +13,7 @@ export class SermonsService {
 
     async create(createSermonDto: CreateSermonDto): Promise<any> {
         try {
-            const sermon = await this.sermonRepository.create({
-                title: createSermonDto.title,
-                url: createSermonDto.url,
-                media: createSermonDto.media,
-            });
+            const sermon = await this.sermonRepository.create(createSermonDto);
 
             await this.sermonRepository.save(sermon);
 

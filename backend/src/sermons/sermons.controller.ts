@@ -74,6 +74,7 @@ export class SermonsController {
   async create(@Body() createSermonDto: CreateSermonDto, @UploadedFiles() files: { media?: Express.Multer.File[], image?: Express.Multer.File[] }) {
         //file upload work
         // if (media && media.originalname && media.buffer) {
+      // return files.image[0];
         if (files.media && files.media[0] && files.media[0].originalname && files.media[0].buffer) {
             let file_name = getRandomFileName(files.media[0]);
 
@@ -151,7 +152,7 @@ export class SermonsController {
       let app_url = process.env.APP_URL + ':' + process.env.PORT;
 
       //file upload work
-      if (files.media[0] && files.media[0].originalname && files.media[0].buffer) {
+      if (files.media && files.media[0] && files.media[0].originalname && files.media[0].buffer) {
           //delete file
           await deleteFileFromUploads(app_url, sermon.media);
 
@@ -163,7 +164,7 @@ export class SermonsController {
 
           updateSermonDto.media = app_url + dir_path + file_name;
       }
-      if (files.image[0] && files.image[0].originalname && files.image[0].buffer) {
+      if (files.image && files.image[0] && files.image[0].originalname && files.image[0].buffer) {
           //delete file
           await deleteFileFromUploads(app_url, sermon.image);
 
