@@ -85,17 +85,6 @@ export class PagesController {
       }
   }
 
-  @Get('seeder/seed')
-  async seed() {
-      let res = await this.pagesService.seed();
-
-      return {
-          success: !res.error,
-          message: res.error ? res.error : 'Seeder ran successfully!',
-          data: res.error ? [] : res,
-      }
-  }
-
   @Get('get-by-name/:name')
   async getByName(@Param('name') name: string) {
       let res = await this.pagesService.getByName(name);
@@ -106,4 +95,15 @@ export class PagesController {
           data: res.error ? [] : res,
       }
   }
+
+    @Get('seeder/seed')
+    async seed() {
+        let res = await this.pagesService.seed();
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Seeder ran successfully!',
+            data: res.error ? [] : res,
+        }
+    }
 }
