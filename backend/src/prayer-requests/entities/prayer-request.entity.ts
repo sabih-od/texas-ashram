@@ -5,6 +5,9 @@ export class PrayerRequest {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({type: 'int', nullable: true})
+    user_id: number
+
     @Column('text')
     name: string;
 

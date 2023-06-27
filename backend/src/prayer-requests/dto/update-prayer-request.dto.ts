@@ -3,6 +3,8 @@ import { CreatePrayerRequestDto } from './create-prayer-request.dto';
 import {IsEmail} from "class-validator";
 
 export class UpdatePrayerRequestDto extends PartialType(CreatePrayerRequestDto) {
+    user_id: number;
+
     @ApiProperty({ example: 'Name' })
     name: string;
 

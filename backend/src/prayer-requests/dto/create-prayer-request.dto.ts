@@ -2,6 +2,8 @@ import {IsEmail, IsNotEmpty} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class CreatePrayerRequestDto {
+    user_id: number;
+
     @IsNotEmpty()
     @ApiProperty({ example: 'Name' })
     name: string;

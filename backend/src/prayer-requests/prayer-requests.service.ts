@@ -59,6 +59,22 @@ export class PrayerRequestsService {
       }
   }
 
+  async findOneByUserId(user_id: number): Promise<any> {
+      try {
+          return await this.prayerRequestRepository.find({
+              where: {
+                  user_id: user_id
+              }
+          });
+      } catch (error) {
+          if (error instanceof EntityNotFoundError) {
+              return {
+                  error: 'Prayer Request Not Found'
+              };
+          }
+      }
+  }
+
   async update(id: number, updatePrayerRequestDto: UpdatePrayerRequestDto): Promise<any> {
       try {
           const prayer_request = await this.findOne(id);
