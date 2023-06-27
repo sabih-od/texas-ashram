@@ -13,4 +13,7 @@ export class UpdateSermonDto extends PartialType(CreateSermonDto) {
 
     @ApiProperty({ type: 'string', format: 'binary' })
     media: string;
+
+    @ApiProperty({ type: 'string', format: 'binary' })
+    image: string;
 }

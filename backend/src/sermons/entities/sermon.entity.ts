@@ -13,4 +13,7 @@ export class Sermon {
 
     @Column({ type: 'text', nullable: true })
     media: string;
+
+    @Column({ type: 'text', nullable: true })
+    image: string;
 }

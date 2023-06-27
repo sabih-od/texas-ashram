@@ -7,19 +7,54 @@ import {
     Delete,
     UseGuards,
     UseInterceptors,
-    UploadedFile, ParseFilePipe, MaxFileSizeValidator, Req, Query
+    UploadedFile,
+    ParseFilePipe,
+    MaxFileSizeValidator,
+    Req,
+    Query,
+    Injectable,
+    NestInterceptor,
+    ExecutionContext,
+    CallHandler, BadRequestException, UploadedFiles
 } from '@nestjs/common';
 import { SermonsService } from './sermons.service';
 import { CreateSermonDto } from './dto/create-sermon.dto';
 import { UpdateSermonDto } from './dto/update-sermon.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
-import {FileInterceptor} from "@nestjs/platform-express";
+import {FileFieldsInterceptor, FileInterceptor} from "@nestjs/platform-express";
 import {
     deleteFileFromUploads,
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+const MAX_FILE_SIZE = 100000000;
+
+@Injectable()
+export class MaxFileSizeInterceptor implements NestInterceptor {
+    constructor(private readonly maxSize: number) {}
+
+    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+        const request = context.switchToHttp().getRequest();
+        const files = request.files;
+
+        if (files && files.file && files.file[0] && files.file[0].size > this.maxSize) {
+            throw new BadRequestException(`File size exceeds the limit of ${this.maxSize} bytes`);
+        }
+
+        if (files && files.image && files.image[0] && files.image[0].size > this.maxSize) {
+            throw new BadRequestException(`Image size exceeds the limit of ${this.maxSize} bytes`);
+        }
+
+        return next.handle().pipe(
+            map((data) => {
+                return data;
+            }),
+        );
+    }
+}
 
 @ApiTags('Sermons')
 @ApiBearerAuth()
@@ -29,24 +64,35 @@ export class SermonsController {
   constructor(private readonly sermonsService: SermonsService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('media'))
-  async create(@Body() createSermonDto: CreateSermonDto, @UploadedFile(
-      new ParseFilePipe({
-          validators: [
-              new MaxFileSizeValidator({maxSize: 100000000})
-          ]
-      })
-  ) media: Express.Multer.File) {
+  @UseInterceptors(
+      FileFieldsInterceptor([
+          { name: 'media', maxCount: 1 },
+          { name: 'image', maxCount: 1 },
+      ]),
+      new MaxFileSizeInterceptor(MAX_FILE_SIZE), // Use the MaxFileSizeInterceptor
+  )
+  async create(@Body() createSermonDto: CreateSermonDto, @UploadedFiles() files: { media?: Express.Multer.File[], image?: Express.Multer.File[] }) {
         //file upload work
-        if (media && media.originalname && media.buffer) {
-            let file_name = getRandomFileName(media);
+        // if (media && media.originalname && media.buffer) {
+        if (files.media && files.media[0] && files.media[0].originalname && files.media[0].buffer) {
+            let file_name = getRandomFileName(files.media[0]);
 
             let dir_path = '/uploads/sermons/';
             let file_path = '.' + dir_path + file_name;
-            await uploadFile('.' + dir_path, file_path, media);
+            await uploadFile('.' + dir_path, file_path, files.media[0]);
 
             let app_url = process.env.APP_URL + ':' + process.env.PORT;
             createSermonDto.media = app_url + dir_path + file_name;
+        }
+        if (files.image && files.image[0] && files.image[0].originalname && files.image[0].buffer) {
+            let file_name = getRandomFileName(files.image[0]);
+
+            let dir_path = '/uploads/sermons/';
+            let file_path = '.' + dir_path + file_name;
+            await uploadFile('.' + dir_path, file_path, files.image[0]);
+
+            let app_url = process.env.APP_URL + ':' + process.env.PORT;
+            createSermonDto.image = app_url + dir_path + file_name;
         }
 
         let res = await this.sermonsService.create(createSermonDto);
@@ -81,15 +127,18 @@ export class SermonsController {
   }
 
   @Post(':id')
-  @UseInterceptors(FileInterceptor('media'))
-  async update(@Param('id') id: string, @Body() updateSermonDto: UpdateSermonDto, @UploadedFile(
-      new ParseFilePipe({
-          validators: [
-              new MaxFileSizeValidator({maxSize: 100000000})
-          ],
-          fileIsRequired: false
-      })
-  ) media?: Express.Multer.File) {
+  @UseInterceptors(
+      FileFieldsInterceptor([
+          { name: 'media', maxCount: 1 },
+          { name: 'image', maxCount: 1 },
+      ]),
+      new MaxFileSizeInterceptor(MAX_FILE_SIZE),
+  )
+  async update(
+      @Param('id') id: string,
+      @Body() updateSermonDto: UpdateSermonDto,
+      @UploadedFiles() files: { media?: Express.Multer.File[], image?: Express.Multer.File[] },
+  ) {
       let sermon = await this.sermonsService.findOne(+id);
       if (sermon.error) {
           return {
@@ -102,17 +151,29 @@ export class SermonsController {
       let app_url = process.env.APP_URL + ':' + process.env.PORT;
 
       //file upload work
-      if (media && media.originalname && media.buffer) {
+      if (files.media[0] && files.media[0].originalname && files.media[0].buffer) {
           //delete file
           await deleteFileFromUploads(app_url, sermon.media);
 
           let dir_path = '/uploads/sermons/';
-          let file_name = getRandomFileName(media);
+          let file_name = getRandomFileName(files.media[0]);
           let file_path = '.' + dir_path + file_name;
 
-          await uploadFile('.' + dir_path, file_path, media);
+          await uploadFile('.' + dir_path, file_path, files.media[0]);
 
           updateSermonDto.media = app_url + dir_path + file_name;
+      }
+      if (files.image[0] && files.image[0].originalname && files.image[0].buffer) {
+          //delete file
+          await deleteFileFromUploads(app_url, sermon.image);
+
+          let dir_path = '/uploads/sermons/';
+          let file_name = getRandomFileName(files.image[0]);
+          let file_path = '.' + dir_path + file_name;
+
+          await uploadFile('.' + dir_path, file_path, files.image[0]);
+
+          updateSermonDto.image = app_url + dir_path + file_name;
       }
 
       if (!Object.keys(updateSermonDto).length) {
