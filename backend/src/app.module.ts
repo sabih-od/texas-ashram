@@ -13,6 +13,7 @@ import { BooksModule } from './books/books.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { SpeakersModule } from './speakers/speakers.module';
 import { StaffMembersModule } from './staff-members/staff-members.module';
+import { PagesModule } from './pages/pages.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { StaffMembersModule } from './staff-members/staff-members.module';
       ContactsModule,
       SpeakersModule,
       StaffMembersModule,
+      PagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

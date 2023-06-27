@@ -11,6 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+  app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
     config({ path: join(__dirname, '../.env') });
 
@@ -25,6 +26,7 @@ async function bootstrap() {
         .addTag('Contacts')
         .addTag('Events')
         .addTag('Posts')
+        .addTag('Pages')
         .addTag('Prayer Requests')
         .addTag('Sermons')
         .addTag('Speakers')
