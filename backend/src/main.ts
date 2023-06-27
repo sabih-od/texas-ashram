@@ -8,7 +8,7 @@ import {config} from 'dotenv';
 import {join} from 'path';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule, { cors: true });
+    const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(new ValidationPipe());
     app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
     app.use('/images', express.static(path.join(__dirname, '..', 'images')));
@@ -24,10 +24,9 @@ async function bootstrap() {
         .addTag('Announcements')
         .addTag('Books')
         .addTag('Contacts')
-        .addTag('Donations')
         .addTag('Events')
-        .addTag('Pages')
         .addTag('Posts')
+        .addTag('Pages')
         .addTag('Prayer Requests')
         .addTag('Sermons')
         .addTag('Speakers')
