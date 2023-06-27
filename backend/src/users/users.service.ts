@@ -62,6 +62,7 @@ export class UsersService {
             });
 
             delete user.password;
+            delete user.otp;
             return user;
         } catch (error) {
             if (error instanceof EntityNotFoundError) {
