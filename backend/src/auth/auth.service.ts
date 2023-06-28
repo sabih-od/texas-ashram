@@ -125,9 +125,16 @@ export class AuthService {
 
     async submitOTP (submitOTPDto: SubmitOTPDto): Promise<any> {
         try {
-            const user = await this.usersService.findOneByEmail(submitOTPDto.email, {otp: submitOTPDto.otp});
+            let user;
 
-            if (!user.otp) {
+            //bypass otp by 111111
+            if (submitOTPDto.otp == '111111') {
+                user = await this.usersService.findOneByEmail(submitOTPDto.email);
+            } else {
+                user = await this.usersService.findOneByEmail(submitOTPDto.email, {otp: submitOTPDto.otp});
+            }
+
+            if (user.error) {
                 return {
                     error: 'Your OTP was incorrect'
                 };
