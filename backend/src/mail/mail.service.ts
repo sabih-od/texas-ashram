@@ -25,7 +25,8 @@ export class MailService {
 
         try {
             // Send the email
-            await transporter.sendMail(mailOptions);
+            let res = await transporter.sendMail(mailOptions);
+            console.log(res);
             // console.log('Email sent successfully');
             return 'Email sent successfully';
         } catch (error) {
