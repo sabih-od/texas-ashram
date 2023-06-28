@@ -116,6 +116,26 @@ export class AuthController {
     }
 
     @HttpCode(HttpStatus.OK)
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth()
+    @Post('update-profile')
+    async updateProfile(@Request() req, @Body() updateUserDto: UpdateUserDto) {
+        let user = await this.authService.getUserByEmail(req.user.email);
+
+        if (user.error) {
+            return user;
+        }
+
+        let res = await this.authService.updateProfile(updateUserDto, user.id);
+
+        return {
+            success: !res.error,
+            message: res.error ? res.error : 'Profile updated successfully!',
+            data: res.error ? [] : res,
+        }
+    }
+
+    @HttpCode(HttpStatus.OK)
     @Post('forgot-password')
     async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
         let res = await this.authService.forgotPassword(forgotPasswordDto);

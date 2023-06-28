@@ -10,6 +10,7 @@ import {ForgotPasswordDto} from "./dto/forgot-password.dto";
 import {generateOTP} from "../helpers/helper";
 import {MailService} from "../mail/mail.service";
 import {SubmitOTPDto} from "./dto/submit-otp.dto";
+import {UpdateUserDto} from "../users/dto/update-user.dto";
 
 @Injectable()
 export class AuthService {
@@ -67,6 +68,28 @@ export class AuthService {
             return await this.userRepository.update(user.id, {
                 profile_picture: file_path
             });
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                return {
+                    error: error['sqlMessage']
+                };
+            }
+        }
+    }
+
+    async updateProfile(updateUserDto: UpdateUserDto, user_id: number): Promise<any> {
+        try {
+            let user = await this.userRepository.findOneOrFail({
+                where: {
+                    id: user_id
+                }
+            });
+
+            if (updateUserDto.password) {
+                updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+            }
+
+            return await this.userRepository.update(user.id, updateUserDto);
         } catch (error) {
             if (error instanceof QueryFailedError) {
                 return {
