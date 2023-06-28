@@ -127,8 +127,7 @@ export class AuthService {
         try {
             const user = await this.usersService.findOneByEmail(submitOTPDto.email, {otp: submitOTPDto.otp});
 
-            // if (!user.otp) {
-            if (!user.otp || submitOTPDto.otp != '111111') {
+            if (!user.otp) {
                 return {
                     error: 'Your OTP was incorrect'
                 };
