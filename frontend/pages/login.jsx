@@ -1,47 +1,30 @@
-import React, {ChangeEvent, useContext, useState} from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import React, {useEffect, useState} from 'react'
 
-import {Label, Input, Button, WindmillContext} from '@roketid/windmill-react-ui'
-import {GithubIcon, TwitterIcon} from 'icons'
-import {apiUrl} from '../services/global'
+import {Label, Input, Button} from '@roketid/windmill-react-ui'
+import {useRouter} from "next/router";
+import {useDispatch, useSelector} from "react-redux";
+import {loginUser, errors, loading as loginLoading, isAuth} from '../store/slices/authSlice'
 
 function LoginPage() {
-    const {mode} = useContext(WindmillContext)
-    const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpeg' : '/assets/img/login-office.jpeg'
+    const router = useRouter()
+    const dispatch = useDispatch()
+
+    const errorsMessages = useSelector(errors)
+    const loading = useSelector(loginLoading)
+    const isAuthenticated = useSelector(isAuth)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
 
-    const login = async (e) => {
+    useEffect(() => {
+        if (isAuthenticated)
+            router.reload()
+    }, [isAuthenticated])
+
+    const loginHandle = async (e) => {
         e.preventDefault()
         if (loading) return;
-        setLoading(true)
-        try {
-            setError(null)
-            const response = await fetch(`${apiUrl}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({email, password}),
-            });
-
-            const data = await response.json();
-
-            if (data?.success === false) {
-                setError(data?.message ?? 'Server Error')
-                return;
-            }
-            console.log("data", data)
-        } catch (e) {
-            console.log("login error", e)
-            setError("Exception!")
-        } finally {
-            setLoading(false)
-        }
+        await dispatch(loginUser({email, password}))
     }
 
     return (
@@ -75,11 +58,17 @@ function LoginPage() {
                             />
                         </Label>
 
-                        <Button disabled={loading} className='mt-4' block onClick={login}>
+                        <Button disabled={loading} className='mt-4' block onClick={loginHandle}>
                             Log in
                         </Button>
 
-                        {error ? <p className="text-center text-red-600 mt-2 text-sm">{error}</p> : null}
+                        {errorsMessages ? <p className="text-center text-red-600 mt-2 text-sm">{
+                            Array.isArray(errorsMessages) ? errorsMessages.map((item, ind) => (
+                                <span key={ind}>
+                                    {item} <br/>
+                                </span>
+                            )) : errorsMessages
+                        }</p> : null}
                     </div>
                 </main>
             </div>
