@@ -13,9 +13,6 @@ export class MailService {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD,
             },
-            tls: {
-                ciphers: 'SSLv3',
-            },
         });
 
         // Prepare the email message
