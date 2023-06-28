@@ -89,7 +89,13 @@ export class AuthService {
                 updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
             }
 
-            return await this.userRepository.update(user.id, updateUserDto);
+            await this.userRepository.update(user.id, updateUserDto);
+
+            return await this.userRepository.findOneOrFail({
+                where: {
+                    id: user_id
+                }
+            })
         } catch (error) {
             if (error instanceof QueryFailedError) {
                 return {
