@@ -80,6 +80,10 @@ export class AuthService {
         try {
             const user = await this.usersService.findOneByEmail(email);
 
+            if (user.error) {
+                return user;
+            }
+
             delete user.password;
             return user;
         } catch (error) {
@@ -94,6 +98,11 @@ export class AuthService {
     async forgotPassword (forgotPasswordDto: ForgotPasswordDto): Promise<any> {
         try {
             const user = await this.usersService.findOneByEmail(forgotPasswordDto.email);
+
+            if (user.error) {
+                return user;
+            }
+
             let generated_otp = generateOTP();
 
             //save otp to database
