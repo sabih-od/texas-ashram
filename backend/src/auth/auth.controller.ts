@@ -26,6 +26,7 @@ import {SubmitOTPDto} from "./dto/submit-otp.dto";
 import {UsersService} from "../users/users.service";
 import {UpdateUserDto} from "../users/dto/update-user.dto";
 import {ResetPasswordDto} from "./dto/reset-password.dto";
+import { firebaseAdmin } from '../firebase/firebase-admin';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -166,5 +167,22 @@ export class AuthController {
             message: res.error ? res.error : 'Your password was reset',
             data: res.error ? [] : res,
         }
+    }
+
+    @Get('firebase/test')
+    async firebaseTest() {
+        const message = {
+            notification: {
+                title: 'Test Notification',
+                body: 'Test Body',
+            },
+            topic: 'test', // The topic to which the notification will be sent
+        };
+
+        let response = await firebaseAdmin.messaging().send(message);
+
+        console.log(response);
+
+        return response;
     }
 }
