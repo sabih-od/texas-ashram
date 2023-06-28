@@ -15,6 +15,7 @@ import { SpeakersModule } from './speakers/speakers.module';
 import { StaffMembersModule } from './staff-members/staff-members.module';
 import { PagesModule } from './pages/pages.module';
 import { MailModule } from './mail/mail.module';
+import { DonationsModule } from './donations/donations.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { MailModule } from './mail/mail.module';
       StaffMembersModule,
       PagesModule,
       MailModule,
+      DonationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
