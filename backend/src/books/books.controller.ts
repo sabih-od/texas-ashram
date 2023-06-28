@@ -116,7 +116,7 @@ export class BooksController {
         return {
             success: true,
             message: '',
-            res
+            ...res
         }
     }
 
