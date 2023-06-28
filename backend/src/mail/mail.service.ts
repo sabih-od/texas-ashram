@@ -13,11 +13,6 @@ export class MailService {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD,
             },
-            tls: {
-                // Specify SSL options
-                ciphers: 'SSLv3',
-                rejectUnauthorized: false, // Set to false if the certificate is self-signed or invalid
-            },
         });
 
         // Prepare the email message
