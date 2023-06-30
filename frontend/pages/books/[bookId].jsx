@@ -1,26 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import PageTitle from "../../example/components/Typography/PageTitle";
-import {Button, Input, Label, Select, Textarea} from "@roketid/windmill-react-ui";
 import Layout from "../../example/containers/Layout";
-import FileInput from "../../example/components/FileInput";
+import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    addBook,
-    loading as BookLoading,
-    errors as BookErrors,
-    success as BookSuccess,
-    setSuccess, setErrors
-} from '../../store/slices/booksSlice'
-import {useRouter} from "next/navigation";
+    getBook,
+    book as bookDetail,
+    loading as bookLoading,
+    errors as bookErrors,
+    success as bookSuccess, updateBook, setErrors, setSuccess
+} from "../../store/slices/bookSlice";
+import PageTitle from "../../example/components/Typography/PageTitle";
+import {Button, Input, Label} from "@roketid/windmill-react-ui";
+import FileInput from "../../example/components/FileInput";
 
-function Create(props) {
+function Book(props) {
+    const {push, query} = useRouter()
+    const {bookId} = query
 
     const dispatch = useDispatch()
-    const {push} = useRouter()
 
-    const loading = useSelector(BookLoading)
-    const errors = useSelector(BookErrors)
-    const success = useSelector(BookSuccess)
+    const book = useSelector(bookDetail)
+    const loading = useSelector(bookLoading)
+    const errors = useSelector(bookErrors)
+    const success = useSelector(bookSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
@@ -28,12 +30,24 @@ function Create(props) {
     const [file, setFile] = useState(null)
 
     useEffect(() => {
+        if (bookId) {
+            dispatch(getBook({id: bookId}))
+        }
+    }, [bookId])
+
+    useEffect(() => {
+        if (book) {
+            setTitle(book.title)
+        }
+    }, [book])
+
+    useEffect(() => {
         dispatch(setSuccess(false))
     }, [success])
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Book added successfully!')
+            setSuccessMessage('Book updated successfully!')
             setTimeout(() => {
                 push('/books')
             }, 1500)
@@ -46,7 +60,8 @@ function Create(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(addBook({
+        dispatch(updateBook({
+            id: bookId,
             title, image, file
         }))
 
@@ -70,7 +85,7 @@ function Create(props) {
 
     return (
         <Layout>
-            <PageTitle>Add Book</PageTitle>
+            <PageTitle>Update Book</PageTitle>
 
             <form onSubmit={handleSubmit} className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 {successMsg ? (
@@ -109,4 +124,4 @@ function Create(props) {
     );
 }
 
-export default Create;
+export default Book;

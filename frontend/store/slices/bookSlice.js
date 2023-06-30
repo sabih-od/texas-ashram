@@ -1,32 +1,38 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {HYDRATE} from 'next-redux-wrapper';
-import {create, get} from '../../services/bookService';
+import {update, show} from '../../services/bookService';
 
-export const getBooks = createAsyncThunk(
+export const getBook = createAsyncThunk(
     'book/get',
-    async (payload, thunkAPI) => {
-        return await get()
+    async ({id}, thunkAPI) => {
+        return await show(id)
     }
 )
 
-export const addBook = createAsyncThunk(
-    'book/add',
+export const updateBook = createAsyncThunk(
+    'book/update',
     async (payload, thunkAPI) => {
-        return await create(payload)
+        return await update(payload)
     }
 )
 
 const initialState = {
+    success: false,
     loading: false,
     errors: null,
-    books: [],
-    total: 0,
+    book: null
 };
 
 export const bookSlice = createSlice({
     name: 'book',
     initialState,
     reducers: {
+        setSuccess: (state, {payload}) => {
+            state.success = payload
+        },
+        setErrors: (state, {payload}) => {
+            state.errors = payload
+        },
         extraReducers: {
             [HYDRATE]: (state, action) => {
                 return {
@@ -38,38 +44,39 @@ export const bookSlice = createSlice({
     },
     extraReducers: builder => {
 
-        builder.addCase(getBooks.pending, (state, action) => {
+        builder.addCase(getBook.pending, (state, action) => {
             state.loading = true
             state.errors = null
         })
-        builder.addCase(getBooks.fulfilled, (state, action) => {
+        builder.addCase(getBook.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            state.books = data?.data ?? []
-            state.total = data?.total ?? 0
+            state.book = data?.data ?? null
 
             state.loading = false
             state.errors = message
         })
 
-        builder.addCase(addBook.pending, (state, action) => {
+        builder.addCase(updateBook.pending, (state, action) => {
             state.loading = true
+            state.success = false
             state.errors = null
         })
-        builder.addCase(addBook.fulfilled, (state, action) => {
+        builder.addCase(updateBook.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            console.log("save data", data)
+            console.log("save update data", data, message)
 
             state.loading = false
+            state.success = !message
             state.errors = message
         })
     }
 });
 
-// export const {logoutAuth} = bookSlice.actions;
-export const books = (state) => state.book.books;
+export const {setSuccess, setErrors} = bookSlice.actions;
+export const book = (state) => state.book.book;
 export const loading = (state) => state.book.loading;
-export const total = (state) => state.book.total;
 export const errors = (state) => state.book.errors;
+export const success = (state) => state.book.success;
 export default bookSlice.reducer;

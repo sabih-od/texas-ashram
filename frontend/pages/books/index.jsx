@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import PageTitle from "../../example/components/Typography/PageTitle";
 import Layout from "../../example/containers/Layout";
 import {
-    Avatar,
-    Badge, Button, Pagination,
+    Button, Pagination,
     Table,
     TableBody,
     TableCell, TableContainer,
@@ -11,19 +10,24 @@ import {
     TableHeader,
     TableRow
 } from "@roketid/windmill-react-ui";
-import response from "../../utils/demo/tableData";
+import {
+    EditIcon,
+    TrashIcon
+} from '../../icons'
 import {useDispatch, useSelector} from "react-redux";
 import {
     getBooks,
     loading as booksLoading,
     books as booksList,
     total as bookTotal
-} from '../../store/slices/bookSlice'
+} from '../../store/slices/booksSlice'
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 function Books(props) {
 
     const dispatch = useDispatch()
+    const {push} = useRouter()
 
     const loading = useSelector(booksLoading)
     const books = useSelector(booksList)
@@ -31,7 +35,6 @@ function Books(props) {
 
 
     const [page, setPage] = useState(1)
-    const [data, setData] = useState([])
 
     const resultsPerPage = 15
 
@@ -40,15 +43,7 @@ function Books(props) {
     }
 
     useEffect(() => {
-        dispatch(getBooks())
-    }, [])
-
-    // useEffect(() => {
-    //     console.log("books react", books)
-    // }, [books])
-
-    useEffect(() => {
-        setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage))
+        dispatch(getBooks({page}))
     }, [page])
 
     return (
@@ -64,21 +59,25 @@ function Books(props) {
                 </div>
             </div>
 
-            {loading ?
-                <h1 className="text-center mb-3">Loading...</h1> :
-                <TableContainer>
-                    <Table>
-                        <TableHeader>
-                            <tr>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Title</TableCell>
-                                <TableCell className="text-center" width="150">File</TableCell>
-                                <TableCell className="text-center" width="150">Image</TableCell>
-                                <TableCell>Action</TableCell>
-                            </tr>
-                        </TableHeader>
-                        <TableBody>
-                            {books.map((book, i) => (
+            <TableContainer>
+                <Table>
+                    <TableHeader>
+                        <tr>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell className="text-center" width="150">File</TableCell>
+                            <TableCell className="text-center" width="150">Image</TableCell>
+                            <TableCell>Action</TableCell>
+                        </tr>
+                    </TableHeader>
+                    <TableBody>
+                        {loading ?
+                            <TableRow>
+                                <TableCell colSpan={5} className="text-center">
+                                    Loading...
+                                </TableCell>
+                            </TableRow> :
+                            books.map((book, i) => (
                                 <TableRow key={i}>
                                     <TableCell>
                                         <span>{book.id}</span>
@@ -87,31 +86,58 @@ function Books(props) {
                                         <span>{book.title}</span>
                                     </TableCell>
                                     <TableCell className="text-center">
-                                        <Button tag='a' href={book.file} target="_blank" layout="link" size="small">
-                                            View File
-                                        </Button>
+                                        {(book.file !== null && book.file !== 'null') ? (
+                                            <Button tag='a' href={book.file} target="_blank" layout="link" size="small">
+                                                View File
+                                            </Button>
+                                        ) : null}
                                     </TableCell>
                                     <TableCell className="text-center">
-                                        <Button tag='a' href={book.image} target="_blank" layout="link" size="small">
-                                            View Image
-                                        </Button>
+                                        {(book.image !== null && book.image !== 'null') ? (
+                                            <Button tag='a' href={book.image} target="_blank" layout="link"
+                                                    size="small">
+                                                View Image
+                                            </Button>
+                                        ) : null}
+                                    </TableCell>
+                                    <TableCell width="200">
+                                        <ButtonWIcon onClick={e => {
+                                            e.preventDefault()
+                                            push(`/books/${book.id}`)
+                                        }} Icon={EditIcon}/>
+                                        <ButtonWIcon onClick={e => {
+                                            e.preventDefault()
+                                            dispatch()
+                                        }} Icon={TrashIcon}/>
                                     </TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <TableFooter>
-                        <Pagination
-                            totalResults={total}
-                            resultsPerPage={resultsPerPage}
-                            label="Table navigation"
-                            onChange={onPageChange}
-                        />
-                    </TableFooter>
-                </TableContainer>
-            }
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+                <TableFooter>
+                    <Pagination
+                        totalResults={total}
+                        resultsPerPage={resultsPerPage}
+                        label="Table navigation"
+                        onChange={onPageChange}
+                    />
+                </TableFooter>
+            </TableContainer>
+
         </Layout>
     );
 }
 
 export default Books;
+
+const ButtonWIcon = ({Icon, ...props}) => {
+
+    return (
+        <button type="button"
+                {...props}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <Icon className="h-5 w-5"/>
+        </button>
+    )
+}
