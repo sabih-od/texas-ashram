@@ -13,11 +13,11 @@ import Books from 'mdi-material-ui/Library';
 
 const navigation = () => {
   return [
-    {
-      title: 'Dashboard',
-      icon: HomeOutline,
-      path: '/'
-    },
+    // {
+    //   title: 'Dashboard',
+    //   icon: HomeOutline,
+    //   path: '/'
+    // },
     {
       title: 'Books',
       icon: Books,

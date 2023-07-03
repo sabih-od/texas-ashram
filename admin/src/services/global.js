@@ -20,18 +20,20 @@ export const getToken = () => {
 export const successResponse = (data = null, message = null) => {
     return {
         data,
-        message
+        message: handleMessage(message)
     }
 }
 
 export const errorResponse = (data = null, message = "Server Error!") => {
     return {
         data,
-        message
+        message: handleMessage(message)
     }
 }
 
 export const exceptionResponse = (data = null, message = "Exception Error!") => ({
     data,
-    message
+    message: handleMessage(message)
 })
+
+const handleMessage = message => message ? (Array.isArray(message) ? message : [message]) : null

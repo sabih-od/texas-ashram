@@ -65,8 +65,6 @@ export const bookSlice = createSlice({
         builder.addCase(updateBook.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            console.log("save update data", data, message)
-
             state.loading = false
             state.success = !message
             state.errors = message

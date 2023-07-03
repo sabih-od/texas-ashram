@@ -120,15 +120,13 @@ export const destroy = async ({
                              }) => {
     try {
         console.log("delete form", id)
-        const form = new FormData()
-        form.append('_method', 'delete')
 
         const response = await fetch(`${apiUrl()}/books/${id}`, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             },
-            body: form,
+            // body: form,
         });
 
         const data = await response.json();

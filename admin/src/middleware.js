@@ -14,7 +14,7 @@ export async function middleware(request) {
                 response.cookies.delete('token')
                 return response
             } else if (request.nextUrl.pathname.startsWith('/login')) {
-                return NextResponse.redirect(new URL('/', request.url))
+                return NextResponse.redirect(new URL('/books', request.url))
             }
         } else if (!token?.value && !request.nextUrl.pathname.startsWith('/login')) {
             return NextResponse.redirect(new URL('/login', request.url))

@@ -54,7 +54,7 @@ function Create(props) {
             setSuccessMessage('Book added successfully!')
             setTimeout(() => {
                 push('/books')
-            }, 1500)
+            }, 500)
         }
     }, [success, loading])
 
@@ -103,7 +103,7 @@ function Create(props) {
                                 <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
                             </Alert>
                         ) : null}
-                        {errors ? (
+                        {errors && errors.length > 0 ? (
                             <Alert severity="error" sx={{mb: 4}}>
                                 <AlertTitle>Errors</AlertTitle>
                                 {errors.map((item, ind) => (
@@ -112,7 +112,7 @@ function Create(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row spacing={4}>
+                            <Grid row>
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
@@ -159,43 +159,6 @@ function Create(props) {
                 </Card>
             </Grid>
         </Grid>
-        // <Layout>
-        //     <PageTitle>Add Book</PageTitle>
-        //
-        //     <form onSubmit={handleSubmit} className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        //         {successMsg ? (
-        //             <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-5" role="alert">
-        //                 <p className="font-bold">Success</p>
-        //                 <p>{successMsg}</p>
-        //             </div>
-        //         ) : null}
-        //         {errors ? (
-        //             <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-5" role="alert">
-        //                 <p className="font-bold">Errors</p>
-        //                 {errors.map((item, ind) => (
-        //                     <p key={ind}>{item}</p>
-        //                 ))}
-        //             </div>
-        //         ) : null}
-        //
-        //         <Label>
-        //             <span>Title</span>
-        //             <Input value={title} onChange={e => setTitle(e.target.value)} className="mt-1"/>
-        //         </Label>
-        //
-        //         <FileInput title="Upload File" onFileChange={e => {
-        //             setFile(e.target?.files[0] ?? null)
-        //         }}/>
-        //
-        //         <FileInput title="Upload Image" onFileChange={e => {
-        //             setImage(e.target?.files[0] ?? null)
-        //         }}/>
-        //
-        //         <Button className="mt-5" type="submit" disabled={loading}>
-        //             {loading ? 'Saving' : 'Save'}
-        //         </Button>
-        //     </form>
-        // </Layout>
     );
 }
 
