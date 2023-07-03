@@ -10,6 +10,9 @@ import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 import Books from 'mdi-material-ui/Library';
+import Contacts from 'mdi-material-ui/Library';
+import Donations from 'mdi-material-ui/Library';
+import Events from 'mdi-material-ui/Library';
 
 const navigation = () => {
   return [
@@ -23,11 +26,29 @@ const navigation = () => {
       icon: Books,
       path: '/books'
     },
-    // {
-    //   title: 'Account Settings',
-    //   icon: AccountCogOutline,
-    //   path: '/account-settings'
-    // },
+    {
+      title: 'Contacts',
+      icon: Contacts,
+      path: '/contacts'
+    },
+
+    {
+      title: 'Donations',
+      icon: Donations,
+      path: '/donations'
+    },
+
+    {
+      title: 'Events',
+      icon: Events,
+      path: '/events'
+    },
+
+    {
+      title: 'Account Settings',
+      icon: AccountCogOutline,
+      path: '/account-settings'
+    },
     // {
     //   sectionTitle: 'Pages'
     // },
