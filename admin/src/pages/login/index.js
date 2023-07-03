@@ -134,6 +134,13 @@ const LoginPage = () => {
                         >
                             Login
                         </Button>
+                        {errorsMessages ? (
+                            <Box component='div'>
+                                {errorsMessages.map((item, ind) => (
+                                    <Typography sx={{color: 'red'}} component='p' textAlign='center' key={ind}>{item}</Typography>
+                                ))}
+                            </Box>
+                        ) : null}
                     </form>
                 </CardContent>
             </Card>

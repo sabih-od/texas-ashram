@@ -29,6 +29,7 @@ const initialState = {
     errors: null,
     books: [],
     total: 0,
+    totalPages: 0,
 };
 
 export const booksSlice = createSlice({
@@ -40,6 +41,14 @@ export const booksSlice = createSlice({
         },
         setErrors: (state, {payload}) => {
             state.errors = payload
+        },
+        setBooksFetched: (state, {data, message}) => {
+            state.books = data?.data ?? []
+            state.total = data?.total ?? 0
+            state.totalPages = data?.totalPages ?? 0
+
+            state.loading = false
+            state.errors = message
         },
         extraReducers: {
             [HYDRATE]: (state, action) => {
@@ -59,11 +68,7 @@ export const booksSlice = createSlice({
         builder.addCase(getBooks.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            state.books = data?.data ?? []
-            state.total = data?.total ?? 0
-
-            state.loading = false
-            state.errors = message
+            booksSlice.caseReducers.setBooksFetched(state, {data, message})
         })
 
         builder.addCase(addBook.pending, (state, action) => {
@@ -73,8 +78,6 @@ export const booksSlice = createSlice({
         })
         builder.addCase(addBook.fulfilled, (state, action) => {
             const {data, message} = action.payload
-
-            console.log("save data", data, message)
 
             state.loading = false
             state.success = !message
@@ -89,8 +92,6 @@ export const booksSlice = createSlice({
         builder.addCase(deleteBook.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            console.log("delete data", data, message)
-
             state.loading = false
             state.success = !message
             state.errors = message
@@ -102,6 +103,7 @@ export const {setSuccess, setErrors} = booksSlice.actions;
 export const books = (state) => state.books.books;
 export const loading = (state) => state.books.loading;
 export const total = (state) => state.books.total;
+export const totalPages = (state) => state.books.totalPages;
 export const errors = (state) => state.books.errors;
 export const success = (state) => state.books.success;
 export default booksSlice.reducer;
