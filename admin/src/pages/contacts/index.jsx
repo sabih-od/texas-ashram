@@ -4,7 +4,8 @@ import {
     getContacts,
     loading as contactsLoading,
     contacts as contactsList,
-    total as contactTotal
+    total as contactTotal,
+    deleteContact
 } from '../../store/slices/contactsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -20,7 +21,9 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import {Pagination, Stack} from "@mui/material";
+import {IconButton, Pagination, Stack} from "@mui/material";
+import {Delete, Pencil} from "mdi-material-ui";
+import {deleteBook, getBooks} from "../../store/slices/booksSlice";
 
 const columns = [
     {id: 'index', label: 'S.No', minWidth: 170},
@@ -52,6 +55,13 @@ function Contacts(props) {
 
     const dispatch = useDispatch()
     const {push} = useRouter()
+
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
+        console.log(id)
+        await dispatch(deleteContact({id}))
+        // await dispatch(getContacts({page}))
+    }
 
     // const loading = useSelector(booksLoading)
     // const books = useSelector(booksList)
@@ -133,14 +143,14 @@ function Contacts(props) {
                                                 </TableCell>
 
                                                 <TableCell width="200">
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    push(`/books/${book.id}`)*/}
-                                                    {/*}} Icon={EditIcon}/>*/}
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    dispatch()*/}
-                                                    {/*}} Icon={TrashIcon}/>*/}
+
+                                                    <IconButton
+                                                        size="small"
+                                                        variant="outlined"
+                                                        onClick={e => handleDelete(e, contact.id)}
+                                                        sx={{marginLeft: 'auto'}}>
+                                                        <Delete/>
+                                                    </IconButton>
                                                 </TableCell>
                                             </TableRow>
                                         )

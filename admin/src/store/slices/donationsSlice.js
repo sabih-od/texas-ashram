@@ -60,7 +60,7 @@ export const donationsSlice = createSlice({
             const {data, message} = action.payload
 
             state.donations = data?.data ?? []
-            state.donations = data?.total ?? 0
+            state.total = data?.total ?? 0
 
             state.loading = false
             state.errors = message
