@@ -21,7 +21,7 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-
+import {Pagination, Stack} from "@mui/material";
 
 const columns = [
     {id: 'index', label: 'S.No', minWidth: 170},
@@ -156,7 +156,7 @@ function Contacts(props) {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        {/*<Pagination sx={{mt: 4}} count={total} onChange={onPageChange} />*/}
+                        <Pagination sx={{mt: 4}} count={total} onChange={onPageChange} />
                         <TablePagination
                             rowsPerPageOptions={[resultsPerPage]}
                             component='div'
