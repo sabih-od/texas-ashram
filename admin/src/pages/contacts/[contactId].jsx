@@ -1,44 +1,32 @@
 import React, {useEffect, useState} from 'react';
-// import PageTitle from "../../example/components/Typography/PageTitle";
-// import {Button, Input, Label, Select, Textarea} from "@roketid/windmill-react-ui";
-// import Layout from "../../example/containers/Layout";
-// import FileInput from "../../example/components/FileInput";
+import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    addContact,
-    loading as ContactLoading,
-    errors as ContactErrors,
-    success as ContactSuccess,
-    setSuccess, setErrors
-} from '../../store/slices/contactsSlice'
-import {useRouter} from "next/navigation";
+    getContact,
+    contact as contactDetail,
+    loading as contactLoading,
+    errors as contactErrors,
+    success as contactSuccess, updateContact, setErrors, setSuccess
+} from "../../store/slices/contactSlice";
 import Grid from "@mui/material/Grid";
-import {Alert, AlertTitle, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Link from "next/link";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import EyeOutline from "mdi-material-ui/EyeOutline";
-import EyeOffOutline from "mdi-material-ui/EyeOffOutline";
-import FormHelperText from "@mui/material/FormHelperText";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import {Alert, AlertTitle, Stack} from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-function Create(props) {
+function Contact(props) {
+    const {push, query} = useRouter()
+    const {contactId} = query
 
     const dispatch = useDispatch()
-    const {push} = useRouter()
 
-    const loading = useSelector(ContactLoading)
-    const errors = useSelector(ContactErrors)
-    const success = useSelector(ContactSuccess)
+    const contact = useSelector(contactDetail)
+    const loading = useSelector(contactLoading)
+    const errors = useSelector(contactErrors)
+    const success = useSelector(contactSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [name, setName] = useState('')
@@ -48,12 +36,24 @@ function Create(props) {
     const [message, setMessage] = useState(null)
 
     useEffect(() => {
+        if (contactId) {
+            dispatch(getContact({id: contactId}))
+        }
+    }, [contactId])
+
+    useEffect(() => {
+        if (contact) {
+            setTitle(contact.title)
+        }
+    }, [contact])
+
+    useEffect(() => {
         dispatch(setSuccess(false))
     }, [success])
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Contact added successfully!')
+            setSuccessMessage('Contact updated successfully!')
             setTimeout(() => {
                 push('/contacts')
             }, 500)
@@ -66,45 +66,47 @@ function Create(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(addContact({
+        dispatch(updateContact({
+            id: ContactId,
             name, email, phone , company , message
         }))
 
     }
 
-    const fileValidation = () => {
-        let _errors = []
-        if (name === null) {
-            _errors.push("name is required!")
-        }
-        if (email === null) {
-            _errors.push("email is required!")
-        }
-
-        if (phone === null) {
-            _errors.push("Phone is required!")
-        }
-
-        if (company === null) {
-            _errors.push("Company is required!")
-        }
-
-        if (message === null) {
-            _errors.push("Message is required!")
-        }
-
-        if (_errors.length > 0) {
-            dispatch(setErrors(_errors))
-        }
-
-        return _errors.length < 1
-    }
+    // const fileValidation = () => {
+    //     let _errors = []
+    //     if (name === null) {
+    //         _errors.push("name is required!")
+    //     }
+    //     if (email === null) {
+    //         _errors.push("email is required!")
+    //     }
+    //
+    //     if (phone === null) {
+    //         _errors.push("Phone is required!")
+    //     }
+    //
+    //     if (company === null) {
+    //         _errors.push("Company is required!")
+    //     }
+    //
+    //     if (message === null) {
+    //         _errors.push("Message is required!")
+    //     }
+    //
+    //
+    //     if (_errors.length > 0) {
+    //         dispatch(setErrors(_errors))
+    //     }
+    //
+    //     return _errors.length < 1
+    // }
 
     return (
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Create Contact
+                    Edit Contact
                 </Typography>
             </Grid>
 
@@ -127,6 +129,8 @@ function Create(props) {
                         ) : null}
                         <form onSubmit={handleSubmit}>
                             <Grid row>
+
+
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Name' value={name}
                                                onChange={e => setName(e.target.value)}/>
@@ -151,6 +155,7 @@ function Create(props) {
                                                onChange={e => setMessage(e.target.value)}/>
                                 </Grid>
 
+
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Button type='submit' variant='contained' disabled={loading}>
                                         {loading ? 'Saving' : 'Save'}
@@ -165,4 +170,4 @@ function Create(props) {
     );
 }
 
-export default Create;
+export default Contact;
