@@ -1,19 +1,19 @@
 import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParams} from "./global";
 
 export const create = async ({
-                                 title,
-                                 url,
-                                 media,
+                                 name,
+                                 designation,
+                                 description,
                                  image
                              }) => {
     try {
         const form = new FormData()
-        form.append('title', title)
-        form.append('url', url)
-        form.append('media', media)
+        form.append('name', name)
+        form.append('designation', designation)
+        form.append('description', description)
         form.append('image', image)
 
-        const response = await fetch(`${apiUrl()}/sermons`, {
+        const response = await fetch(`${apiUrl()}/speakers`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -36,20 +36,21 @@ export const create = async ({
 
 export const update = async ({
                                  id,
-                                 title,
-                                 url,
-                                 media,
+                                 name,
+                                 designation,
+                                 description,
                                  image
                              }) => {
     try {
-        console.log("update form", id, title,url,media,image)
+        console.log("update form", id, name,description,designation,image)
         const form = new FormData()
-        form.append('title', title)
-        form.append('url', url)
-        form.append('media', media)
+        form.append('name', name)
+        form.append('designation', designation)
+        form.append('description', description)
         form.append('image', image)
 
-        const response = await fetch(`${apiUrl()}/sermons/${id}`, {
+
+        const response = await fetch(`${apiUrl()}/speakers/${id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -72,7 +73,7 @@ export const update = async ({
 
 export const get = async (page = 1, limit = 15) => {
     try {
-        const response = await fetch(urlWithParams(`${apiUrl()}/sermons`, {
+        const response = await fetch(urlWithParams(`${apiUrl()}/speakers`, {
             page, limit
         }), {
             method: 'GET',
@@ -97,7 +98,7 @@ export const get = async (page = 1, limit = 15) => {
 //
 export const show = async (id) => {
     try {
-        const response = await fetch(`${apiUrl()}/sermons/${id}`, {
+        const response = await fetch(`${apiUrl()}/speakers/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -123,7 +124,7 @@ export const destroy = async ({
     try {
         console.log("delete form", id)
 
-        const response = await fetch(`${apiUrl()}/sermons/${id}`, {
+        const response = await fetch(`${apiUrl()}/speakers/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${getToken()}`

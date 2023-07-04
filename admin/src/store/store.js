@@ -16,9 +16,13 @@ import {staffMemberSlice} from "./slices/staffMemberSlice"
 import {eventSlice} from "./slices/EventSlice"
 import {prayersSlice} from "./slices/prayersSlice";
 import {sermonsSlice} from "./slices/sermonsSlice"
+import {sermonSlice} from "./slices/sermonSlice"
 
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
+
+import {speakersSlice} from "./slices/speakersSlice";
+import {speakerSlice} from "./slices/speakerSlice";
 
 const makeStore = () =>
     configureStore({
@@ -38,8 +42,11 @@ const makeStore = () =>
             [eventSlice.name]: eventSlice.reducer,
             [prayersSlice.name]: prayersSlice.reducer,
             [sermonsSlice.name]: sermonsSlice.reducer,
+            [sermonSlice.name]: sermonSlice.reducer,
             [usersSlice.name]: usersSlice.reducer,
             [userSlice.name]: userSlice.reducer,
+            [speakersSlice.name]: speakersSlice.reducer,
+            [speakerSlice.name]: speakerSlice.reducer,
         },
         devTools: true,
     });
