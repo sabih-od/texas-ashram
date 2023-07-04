@@ -11,10 +11,12 @@ module.exports = {
     apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
   },
   webpack: config => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    }
+    // config.infrastructureLogging = { debug: /PackFileCache/ }
+    //
+    // config.resolve.alias = {
+    //   ...config.resolve.alias,
+    //   apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
+    // }
 
     return config
   }
