@@ -1,19 +1,19 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import {ValidationPipe} from "@nestjs/common";
-import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
+import {ValidationPipe} from '@nestjs/common';
+import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import * as express from 'express';
 import * as path from 'path';
-import { config } from 'dotenv';
-import { join } from 'path';
+import {config} from 'dotenv';
+import {join} from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
-  app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
-  app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+    const app = await NestFactory.create(AppModule);
+    app.useGlobalPipes(new ValidationPipe());
+    app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+    app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
-    config({ path: join(__dirname, '../.env') });
+    config({path: join(__dirname, '../.env')});
 
     //swagger
     const swagger_config = new DocumentBuilder()
@@ -24,10 +24,9 @@ async function bootstrap() {
         .addTag('Announcements')
         .addTag('Books')
         .addTag('Contacts')
-        .addTag('Donations')
         .addTag('Events')
-        .addTag('Pages')
         .addTag('Posts')
+        .addTag('Pages')
         .addTag('Prayer Requests')
         .addTag('Sermons')
         .addTag('Speakers')
@@ -41,6 +40,7 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, swagger_config);
     SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.PORT);
+    await app.listen(process.env.PORT);
 }
+
 bootstrap();
