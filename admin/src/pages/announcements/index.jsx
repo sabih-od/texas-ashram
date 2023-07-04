@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getBooks,
-    loading as booksLoading,
-    books as booksList,
-    total as bookTotal,
-    totalPages as bookTotalPages,
-    deleteBook
-} from '../../store/slices/booksSlice'
+    getAnnouncements,
+    loading as annLoading,
+    announcements as annList,
+    total as annTotal,
+    totalPages as annTotalPages,
+    deleteAnnouncement
+} from '../../store/slices/announcementsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
@@ -24,15 +24,15 @@ import Button from "@mui/material/Button";
 import {IconButton, Pagination, Stack} from "@mui/material";
 import {Pencil, Delete} from 'mdi-material-ui'
 
-function Books(props) {
+function Announcements(props) {
 
     const dispatch = useDispatch()
     const {push} = useRouter()
 
-    const loading = useSelector(booksLoading)
-    const books = useSelector(booksList)
-    const total = useSelector(bookTotal)
-    const totalPages = useSelector(bookTotalPages)
+    const loading = useSelector(annLoading)
+    const announcements = useSelector(annList)
+    const total = useSelector(annTotal)
+    const totalPages = useSelector(annTotalPages)
 
     const [page, setPage] = useState(1)
 
@@ -42,12 +42,12 @@ function Books(props) {
 
     const handleDelete = async (e, id) => {
         e.preventDefault()
-        await dispatch(deleteBook({id}))
-        await dispatch(getBooks({page}))
+        await dispatch(deleteAnnouncement({id}))
+        await dispatch(getAnnouncements({page}))
     }
 
     useEffect(() => {
-        dispatch(getBooks({page}))
+        dispatch(getAnnouncements({page}))
     }, [page])
 
     return (
@@ -55,10 +55,10 @@ function Books(props) {
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Books
+                        Announcements
                     </Typography>
-                    <Button component={Link} href='/books/create' sx={{marginLeft: 'auto'}}>
-                        Create Book
+                    <Button component={Link} href='/announcements/create' sx={{marginLeft: 'auto'}}>
+                        Create Announcement
                     </Button>
                 </Stack>
             </Grid>
@@ -73,39 +73,27 @@ function Books(props) {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
+                                            <TableCell>Date</TableCell>
                                             <TableCell>Title</TableCell>
-                                            <TableCell className="text-center" width="150">File</TableCell>
-                                            <TableCell className="text-center" width="150">Image</TableCell>
+                                            <TableCell>Description</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {books.map(book => {
+                                        {announcements.map(announcement => {
                                             return (
-                                                <TableRow hover role='checkbox' tabIndex={-1} key={book.id}>
+                                                <TableRow hover role='checkbox' tabIndex={-1} key={announcement.id}>
                                                     <TableCell>
-                                                        <span>{book.id}</span>
+                                                        <span>{announcement.id}</span>
+                                                    </TableCell>
+                                                    <TableCell width="200">
+                                                        <span>{announcement.date}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{book.title}</span>
+                                                        <span>{announcement.title}</span>
                                                     </TableCell>
-                                                    <TableCell className="text-center">
-                                                        {(book.file !== null && book.file !== 'null') ? (
-                                                            <Button tag='a' href={book.file} target="_blank"
-                                                                    layout="link"
-                                                                    size="small">
-                                                                View File
-                                                            </Button>
-                                                        ) : null}
-                                                    </TableCell>
-                                                    <TableCell className="text-center">
-                                                        {(book.image !== null && book.image !== 'null') ? (
-                                                            <Button tag='a' href={book.image} target="_blank"
-                                                                    layout="link"
-                                                                    size="small">
-                                                                View Image
-                                                            </Button>
-                                                        ) : null}
+                                                    <TableCell>
+                                                        <span>{announcement.description}</span>
                                                     </TableCell>
                                                     <TableCell width="200">
                                                         <IconButton
@@ -113,14 +101,14 @@ function Books(props) {
                                                             variant="outlined"
                                                             onClick={e => {
                                                                 e.preventDefault()
-                                                                push(`/books/${book.id}`)
+                                                                push(`/announcements/${announcement.id}`)
                                                             }} sx={{marginLeft: 'auto'}}>
                                                             <Pencil/>
                                                         </IconButton>
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => handleDelete(e, book.id)}
+                                                            onClick={e => handleDelete(e, announcement.id)}
                                                             sx={{marginLeft: 'auto'}}>
                                                             <Delete/>
                                                         </IconButton>
@@ -143,4 +131,4 @@ function Books(props) {
     );
 }
 
-export default Books;
+export default Announcements;
