@@ -9,6 +9,9 @@ import {donationsSlice} from "./slices/donationsSlice";
 import {eventsSlice} from "./slices/eventsSlice";
 import {postsSlice} from "./slices/postsSlice"
 import {announcementSlice} from "./slices/announcementSlice";
+import {usersSlice} from "./slices/usersSlice";
+import {userSlice} from "./slices/userSlice";
+
 const makeStore = () =>
     configureStore({
         reducer: {
@@ -21,6 +24,8 @@ const makeStore = () =>
             [postsSlice.name]: postsSlice.reducer,
             [announcementsSlice.name]: announcementsSlice.reducer,
             [announcementSlice.name]: announcementSlice.reducer,
+            [usersSlice.name]: usersSlice.reducer,
+            [userSlice.name]: userSlice.reducer,
         },
         devTools: true,
     });

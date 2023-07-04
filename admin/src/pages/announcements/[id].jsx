@@ -49,7 +49,6 @@ function Announcement(props) {
         if (announcement) {
             setTitle(announcement.title)
             setDescription(announcement.description)
-            console.log(announcement.date, moment(announcement.date, 'DD-MM-YYYY').isValid())
             const _date = moment(announcement.date, 'DD-MM-YYYY')
             if (_date.isValid()) {
                 setDate(_date.toDate())
