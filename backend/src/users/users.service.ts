@@ -1,8 +1,8 @@
-import { Injectable, Inject, Catch } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import {Repository, EntityNotFoundError, QueryFailedError} from 'typeorm';
-import { User } from './entities/user.entity';
+import {Injectable, Inject, Catch} from '@nestjs/common';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UpdateUserDto} from './dto/update-user.dto';
+import {Repository, EntityNotFoundError, QueryFailedError, Not} from 'typeorm';
+import {User} from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -10,7 +10,8 @@ export class UsersService {
     constructor(
         @Inject('USER_REPOSITORY')
         private userRepository: Repository<User>,
-    ) {}
+    ) {
+    }
 
     async create(createUserDto: CreateUserDto): Promise<any> {
         try {
@@ -39,6 +40,7 @@ export class UsersService {
 
     async findAll(page: number = 1, limit: number = 10): Promise<any> {
         const [data, total] = await this.userRepository.findAndCount({
+            where: {role_id: Not(1)},
             skip: (page - 1) * limit,
             take: limit,
         });
@@ -104,7 +106,7 @@ export class UsersService {
                 updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
             }
 
-            await this.userRepository.update(user, updateUserDto);
+            await this.userRepository.update(id, updateUserDto);
 
             return await this.findOne(id);
         } catch (error) {
@@ -123,6 +125,6 @@ export class UsersService {
             return user;
         }
 
-        return await this.userRepository.delete(user);
+        return await this.userRepository.delete(id);
     }
 }

@@ -12,6 +12,9 @@ import {postsSlice} from "./slices/postsSlice"
 import {staffMembersSlice} from "./slices/staffMembersSlice"
 import {staffMemberSlice} from "./slices/staffMemberSlice"
 import {eventSlice} from "./slices/EventSlice"
+import {usersSlice} from "./slices/usersSlice";
+import {userSlice} from "./slices/userSlice";
+
 const makeStore = () =>
     configureStore({
         reducer: {
@@ -27,6 +30,8 @@ const makeStore = () =>
             [staffMembersSlice.name]: staffMembersSlice.reducer,
             [staffMemberSlice.name]: staffMemberSlice.reducer,
             [eventSlice.name]: eventSlice.reducer,
+            [usersSlice.name]: usersSlice.reducer,
+            [userSlice.name]: userSlice.reducer,
         },
         devTools: true,
     });

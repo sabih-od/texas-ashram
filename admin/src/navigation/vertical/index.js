@@ -1,23 +1,11 @@
-// ** Icon imports
-// import Login from 'mdi-material-ui/Login'
-// import Table from 'mdi-material-ui/Table'
-// import CubeOutline from 'mdi-material-ui/CubeOutline'
-// import HomeOutline from 'mdi-material-ui/HomeOutline'
-// import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-// import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-// import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
-// import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
-// import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-// import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
-import Books from 'mdi-material-ui/Library';
-import Contacts from 'mdi-material-ui/Library';
-import Donations from 'mdi-material-ui/Library';
-import Events from 'mdi-material-ui/Library';
-import Annoucements from 'mdi-material-ui/Library';
-import Posts from 'mdi-material-ui/Library';
-import Staff_members from 'mdi-material-ui/Library';
-
+import BookIcon from '@mui/icons-material/AutoStoriesOutlined';
+import ContactIcon from '@mui/icons-material/ContactPhoneOutlined';
+import DonationIcon from '@mui/icons-material/VolunteerActivismOutlined';
+import EventIcon from '@mui/icons-material/EventOutlined';
+import PostIcon from '@mui/icons-material/DynamicFeedOutlined';
 import {BullhornOutline} from 'mdi-material-ui';
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
+
 
 const navigation = () => {
   return [
@@ -33,7 +21,7 @@ const navigation = () => {
     },
     {
       title: 'Announcements',
-      icon: Annoucements,
+      icon: BullhornOutline,
       path: '/announcements'
     },
 
@@ -48,30 +36,92 @@ const navigation = () => {
       path: '/contacts'
     },
 
-    {
-      title: 'Donations',
-      icon: Donations,
-      path: '/donations'
-    },
+        {
+            title: 'Donations',
+            icon: DonationIcon,
+            path: '/donations'
+        },
 
-    {
-      title: 'Events',
-      icon: Events,
-      path: '/events'
-    },
+        {
+            title: 'Events',
+            icon: EventIcon,
+            path: '/events'
+        },
 
-    {
-      title: 'Posts',
-      icon: Posts,
-      path: '/posts',
-    },
+        {
+            title: 'Posts',
+            icon: PostIcon,
+            path: '/posts',
+        },
 
+        {
+            title: 'Users',
+            icon: PeopleOutlinedIcon,
+            path: '/users',
+        },
 
+        // {
+        //   title: 'Account Settings',
+        //   icon: AccountCogOutline,
+        //   path: '/account-settings'
+        // },
+        // {
+        //   sectionTitle: 'Pages'
+        // },
+        // {
+        //   title: 'Login',
+        //   icon: Login,
+        //   path: '/pages/login',
+        //   openInNewTab: true
+        // },
+        // {
+        //   title: 'Register',
+        //   icon: AccountPlusOutline,
+        //   path: '/pages/register',
+        //   openInNewTab: true
+        // },
+        // {
+        //   title: 'Error',
+        //   icon: AlertCircleOutline,
+        //   path: '/pages/error',
+        //   openInNewTab: true
+        // },
+        // {
+        //   sectionTitle: 'User Interface'
+        // },
+        // {
+        //   title: 'Typography',
+        //   icon: FormatLetterCase,
+        //   path: '/typography'
+        // },
+        // {
+        //   title: 'Icons',
+        //   path: '/icons',
+        //   icon: GoogleCirclesExtended
+        // },
+        // {
+        //   title: 'Cards',
+        //   icon: CreditCardOutline,
+        //   path: '/cards'
+        // },
+        // {
+        //   title: 'Tables',
+        //   icon: Table,
+        //   path: '/tables'
+        // },
+        // {
+        //   icon: CubeOutline,
+        //   title: 'Form Layouts',
+        //   path: '/form-layouts'
+        // }
     {
       title: 'Staff Members',
       icon: Staff_members,
       path: '/staff-members',
     },
+
+
+
     // {
     //   title: 'Account Settings',
     //   icon: AccountCogOutline,
