@@ -96,6 +96,7 @@ export class SermonsController {
             createSermonDto.image = app_url + dir_path + file_name;
         }
 
+        createSermonDto.created_at = Date.now().toString();
         let res = await this.sermonsService.create(createSermonDto);
 
         return {

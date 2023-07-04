@@ -16,4 +16,9 @@ export class UpdateSermonDto extends PartialType(CreateSermonDto) {
 
     @ApiProperty({ type: 'string', format: 'binary' })
     image: string;
+
+    @ApiProperty({ example: 'This is the description for sermons' })
+    description: string;
+
+    created_at: string;
 }
