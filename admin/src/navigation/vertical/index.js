@@ -15,6 +15,7 @@ import Donations from 'mdi-material-ui/Library';
 import Events from 'mdi-material-ui/Library';
 import Annoucements from 'mdi-material-ui/Library';
 import Posts from 'mdi-material-ui/Library';
+import Staff_members from 'mdi-material-ui/Library';
 
 import {BullhornOutline} from 'mdi-material-ui';
 
@@ -65,6 +66,12 @@ const navigation = () => {
       path: '/posts',
     },
 
+
+    {
+      title: 'Staff Members',
+      icon: Staff_members,
+      path: '/staff-members',
+    },
     // {
     //   title: 'Account Settings',
     //   icon: AccountCogOutline,

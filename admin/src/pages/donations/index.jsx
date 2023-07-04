@@ -86,9 +86,9 @@ function Donations(props) {
                     <Typography variant='h5'>
                         Donations
                     </Typography>
-                    <Button component={Link} href='/donations/create' sx={{marginLeft: 'auto'}}>
-                        Create Donation
-                    </Button>
+                    {/*<Button component={Link} href='/donations/create' sx={{marginLeft: 'auto'}}>*/}
+                    {/*    Create Donation*/}
+                    {/*</Button>*/}
                 </Stack>
             </Grid>
 
@@ -102,7 +102,7 @@ function Donations(props) {
                                     <TableRow>
                                         <TableCell>ID</TableCell>
                                         <TableCell>amount</TableCell>
-                                        <TableCell>Action</TableCell>
+                                        {/*<TableCell>Action</TableCell>*/}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -117,16 +117,7 @@ function Donations(props) {
                                                     <span>{donation.amount}</span>
                                                 </TableCell>
 
-                                                <TableCell width="200">
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    push(`/books/${book.id}`)*/}
-                                                    {/*}} Icon={EditIcon}/>*/}
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    dispatch()*/}
-                                                    {/*}} Icon={TrashIcon}/>*/}
-                                                </TableCell>
+
                                             </TableRow>
                                         )
                                     })}

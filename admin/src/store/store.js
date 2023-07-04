@@ -9,6 +9,9 @@ import {eventsSlice} from "./slices/eventsSlice";
 import {announcementsSlice} from "./slices/announcementsSlice";
 import {announcementSlice} from "./slices/announcementSlice";
 import {postsSlice} from "./slices/postsSlice"
+import {staffMembersSlice} from "./slices/staffMembersSlice"
+import {staffMemberSlice} from "./slices/staffMemberSlice"
+import {eventSlice} from "./slices/EventSlice"
 const makeStore = () =>
     configureStore({
         reducer: {
@@ -21,6 +24,9 @@ const makeStore = () =>
             [postsSlice.name]: postsSlice.reducer,
             [announcementsSlice.name]: announcementsSlice.reducer,
             [announcementSlice.name]: announcementSlice.reducer,
+            [staffMembersSlice.name]: staffMembersSlice.reducer,
+            [staffMemberSlice.name]: staffMemberSlice.reducer,
+            [eventSlice.name]: eventSlice.reducer,
         },
         devTools: true,
     });

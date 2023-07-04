@@ -4,7 +4,8 @@ import {
     getEvents,
     loading as eventsLoading,
     events as eventsList,
-    total as eventTotal
+    total as eventTotal,
+    deleteEvent
 } from '../../store/slices/eventsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -20,7 +21,9 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import {Pagination, Stack} from "@mui/material";
+import {IconButton, Pagination, Stack} from "@mui/material";
+import {Delete, Pencil} from "mdi-material-ui";
+import {deleteBook, getBooks} from "../../store/slices/booksSlice";
 
 const columns = [
     {id: 'index', label: 'S.No', minWidth: 170},
@@ -70,6 +73,13 @@ function Events(props) {
         // setPage(p)
         console.log("p", p)
     }
+
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
+        await dispatch(deleteEvent({id}))
+        await dispatch(getEvents({page}))
+    }
+
 
     useEffect(() => {
         dispatch(getEvents({page}))
@@ -142,14 +152,22 @@ function Events(props) {
                                                 </TableCell>
 
                                                 <TableCell width="200">
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    push(`/books/${book.id}`)*/}
-                                                    {/*}} Icon={EditIcon}/>*/}
-                                                    {/*<ButtonWIcon onClick={e => {*/}
-                                                    {/*    e.preventDefault()*/}
-                                                    {/*    dispatch()*/}
-                                                    {/*}} Icon={TrashIcon}/>*/}
+                                                    <IconButton
+                                                        size="small"
+                                                        variant="outlined"
+                                                        onClick={e => {
+                                                            e.preventDefault()
+                                                            push(`/events/${event.id}`)
+                                                        }} sx={{marginLeft: 'auto'}}>
+                                                        <Pencil/>
+                                                    </IconButton>
+                                                    <IconButton
+                                                        size="small"
+                                                        variant="outlined"
+                                                        onClick={e => handleDelete(e, event.id)}
+                                                        sx={{marginLeft: 'auto'}}>
+                                                        <Delete/>
+                                                    </IconButton>
                                                 </TableCell>
                                             </TableRow>
                                         )

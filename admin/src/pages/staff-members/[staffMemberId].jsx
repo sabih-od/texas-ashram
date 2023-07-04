@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getContact,
-    contact as contactDetail,
-    loading as contactLoading,
-    errors as contactErrors,
-    success as contactSuccess, updateContact, setErrors, setSuccess
-} from "../../store/slices/contactSlice";
+    getStaffMember,
+    staffMember as staffMemberDetail,
+    loading as staffMemberLoading,
+    errors as staffMemberErrors,
+    success as staffMemberSuccess, updateStaffMember, setErrors, setSuccess
+} from "../../store/slices/staffMemberSlice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -17,35 +17,37 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-function Contact(props) {
+function StaffMember(props) {
     const {push, query} = useRouter()
-    const {contactId} = query
+    const {staffMemberId} = query
 
     const dispatch = useDispatch()
 
-    const contact = useSelector(contactDetail)
-    const loading = useSelector(contactLoading)
-    const errors = useSelector(contactErrors)
-    const success = useSelector(contactSuccess)
+    const staffMember = useSelector(staffMemberDetail)
+    const loading = useSelector(staffMemberLoading)
+    const errors = useSelector(staffMemberErrors)
+    const success = useSelector(staffMemberSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
+
     const [name, setName] = useState('')
-    const [email, setEmail] = useState(null)
-    const [phone, setPhone] = useState(null)
-    const [company, setCompany] = useState(null)
-    const [message, setMessage] = useState(null)
+    const [description, setDescription] = useState(null)
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
-        if (contactId) {
-            dispatch(getContact({id: contactId}))
+        if (staffMemberId) {
+            dispatch(getStaffMember({id: staffMemberId}))
         }
-    }, [contactId])
+    }, [staffMemberId])
 
     useEffect(() => {
-        if (contact) {
-            setTitle(contact.title)
+        if (staffMember) {
+            setName(staffMember.name)
+            setDescription(staffMember.description)
         }
-    }, [contact])
+    }, [staffMember])
+
+
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -53,9 +55,9 @@ function Contact(props) {
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Contact updated successfully!')
+            setSuccessMessage('Staff-Member updated successfully!')
             setTimeout(() => {
-                push('/contacts')
+                push('/staff-members')
             }, 500)
         }
     }, [success, loading])
@@ -66,47 +68,39 @@ function Contact(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(updateContact({
-            id: ContactId,
-            name, email, phone , company , message
+        dispatch(updateStaffMember({
+            id: staffMemberId,
+            name, description, image
         }))
 
     }
 
-    // const fileValidation = () => {
-    //     let _errors = []
-    //     if (name === null) {
-    //         _errors.push("name is required!")
-    //     }
-    //     if (email === null) {
-    //         _errors.push("email is required!")
-    //     }
-    //
-    //     if (phone === null) {
-    //         _errors.push("Phone is required!")
-    //     }
-    //
-    //     if (company === null) {
-    //         _errors.push("Company is required!")
-    //     }
-    //
-    //     if (message === null) {
-    //         _errors.push("Message is required!")
-    //     }
-    //
-    //
-    //     if (_errors.length > 0) {
-    //         dispatch(setErrors(_errors))
-    //     }
-    //
-    //     return _errors.length < 1
-    // }
+    const fileValidation = () => {
+        let _errors = []
+        if (name === null) {
+            _errors.push("Name is required!")
+        }
+        if (description === null) {
+            _errors.push("Description is required!")
+        }
+
+        if (image === null) {
+            _errors.push("Image is required!")
+        }
+
+
+        if (_errors.length > 0) {
+            dispatch(setErrors(_errors))
+        }
+
+        return _errors.length < 1
+    }
 
     return (
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Edit Contact
+                    Edit Staff Member
                 </Typography>
             </Grid>
 
@@ -129,32 +123,33 @@ function Contact(props) {
                         ) : null}
                         <form onSubmit={handleSubmit}>
                             <Grid row>
-
-
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Name' value={name}
                                                onChange={e => setName(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Email' value={email}
-                                               onChange={e => setEmail(e.target.value)}/>
+
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Phone' value={phone}
-                                               onChange={e => setPhone(e.target.value)}/>
+                                    <Stack direction="row" gap={2}>
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            Upload Image
+                                            <input
+                                                type="file"
+                                                hidden
+                                                onChange={e => {
+                                                    setImage(e.target?.files[0] ?? null)
+                                                }}
+                                            />
+                                        </Button>
+                                    </Stack>
                                 </Grid>
-
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Company' value={company}
-                                               onChange={e => setCompany(e.target.value)}/>
-                                </Grid>
-
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Message' value={message}
-                                               onChange={e => setMessage(e.target.value)}/>
-                                </Grid>
-
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Button type='submit' variant='contained' disabled={loading}>
@@ -170,4 +165,4 @@ function Contact(props) {
     );
 }
 
-export default Contact;
+export default StaffMember;
