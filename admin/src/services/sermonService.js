@@ -1,21 +1,19 @@
 import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParams} from "./global";
 
 export const create = async ({
-                                 name,
-                                 email,
-                                 contact,
-                                 start_date,
-                                 end_date,
-                                 time,
-                                 description
+                                 title,
+                                 url,
+                                 media,
+                                 image
                              }) => {
     try {
         const form = new FormData()
         form.append('title', title)
-        form.append('content', content)
+        form.append('url', url)
         form.append('media', media)
+        form.append('image', image)
 
-        const response = await fetch(`${apiUrl()}/posts`, {
+        const response = await fetch(`${apiUrl()}/sermons`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${getToken()}`

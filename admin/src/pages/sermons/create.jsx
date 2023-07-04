@@ -5,12 +5,12 @@ import React, {useEffect, useState} from 'react';
 // import FileInput from "../../example/components/FileInput";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    addPost,
+    addSermon,
     loading as PostLoading,
     errors as PostErrors,
     success as PostSuccess,
     setSuccess, setErrors
-} from '../../store/slices/postsSlice'
+} from '../../store/slices/sermonsSlice'
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
 import {Alert, AlertTitle, Stack} from "@mui/material";
@@ -42,9 +42,9 @@ function Create(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
+    const [url, setUrl] = useState('')
     const [media, setMedia] = useState(null)
-    // const [file, setFile] = useState(null)
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -52,9 +52,9 @@ function Create(props) {
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Post added successfully!')
+            setSuccessMessage('Sermon added successfully!')
             setTimeout(() => {
-                push('/posts')
+                push('/sermons')
             }, 500)
         }
     }, [success, loading])
@@ -65,20 +65,20 @@ function Create(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(addPost({
-            title, content, media
+        dispatch(addSermon({
+            title, url, media , image
         }))
 
     }
 
     const fileValidation = () => {
-        let _errors = []
-        // if (file === null) {
-        //     _errors.push("File is required!")
-        // }
+        let _erroaddSermonsrs = []
+        if (image === null) {
+            _errors.push("Image is required!")
+        }
         console.log("img" , media);
         if (media === null) {
-            _errors.push("Image is required!")
+            _errors.push("Media is required!")
         }
 
         if (_errors.length > 0) {
@@ -121,25 +121,25 @@ function Create(props) {
                                 </Grid>
 <br/>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Content' value={content}
-                                               onChange={e => setContent(e.target.value)}/>
+                                    <TextField fullWidth label='Url' value={content}
+                                               onChange={e => setUrl(e.target.value)}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
-                                        {/*<Button*/}
-                                        {/*    variant="contained"*/}
-                                        {/*    component="label"*/}
-                                        {/*>*/}
-                                        {/*    Upload Media*/}
-                                        {/*    <input*/}
-                                        {/*        type="file"*/}
-                                        {/*        hidden*/}
-                                        {/*        onChange={e => {*/}
-                                        {/*            setFile(e.target?.files[0] ?? null)*/}
-                                        {/*        }}*/}
-                                        {/*    />*/}
-                                        {/*</Button>*/}
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            Upload Image
+                                            <input
+                                                type="file"
+                                                hidden
+                                                onChange={e => {
+                                                    setImage(e.target?.files[0] ?? null)
+                                                }}
+                                            />
+                                        </Button>
                                         <Button
                                             variant="contained"
                                             component="label"
@@ -155,6 +155,8 @@ function Create(props) {
                                         </Button>
                                     </Stack>
                                 </Grid>
+
+
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Button type='submit' variant='contained' disabled={loading}>
