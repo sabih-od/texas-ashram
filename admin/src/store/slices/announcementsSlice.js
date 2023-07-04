@@ -1,23 +1,23 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {HYDRATE} from 'next-redux-wrapper';
-import {create, destroy, get} from '../../services/bookService';
+import {create, destroy, get} from '../../services/announcementService';
 
-export const getBooks = createAsyncThunk(
-    'books/get',
+export const getAnnouncements = createAsyncThunk(
+    'announcements/get',
     async ({page = 1}, thunkAPI) => {
         return await get(page)
     }
 )
 
-export const addBook = createAsyncThunk(
-    'books/add',
+export const addAnnouncement = createAsyncThunk(
+    'announcements/add',
     async (payload, thunkAPI) => {
         return await create(payload)
     }
 )
 
-export const deleteBook = createAsyncThunk(
-    'books/delete',
+export const deleteAnnouncement = createAsyncThunk(
+    'announcements/delete',
     async (payload, thunkAPI) => {
         return await destroy(payload)
     }
@@ -27,13 +27,13 @@ const initialState = {
     success: false,
     loading: false,
     errors: null,
-    books: [],
+    announcements: [],
     total: 0,
     totalPages: 0,
 };
 
-export const booksSlice = createSlice({
-    name: 'books',
+export const announcementsSlice = createSlice({
+    name: 'announcements',
     initialState,
     reducers: {
         setSuccess: (state, {payload}) => {
@@ -43,7 +43,7 @@ export const booksSlice = createSlice({
             state.errors = payload
         },
         setBooksFetched: (state, {data, message}) => {
-            state.books = data?.data ?? []
+            state.announcements = data?.data ?? []
             state.total = data?.total ?? 0
             state.totalPages = data?.totalPages ?? 0
 
@@ -54,29 +54,29 @@ export const booksSlice = createSlice({
             [HYDRATE]: (state, action) => {
                 return {
                     ...state,
-                    ...action.payload.books,
+                    ...action.payload.announcements,
                 };
             },
         },
     },
     extraReducers: builder => {
 
-        builder.addCase(getBooks.pending, (state, action) => {
+        builder.addCase(getAnnouncements.pending, (state, action) => {
             state.loading = true
             state.errors = null
         })
-        builder.addCase(getBooks.fulfilled, (state, action) => {
+        builder.addCase(getAnnouncements.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            booksSlice.caseReducers.setBooksFetched(state, {data, message})
+            announcementsSlice.caseReducers.setBooksFetched(state, {data, message})
         })
 
-        builder.addCase(addBook.pending, (state, action) => {
+        builder.addCase(addAnnouncement.pending, (state, action) => {
             state.loading = true
             state.success = false
             state.errors = null
         })
-        builder.addCase(addBook.fulfilled, (state, action) => {
+        builder.addCase(addAnnouncement.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
             state.loading = false
@@ -84,12 +84,12 @@ export const booksSlice = createSlice({
             state.errors = message
         })
 
-        builder.addCase(deleteBook.pending, (state, action) => {
+        builder.addCase(deleteAnnouncement.pending, (state, action) => {
             state.loading = true
             state.success = false
             state.errors = null
         })
-        builder.addCase(deleteBook.fulfilled, (state, action) => {
+        builder.addCase(deleteAnnouncement.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
             state.loading = false
@@ -99,11 +99,11 @@ export const booksSlice = createSlice({
     }
 });
 
-export const {setSuccess, setErrors} = booksSlice.actions;
-export const books = (state) => state.books.books;
-export const loading = (state) => state.books.loading;
-export const total = (state) => state.books.total;
-export const totalPages = (state) => state.books.totalPages;
-export const errors = (state) => state.books.errors;
-export const success = (state) => state.books.success;
-export default booksSlice.reducer;
+export const {setSuccess, setErrors} = announcementsSlice.actions;
+export const announcements = (state) => state.announcements.announcements;
+export const loading = (state) => state.announcements.loading;
+export const total = (state) => state.announcements.total;
+export const totalPages = (state) => state.announcements.totalPages;
+export const errors = (state) => state.announcements.errors;
+export const success = (state) => state.announcements.success;
+export default announcementsSlice.reducer;
