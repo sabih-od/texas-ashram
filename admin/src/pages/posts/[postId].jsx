@@ -3,11 +3,11 @@ import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getPost,
-    post as postDetail,
+    posts as postDetail,
     loading as postLoading,
     errors as postErrors,
     success as postSuccess, updatePost, setErrors, setSuccess
-} from "../../store/slices/postSlice";
+} from "../../store/slices/postsSlice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -131,6 +131,19 @@ function Post(props) {
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
+                                        {/*<Button*/}
+                                        {/*    variant="contained"*/}
+                                        {/*    component="label"*/}
+                                        {/*>*/}
+                                        {/*    Upload File*/}
+                                        {/*    <input*/}
+                                        {/*        type="file"*/}
+                                        {/*        hidden*/}
+                                        {/*        onChange={e => {*/}
+                                        {/*            setFile(e.target?.files[0] ?? null)*/}
+                                        {/*        }}*/}
+                                        {/*    />*/}
+                                        {/*</Button>*/}
                                         <Button
                                             variant="contained"
                                             component="label"
