@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getPosts,
-    loading as postsLoading,
-    posts as postsList,
-    total as postTotal,
-    totalPages as postTotalPages,
-    deletePost
-} from '../../store/slices/postsSlice'
+    getSermons,
+    loading as sermonsLoading,
+    sermons as sermonsList,
+    total as sermonsTotal,
+    totalPages as sermonsTotalPages,
+} from '../../store/slices/sermonsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
@@ -26,19 +25,19 @@ import {IconButton, Pagination, Stack} from "@mui/material";
 import {Pencil, Delete} from 'mdi-material-ui'
 import {log} from "next/dist/server/typescript/utils";
 //Additonal
-// import {deletePost} from "../../store/slices/postsSlice";
-// import {getPosts} from "../../store/slices/postsSlice";
+// import {deletePost} from "../../store/slices/sermonssSlice";
+// import {getPosts} from "../../store/slices/prayerssSlice";
 
-function Posts(props) {
+function Prayers(props) {
 
     const dispatch = useDispatch()
     const {push} = useRouter()
 
-    const loading = useSelector(postsLoading)
-    const posts = useSelector(postsList)
-    const total = useSelector(postTotal)
-    const totalPages = useSelector(postTotalPages)
-console.log("posts" , posts)
+    const loading = useSelector(sermonsLoading)
+    const sermons = useSelector(sermonsList)
+    const total = useSelector(sermonsTotal)
+    const totalPages = useSelector(sermonsTotalPages)
+console.log("sermons" , sermons)
     const [page, setPage] = useState(1)
 
     function onPageChange(e, p) {
@@ -48,12 +47,12 @@ console.log("posts" , posts)
     const handleDelete = async (e, id) => {
         e.preventDefault()
         console.log(id)
-        await dispatch(deletePost({id}))
-        await dispatch(getPosts({page}))
+        // await dispatch(deletePost({id}))
+        await dispatch(getSermons({page}))
     }
 
     useEffect(() => {
-        dispatch(getPosts({page}))
+        dispatch(getSermons({page}))
     }, [page])
 
     return (
@@ -61,10 +60,10 @@ console.log("posts" , posts)
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Posts
+                        Sermons
                     </Typography>
-                    <Button component={Link} href='/posts/create' sx={{marginLeft: 'auto'}}>
-                        Create Post
+                    <Button component={Link} href='/sermons/create' sx={{marginLeft: 'auto'}}>
+                        Create Sermon
                     </Button>
                 </Stack>
             </Grid>
@@ -80,48 +79,46 @@ console.log("posts" , posts)
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Title</TableCell>
-                                            <TableCell>Content</TableCell>
-                                            <TableCell className="text-center" width="150">Media</TableCell>
+                                            <TableCell>Url</TableCell>
+                                            <TableCell className="text-center" width="50">Media</TableCell>
+                                            <TableCell className="text-center" width="50">Image</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {posts.map(post => {
+                                        {sermons.map(sermon => {
                                             return (
-                                                <TableRow hover role='checkbox' tabIndex={-1} key={post.id}>
+                                                <TableRow hover role='checkbox' tabIndex={-1} key={sermon.id}>
                                                     <TableCell>
-                                                        <span>{post.id}</span>
+                                                        <span>{sermon.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{post.title}</span>
+                                                        <span>{sermon.title}</span>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <span>{sermon.url}</span>
+                                                    </TableCell >
+                                                    <TableCell>
+                                                        <span>{sermon.media}</span>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <span>{sermon.image}</span>
                                                     </TableCell>
 
-                                                    <TableCell>
-                                                        <span>{post.content}</span>
-                                                    </TableCell>
-                                                    <TableCell className="text-center">
-                                                        {(post.media !== null && post.media !== 'null') ? (
-                                                            <Button tag='a' href={post.media} target="_blank"
-                                                                    layout="link"
-                                                                    size="small">
-                                                                View Image
-                                                            </Button>
-                                                        ) : null}
-                                                    </TableCell>
                                                     <TableCell width="200">
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
                                                             onClick={e => {
                                                                 e.preventDefault()
-                                                                push(`/posts/${post.id}`)
+                                                                push(`/sermons/${sermon.id}`)
                                                             }} sx={{marginLeft: 'auto'}}>
                                                             <Pencil/>
                                                         </IconButton>
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => handleDelete(e, post.id)}
+                                                            onClick={e => handleDelete(e, sermon.id)}
                                                             sx={{marginLeft: 'auto'}}>
                                                             <Delete/>
                                                         </IconButton>
@@ -144,4 +141,4 @@ console.log("posts" , posts)
     );
 }
 
-export default Posts;
+export default Prayers;
