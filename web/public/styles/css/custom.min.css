@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&family=Reenie+Beanie&family=Roboto:wght@300;400;500;700&family=Yeseva+One&display=swap');
-
 :root {
     --white: #fff;
     --black: #000;
@@ -298,7 +297,6 @@ header {
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    z-index: -1;
 }
 
 .homeSlider .slide-inner::before {
@@ -524,7 +522,6 @@ svg .bgwhite {
     background-color: var(--white);
     text-align: center;
     padding: 1.875rem;
-    margin: 1rem;
 }
 
 .testimonialCard figure img {
@@ -633,14 +630,13 @@ footer h2 {
 /* InnerPages */
 
 .innertitle {
-    /*     padding-top: 135px; */
+    padding-top: 135px;
 }
 
 .innerHeading {
     background-color: var(--black);
     padding: 6.375rem 0 2rem;
     text-align: center;
-    padding-top: 236px;
 }
 
 .innerHeading h1 {
@@ -1644,73 +1640,4 @@ a.paperPlane input {
     background: #D0D3E3;
     border-bottom-left-radius: 23px;
     border-bottom-right-radius: 0;
-}
-
-.remember {
-    position: relative;
-    padding-left: 25px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.remember input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: var(--secondary);
-}
-
-.remember input[type="checkbox"]:checked + .checkmark {
-    background-color: #5c908a;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.remember input[type="checkbox"]:checked + .checkmark:after {
-    display: block;
-}
-
-.remember .checkmark:after {
-    left: 7px;
-    top: 2px;
-    width: 6px;
-    height: 13px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-}
-
-button.logoutBtn {
-    background: var(--primary);
-    font-size: 14px !important;
-    color: var(--white) !important;
-    text-transform: uppercase;
-    font-weight: 600 !important;
-    display: inline-block;
-    padding: 1rem 0.75rem !important;
-    border-radius: 35px;
-    line-height: normal;
-    border: none;
-    margin: 0.2rem;
-}
-
-button.logoutBtn:hover {
-    background-color: #fcbd32;
-    color: white;
-}
-
-button.logoutBtn:focus {
-    outline: none;
 }

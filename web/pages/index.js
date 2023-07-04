@@ -26,7 +26,6 @@ import test1 from "../images/test1.jpg";
 import test2 from "../images/test2.jpg";
 import React from "react";
 import PreLoader from "./preLoader";
-import Link from "next/link";
 
 export default function Home() {
     return (
@@ -377,7 +376,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="d-flex justify-content-center mt-5">
-                            <Link href="/contact" className="themeBtn white mx-2">Contact</Link>
+                            <a href="" className="themeBtn white mx-2">Contact</a>
                             <a href="" className="themeBtn invert mx-2">Request Information</a>
                         </div>
                     </div>
@@ -560,7 +559,9 @@ export default function Home() {
                 <section className="testimonial-section pt-5">
                     <div className="container">
                         <h2 className="heading text-center mb-4" data-aos="fade-up">Testimonials</h2>
+                        {/*<h2 className="heading text-center mb-4" data-aos="">Testimonials</h2>*/}
                         <div className="swiper testimonialSlider" data-aos="fade-up">
+                            {/*<div className="swiper testimonialSlider" data-aos="">*/}
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide">
                                     <div className="testimonialCard">
@@ -588,6 +589,8 @@ export default function Home() {
                                             and my community.</p>
                                         <strong>Caleb Jones</strong>
                                     </div>
+                                </div>
+                                <div className="swiper-slide">
                                     <div className="testimonialCard">
                                         <figure>
                                             <Image src={test2} alt="test 2"/>
@@ -612,6 +615,8 @@ export default function Home() {
                                             feeling closer to each other and closer to God.</p>
                                         <strong>Emma Rodriguez</strong>
                                     </div>
+                                </div>
+                                <div className="swiper-slide">
                                     <div className="testimonialCard">
                                         <figure>
                                             <Image src={test1} alt="test 1"/>
@@ -640,10 +645,6 @@ export default function Home() {
                                         <strong>William Davis</strong>
                                     </div>
                                 </div>
-                                {/*<div className="swiper-slide">
-                                </div>
-                                <div className="swiper-slide">
-                                </div>*/}
                             </div>
                         </div>
                     </div>

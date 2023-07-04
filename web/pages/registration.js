@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
 import registration from "../images/registeration.jpeg";
-import Link from "next/link";
 
 function Registration(props) {
     return (
@@ -13,7 +12,7 @@ function Registration(props) {
                     <h1>Registration</h1>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><Link href="/">Home</Link></li>
+                            <li className="breadcrumb-item"><a href="#">Home</a></li>
                             <li className="breadcrumb-item active" aria-current="page">Registration</li>
                         </ol>
                     </nav>
@@ -26,10 +25,10 @@ function Registration(props) {
                 <div className="container">
                     <div className="col-md-9 row mx-auto align-items-center ">
                         <div className="col-md-8 px-5">
-                            <p className="mb-3">To register and pay online, please click here: <Link href="/"> Online
-                                Registration</Link></p>
+                            <p className="mb-3">To register and pay online, please click here: <a href=""> Online
+                                Registration</a></p>
                             <p className="mb-3">To print the registration form and mail it with a registration fee
-                                check, please click here: <Link href="/">2023 Registration Form</Link>​</p>
+                                check, please click here: <a href="">2023 Registration Form</a>​</p>
                             <p className="mb-3">To fill out your family’s health forms in advance to save time at
                                 check-in, please click here: <a href="">Printable Health Form</a></p>
                             <p className="mb-3">Important Note: You will need one Health Form for every person in your
