@@ -15,7 +15,6 @@ export const create = async ({
         form.append('company', company)
         form.append('message', message)
 
-
         const response = await fetch(`${apiUrl()}/contacts`, {
             method: 'POST',
             headers: {
@@ -141,7 +140,6 @@ export const destroy = async ({
             },
             body: form,
         });
-
 
         const data = await response.json();
 

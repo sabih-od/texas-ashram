@@ -21,6 +21,7 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import {Pagination, Stack} from "@mui/material";
 import {IconButton, Pagination, Stack} from "@mui/material";
 import {Delete, Pencil} from "mdi-material-ui";
 import {deleteBook, getBooks} from "../../store/slices/booksSlice";
@@ -143,14 +144,14 @@ function Contacts(props) {
                                                 </TableCell>
 
                                                 <TableCell width="200">
-
-                                                    <IconButton
-                                                        size="small"
-                                                        variant="outlined"
-                                                        onClick={e => handleDelete(e, contact.id)}
-                                                        sx={{marginLeft: 'auto'}}>
-                                                        <Delete/>
-                                                    </IconButton>
+                                                    {/*<ButtonWIcon onClick={e => {*/}
+                                                    {/*    e.preventDefault()*/}
+                                                    {/*    push(`/books/${book.id}`)*/}
+                                                    {/*}} Icon={EditIcon}/>*/}
+                                                    {/*<ButtonWIcon onClick={e => {*/}
+                                                    {/*    e.preventDefault()*/}
+                                                    {/*    dispatch()*/}
+                                                    {/*}} Icon={TrashIcon}/>*/}
                                                 </TableCell>
                                             </TableRow>
                                         )

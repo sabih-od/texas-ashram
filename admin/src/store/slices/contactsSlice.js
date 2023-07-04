@@ -9,14 +9,6 @@ export const getContacts = createAsyncThunk(
     }
 )
 
-
-export const deleteContact = createAsyncThunk(
-    'contacts/delete',
-    async (payload, thunkAPI) => {
-        return await destroy(payload)
-    }
-)
-
 export const addContact = createAsyncThunk(
     'contacts/add',
     async (payload, thunkAPI) => {
@@ -24,12 +16,12 @@ export const addContact = createAsyncThunk(
     }
 )
 
-// export const deleteContact = createAsyncThunk(
-//     'contacts/delete',
-//     async (payload, thunkAPI) => {
-//         return await destroy(payload)
-//     }
-// )
+export const deleteContact = createAsyncThunk(
+    'contacts/delete',
+    async (payload, thunkAPI) => {
+        return await destroy(payload)
+    }
+)
 
 const initialState = {
     success: false,

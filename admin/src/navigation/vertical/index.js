@@ -1,19 +1,18 @@
 // ** Icon imports
-// import Login from 'mdi-material-ui/Login'
-// import Table from 'mdi-material-ui/Table'
-// import CubeOutline from 'mdi-material-ui/CubeOutline'
-// import HomeOutline from 'mdi-material-ui/HomeOutline'
-// import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-// import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-// import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
-// import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
-// import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-// import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
+import Login from 'mdi-material-ui/Login'
+import Table from 'mdi-material-ui/Table'
+import CubeOutline from 'mdi-material-ui/CubeOutline'
+import HomeOutline from 'mdi-material-ui/HomeOutline'
+import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
+import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
+import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
+import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
+import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
+import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 import Books from 'mdi-material-ui/Library';
 import Contacts from 'mdi-material-ui/Library';
 import Donations from 'mdi-material-ui/Library';
 import Events from 'mdi-material-ui/Library';
-import {BullhornOutline} from 'mdi-material-ui';
 
 const navigation = () => {
   return [
@@ -55,6 +54,29 @@ const navigation = () => {
       icon: Events,
       path: '/events'
     },
+    {
+      title: 'Contacts',
+      icon: Contacts,
+      path: '/contacts'
+    },
+
+    {
+      title: 'Donations',
+      icon: Donations,
+      path: '/donations'
+    },
+
+    {
+      title: 'Events',
+      icon: Events,
+      path: '/events'
+    },
+
+    // {
+    //   title: 'Account Settings',
+    //   icon: AccountCogOutline,
+    //   path: '/account-settings'
+    // },
     // {
     //   sectionTitle: 'Pages'
     // },
