@@ -13,6 +13,8 @@ import Books from 'mdi-material-ui/Library';
 import Contacts from 'mdi-material-ui/Library';
 import Donations from 'mdi-material-ui/Library';
 import Events from 'mdi-material-ui/Library';
+import Posts from 'mdi-material-ui/Library';
+
 import Annoucements from 'mdi-material-ui/Library';
 const navigation = () => {
   return [
@@ -55,6 +57,17 @@ const navigation = () => {
       path: '/events'
     },
 
+    {
+      title: 'Posts',
+      icon: Posts,
+      path: '/posts',
+    },
+
+    {
+      title: 'Account Settings',
+      icon: AccountCogOutline,
+      path: '/account-settings'
+    },
 
 
 
