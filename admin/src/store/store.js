@@ -11,6 +11,8 @@ import {postsSlice} from "./slices/postsSlice"
 import {announcementSlice} from "./slices/announcementSlice";
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
+import {cmsListSlice} from "./slices/cmsListSlice";
+import {pageSlice} from "./slices/cmsPageSlice";
 
 const makeStore = () =>
     configureStore({
@@ -26,6 +28,8 @@ const makeStore = () =>
             [announcementSlice.name]: announcementSlice.reducer,
             [usersSlice.name]: usersSlice.reducer,
             [userSlice.name]: userSlice.reducer,
+            [cmsListSlice.name]: cmsListSlice.reducer,
+            [pageSlice.name]: pageSlice.reducer,
         },
         devTools: true,
     });

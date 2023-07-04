@@ -5,6 +5,7 @@ import EventIcon from '@mui/icons-material/EventOutlined';
 import PostIcon from '@mui/icons-material/DynamicFeedOutlined';
 import {BullhornOutline} from 'mdi-material-ui';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined';
 
 
 const navigation = () => {
@@ -52,6 +53,11 @@ const navigation = () => {
             title: 'Users',
             icon: PeopleOutlinedIcon,
             path: '/users',
+        },
+        {
+            title: 'CMS Pages',
+            icon: DrawOutlinedIcon,
+            path: '/cms',
         },
 
         // {
