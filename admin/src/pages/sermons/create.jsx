@@ -72,7 +72,8 @@ function Create(props) {
     }
 
     const fileValidation = () => {
-        let _erroaddSermonsrs = []
+        let _errors = []
+
         if (image === null) {
             _errors.push("Image is required!")
         }
@@ -92,7 +93,7 @@ function Create(props) {
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Create Post
+                    Create Sermon
                 </Typography>
             </Grid>
 
@@ -121,7 +122,7 @@ function Create(props) {
                                 </Grid>
 <br/>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Url' value={content}
+                                    <TextField fullWidth label='Url' value={url}
                                                onChange={e => setUrl(e.target.value)}/>
                                 </Grid>
 

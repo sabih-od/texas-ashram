@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getSermons,
-    loading as sermonsLoading,
-    sermons as sermonsList,
-    total as sermonsTotal,
-    totalPages as sermonsTotalPages,
-    deleteSermon
-} from '../../store/slices/sermonsSlice'
+    getSpeakers,
+    loading as speakersLoading,
+    speakers as speakersList,
+    total as speakersTotal,
+    totalPages as speakersTotalPages,
+    deleteSpeaker
+} from '../../store/slices/speakersSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
@@ -26,19 +26,19 @@ import {IconButton, Pagination, Stack} from "@mui/material";
 import {Pencil, Delete} from 'mdi-material-ui'
 import {log} from "next/dist/server/typescript/utils";
 //Additonal
-// import {deletePost} from "../../store/slices/sermonssSlice";
+// import {deletePost} from "../../store/slices/speakerssSlice";
 // import {getPosts} from "../../store/slices/prayerssSlice";
 
-function Sermons(props) {
+function Speakers(props) {
 
     const dispatch = useDispatch()
     const {push} = useRouter()
 
-    const loading = useSelector(sermonsLoading)
-    const sermons = useSelector(sermonsList)
-    const total = useSelector(sermonsTotal)
-    const totalPages = useSelector(sermonsTotalPages)
-console.log("sermonss" , sermons)
+    const loading = useSelector(speakersLoading)
+    const speakers = useSelector(speakersList)
+    const total = useSelector(speakersTotal)
+    const totalPages = useSelector(speakersTotalPages)
+console.log("speakerss" , speakers)
     const [page, setPage] = useState(1)
 
     function onPageChange(e, p) {
@@ -48,12 +48,12 @@ console.log("sermonss" , sermons)
     const handleDelete = async (e, id) => {
         e.preventDefault()
         console.log(id)
-        await dispatch(deleteSermon({id}))
-        await dispatch(getSermons({page}))
+        await dispatch(deleteSpeaker({id}))
+        await dispatch(getSpeakers({page}))
     }
 
     useEffect(() => {
-        dispatch(getSermons({page}))
+        dispatch(getSpeakers({page}))
     }, [page])
 
     return (
@@ -61,10 +61,10 @@ console.log("sermonss" , sermons)
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Sermons
+                        Speakers
                     </Typography>
-                    <Button component={Link} href='/sermons/create' sx={{marginLeft: 'auto'}}>
-                        Create Sermon
+                    <Button component={Link} href='/speakers/create' sx={{marginLeft: 'auto'}}>
+                        Create Speaker
                     </Button>
                 </Stack>
             </Grid>
@@ -79,46 +79,32 @@ console.log("sermonss" , sermons)
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
-                                            <TableCell>Title</TableCell>
-                                            <TableCell>Url</TableCell>
-                                            <TableCell>Media</TableCell>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Designation</TableCell>
+                                            <TableCell>Description</TableCell>
                                             <TableCell>Image</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {sermons.map(sermon => {
+                                        {speakers.map(speaker => {
                                             return (
-                                                <TableRow hover role='checkbox' tabIndex={-1} key={sermon.id}>
+                                                <TableRow hover role='checkbox' tabIndex={-1} key={speaker.id}>
                                                     <TableCell>
-                                                        <span>{sermon.id}</span>
+                                                        <span>{speaker.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{sermon.title}</span>
+                                                        <span>{speaker.name}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{sermon.url}</span>
+                                                        <span>{speaker.designation}</span>
                                                     </TableCell >
-                                                    {/*<TableCell>*/}
-                                                    {/*    <span>{sermon.media}</span>*/}
-                                                    {/*</TableCell>*/}
-                                                    {/*<TableCell>*/}
-                                                    {/*    <span>{sermon.image}</span>*/}
-                                                    {/*</TableCell>*/}
-
-                                                    <TableCell className="text-center">
-                                                        {(sermon.media !== null && sermon.media !== 'null') ? (
-                                                            <Button tag='a' href={sermon.media} target="_blank"
-                                                                    layout="link"
-                                                                    size="small">
-                                                                View Image
-                                                            </Button>
-                                                        ) : null}
+                                                    <TableCell>
+                                                        <span>{speaker.description}</span>
                                                     </TableCell>
-
                                                     <TableCell className="text-center">
-                                                        {(sermon.image !== null && sermon.image !== 'null') ? (
-                                                            <Button tag='a' href={sermon.image} target="_blank"
+                                                        {(speaker.image !== null && speaker.image !== 'null') ? (
+                                                            <Button tag='a' href={speaker.image} target="_blank"
                                                                     layout="link"
                                                                     size="small">
                                                                 View Image
@@ -132,14 +118,14 @@ console.log("sermonss" , sermons)
                                                             variant="outlined"
                                                             onClick={e => {
                                                                 e.preventDefault()
-                                                                push(`/sermons/${sermon.id}`)
+                                                                push(`/speakers/${speaker.id}`)
                                                             }} sx={{marginLeft: 'auto'}}>
                                                             <Pencil/>
                                                         </IconButton>
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => handleDelete(e, sermon.id)}
+                                                            onClick={e => handleDelete(e, speaker.id)}
                                                             sx={{marginLeft: 'auto'}}>
                                                             <Delete/>
                                                         </IconButton>
@@ -162,4 +148,4 @@ console.log("sermonss" , sermons)
     );
 }
 
-export default Sermons;
+export default Speakers;

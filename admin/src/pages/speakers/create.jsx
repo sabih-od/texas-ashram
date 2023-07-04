@@ -1,57 +1,51 @@
 import React, {useEffect, useState} from 'react';
-import {useRouter} from "next/router";
+// import PageTitle from "../../example/components/Typography/PageTitle";
+// import {Button, Input, Label, Select, Textarea} from "@roketid/windmill-react-ui";
+// import Layout from "../../example/containers/Layout";
+// import FileInput from "../../example/components/FileInput";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getSermon,
-    sermon as sermonDetail,
-    loading as sermonLoading,
-    errors as sermonErrors,
-    success as sermonSuccess, updateSermon, setErrors, setSuccess
-} from "../../store/slices/sermonSlice";
+    addSpeaker,
+    loading as SpeakerLoading,
+    errors as SpeakerErrors,
+    success as SpeakerSuccess,
+    setSuccess, setErrors
+} from '../../store/slices/speakersSlice'
+import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import {Alert, AlertTitle, Stack} from "@mui/material";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Link from "next/link";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import EyeOutline from "mdi-material-ui/EyeOutline";
+import EyeOffOutline from "mdi-material-ui/EyeOffOutline";
+import FormHelperText from "@mui/material/FormHelperText";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 
-function Sermon(props) {
-    const {push, query} = useRouter()
-    console.log("query" , query)
-
-    const {sermonId} = query
+function Create(props) {
 
     const dispatch = useDispatch()
+    const {push} = useRouter()
 
-    const sermon = useSelector(sermonDetail)
-    const loading = useSelector(sermonLoading)
-    const errors = useSelector(sermonErrors)
-    const success = useSelector(sermonSuccess)
+    const loading = useSelector(SpeakerLoading)
+    const errors = useSelector(SpeakerErrors)
+    const success = useSelector(SpeakerSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
-    const [title, setTitle] = useState('')
-    const [url, setUrl] = useState('')
-    const [media, setMedia] = useState(null)
+    const [name, setName] = useState('')
+    const [designation, setDesignation] = useState('')
+    const [description, setDescription] = useState('')
     const [image, setImage] = useState(null)
-
-    useEffect(() => {
-        if (sermonId) {
-            console.log("sermonId" , sermonId)
-            dispatch(getSermon({id: sermonId}))
-        }
-    }, [sermonId])
-
-    useEffect(() => {
-        if (sermon) {
-            console.log("sermon" , sermon)
-            setTitle(sermon.title)
-            setUrl(sermon.url)
-            setMedia(sermon.media)
-            setImage(sermon.image)
-        }
-    }, [sermon])
+    // const [file, setFile] = useState(null)
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -59,9 +53,9 @@ function Sermon(props) {
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Sermon updated successfully!')
+            setSuccessMessage('Speaker added successfully!')
             setTimeout(() => {
-                push('/sermons')
+                push('/speakers')
             }, 500)
         }
     }, [success, loading])
@@ -72,22 +66,20 @@ function Sermon(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(updateSermon({
-            id: sermonId,
-            title, url, media , image
+        dispatch(addSpeaker({
+            name, designation, description , image
         }))
 
     }
 
     const fileValidation = () => {
         let _errors = []
-
+        // if (file === null) {
+        //     _errors.push("File is required!")
+        // }
+        console.log("img" , image);
         if (image === null) {
             _errors.push("Image is required!")
-        }
-        console.log("img" , media);
-        if (media === null) {
-            _errors.push("Media is required!")
         }
 
         if (_errors.length > 0) {
@@ -101,7 +93,7 @@ function Sermon(props) {
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Edit Sermon
+                    Create Speaker
                 </Typography>
             </Grid>
 
@@ -125,30 +117,22 @@ function Sermon(props) {
                         <form onSubmit={handleSubmit}>
                             <Grid row>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Title' value={title}
-                                               onChange={e => setTitle(e.target.value)}/>
+                                    <TextField fullWidth label='Name' value={name}
+                                               onChange={e => setName(e.target.value)}/>
                                 </Grid>
                                 <br/>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Url' value={url}
-                                               onChange={e => setUrl(e.target.value)}/>
+                                    <TextField fullWidth label='Designation' value={designation}
+                                               onChange={e => setDesignation(e.target.value)}/>
                                 </Grid>
+<br/>
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
+                                </Grid>
+
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
-                                        <Button
-                                            variant="contained"
-                                            component="label"
-                                        >
-                                            Upload Media
-                                            <input
-                                                type="file"
-                                                hidden
-                                                onChange={e => {
-                                                    setMedia(e.target?.files[0] ?? null)
-                                                }}
-                                            />
-                                        </Button>
-
                                         <Button
                                             variant="contained"
                                             component="label"
@@ -179,4 +163,4 @@ function Sermon(props) {
     );
 }
 
-export default Sermon;
+export default Create;
