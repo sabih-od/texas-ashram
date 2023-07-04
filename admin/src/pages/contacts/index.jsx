@@ -21,10 +21,7 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import {Pagination, Stack} from "@mui/material";
-import {IconButton, Pagination, Stack} from "@mui/material";
-import {Delete, Pencil} from "mdi-material-ui";
-import {deleteBook, getBooks} from "../../store/slices/booksSlice";
+
 
 const columns = [
     {id: 'index', label: 'S.No', minWidth: 170},
@@ -93,14 +90,14 @@ function Contacts(props) {
     return (
         <Grid container spacing={6}>
             <Grid item xs={12}>
-                <Stack direction="row">
+                <Grid direction="row">
                     <Typography variant='h5'>
                         Contacts
                     </Typography>
                     <Button component={Link} href='/contacts/create' sx={{marginLeft: 'auto'}}>
                         Create Contact
                     </Button>
-                </Stack>
+                </Grid>
             </Grid>
 
 
@@ -159,7 +156,7 @@ function Contacts(props) {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        <Pagination sx={{mt: 4}} count={total} onChange={onPageChange} />
+                        {/*<Pagination sx={{mt: 4}} count={total} onChange={onPageChange} />*/}
                         <TablePagination
                             rowsPerPageOptions={[resultsPerPage]}
                             component='div'

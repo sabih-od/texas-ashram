@@ -13,7 +13,7 @@ import Books from 'mdi-material-ui/Library';
 import Contacts from 'mdi-material-ui/Library';
 import Donations from 'mdi-material-ui/Library';
 import Events from 'mdi-material-ui/Library';
-
+import Annoucements from 'mdi-material-ui/Library';
 const navigation = () => {
   return [
     // {
@@ -28,7 +28,7 @@ const navigation = () => {
     },
     {
       title: 'Announcements',
-      icon: BullhornOutline,
+      icon: Annoucements,
       path: '/announcements'
     },
 
@@ -54,23 +54,9 @@ const navigation = () => {
       icon: Events,
       path: '/events'
     },
-    {
-      title: 'Contacts',
-      icon: Contacts,
-      path: '/contacts'
-    },
 
-    {
-      title: 'Donations',
-      icon: Donations,
-      path: '/donations'
-    },
 
-    {
-      title: 'Events',
-      icon: Events,
-      path: '/events'
-    },
+
 
     // {
     //   title: 'Account Settings',

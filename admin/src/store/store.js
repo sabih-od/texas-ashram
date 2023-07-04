@@ -6,7 +6,8 @@ import {bookSlice} from "./slices/bookSlice";
 import {contactsSlice} from "./slices/contactsSlice";
 import {donationsSlice} from "./slices/donationsSlice";
 import {eventsSlice} from "./slices/eventsSlice";
-
+import {announcementsSlice} from "./slices/announcementsSlice";
+import {announcementSlice} from "./slices/announcementSlice";
 const makeStore = () =>
     configureStore({
         reducer: {
