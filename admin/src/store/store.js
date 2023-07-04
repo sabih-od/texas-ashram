@@ -6,6 +6,8 @@ import {bookSlice} from "./slices/bookSlice";
 import {contactsSlice} from "./slices/contactsSlice";
 import {donationsSlice} from "./slices/donationsSlice";
 import {eventsSlice} from "./slices/eventsSlice";
+import {postsSlice} from "./slices/postsSlice"
+
 import {announcementsSlice} from "./slices/announcementsSlice";
 import {announcementSlice} from "./slices/announcementSlice";
 const makeStore = () =>
@@ -17,6 +19,7 @@ const makeStore = () =>
             [contactsSlice.name]: contactsSlice.reducer,
             [donationsSlice.name]: donationsSlice.reducer,
             [eventsSlice.name]: eventsSlice.reducer,
+            [postsSlice.name]: postsSlice.reducer,
             [announcementsSlice.name]: announcementsSlice.reducer,
             [announcementSlice.name]: announcementSlice.reducer,
             [contactsSlice.name]: contactsSlice.reducer,
