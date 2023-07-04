@@ -16,6 +16,8 @@ import { StaffMembersModule } from './staff-members/staff-members.module';
 import { PagesModule } from './pages/pages.module';
 import { MailModule } from './mail/mail.module';
 import { DonationsModule } from './donations/donations.module';
+import { GroupsModule } from './groups/groups.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import { DonationsModule } from './donations/donations.module';
       PagesModule,
       MailModule,
       DonationsModule,
+      GroupsModule,
+      MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
