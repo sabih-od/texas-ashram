@@ -29,6 +29,7 @@ const initialState = {
     errors: null,
     contacts: [],
     total: 0,
+    totalPages: 0,
 };
 
 export const contactsSlice = createSlice({
@@ -61,6 +62,7 @@ export const contactsSlice = createSlice({
 
             state.contacts = data?.data ?? []
             state.total = data?.total ?? 0
+            state.totalPages = data?.totalPages ?? 0
 
             state.loading = false
             state.errors = message
@@ -102,6 +104,7 @@ export const {setSuccess, setErrors} = contactsSlice.actions;
 export const contacts = (state) => state.contacts.contacts;
 export const loading = (state) => state.contacts.loading;
 export const total = (state) => state.contacts.total;
+export const totalPages = (state) => state.contacts.totalPages;
 export const errors = (state) => state.contacts.errors;
 export const success = (state) => state.contacts.success;
 export default contactsSlice.reducer;
