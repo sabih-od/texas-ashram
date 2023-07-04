@@ -4,7 +4,8 @@ import {
     getContacts,
     loading as contactsLoading,
     contacts as contactsList,
-    total as contactTotal
+    total as contactTotal,
+    deleteContact
 } from '../../store/slices/contactsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -53,6 +54,13 @@ function Contacts(props) {
     const dispatch = useDispatch()
     const {push} = useRouter()
 
+    const handleDelete = async (e, id) => {
+        e.preventDefault()
+        console.log(id)
+        await dispatch(deleteContact({id}))
+        // await dispatch(getContacts({page}))
+    }
+
     // const loading = useSelector(booksLoading)
     // const books = useSelector(booksList)
     // const total = useSelector(bookTotal)
@@ -82,14 +90,14 @@ function Contacts(props) {
     return (
         <Grid container spacing={6}>
             <Grid item xs={12}>
-                <Stack direction="row">
+                <Grid direction="row">
                     <Typography variant='h5'>
                         Contacts
                     </Typography>
                     <Button component={Link} href='/contacts/create' sx={{marginLeft: 'auto'}}>
                         Create Contact
                     </Button>
-                </Stack>
+                </Grid>
             </Grid>
 
 
