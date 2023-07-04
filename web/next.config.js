@@ -1,20 +1,25 @@
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {}
+//
+// module.exports = nextConfig
+
 const path = require('path');
 
 module.exports = {
     // Enable CSS modules for CSS file imports
     cssModules: true,
 
-    publicRuntimeConfig: {
-        apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',
-    },
-
     // Add aliases for commonly used directories
     // You can customize these aliases based on your project structure
     webpack: (config, { isServer }) => {
-        // Add aliases for commonly used directories
         config.resolve.alias['@components'] = path.join(__dirname, 'src/components');
         config.resolve.alias['@styles'] = path.join(__dirname, 'src/styles');
+        return config;
+    },
 
+    // Add additional webpack configuration
+    // You can customize this based on your project's requirements
+    webpack: (config, { isServer }) => {
         // Add a rule to handle popper.js file
         config.module.rules.push({
             test: /popper\.js$/,
