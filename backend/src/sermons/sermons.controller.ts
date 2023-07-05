@@ -30,6 +30,9 @@ import {
 } from "../helpers/helper";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {AnnouncementsService} from "../announcements/announcements.service";
+import {NotificationsService} from "../notifications/notifications.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 const MAX_FILE_SIZE = 100000000;
 
 @Injectable()
@@ -61,7 +64,7 @@ export class MaxFileSizeInterceptor implements NestInterceptor {
 @UseGuards(AuthGuard)
 @Controller('sermons')
 export class SermonsController {
-  constructor(private readonly sermonsService: SermonsService) {}
+  constructor(private readonly sermonsService: SermonsService, private readonly notificationsService: NotificationsService) {}
 
   @Post()
   @UseInterceptors(
@@ -98,6 +101,13 @@ export class SermonsController {
 
         createSermonDto.created_at = Date.now().toString();
         let res = await this.sermonsService.create(createSermonDto);
+
+        //create notification
+        let createNotificationDto = new CreateNotificationDto();
+        createNotificationDto.title = 'New Sermon';
+        createNotificationDto.content = createSermonDto.title;
+        createNotificationDto.created_at = Date.now().toString();
+        await this.notificationsService.create(createNotificationDto);
 
         return {
             success: !res.error,

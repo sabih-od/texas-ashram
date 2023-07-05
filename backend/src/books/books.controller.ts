@@ -25,6 +25,9 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {AnnouncementsService} from "../announcements/announcements.service";
+import {NotificationsService} from "../notifications/notifications.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 const MAX_FILE_SIZE = 100000000;
 
 @Injectable()
@@ -56,7 +59,7 @@ export class MaxFileSizeInterceptor implements NestInterceptor {
 @UseGuards(AuthGuard)
 @Controller('books')
 export class BooksController {
-    constructor(private readonly booksService: BooksService) {}
+    constructor(private readonly booksService: BooksService, private readonly notificationsService: NotificationsService) {}
 
     @Post()
     @UseInterceptors(
@@ -97,6 +100,13 @@ export class BooksController {
 
             createBookDto.created_at = Date.now().toString();
             const res = await this.booksService.create(createBookDto);
+
+            //create notification
+            let createNotificationDto = new CreateNotificationDto();
+            createNotificationDto.title = 'New Book Upload';
+            createNotificationDto.content = createBookDto.title;
+            createNotificationDto.created_at = Date.now().toString();
+            await this.notificationsService.create(createNotificationDto);
 
             return {
                 success: !res.error,

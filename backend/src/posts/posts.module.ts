@@ -3,9 +3,10 @@ import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
 import {DatabaseModule} from "../database.module";
 import {sermonProviders} from "./posts.provider";
+import {NotificationsModule} from "../notifications/notifications.module";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [DatabaseModule, NotificationsModule],
   controllers: [PostsController],
   providers: [...sermonProviders, PostsService],
     exports: [PostsService]

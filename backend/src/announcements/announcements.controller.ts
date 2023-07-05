@@ -4,18 +4,27 @@ import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
+import {NotificationsService} from "../notifications/notifications.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 
 @ApiTags('Announcements')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('announcements')
 export class AnnouncementsController {
-  constructor(private readonly announcementsService: AnnouncementsService) {}
+  constructor(private readonly announcementsService: AnnouncementsService, private readonly notificationsService: NotificationsService) {}
 
   @Post()
   async create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
       createAnnouncementDto.created_at = Date.now().toString();
       let res = await this.announcementsService.create(createAnnouncementDto);
+
+      //create notification
+      let createNotificationDto = new CreateNotificationDto();
+      createNotificationDto.title = 'New Announcement';
+      createNotificationDto.content = createAnnouncementDto.title;
+      createNotificationDto.created_at = Date.now().toString();
+      await this.notificationsService.create(createNotificationDto);
 
       return {
           success: !res.error,

@@ -20,13 +20,16 @@ import {
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
+import {AnnouncementsService} from "../announcements/announcements.service";
+import {NotificationsService} from "../notifications/notifications.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 
 @ApiTags('Events')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('events')
 export class EventsController {
-  constructor(private readonly eventsService: EventsService) {}
+  constructor(private readonly eventsService: EventsService, private readonly notificationsService: NotificationsService) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('image'))
@@ -51,6 +54,13 @@ export class EventsController {
 
     createEventDto.created_at = Date.now().toString();
     let res = await this.eventsService.create(createEventDto);
+
+      //create notification
+      let createNotificationDto = new CreateNotificationDto();
+      createNotificationDto.title = 'New Event';
+      createNotificationDto.content = createEventDto.title;
+      createNotificationDto.created_at = Date.now().toString();
+      await this.notificationsService.create(createNotificationDto);
 
     return {
       success: !res.error,

@@ -5,13 +5,20 @@ import { UpdatePrayerRequestDto } from './dto/update-prayer-request.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {AuthService} from "../auth/auth.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
+import {AnnouncementsService} from "../announcements/announcements.service";
+import {NotificationsService} from "../notifications/notifications.service";
 
 @ApiTags('Prayer Requests')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('prayer-requests')
 export class PrayerRequestsController {
-  constructor(private readonly prayerRequestsService: PrayerRequestsService, private readonly authService: AuthService) {}
+  constructor(
+      private readonly prayerRequestsService: PrayerRequestsService,
+      private readonly authService: AuthService,
+      private readonly notificationsService: NotificationsService
+  ) {}
 
   @Post()
   async create(@Body() createPrayerRequestDto: CreatePrayerRequestDto, @Request() req) {
@@ -20,6 +27,14 @@ export class PrayerRequestsController {
 
       createPrayerRequestDto.created_at = Date.now().toString();
       let res = await this.prayerRequestsService.create(createPrayerRequestDto);
+
+      //create notification
+      let createNotificationDto = new CreateNotificationDto();
+      createNotificationDto.title = 'New Prayer Request for ' + createPrayerRequestDto.name;
+      createNotificationDto.content = createPrayerRequestDto.description;
+      createNotificationDto.icon = user.profile_picture ?? process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
+      createNotificationDto.created_at = Date.now().toString();
+      await this.notificationsService.create(createNotificationDto);
 
       return {
           success: !res.error,

@@ -4,9 +4,10 @@ import { PrayerRequestsController } from './prayer-requests.controller';
 import {DatabaseModule} from "../database.module";
 import {prayerRequestProviders} from "./prayer-requests.provider";
 import {AuthModule} from "../auth/auth.module";
+import {NotificationsModule} from "../notifications/notifications.module";
 
 @Module({
-    imports: [DatabaseModule, AuthModule],
+    imports: [DatabaseModule, AuthModule, NotificationsModule],
   controllers: [PrayerRequestsController],
   providers: [PrayerRequestsService, ...prayerRequestProviders],
     exports: [PrayerRequestsService],

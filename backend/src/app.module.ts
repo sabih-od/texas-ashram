@@ -18,6 +18,7 @@ import { MailModule } from './mail/mail.module';
 import { DonationsModule } from './donations/donations.module';
 import { GroupsModule } from './groups/groups.module';
 import { MessagesModule } from './messages/messages.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { MessagesModule } from './messages/messages.module';
       DonationsModule,
       GroupsModule,
       MessagesModule,
+      NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
