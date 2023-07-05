@@ -2,25 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Logo from "../images/logo.png";
 import Link from "next/link";
-import {authUser} from "../services/authService";
-import Cookies from "js-cookie";
-import {useRouter} from 'next/router';
-// import {cookies} from "next/headers";
+
 
 const Menu = () => {
-    const router = useRouter();
-    const handleLogout = () => {
-        // Clear any client-side session data or authentication tokens
-        clearSessionData();
-
-        router.push('/members'); // Redirect to the login page or any other desired page
-    };
-
-    const clearSessionData = () => {
-        localStorage.clear();
-        Cookies.remove('token');
-    };
-    const token = Cookies.get('token');
     return (
         <div>
             <header className="">
@@ -55,11 +39,9 @@ const Menu = () => {
                                         <li className="nav-item">
                                             <Link className="nav-link" href="/registration">Registration</Link>
                                         </li>
-                                        {!token ? (
-                                            <li className="nav-item">
-                                                <Link className="nav-link" href="/members">Members</Link>
-                                            </li>
-                                        ) : null}
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/members">Members</Link>
+                                        </li>
                                         <li className="nav-item">
                                             <Link className="nav-link" href="/contact">Contact</Link>
                                         </li>
@@ -78,10 +60,6 @@ const Menu = () => {
                                         <li className="nav-item">
                                             <Link className="nav-link" href="/notifications">Notification</Link>
                                         </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/prayer-request-form">Prayer Request
-                                                Form</Link>
-                                        </li>
                                         <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -90,7 +68,7 @@ const Menu = () => {
                                             </a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <Link className="dropdown-item"
-                                                      href="/prayer-request-form">Prayer Request Form</Link>
+                                                      href="/prayer-request-form">Request</Link>
                                                 <Link className="dropdown-item" href="/sermons-teaching">Sermons
                                                     Teaching</Link>
                                                 <Link className="dropdown-item"
@@ -100,9 +78,6 @@ const Menu = () => {
                                         <li className="nav-item">
                                             <Link className="nav-link themeBtn" href="/donate">Donate</Link>
                                         </li>
-                                        {token ? <li className="nav-item ms-2">
-                                            <button className="logoutBtn" onClick={handleLogout}>Logout</button>
-                                        </li> : null}
                                     </ul>
                                 </div>
                             </nav>
