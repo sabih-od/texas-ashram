@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdi/js": "^7.2.96",
+    "@mdi/react": "^1.6.1",
+    "@mui/material": "^5.13.7",
     "aos": "^2.3.4",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "global": "^4.4.0",
     "imports-loader": "^4.0.1",
     "jquery": "^3.7.0",
+    "js-cookie": "^3.0.5",
     "next": "13.4.7",
     "popper.js": "^1.16.1",
     "postcss": "8.4.24",
