@@ -2,6 +2,7 @@ import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, url
 
 export const create = async ({
                                  title,
+                                 description,
                                  url,
                                  media,
                                  image
@@ -9,6 +10,7 @@ export const create = async ({
     try {
         const form = new FormData()
         form.append('title', title)
+        form.append('description', description)
         form.append('url', url)
         form.append('media', media)
         form.append('image', image)
@@ -35,8 +37,8 @@ export const create = async ({
 }
 
 export const update = async ({
-                                 id,
                                  title,
+                                 description,
                                  url,
                                  media,
                                  image
@@ -45,6 +47,7 @@ export const update = async ({
         console.log("update form", id, title,url,media,image)
         const form = new FormData()
         form.append('title', title)
+        form.append('description', description)
         form.append('url', url)
         form.append('media', media)
         form.append('image', image)
