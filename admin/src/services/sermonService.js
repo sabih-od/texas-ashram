@@ -37,6 +37,7 @@ export const create = async ({
 }
 
 export const update = async ({
+    id,
                                  title,
                                  description,
                                  url,
@@ -44,7 +45,7 @@ export const update = async ({
                                  image
                              }) => {
     try {
-        console.log("update form", id, title,url,media,image)
+        console.log("update form", id, title,description,url,media,image)
         const form = new FormData()
         form.append('title', title)
         form.append('description', description)

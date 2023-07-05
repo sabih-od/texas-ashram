@@ -19,7 +19,7 @@ import Button from "@mui/material/Button";
 
 function Sermon(props) {
     const {push, query} = useRouter()
-    console.log("query" , query)
+    console.log("query", query)
 
     const {sermonId} = query
 
@@ -39,16 +39,16 @@ function Sermon(props) {
 
     useEffect(() => {
         if (sermonId) {
-            console.log("sermonId" , sermonId)
+            console.log("sermonId", sermonId)
             dispatch(getSermon({id: sermonId}))
         }
     }, [sermonId])
 
     useEffect(() => {
         if (sermon) {
-            console.log("sermon" , sermon)
+            console.log("sermon", sermon)
             setTitle(sermon.title)
-            setDescription(sermon.description)
+            setDescription(sermon.description != null ? sermon.description : "")
             setUrl(sermon.url)
             setMedia(sermon.media)
             setImage(sermon.image)
@@ -70,13 +70,20 @@ function Sermon(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (loading) return
 
-        if (!fileValidation()) return;
+        if (loading) {
+            return
+        }
+
+        if (!fileValidation()) {
+            return
+        };
+
+        console.log("IN Submit" , sermonId,title, description, url, media, image);
 
         dispatch(updateSermon({
             id: sermonId,
-            title,description, url, media , image
+            title, description, url, media, image
         }))
 
     }
@@ -87,12 +94,12 @@ function Sermon(props) {
         if (image === null) {
             _errors.push("Image is required!")
         }
-        console.log("img" , media);
         if (media === null) {
             _errors.push("Media is required!")
         }
 
         if (_errors.length > 0) {
+            console.log("in error")
             dispatch(setErrors(_errors))
         }
 
