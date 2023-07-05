@@ -19,7 +19,7 @@ const Footer = () => {
                             <h2>Short Links</h2>
                             <ul>
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/events">Our Mission</a></li>
+                                <li><a href="/our-mission">Our Mission</a></li>
                                 <li><a href="/families">Families</a></li>
                                 <li><a href="/speakers">Speakers</a></li>
                                 <li><a href="/contact">Contact us</a></li>
