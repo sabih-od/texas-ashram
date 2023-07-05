@@ -73,8 +73,9 @@ export const announcementSlice = createSlice({
 });
 
 export const {setSuccess, setErrors} = announcementSlice.actions;
-export const announcement = (state) => state.announcement.announcement;
-export const loading = (state) => state.announcement.loading;
-export const errors = (state) => state.announcement.errors;
-export const success = (state) => state.announcement.success;
+export const announcement = (state) => state?.announcement?.announcement;
+export const loading = (state) => state?.announcement?.loading;
+export const errors = (state) => state?.announcement?.errors;
+
+export const success = (state) => state?.announcement?.success;
 export default announcementSlice.reducer;

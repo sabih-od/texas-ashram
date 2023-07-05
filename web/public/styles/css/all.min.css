@@ -3518,7 +3518,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-    color: #0056b3;
+    color: var(--secondary);
     text-decoration: underline;
 }
 
@@ -30829,6 +30829,8 @@ body.compensate-for-scrollbar {
     height: 100%;
     position: relative;
     transition-property: transform;
+    justify-content: center;
+    display: flex;
 }
 
 .swiper-slide-invisible-blank {
