@@ -80,6 +80,7 @@ console.log("sermonss" , sermons)
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Title</TableCell>
+                                            <TableCell>Description</TableCell>
                                             <TableCell>Url</TableCell>
                                             <TableCell>Media</TableCell>
                                             <TableCell>Image</TableCell>
@@ -95,6 +96,9 @@ console.log("sermonss" , sermons)
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{sermon.title}</span>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <span>{sermon.description ?? ''}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{sermon.url}</span>

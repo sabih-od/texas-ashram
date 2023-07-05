@@ -42,6 +42,7 @@ function Create(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const [url, setUrl] = useState('')
     const [media, setMedia] = useState(null)
     const [image, setImage] = useState(null)
@@ -66,7 +67,7 @@ function Create(props) {
         if (!fileValidation()) return;
 
         dispatch(addSermon({
-            title, url, media , image
+            title, setDescription, url, media , image
         }))
 
     }
@@ -121,6 +122,11 @@ function Create(props) {
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
 <br/>
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
+                                </Grid>
+                                <br/>
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Url' value={url}
                                                onChange={e => setUrl(e.target.value)}/>

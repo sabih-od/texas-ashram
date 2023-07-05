@@ -32,6 +32,7 @@ function Sermon(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const [url, setUrl] = useState('')
     const [media, setMedia] = useState(null)
     const [image, setImage] = useState(null)
@@ -47,6 +48,7 @@ function Sermon(props) {
         if (sermon) {
             console.log("sermon" , sermon)
             setTitle(sermon.title)
+            setDescription(sermon.description)
             setUrl(sermon.url)
             setMedia(sermon.media)
             setImage(sermon.image)
@@ -74,7 +76,7 @@ function Sermon(props) {
 
         dispatch(updateSermon({
             id: sermonId,
-            title, url, media , image
+            title,description, url, media , image
         }))
 
     }
@@ -127,6 +129,11 @@ function Sermon(props) {
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
+                                </Grid>
+                                <br/>
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
                                 <br/>
                                 <Grid item xs={12}>
