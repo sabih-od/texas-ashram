@@ -11,6 +11,7 @@ export const create = async ({
         const form = new FormData()
         form.append('title', title)
         form.append('description', description)
+
         form.append('url', url)
         form.append('media', media)
         form.append('image', image)
