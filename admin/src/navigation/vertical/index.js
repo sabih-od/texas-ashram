@@ -16,7 +16,7 @@ const navigation = () => {
     // },
     {
       title: 'Books',
-      icon: Books,
+        icon: BookIcon,
       path: '/books'
     },
     {
@@ -32,7 +32,7 @@ const navigation = () => {
     // },
     {
       title: 'Contacts',
-      icon: Contacts,
+      icon: ContactIcon,
       path: '/contacts'
     },
 
@@ -116,7 +116,7 @@ const navigation = () => {
         // }
     {
       title: 'Staff Members',
-      icon: Staff_members,
+      icon: PeopleOutlinedIcon,
       path: '/staff-members',
     },
 
