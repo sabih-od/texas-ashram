@@ -5,6 +5,7 @@ import { UpdateNotificationDto } from './dto/update-notification.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {AuthService} from "../auth/auth.service";
+import {In} from "typeorm";
 
 @ApiTags('Notifications')
 @ApiBearerAuth()
@@ -33,7 +34,7 @@ export class NotificationsController {
               created_at: 'DESC'
           },
           where: {
-              user_id: [0, user.id]
+              user_id: In([0, user.id])
           }
       });
 
