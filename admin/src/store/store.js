@@ -3,12 +3,15 @@ import { createWrapper } from 'next-redux-wrapper';
 import {authSlice} from "./slices/authSlice";
 import {booksSlice} from "./slices/booksSlice";
 import {bookSlice} from "./slices/bookSlice";
-import {announcementsSlice} from "./slices/announcementsSlice";
 import {contactsSlice} from "./slices/contactsSlice";
 import {donationsSlice} from "./slices/donationsSlice";
 import {eventsSlice} from "./slices/eventsSlice";
-import {postsSlice} from "./slices/postsSlice"
+import {announcementsSlice} from "./slices/announcementsSlice";
 import {announcementSlice} from "./slices/announcementSlice";
+import {postsSlice} from "./slices/postsSlice"
+import {staffMembersSlice} from "./slices/staffMembersSlice"
+import {staffMemberSlice} from "./slices/staffMemberSlice"
+import {eventSlice} from "./slices/EventSlice"
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
 
@@ -24,6 +27,9 @@ const makeStore = () =>
             [postsSlice.name]: postsSlice.reducer,
             [announcementsSlice.name]: announcementsSlice.reducer,
             [announcementSlice.name]: announcementSlice.reducer,
+            [staffMembersSlice.name]: staffMembersSlice.reducer,
+            [staffMemberSlice.name]: staffMemberSlice.reducer,
+            [eventSlice.name]: eventSlice.reducer,
             [usersSlice.name]: usersSlice.reducer,
             [userSlice.name]: userSlice.reducer,
         },

@@ -26,11 +26,11 @@ import {Pagination, Stack} from "@mui/material";
 function Contacts(props) {
 
     const dispatch = useDispatch()
+    const {push} = useRouter()
 
-    const handleDelete = async (e, id) => {
-        e.preventDefault()
-        await dispatch(deleteContact({id}))
-    }
+    // const loading = useSelector(booksLoading)
+    // const books = useSelector(booksList)
+    // const total = useSelector(bookTotal)
 
     const loading = useSelector(contactsLoading)
     const contacts = useSelector(contactsList)
