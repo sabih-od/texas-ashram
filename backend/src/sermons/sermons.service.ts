@@ -27,7 +27,7 @@ export class SermonsService {
         }
     }
 
-    async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {created_at: 'DESC'}}): Promise<any> {
+    async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {id: 'DESC'}}): Promise<any> {
         const [data, total] = await this.sermonRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,

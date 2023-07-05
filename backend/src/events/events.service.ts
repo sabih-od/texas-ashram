@@ -37,7 +37,7 @@ export class EventsService {
 
     async findAll(page: number = 1, limit: number = 10, is_upcoming_event?: string): Promise<any> {
         //upcoming events check
-        let order_object: FindManyOptions<Event> = (is_upcoming_event && is_upcoming_event == 'true') ? { order: { date_from: 'DESC' } } : {};
+        let order_object: FindManyOptions<Event> = (is_upcoming_event && is_upcoming_event == 'true') ? { order: { id: 'DESC' } } : {};
 
         const [data, total] = await this.eventRepository.findAndCount({
             skip: (page - 1) * limit,
