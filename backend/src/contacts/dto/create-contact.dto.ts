@@ -18,4 +18,6 @@ export class CreateContactDto {
 
     @ApiProperty({ example: 'This is sample message' })
     message: string;
+
+    created_at: string;
 }

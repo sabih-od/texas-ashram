@@ -14,6 +14,7 @@ export class AnnouncementsController {
 
   @Post()
   async create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
+      createAnnouncementDto.created_at = Date.now().toString();
       let res = await this.announcementsService.create(createAnnouncementDto);
 
       return {

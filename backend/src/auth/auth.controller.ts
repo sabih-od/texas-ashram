@@ -48,6 +48,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @Post('signup')
     async signUp(@Body() signUpDto: CreateUserDto) {
+        signUpDto.created_at = Date.now().toString();
         let res = await this.authService.signup(signUpDto);
 
         return {

@@ -95,6 +95,7 @@ export class BooksController {
                 createBookDto.image = app_url + dir_path + file_name;
             }
 
+            createBookDto.created_at = Date.now().toString();
             const res = await this.booksService.create(createBookDto);
 
             return {

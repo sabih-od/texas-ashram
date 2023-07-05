@@ -9,4 +9,6 @@ export class CreatePageDto {
     @IsNotEmpty()
     @ApiProperty({ type: 'text' })
     content: string;
+
+    created_at: string;
 }

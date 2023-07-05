@@ -27,10 +27,11 @@ export class SpeakersService {
         }
     }
 
-    async findAll(page: number = 1, limit: number = 10): Promise<any> {
+    async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {created_at: 'DESC'}}): Promise<any> {
         const [data, total] = await this.speakerRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
+            ...query_object
         });
 
         const totalPages = Math.ceil(total / limit);

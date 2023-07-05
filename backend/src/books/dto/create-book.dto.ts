@@ -12,4 +12,6 @@ export class CreateBookDto {
 
     @ApiProperty({example: 'Place Your Book Image'})
     image: string;
+
+    created_at: string;
 }

@@ -45,6 +45,7 @@ export class StaffMembersController {
           createStaffMemberDto.image = app_url + dir_path + file_name;
       }
 
+      createStaffMemberDto.created_at = Date.now().toString();
       let res = await this.staffMembersService.create(createStaffMemberDto);
 
       return {

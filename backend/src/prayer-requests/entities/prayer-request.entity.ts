@@ -28,4 +28,7 @@ export class PrayerRequest {
 
     @Column('text')
     description: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }

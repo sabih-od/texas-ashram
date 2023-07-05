@@ -26,4 +26,6 @@ export class CreateEventDto {
 
     @ApiProperty({ example: 'Place Your Image' })
     image: string;
+
+    created_at: string;
 }

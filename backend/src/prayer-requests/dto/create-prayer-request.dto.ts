@@ -32,4 +32,6 @@ export class CreatePrayerRequestDto {
     @IsNotEmpty()
     @ApiProperty({ example: 'This is the description for prayer request' })
     description: string;
+
+    created_at: string;
 }

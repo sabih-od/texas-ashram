@@ -46,6 +46,7 @@ export class SpeakersController {
           createSpeakerDto.image = app_url + dir_path + file_name;
       }
 
+      createSpeakerDto.created_at = Date.now().toString();
       let res = await this.speakersService.create(createSpeakerDto);
 
       return {

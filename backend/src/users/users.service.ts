@@ -15,16 +15,10 @@ export class UsersService {
 
     async create(createUserDto: CreateUserDto): Promise<any> {
         try {
-            let hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+            createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
             // const isMatch = await bcrypt.compare(password, hash);
 
-            const user = await this.userRepository.create({
-                first_name: createUserDto.first_name,
-                last_name: createUserDto.last_name,
-                email: createUserDto.email,
-                phone: createUserDto.phone,
-                password: hashedPassword,
-            });
+            const user = await this.userRepository.create(createUserDto);
 
             await this.userRepository.save(user);
 
@@ -38,11 +32,12 @@ export class UsersService {
         }
     }
 
-    async findAll(page: number = 1, limit: number = 10): Promise<any> {
+    async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {created_at: 'DESC'}}): Promise<any> {
         const [data, total] = await this.userRepository.findAndCount({
             where: {role_id: Not(1)},
             skip: (page - 1) * limit,
             take: limit,
+            ...query_object
         });
 
         const totalPages = Math.ceil(total / limit);

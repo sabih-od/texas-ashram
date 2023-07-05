@@ -13,4 +13,6 @@ export class CreateAnnouncementDto {
     @IsNotEmpty()
     @ApiProperty({ example: '01-01-2023' })
     date: string;
+
+    created_at: string;
 }

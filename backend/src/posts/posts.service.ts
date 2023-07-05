@@ -12,12 +12,7 @@ export class PostsService {
     ) {}
   async create(createPostDto: CreatePostDto): Promise<any> {
       try {
-          const post = await this.postRepository.create({
-              title: createPostDto.title,
-              content: createPostDto.content,
-              media: createPostDto.media,
-              created_at: Date.now().toString(),
-          });
+          const post = await this.postRepository.create(createPostDto);
 
           await this.postRepository.save(post);
 
@@ -31,10 +26,11 @@ export class PostsService {
       }
   }
 
-  async findAll(page: number = 1, limit: number = 10): Promise<any> {
+  async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {created_at: 'DESC'}}): Promise<any> {
       const [data, total] = await this.postRepository.findAndCount({
           skip: (page - 1) * limit,
           take: limit,
+          ...query_object
       });
 
       const totalPages = Math.ceil(total / limit);

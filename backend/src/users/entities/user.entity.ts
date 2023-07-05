@@ -30,6 +30,9 @@ export class User {
     @Column({ type: 'text', nullable: true})
     otp: string;
 
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
+
     //relations
     @ManyToMany(() => Group, (group) => group.members)
     @JoinTable({name: 'group_users'})

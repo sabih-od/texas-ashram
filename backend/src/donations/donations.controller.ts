@@ -19,7 +19,7 @@ export class DonationsController {
       let user = await this.authService.getUserByEmail(req.user.email);
       createDonationDto.user_id = user.id;
       createDonationDto.name = user.first_name + ' ' + user.last_name;
-
+      createDonationDto.created_at = Date.now().toString();
       let res = await this.donationsService.create(createDonationDto);
 
       return {

@@ -14,6 +14,7 @@ export class ContactsController {
 
   @Post()
   async create(@Body() createContactDto: CreateContactDto) {
+      createContactDto.created_at = Date.now().toString();
       let res = await this.contactsService.create(createContactDto);
 
       return {

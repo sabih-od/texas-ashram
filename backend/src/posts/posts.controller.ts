@@ -49,6 +49,7 @@ export class PostsController {
           createPostDto.media =  app_url + dir_path + file_name;
       }
 
+      createPostDto.created_at = Date.now().toString();
       let res = await this.postsService.create(createPostDto);
 
       return {

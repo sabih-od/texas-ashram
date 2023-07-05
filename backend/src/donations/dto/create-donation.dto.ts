@@ -9,4 +9,6 @@ export class CreateDonationDto {
     @IsNotEmpty()
     @ApiProperty({ example: '123.00' })
     amount: string;
+
+    created_at: string;
 }

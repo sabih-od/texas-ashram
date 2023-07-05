@@ -14,6 +14,7 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
+    createUserDto.created_at = Date.now().toString();
     let res = await this.usersService.create(createUserDto);
 
     return {

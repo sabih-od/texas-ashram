@@ -19,4 +19,7 @@ export class Contact {
 
     @Column({type: 'text', nullable: true})
     message: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }

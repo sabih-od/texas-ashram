@@ -5,4 +5,6 @@ export class CreateGroupDto {
     @IsNotEmpty()
     @ApiProperty({ example: 'Group Name' })
     name: string;
+
+    created_at: string;
 }

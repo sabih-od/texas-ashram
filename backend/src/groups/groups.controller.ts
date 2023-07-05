@@ -15,6 +15,7 @@ export class GroupsController {
 
   @Post()
   async create(@Body() createGroupDto: CreateGroupDto) {
+      createGroupDto.created_at = Date.now().toString();
       let res = await this.groupsService.create(createGroupDto);
 
       return {

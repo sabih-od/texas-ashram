@@ -49,6 +49,7 @@ export class EventsController {
         createEventDto.image = app_url + dir_path + file_name;
     }
 
+    createEventDto.created_at = Date.now().toString();
     let res = await this.eventsService.create(createEventDto);
 
     return {

@@ -13,4 +13,7 @@ export class Donation {
 
     @Column({type: 'varchar'})
     amount: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }

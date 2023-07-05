@@ -14,6 +14,7 @@ export class PagesController {
 
   @Post()
   async create(@Body() createPageDto: CreatePageDto) {
+      createPageDto.created_at = Date.now().toString();
       let res = await this.pagesService.create(createPageDto);
 
       return {

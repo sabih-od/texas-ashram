@@ -18,6 +18,7 @@ export class PrayerRequestsController {
       let user = await this.authService.getUserByEmail(req.user.email);
       createPrayerRequestDto.user_id = user.id;
 
+      createPrayerRequestDto.created_at = Date.now().toString();
       let res = await this.prayerRequestsService.create(createPrayerRequestDto);
 
       return {

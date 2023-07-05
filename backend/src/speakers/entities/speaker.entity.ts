@@ -16,4 +16,7 @@ export class Speaker {
 
     @Column({ type: 'text', nullable: true })
     image: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }

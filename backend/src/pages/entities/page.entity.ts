@@ -10,4 +10,7 @@ export class Page {
 
     @Column({ type: 'text', nullable: true })
     content: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }

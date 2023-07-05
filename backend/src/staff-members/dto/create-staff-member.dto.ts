@@ -12,4 +12,6 @@ export class CreateStaffMemberDto {
 
     @ApiProperty({ type: 'string', format: 'binary' })
     image: string;
+
+    created_at: string;
 }

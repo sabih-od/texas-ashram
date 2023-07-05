@@ -13,4 +13,7 @@ export class Announcement {
 
     @Column('varchar')
     date: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
 }
