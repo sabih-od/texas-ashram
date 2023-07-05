@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getPost,
-    post as postDetail,
-    loading as postLoading,
-    errors as postErrors,
-    success as postSuccess, updatePost, setErrors, setSuccess
-} from "../../store/slices/postSlice";
+    getSpeaker,
+    speaker as speakerDetail,
+    loading as speakerLoading,
+    errors as speakerErrors,
+    success as speakerSuccess, updateSpeaker, setErrors, setSuccess
+} from "../../store/slices/speakerSlice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -17,39 +17,42 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-function Post(props) {
+function Speaker(props) {
     const {push, query} = useRouter()
     console.log("query" , query)
 
-    const {postId} = query
+    const {speakerId} = query
 
     const dispatch = useDispatch()
 
-    const post = useSelector(postDetail)
-    const loading = useSelector(postLoading)
-    const errors = useSelector(postErrors)
-    const success = useSelector(postSuccess)
+    const speaker = useSelector(speakerDetail)
+    const loading = useSelector(speakerLoading)
+    const errors = useSelector(speakerErrors)
+    const success = useSelector(speakerSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
-    const [title, setTitle] = useState('')
-    const [media, setMedia] = useState(null)
-    const [content, setContent] = useState('')
+    const [name, setName] = useState('')
+    const [designation, setDesignation] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState(null)
+    // const [file, setFile] = useState(null)
 
     useEffect(() => {
-        if (postId) {
-            console.log("postId" , postId)
-            dispatch(getPost({id: postId}))
+        if (speakerId) {
+            console.log("speakerId" , speakerId)
+            dispatch(getSpeaker({id: speakerId}))
         }
-    }, [postId])
+    }, [speakerId])
 
     useEffect(() => {
-        if (post) {
-            console.log("post" , post)
-            setTitle(post.title)
-            setContent(post.content)
-            setMedia(post.media)
+        if (speaker) {
+            console.log("speaker" , speaker)
+            setName(speaker.name)
+            setDescription(speaker.description)
+            setDesignation(speaker.designation)
+            setImage(speaker.image)
         }
-    }, [post])
+    }, [speaker])
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -57,9 +60,9 @@ function Post(props) {
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Post updated successfully!')
+            setSuccessMessage('Speaker updated successfully!')
             setTimeout(() => {
-                push('/posts')
+                push('/speakers')
             }, 500)
         }
     }, [success, loading])
@@ -70,9 +73,9 @@ function Post(props) {
 
         if (!fileValidation()) return;
 
-        dispatch(updatePost({
-            id: postId,
-            title, content, media
+        dispatch(updateSpeaker({
+            id: speakerId,
+            name, designation, description , image
         }))
 
     }
@@ -82,7 +85,8 @@ function Post(props) {
         // if (file === null) {
         //     _errors.push("File is required!")
         // }
-        if (media === null) {
+        console.log("img" , image);
+        if (image === null) {
             _errors.push("Image is required!")
         }
 
@@ -97,7 +101,7 @@ function Post(props) {
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Edit Post
+                    Edit Speaker
                 </Typography>
             </Grid>
 
@@ -121,13 +125,18 @@ function Post(props) {
                         <form onSubmit={handleSubmit}>
                             <Grid row>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Title' value={title}
-                                               onChange={e => setTitle(e.target.value)}/>
+                                    <TextField fullWidth label='Name' value={name}
+                                               onChange={e => setName(e.target.value)}/>
                                 </Grid>
                                 <br/>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Content' value={content}
-                                               onChange={e => setContent(e.target.value)}/>
+                                    <TextField fullWidth label='Designation' value={designation}
+                                               onChange={e => setDesignation(e.target.value)}/>
+                                </Grid>
+                                <br/>
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
@@ -135,12 +144,12 @@ function Post(props) {
                                             variant="contained"
                                             component="label"
                                         >
-                                            Upload Media
+                                            Upload Image
                                             <input
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setMedia(e.target?.files[0] ?? null)
+                                                    setImage(e.target?.files[0] ?? null)
                                                 }}
                                             />
                                         </Button>
@@ -161,4 +170,4 @@ function Post(props) {
     );
 }
 
-export default Post;
+export default Speaker;

@@ -7,13 +7,21 @@ import {contactsSlice} from "./slices/contactsSlice";
 import {donationsSlice} from "./slices/donationsSlice";
 import {eventsSlice} from "./slices/eventsSlice";
 import {announcementsSlice} from "./slices/announcementsSlice";
-import {announcementSlice} from "./slices/announcementSlice";
 import {postsSlice} from "./slices/postsSlice"
+import {postSlice} from "./slices/postSlice"
+import {announcementSlice} from "./slices/announcementSlice";
+// import {postsSlice} from "./slices/postsSlice"
 import {staffMembersSlice} from "./slices/staffMembersSlice"
 import {staffMemberSlice} from "./slices/staffMemberSlice"
 import {eventSlice} from "./slices/EventSlice"
+import {prayersSlice} from "./slices/prayersSlice";
+import {sermonsSlice} from "./slices/sermonsSlice"
+import {sermonSlice} from "./slices/sermonSlice"
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
+
+import {speakersSlice} from "./slices/speakersSlice";
+import {speakerSlice} from "./slices/speakerSlice";
 
 const makeStore = () =>
     configureStore({
@@ -25,13 +33,19 @@ const makeStore = () =>
             [donationsSlice.name]: donationsSlice.reducer,
             [eventsSlice.name]: eventsSlice.reducer,
             [postsSlice.name]: postsSlice.reducer,
+            [postSlice.name]: postSlice.reducer,
             [announcementsSlice.name]: announcementsSlice.reducer,
             [announcementSlice.name]: announcementSlice.reducer,
             [staffMembersSlice.name]: staffMembersSlice.reducer,
             [staffMemberSlice.name]: staffMemberSlice.reducer,
             [eventSlice.name]: eventSlice.reducer,
+            [prayersSlice.name]: prayersSlice.reducer,
+            [sermonsSlice.name]: sermonsSlice.reducer,
+            [sermonSlice.name]: sermonSlice.reducer,
             [usersSlice.name]: usersSlice.reducer,
             [userSlice.name]: userSlice.reducer,
+            [speakersSlice.name]: speakersSlice.reducer,
+            [speakerSlice.name]: speakerSlice.reducer,
         },
         devTools: true,
     });

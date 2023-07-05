@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getPosts,
-    loading as postsLoading,
-    posts as postsList,
-    total as postTotal,
-    totalPages as postTotalPages,
-    deletePost
-} from '../../store/slices/postsSlice'
+    getSpeakers,
+    loading as speakersLoading,
+    speakers as speakersList,
+    total as speakersTotal,
+    totalPages as speakersTotalPages,
+    deleteSpeaker
+} from '../../store/slices/speakersSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
@@ -26,19 +26,19 @@ import {IconButton, Pagination, Stack} from "@mui/material";
 import {Pencil, Delete} from 'mdi-material-ui'
 import {log} from "next/dist/server/typescript/utils";
 //Additonal
-// import {deletePost} from "../../store/slices/postsSlice";
-// import {getPosts} from "../../store/slices/postsSlice";
+// import {deletePost} from "../../store/slices/speakerssSlice";
+// import {getPosts} from "../../store/slices/prayerssSlice";
 
-function Posts(props) {
+function Speakers(props) {
 
     const dispatch = useDispatch()
     const {push} = useRouter()
 
-    const loading = useSelector(postsLoading)
-    const posts = useSelector(postsList)
-    const total = useSelector(postTotal)
-    const totalPages = useSelector(postTotalPages)
-console.log("posts" , posts)
+    const loading = useSelector(speakersLoading)
+    const speakers = useSelector(speakersList)
+    const total = useSelector(speakersTotal)
+    const totalPages = useSelector(speakersTotalPages)
+console.log("speakerss" , speakers)
     const [page, setPage] = useState(1)
 
     function onPageChange(e, p) {
@@ -48,12 +48,12 @@ console.log("posts" , posts)
     const handleDelete = async (e, id) => {
         e.preventDefault()
         console.log(id)
-        await dispatch(deletePost({id}))
-        await dispatch(getPosts({page}))
+        await dispatch(deleteSpeaker({id}))
+        await dispatch(getSpeakers({page}))
     }
 
     useEffect(() => {
-        dispatch(getPosts({page}))
+        dispatch(getSpeakers({page}))
     }, [page])
 
     return (
@@ -61,10 +61,10 @@ console.log("posts" , posts)
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Posts
+                        Speakers
                     </Typography>
-                    <Button component={Link} href='/posts/create' sx={{marginLeft: 'auto'}}>
-                        Create Post
+                    <Button component={Link} href='/speakers/create' sx={{marginLeft: 'auto'}}>
+                        Create Speaker
                     </Button>
                 </Stack>
             </Grid>
@@ -79,49 +79,53 @@ console.log("posts" , posts)
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
-                                            <TableCell>Title</TableCell>
-                                            <TableCell>Content</TableCell>
-                                            <TableCell className="text-center" width="150">Media</TableCell>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Designation</TableCell>
+                                            <TableCell>Description</TableCell>
+                                            <TableCell>Image</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {posts.map(post => {
+                                        {speakers.map(speaker => {
                                             return (
-                                                <TableRow hover role='checkbox' tabIndex={-1} key={post.id}>
+                                                <TableRow hover role='checkbox' tabIndex={-1} key={speaker.id}>
                                                     <TableCell>
-                                                        <span>{post.id}</span>
+                                                        <span>{speaker.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{post.title}</span>
+                                                        <span>{speaker.name}</span>
                                                     </TableCell>
-
                                                     <TableCell>
-                                                        <span>{post.content}</span>
+                                                        <span>{speaker.designation}</span>
+                                                    </TableCell >
+                                                    <TableCell>
+                                                        <span>{speaker.description}</span>
                                                     </TableCell>
                                                     <TableCell className="text-center">
-                                                        {(post.media !== null && post.media !== 'null') ? (
-                                                            <Button tag='a' href={post.media} target="_blank"
+                                                        {(speaker.image !== null && speaker.image !== 'null') ? (
+                                                            <Button tag='a' href={speaker.image} target="_blank"
                                                                     layout="link"
                                                                     size="small">
                                                                 View Image
                                                             </Button>
                                                         ) : null}
                                                     </TableCell>
+
                                                     <TableCell width="200">
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
                                                             onClick={e => {
                                                                 e.preventDefault()
-                                                                push(`/posts/${post.id}`)
+                                                                push(`/speakers/${speaker.id}`)
                                                             }} sx={{marginLeft: 'auto'}}>
                                                             <Pencil/>
                                                         </IconButton>
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => handleDelete(e, post.id)}
+                                                            onClick={e => handleDelete(e, speaker.id)}
                                                             sx={{marginLeft: 'auto'}}>
                                                             <Delete/>
                                                         </IconButton>
@@ -144,4 +148,4 @@ console.log("posts" , posts)
     );
 }
 
-export default Posts;
+export default Speakers;

@@ -55,6 +55,24 @@ const navigation = () => {
         },
 
         {
+            title: 'Prayer Requests',
+            icon: PostIcon,
+            path: '/prayers',
+        },
+
+        {
+            title: 'Sermons',
+            icon: PostIcon,
+            path: '/sermons',
+        },
+
+        {
+            title: 'Speaker',
+            icon: PostIcon,
+            path: '/speakers',
+        },
+
+        {
             title: 'Users',
             icon: PeopleOutlinedIcon,
             path: '/users',

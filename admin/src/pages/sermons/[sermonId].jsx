@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getPost,
-    post as postDetail,
-    loading as postLoading,
-    errors as postErrors,
-    success as postSuccess, updatePost, setErrors, setSuccess
-} from "../../store/slices/postSlice";
+    getSermon,
+    sermon as sermonDetail,
+    loading as sermonLoading,
+    errors as sermonErrors,
+    success as sermonSuccess, updateSermon, setErrors, setSuccess
+} from "../../store/slices/sermonSlice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -17,39 +17,43 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-function Post(props) {
+function Sermon(props) {
     const {push, query} = useRouter()
-    console.log("query" , query)
+    console.log("query", query)
 
-    const {postId} = query
+    const {sermonId} = query
 
     const dispatch = useDispatch()
 
-    const post = useSelector(postDetail)
-    const loading = useSelector(postLoading)
-    const errors = useSelector(postErrors)
-    const success = useSelector(postSuccess)
+    const sermon = useSelector(sermonDetail)
+    const loading = useSelector(sermonLoading)
+    const errors = useSelector(sermonErrors)
+    const success = useSelector(sermonSuccess)
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [url, setUrl] = useState('')
     const [media, setMedia] = useState(null)
-    const [content, setContent] = useState('')
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
-        if (postId) {
-            console.log("postId" , postId)
-            dispatch(getPost({id: postId}))
+        if (sermonId) {
+            console.log("sermonId", sermonId)
+            dispatch(getSermon({id: sermonId}))
         }
-    }, [postId])
+    }, [sermonId])
 
     useEffect(() => {
-        if (post) {
-            console.log("post" , post)
-            setTitle(post.title)
-            setContent(post.content)
-            setMedia(post.media)
+        if (sermon) {
+            console.log("sermon", sermon)
+            setTitle(sermon.title)
+            setDescription(sermon.description != null ? sermon.description : "")
+            setUrl(sermon.url)
+            setMedia(sermon.media)
+            setImage(sermon.image)
         }
-    }, [post])
+    }, [sermon])
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -57,36 +61,45 @@ function Post(props) {
 
     useEffect(() => {
         if (!loading && success) {
-            setSuccessMessage('Post updated successfully!')
+            setSuccessMessage('Sermon updated successfully!')
             setTimeout(() => {
-                push('/posts')
+                push('/sermons')
             }, 500)
         }
     }, [success, loading])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (loading) return
 
-        if (!fileValidation()) return;
+        if (loading) {
+            return
+        }
 
-        dispatch(updatePost({
-            id: postId,
-            title, content, media
+        if (!fileValidation()) {
+            return
+        };
+
+        console.log("IN Submit" , sermonId,title, description, url, media, image);
+
+        dispatch(updateSermon({
+            id: sermonId,
+            title, description, url, media, image
         }))
 
     }
 
     const fileValidation = () => {
         let _errors = []
-        // if (file === null) {
-        //     _errors.push("File is required!")
-        // }
-        if (media === null) {
+
+        if (image === null) {
             _errors.push("Image is required!")
+        }
+        if (media === null) {
+            _errors.push("Media is required!")
         }
 
         if (_errors.length > 0) {
+            console.log("in error")
             dispatch(setErrors(_errors))
         }
 
@@ -97,7 +110,7 @@ function Post(props) {
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
-                    Edit Post
+                    Edit Sermon
                 </Typography>
             </Grid>
 
@@ -126,8 +139,13 @@ function Post(props) {
                                 </Grid>
                                 <br/>
                                 <Grid item xs={12}>
-                                    <TextField fullWidth label='Content' value={content}
-                                               onChange={e => setContent(e.target.value)}/>
+                                    <TextField fullWidth label='Description' value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
+                                </Grid>
+                                <br/>
+                                <Grid item xs={12}>
+                                    <TextField fullWidth label='Url' value={url}
+                                               onChange={e => setUrl(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
@@ -141,6 +159,20 @@ function Post(props) {
                                                 hidden
                                                 onChange={e => {
                                                     setMedia(e.target?.files[0] ?? null)
+                                                }}
+                                            />
+                                        </Button>
+
+                                        <Button
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            Upload Image
+                                            <input
+                                                type="file"
+                                                hidden
+                                                onChange={e => {
+                                                    setImage(e.target?.files[0] ?? null)
                                                 }}
                                             />
                                         </Button>
@@ -161,4 +193,4 @@ function Post(props) {
     );
 }
 
-export default Post;
+export default Sermon;
