@@ -17,7 +17,6 @@ import {eventSlice} from "./slices/EventSlice"
 import {prayersSlice} from "./slices/prayersSlice";
 import {sermonsSlice} from "./slices/sermonsSlice"
 import {sermonSlice} from "./slices/sermonSlice"
-
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
 
