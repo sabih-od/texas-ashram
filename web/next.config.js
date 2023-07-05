@@ -11,6 +11,10 @@ module.exports = {
         apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',
     },
 
+    publicRuntimeConfig: {
+        apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',
+    },
+
     // Add aliases for commonly used directories
     // You can customize these aliases based on your project structure
     webpack: (config, { isServer }) => {
