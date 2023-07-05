@@ -1,10 +1,11 @@
 import '../public/styles/css/all.min.css';
 import '../public/styles/css/custom.min.css';
 import '../public/styles/css/responsive.css';
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import dynamic from "next/dynamic";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Middleware from "./middleware";
 
 const DynamicJSFiles = dynamic(
     () =>
@@ -17,10 +18,10 @@ const DynamicJSFiles = dynamic(
         ]).then((values) => {
             return () => values.forEach((value) => value.default());
         }),
-    { ssr: false }
+    {ssr: false}
 );
 
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}) {
     useEffect(() => {
         AOS.init({
             duration: 1000, // Specify the duration in milliseconds (default: 1000)
@@ -32,8 +33,10 @@ function MyApp({ Component, pageProps }) {
         <>
             <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <DynamicJSFiles />
-            <Component {...pageProps} />
+            <DynamicJSFiles/>
+            <Middleware>
+                <Component {...pageProps} />
+            </Middleware>
         </>
     );
 }
