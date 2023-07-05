@@ -67,7 +67,7 @@ function Create(props) {
         if (!fileValidation()) return;
 
         dispatch(addSermon({
-            title, setDescription, url, media , image
+            title, description, url, media , image
         }))
 
     }
