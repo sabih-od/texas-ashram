@@ -10,7 +10,7 @@ import {announcementsSlice} from "./slices/announcementsSlice";
 import {postsSlice} from "./slices/postsSlice"
 import {postSlice} from "./slices/postSlice"
 import {announcementSlice} from "./slices/announcementSlice";
-import {postsSlice} from "./slices/postsSlice"
+// import {postsSlice} from "./slices/postsSlice"
 import {staffMembersSlice} from "./slices/staffMembersSlice"
 import {staffMemberSlice} from "./slices/staffMemberSlice"
 import {eventSlice} from "./slices/EventSlice"
