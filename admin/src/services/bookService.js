@@ -34,18 +34,14 @@ export const create = async ({
 
 export const update = async ({
                                  id,
-                                 title,
-                                 file,
-                                 image
+                                 ...payload
                              }) => {
     try {
-        console.log("update form", id, title,
-            file,
-            image)
+        console.log("payload", payload)
         const form = new FormData()
-        form.append('title', title)
-        form.append('file', file)
-        form.append('image', image)
+        for (const payloadKey in payload) {
+            form.append(payloadKey, payload[payloadKey])
+        }
 
         const response = await fetch(`${apiUrl()}/books/${id}`, {
             method: 'POST',
@@ -116,8 +112,8 @@ export const show = async (id) => {
 }
 
 export const destroy = async ({
-                                 id
-                             }) => {
+                                  id
+                              }) => {
     try {
         console.log("delete form", id)
 

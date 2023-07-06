@@ -62,11 +62,20 @@ function Book(props) {
         e.preventDefault()
         if (loading) return
 
-        if (!fileValidation()) return;
+        // if (!fileValidation()) return;
+        let data = {
+            title
+        }
+
+        if (image)
+            data['image'] = image
+
+        if (file)
+            data['file'] = file
 
         dispatch(updateBook({
             id: bookId,
-            title, image, file
+            ...data
         }))
 
     }

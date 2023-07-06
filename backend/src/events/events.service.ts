@@ -79,7 +79,7 @@ export class EventsService {
                 return event;
             }
 
-            await this.eventRepository.update(event, updateEventDto);
+            await this.eventRepository.update(id, updateEventDto);
 
             return await this.findOne(id);
         } catch (error) {
@@ -98,6 +98,6 @@ export class EventsService {
             return event;
         }
 
-        return await this.eventRepository.delete(event);
+        return await this.eventRepository.delete(id);
     }
 }

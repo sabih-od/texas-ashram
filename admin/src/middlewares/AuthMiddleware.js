@@ -8,8 +8,11 @@ function AuthMiddleware({children}) {
 
     const router = useRouter();
     const [loading, setLoading] = useState(true)
+    const [lastUrl, setLastUrl] = useState(null)
 
     useEffect(() => {
+        if (router.pathname === lastUrl)
+            return;
         const checkAuthentication = async () => {
             const token = getToken()
             if (token) {
@@ -24,13 +27,11 @@ function AuthMiddleware({children}) {
                 await router.push('/login')
             }
 
+            setLastUrl(router.pathname)
             setLoading(false)
         };
         checkAuthentication();
 
-        return () => {
-            checkAuthentication();
-        }
     }, [router]);
 
     if (loading)

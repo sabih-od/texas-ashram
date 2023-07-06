@@ -4,7 +4,6 @@ import {MaxLength} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class UpdateBookDto extends PartialType(CreateBookDto) {
-    @MaxLength(20)
     @ApiProperty({example: 'Books Lorem Ipsum'})
     title: string;
 
