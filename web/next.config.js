@@ -4,11 +4,15 @@ module.exports = {
     // Enable CSS modules for CSS file imports
     cssModules: true,
     images: {
-        domains: ['localhost'],
+        domains: ['http://service.demowebsitelinks.com'] || ['localhost'],
     },
 
     publicRuntimeConfig: {
         apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',
+    },
+
+    server: {
+        port: 3025,
     },
 
     // Add aliases for commonly used directories
