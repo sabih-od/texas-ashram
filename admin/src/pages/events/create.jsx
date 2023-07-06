@@ -82,7 +82,6 @@ function Create(props) {
             _errors.push("Image is required!")
         }
 
-
         if (_errors.length > 0) {
             dispatch(setErrors(_errors))
         }
@@ -141,7 +140,6 @@ function Create(props) {
                                 </Grid>
 
 
-
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
 
@@ -160,7 +158,6 @@ function Create(props) {
                                         </Button>
                                     </Stack>
                                 </Grid>
-
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>
