@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -16,6 +16,10 @@ import {Alert, AlertTitle, Stack} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import DatePicker from "react-datepicker";
+export const CustomDateInput = forwardRef((props, ref) => {
+    return <TextField fullWidth {...props} inputRef={ref} label='Date' autoComplete='off'/>
+})
 
 function Event(props) {
     const {push, query} = useRouter()
@@ -134,26 +138,27 @@ function Event(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row>
+                            <Grid row className="my-4">
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='description' value={description}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='date_to' value={date_to}
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth type="date" label='date_to' value={date_to}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='date_from' value={date_from}
+
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth type="date" label='date_from' value={date_from}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='location' value={location}
                                                onChange={e => setLocation(e.target.value)}/>
                                 </Grid>
