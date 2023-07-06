@@ -29,6 +29,7 @@ import '../../styles/globals.css'
 
 import {Provider} from 'react-redux';
 import {wrapper} from '../store/store';
+import AuthMiddleware from "../middlewares/AuthMiddleware";
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -67,14 +68,16 @@ const App = ({...rest}) => {
                     <meta name='viewport' content='initial-scale=1, width=device-width'/>
                 </Head>
 
-                <SettingsProvider>
-                    <SettingsConsumer>
-                        {({settings}) => {
-                            return <ThemeComponent settings={settings}>{getLayout(
-                                <Component {...pageProps} />)}</ThemeComponent>
-                        }}
-                    </SettingsConsumer>
-                </SettingsProvider>
+                <AuthMiddleware>
+                    <SettingsProvider>
+                        <SettingsConsumer>
+                            {({settings}) => {
+                                return <ThemeComponent settings={settings}>{getLayout(
+                                    <Component {...pageProps} />)}</ThemeComponent>
+                            }}
+                        </SettingsConsumer>
+                    </SettingsProvider>
+                </AuthMiddleware>
             </CacheProvider>
         </Provider>
     )
