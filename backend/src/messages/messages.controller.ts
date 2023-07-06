@@ -19,13 +19,19 @@ export class MessagesController {
       createMessageDto.created_at = Date.now().toString();
 
       let group = await this.groupService.findOne(createMessageDto.group_id);
-      if (!group.error) {
-          let updateGroupDto = new UpdateGroupDto();
-          updateGroupDto.last_message = createMessageDto.message;
-          updateGroupDto.last_updated = Date.now().toString();
-
-          await this.groupService.update(group.id, updateGroupDto);
+      if (group.error) {
+          return {
+              success: false,
+              message: 'Group not found',
+              data: []
+          }
       }
+
+      let updateGroupDto = new UpdateGroupDto();
+      updateGroupDto.last_message = createMessageDto.message;
+      updateGroupDto.last_updated = Date.now().toString();
+
+      await this.groupService.update(group.id, updateGroupDto);
 
       let res = await this.messagesService.create(createMessageDto);
 

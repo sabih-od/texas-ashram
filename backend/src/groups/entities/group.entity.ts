@@ -21,11 +21,14 @@ export class Group {
     @Column({ type: 'varchar', nullable: true })
     last_updated: string;
 
-    //relations
-    @ManyToMany(() => User, (user) => user.groups)
-    @JoinTable({name: 'group_users'})
-    members: User[];
-
     @Column({ type: 'text', nullable: true })
     created_at: string;
+
+    @Column({ type: 'text', nullable: true })
+    members: string;
+
+    // //relations
+    // @ManyToMany(() => User, (user) => user.groups)
+    // @JoinTable({name: 'group_users'})
+    // members: User[];
 }
