@@ -1,12 +1,13 @@
 import getConfig from 'next/config';
 import Cookie from "js-cookie";
 
+// This apiUrls Set Into next.config.js File
 export const apiUrl = () => {
     const {publicRuntimeConfig} = getConfig();
     return publicRuntimeConfig.apiUrls
 };
 
-export const urlWithParams = (path, params = {}) => {
+export const urlWithParam = (path, params = {}) => {
     return `${path}?${Object.keys(params)
         .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
         .join('&')}`;

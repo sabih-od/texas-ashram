@@ -82,6 +82,7 @@ function Create(props) {
             _errors.push("Image is required!")
         }
 
+
         if (_errors.length > 0) {
             dispatch(setErrors(_errors))
         }
@@ -115,7 +116,7 @@ function Create(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row>
+                            <Grid row className="my-4">
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
@@ -126,11 +127,11 @@ function Create(props) {
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Date To' value={date_to}
+                                    <TextField fullWidth type="date" label='Date To' value={date_to}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Date From' value={date_from}
+                                    <TextField fullWidth type="date" label='Date From' value={date_from}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 
@@ -138,6 +139,7 @@ function Create(props) {
                                     <TextField fullWidth label='Location' value={location}
                                                onChange={e => setLocation(e.target.value)}/>
                                 </Grid>
+
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>
@@ -158,6 +160,7 @@ function Create(props) {
                                         </Button>
                                     </Stack>
                                 </Grid>
+
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>

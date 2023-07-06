@@ -3,12 +3,13 @@ import {useRouter} from 'next/router';
 import React, {useState, useEffect, useCallback} from 'react';
 import Layout from "../components/Layout";
 import Link from "next/link";
-import {authUser, signup} from '../services/authService';
+import {signup} from '../services/authService';
 import {loginUser} from '../services/authService';
-import * as toastr from "../../admin/src/store/slices/announcementSlice";
-import Cookies from "js-cookie";
+import * as toastr from "../../admin/src/store/slices/EventSlice";
 
 function Members(props) {
+
+    // Sign Up And Login Tab Changes Work
     const [login, setLogin] = useState(0);
 
     const loginForm = useCallback(() => {
@@ -30,6 +31,7 @@ function Members(props) {
             loginFormElements[login].style.display = "block";
         }
     }, [login]);
+    // Sign Up And Login Tab Changes Work
 
     // signup and login work
     const [first_name, setFirstName] = useState('');
@@ -39,6 +41,7 @@ function Members(props) {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    // signup and login work
 
     // const handleClickShowPassword = () => {
     //     setShowPassword(!showPassword);
@@ -50,11 +53,10 @@ function Members(props) {
 
     const router = useRouter();
 
-    // Sign-up Request
+    // Sign-up Request Work
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        // Call the signup function with the input values
         const result = await signup(first_name, last_name, email, phone, password);
 
         if (result.data.success === true) {
@@ -66,12 +68,14 @@ function Members(props) {
             toastr.errors('Error occurred during signup', 'Error');
         }
     }
+    // Sign-up Request Work
 
-    // Login Request
+    // Login Request Work
     const loginHandle = async (e) => {
         e.preventDefault();
 
         const result = await loginUser(email, password);
+        console.log(result)
 
         if (result.data.success === true) {
             await router.push('/');
@@ -82,7 +86,7 @@ function Members(props) {
             toastr.errors('Error occurred during login', 'Error');
         }
     }
-
+    // Login Request Work
 
     return (
         <Layout>
@@ -104,6 +108,7 @@ function Members(props) {
                 <div className="container">
                     <div className="row mx-4">
                         <div className="col-md-6 pr-5">
+                            {/*Login Work Start*/}
                             {errorMessage && <div>{errorMessage}</div>}
                             <div className="loginForm">
                                 <h2>LOGIN</h2>
@@ -132,7 +137,9 @@ function Members(props) {
                                     </div>
                                 </form>
                             </div>
+                            {/*Login Work End*/}
 
+                            {/*Register Work Start*/}
                             {errorMessage && <div>{errorMessage}</div>}
                             <div className="loginForm">
                                 <h2>REGISTER</h2>
@@ -208,7 +215,10 @@ function Members(props) {
                                 </form>*/}
 
                             </div>
+                            {/*Register Work End*/}
                         </div>
+
+                        {/*Register And Login Tab Changes Work*/}
                         <div className="col-md-6 border-left text-center">
                             <div className="col-md-11 mx-auto">
                                 <h2>REGISTER</h2>

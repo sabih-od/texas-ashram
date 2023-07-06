@@ -2,25 +2,27 @@ import React from "react";
 import Image from "next/image";
 import Logo from "../images/logo.png";
 import Link from "next/link";
-import {authUser} from "../services/authService";
 import Cookies from "js-cookie";
 import {useRouter} from 'next/router';
-// import {cookies} from "next/headers";
 
 const Menu = () => {
+
+    // Logout Work Into Token
     const router = useRouter();
     const handleLogout = () => {
-        // Clear any client-side session data or authentication tokens
         clearSessionData();
 
-        router.push('/members'); // Redirect to the login page or any other desired page
+        router.push('/members');
     };
 
     const clearSessionData = () => {
         localStorage.clear();
         Cookies.remove('token');
     };
+
+    // Show And Hide Work On Members Tab
     const token = Cookies.get('token');
+
     return (
         <div>
             <header className="">
@@ -79,8 +81,7 @@ const Menu = () => {
                                             <Link className="nav-link" href="/notifications">Notification</Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link" href="/prayer-request-form">Prayer Request
-                                                Form</Link>
+                                            <Link className="nav-link" href="/request-prayer">Requested Prayers</Link>
                                         </li>
                                         <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown"

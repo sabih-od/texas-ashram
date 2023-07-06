@@ -1,9 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
 import video from "../images/video1.png";
+import {get} from "../services/sermonService";
+import {format, parse} from "date-fns";
 
 function SermonsTeaching(props) {
+
+    const [sermons, setSermons] = useState([]);
+
+    useEffect(() => {
+        async function fetchSermons() {
+            try {
+                const response = await get(1, 15);
+                const sermonsArray = response.data?.data || [];
+                console.log(response.data?.data)
+
+                setSermons(sermonsArray);
+            } catch (error) {
+                console.error(error);
+            }
+
+        }
+
+        fetchSermons().then((r) => 'error');
+    }, []);
+
     return (
         <Layout>
             {/*<!-- Main Heading -->*/}
@@ -24,63 +46,29 @@ function SermonsTeaching(props) {
             <section className="books-section pb-0">
                 <div className="container custom-container ">
                     <div className="row">
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video1.png" data-fancybox=""><i className="fab fa-youtube"/></a>
 
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video2.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video3.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video1.png" data-fancybox=""><i className="fab fa-youtube"/></a>
+                        {Array.isArray(sermons) && sermons.length > 0 ? (
+                            sermons.map((sermon) => (
+                                <div className="col-md-4 mb-4" key={sermon.id}>
+                                    <div className="videoItems">
+                                        {/*<Image src={sermon.image} className="img-fluid" alt="video"/>*/}
+                                        <Image
+                                            src={sermon.image}
+                                            className="img-fluid"
+                                            alt={sermon.title}
+                                            width={300}
+                                            height={400}
+                                        />
+                                        <a href={sermon.image} data-fancybox=""><i className="fab fa-youtube"/></a>
 
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="col-md-12">
+                                <p>Sermons are not available at this moment.</p>
                             </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video2.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video3.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt="video"/>
-                                <a href="../images/video1.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt=""/>
-                                <a href="../images/video2.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
-                        <div className="col-md-4 mb-4">
-                            <div className="videoItems">
-                                <Image src={video} className="img-fluid" alt=""/>
-                                <a href="../images/video3.png" data-fancybox=""><i className="fab fa-youtube"/></a>
-                            </div>
-                        </div>
+                        )}
 
                     </div>
                 </div>
