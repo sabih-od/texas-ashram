@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@nestjs/common';
 import {CreateEventDto} from './dto/create-event.dto';
 import {UpdateEventDto} from './dto/update-event.dto';
-import {EntityNotFoundError, FindManyOptions, QueryFailedError, Repository} from "typeorm";
+import {EntityNotFoundError, FindManyOptions, MoreThanOrEqual, QueryFailedError, Repository} from "typeorm";
 import {Event} from "./entities/event.entity";
 
 @Injectable()
@@ -38,11 +38,18 @@ export class EventsService {
     async findAll(page: number = 1, limit: number = 10, is_upcoming_event?: string): Promise<any> {
         //upcoming events check
         let order_object: FindManyOptions<Event> = (is_upcoming_event && is_upcoming_event == 'true') ? { order: { id: 'DESC' } } : {};
+        let where_object = (is_upcoming_event && is_upcoming_event == 'true') ?
+            {
+                where: {
+                    date_to: MoreThanOrEqual(new Date().toISOString().slice(0, 10))
+                }
+            } : {};
 
         const [data, total] = await this.eventRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
-            ...order_object
+            ...order_object,
+            ...where_object
         });
 
         const totalPages = Math.ceil(total / limit);
