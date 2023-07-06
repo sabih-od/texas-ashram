@@ -1,10 +1,15 @@
 import '../public/styles/css/all.min.css';
 import '../public/styles/css/custom.min.css';
 import '../public/styles/css/responsive.css';
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import dynamic from "next/dynamic";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Middleware from "./middleware";
+import Modal from 'react-modal';
+
+// Request Prayer Work For Error Handling
+Modal.setAppElement('#__next');
 
 const DynamicJSFiles = dynamic(
     () =>
@@ -17,23 +22,28 @@ const DynamicJSFiles = dynamic(
         ]).then((values) => {
             return () => values.forEach((value) => value.default());
         }),
-    { ssr: false }
+    {ssr: false}
 );
 
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}) {
+
+    // Animation Timing work
     useEffect(() => {
         AOS.init({
-            duration: 1000, // Specify the duration in milliseconds (default: 1000)
-            delay: 200, // Specify the delay in milliseconds (default: 0)
+            duration: 1000,
+            delay: 200,
         });
     }, []);
 
     return (
         <>
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <DynamicJSFiles />
-            <Component {...pageProps} />
+
+            <DynamicJSFiles/>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"/>
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"/>
+            <Middleware>
+                <Component {...pageProps} />
+            </Middleware>
         </>
     );
 }

@@ -3,6 +3,9 @@ const path = require('path');
 module.exports = {
     // Enable CSS modules for CSS file imports
     cssModules: true,
+    images: {
+        domains: ['localhost'],
+    },
 
     publicRuntimeConfig: {
         apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',

@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
 import speaker from "../images/icon/speaker.png";
+import { get } from "../services/announcementService";
+import { parse, format } from "date-fns";
 
 function Announcement(props) {
+    const [announcements, setAnnouncement] = useState([]);
+
+    useEffect(() => {
+        async function fetchAnnouncements() {
+            try {
+                const response = await get(1, 15);
+                const announcementsArray = response.data?.data || [];
+
+                const formattedAnnouncements = announcementsArray.map((announcement) => {
+                    const parsedDate = parse(announcement.date, 'dd-MM-yyyy', new Date());
+                    const formattedDate = format(parsedDate, 'MMM dd, yyyy');
+                    return {
+                        ...announcement,
+                        formattedDate: formattedDate,
+                    };
+                });
+
+                setAnnouncement(formattedAnnouncements);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchAnnouncements().then((r) => 'error');
+    }, []);
+
     return (
         <Layout>
             {/*<!-- Main Heading -->*/}
@@ -14,78 +42,40 @@ function Announcement(props) {
             </div>
             {/*<!-- !Main Heading -->*/}
 
-
-            {/*<!-- Books Section -->*/}
+            {/*<!-- Announcements Section -->*/}
             <section className="announcement-section pb-0">
-                <div className="container custom-container ">
+                <div className="container custom-container">
                     <div className="col-md-10 mx-auto">
-                        <div className="card-items mb-4">
-                            <div className="row align-items-center">
-                                <div className="col-md-3">
-                                    <figure>
-                                        <Image src={speaker} className="img-fluid" alt="speaker" />
-                                    </figure>
+                        {Array.isArray(announcements) && announcements.length > 0 ? (
+                            announcements.map((announcement) => (
+                                <div className="card-items mb-4" key={announcement.id}>
+                                    <div className="row align-items-center">
+                                        <div className="col-md-3">
+                                            <figure>
+                                                <Image src={speaker} className="img-fluid" alt="speaker" />
+                                            </figure>
+                                        </div>
+                                        <div className="col-md-9">
+                                            <span>{announcement.formattedDate}</span>
+                                            <a href="">
+                                                <h4>{announcement.title}</h4>
+                                            </a>
+                                            <p>{announcement.description}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-md-9">
-                                    <span>Jun 01, 2023</span>
-                                    <a href="">
-                                        <h4>Event Announcement</h4>
-                                    </a>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                        that it has a more-or-less normal distribution of letters, as opposed to using
-                                        'Content here, content here', making it look like readable English.</p>
-                                </div>
+                            ))
+                        ) : (
+                            <div className="col-md-12">
+                                <p>Announcements are not available at this moment.</p>
                             </div>
-
-                        </div>
-                        <div className="card-items mb-4">
-                            <div className="row align-items-center">
-                                <div className="col-md-3">
-                                    <figure>
-                                        <Image src={speaker} className="img-fluid" alt="speaker" />
-                                    </figure>
-                                </div>
-                                <div className="col-md-9">
-                                    <span>Jun 01, 2023</span>
-                                    <a href="">
-                                        <h4>Event Announcement</h4>
-                                    </a>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                        that it has a more-or-less normal distribution of letters, as opposed to using
-                                        'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="card-items mb-4">
-                            <div className="row align-items-center">
-                                <div className="col-md-3">
-                                    <figure>
-                                        <Image src={speaker} className="img-fluid" alt="speaker" />
-                                    </figure>
-                                </div>
-                                <div className="col-md-9">
-                                    <span>Jun 01, 2023</span>
-                                    <a href="">
-                                        <h4>Event Announcement</h4>
-                                    </a>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                        that it has a more-or-less normal distribution of letters, as opposed to using
-                                        'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-
-                        </div>
-
+                        )}
                     </div>
                 </div>
             </section>
-            {/*<!-- !Books Section -->*/}
+            {/*<!-- !Announcements Section -->*/}
         </Layout>
-);
+    );
 }
 
 export default Announcement;
