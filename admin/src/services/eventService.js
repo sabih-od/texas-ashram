@@ -17,7 +17,6 @@ export const create = async ({
         form.append('location', location)
         form.append('image', image)
 
-
         const response = await fetch(`${apiUrl()}/events`, {
             method: 'POST',
             headers: {
@@ -136,16 +135,11 @@ export const destroy = async ({
                                   id
                               }) => {
     try {
-        console.log("delete form", id)
-        const form = new FormData()
-        form.append('_method', 'delete')
-
         const response = await fetch(`${apiUrl()}/events/${id}`, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             },
-            body: form,
         });
 
         const data = await response.json();

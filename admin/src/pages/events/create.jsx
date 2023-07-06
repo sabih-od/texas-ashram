@@ -1,8 +1,4 @@
 import React, {useEffect, useState} from 'react';
-// import PageTitle from "../../example/components/Typography/PageTitle";
-// import {Button, Input, Label, Select, Textarea} from "@roketid/windmill-react-ui";
-// import Layout from "../../example/containers/Layout";
-// import FileInput from "../../example/components/FileInput";
 import {useDispatch, useSelector} from "react-redux";
 import {
     addEvent,
@@ -16,18 +12,8 @@ import Grid from "@mui/material/Grid";
 import {Alert, AlertTitle, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Link from "next/link";
-import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import EyeOutline from "mdi-material-ui/EyeOutline";
-import EyeOffOutline from "mdi-material-ui/EyeOffOutline";
-import FormHelperText from "@mui/material/FormHelperText";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 
@@ -69,33 +55,32 @@ function Create(props) {
         if (!fileValidation()) return;
 
         dispatch(addEvent({
-            title, description, date_to ,date_from , location , image
+            title, description, date_to, date_from, location, image
         }))
 
     }
 
     const fileValidation = () => {
         let _errors = []
-        if (title === null) {
-            _errors.push("Title is required!")
-        }
-        if (description === null) {
-            _errors.push("Description is required!")
-        }
-
-        if (date_to === null) {
-            _errors.push("Date 1 is required!")
-        }
-        if (date_from === null) {
-            _errors.push("Date 2 is required!")
-        }
-        if (location === null) {
-            _errors.push("Location is required!")
-        }
+        // if (title === null) {
+        //     _errors.push("Title is required!")
+        // }
+        // if (description === null) {
+        //     _errors.push("Description is required!")
+        // }
+        //
+        // if (date_to === null) {
+        //     _errors.push("Date 1 is required!")
+        // }
+        // if (date_from === null) {
+        //     _errors.push("Date 2 is required!")
+        // }
+        // if (location === null) {
+        //     _errors.push("Location is required!")
+        // }
         if (image === null) {
             _errors.push("Image is required!")
         }
-
 
         if (_errors.length > 0) {
             dispatch(setErrors(_errors))
@@ -135,25 +120,24 @@ function Create(props) {
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='description' value={description}
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Description' value={description}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='date_to' value={date_to}
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Date To' value={date_to}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='date_from' value={date_from}
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Date From' value={date_from}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <TextField fullWidth label='location' value={location}
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Location' value={location}
                                                onChange={e => setLocation(e.target.value)}/>
                                 </Grid>
-
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>
@@ -174,7 +158,6 @@ function Create(props) {
                                         </Button>
                                     </Stack>
                                 </Grid>
-
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>

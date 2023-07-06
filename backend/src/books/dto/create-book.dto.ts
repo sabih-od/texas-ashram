@@ -3,7 +3,6 @@ import {ApiProperty} from "@nestjs/swagger";
 
 export class CreateBookDto {
     @IsNotEmpty()
-    @MaxLength(20)
     @ApiProperty({example: 'Books Lorem Ipsum'})
     title: string;
 

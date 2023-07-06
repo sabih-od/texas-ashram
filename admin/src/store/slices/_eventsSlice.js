@@ -29,7 +29,6 @@ const initialState = {
     errors: null,
     events: [],
     total: 0,
-    totalPages: 0,
 };
 
 export const eventsSlice = createSlice({
@@ -42,19 +41,11 @@ export const eventsSlice = createSlice({
         setErrors: (state, {payload}) => {
             state.errors = payload
         },
-        setBooksFetched: (state, {data, message}) => {
-            state.events = data?.data ?? []
-            state.total = data?.total ?? 0
-            state.totalPages = data?.totalPages ?? 0
-
-            state.loading = false
-            state.errors = message
-        },
         extraReducers: {
             [HYDRATE]: (state, action) => {
                 return {
                     ...state,
-                    ...action.payload.events,
+                    ...action.payload.event,
                 };
             },
         },
@@ -68,7 +59,11 @@ export const eventsSlice = createSlice({
         builder.addCase(getEvents.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
-            eventsSlice.caseReducers.setBooksFetched(state, {data, message})
+            state.events = data?.data ?? []
+            state.total = data?.total ?? 0
+
+            state.loading = false
+            state.errors = message
         })
 
         builder.addCase(addEvent.pending, (state, action) => {
@@ -78,6 +73,8 @@ export const eventsSlice = createSlice({
         })
         builder.addCase(addEvent.fulfilled, (state, action) => {
             const {data, message} = action.payload
+
+            console.log("save data", data, message)
 
             state.loading = false
             state.success = !message
@@ -92,9 +89,11 @@ export const eventsSlice = createSlice({
         builder.addCase(deleteEvent.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
+            console.log("delete data", data, message)
+
             state.loading = false
-            // state.success = !message
-            // state.errors = message
+            state.success = !message
+            state.errors = message
         })
     }
 });
@@ -103,7 +102,6 @@ export const {setSuccess, setErrors} = eventsSlice.actions;
 export const events = (state) => state.events.events;
 export const loading = (state) => state.events.loading;
 export const total = (state) => state.events.total;
-export const totalPages = (state) => state.events.totalPages;
 export const errors = (state) => state.events.errors;
 export const success = (state) => state.events.success;
 export default eventsSlice.reducer;

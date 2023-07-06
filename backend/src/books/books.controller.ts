@@ -154,7 +154,7 @@ export class BooksController {
         @Param('id', ParseIntPipe) id: number,
         @Body() updateBookDto: UpdateBookDto,
 
-        @UploadedFiles() files: { image: Express.Multer.File[], file?: Express.Multer.File[] },
+        @UploadedFiles() files: { image?: Express.Multer.File[], file?: Express.Multer.File[] },
     ) {
         try {
             const book = await this.booksService.findOne(id);
@@ -169,7 +169,7 @@ export class BooksController {
             let app_url = process.env.APP_URL + ':' + process.env.PORT;
 
             // File upload work
-            if (files.file[0] && files.file[0].originalname && files.file[0].buffer) {
+            if (files.file && files.file[0] && files.file[0].originalname && files.file[0].buffer) {
                 // Delete existing file
                 await deleteFileFromUploads(app_url, book.file);
 
@@ -181,7 +181,7 @@ export class BooksController {
             }
 
             // Image upload work
-            if (files.image[0] && files.image[0].originalname && files.image[0].buffer) {
+            if (files.image && files.image[0] && files.image[0].originalname && files.image[0].buffer) {
                 // Delete existing image
                 await deleteFileFromUploads(app_url, book.image);
 

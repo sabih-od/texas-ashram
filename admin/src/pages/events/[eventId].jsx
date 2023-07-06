@@ -49,7 +49,7 @@ function Event(props) {
             setDate_to(event.date_to)
             setDate_from(event.date_from)
             setLocation(event.location)
-            setImage(event.image)
+            // setImage(event.image)
         }
     }, [event])
 
@@ -70,7 +70,7 @@ function Event(props) {
         e.preventDefault()
         if (loading) return
 
-        if (!fileValidation()) return;
+        // if (!fileValidation()) return;
 
         dispatch(updateEvent({
             id: eventId,
