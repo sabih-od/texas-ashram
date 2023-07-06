@@ -2,14 +2,6 @@ import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, url
 
 export const create = async (name, email, contact, start_date, end_date, time, description) => {
     try {
-        // const form = new FormData()
-        // form.append('name', name)
-        // form.append('email', email)
-        // form.append('contact', contact)
-        // form.append('start_date', start_date)
-        // form.append('end_date', end_date)
-        // form.append('time', time)
-        // form.append('description', description)
 
         const response = await fetch(`${apiUrl()}/prayer-requests`, {
             method: 'POST',
