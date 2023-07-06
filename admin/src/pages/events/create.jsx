@@ -115,7 +115,7 @@ function Create(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row className="my-4">
+                            <Grid row>
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
