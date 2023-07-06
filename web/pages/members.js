@@ -1,11 +1,10 @@
-import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParams} from "../services/global";
+import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParam} from "../services/global";
 import {useRouter} from 'next/router';
 import React, {useState, useEffect, useCallback} from 'react';
 import Layout from "../components/Layout";
 import Link from "next/link";
 import {signup} from '../services/authService';
 import {loginUser} from '../services/authService';
-import * as toastr from "../../admin/src/store/slices/EventSlice";
 
 function Members(props) {
 
@@ -59,13 +58,13 @@ function Members(props) {
 
         const result = await signup(first_name, last_name, email, phone, password);
 
-        if (result.data.success === true) {
-            await router.push('/');
-            toastr.success('Signup successful!', 'Success');
-        } else {
-            setErrorMessage(result.error);
+        if (result.data === null) {
+            setErrorMessage("Exception Error!");
             router.back();
-            toastr.errors('Error occurred during signup', 'Error');
+        } else {
+            if (result.data.success === true) {
+                await router.push('/');
+            }
         }
     }
     // Sign-up Request Work
@@ -77,13 +76,13 @@ function Members(props) {
         const result = await loginUser(email, password);
         console.log(result)
 
-        if (result.data.success === true) {
-            await router.push('/');
-            toastr.success('Login successful!', 'Success');
-        } else {
-            setErrorMessage(result.error);
+        if (result.data === null) {
+            setErrorMessage("Exception Error!");
             router.back();
-            toastr.errors('Error occurred during login', 'Error');
+        } else {
+            if (result.data.success === true) {
+                await router.push('/');
+            }
         }
     }
     // Login Request Work
@@ -109,7 +108,6 @@ function Members(props) {
                     <div className="row mx-4">
                         <div className="col-md-6 pr-5">
                             {/*Login Work Start*/}
-                            {errorMessage && <div>{errorMessage}</div>}
                             <div className="loginForm">
                                 <h2>LOGIN</h2>
                                 <form onSubmit={loginHandle}>
@@ -126,6 +124,7 @@ function Members(props) {
                                            value={password} onChange={(e) => setPassword(e.target.value)}/>
 
                                     <button className="btn themeBtn green w-100" type="submit">Login</button>
+                                    {errorMessage && <div className="error">{errorMessage}</div>}
                                     <div className="d-flex justify-content-between mt-4">
                                         <label htmlFor="remember" className="remember">
                                             <input type="checkbox" className="mr-2" id="remember"/>
@@ -140,7 +139,6 @@ function Members(props) {
                             {/*Login Work End*/}
 
                             {/*Register Work Start*/}
-                            {errorMessage && <div>{errorMessage}</div>}
                             <div className="loginForm">
                                 <h2>REGISTER</h2>
                                 <form onSubmit={handleSignup}>
@@ -180,6 +178,7 @@ function Members(props) {
                                                className="form-control mb-4" value={password}
                                                onChange={(e) => setPassword(e.target.value)}/>*/}
                                     <button className="btn themeBtn green w-100" type="submit">Register</button>
+                                    {errorMessage && <div className="error">{errorMessage}</div>}
                                 </form>
                                 {/*<form action="">
                                     <label htmlFor="">First Name
