@@ -19,6 +19,7 @@ import { DonationsModule } from './donations/donations.module';
 import { GroupsModule } from './groups/groups.module';
 import { MessagesModule } from './messages/messages.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { GroupRequestsModule } from './group-requests/group-requests.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { NotificationsModule } from './notifications/notifications.module';
       GroupsModule,
       MessagesModule,
       NotificationsModule,
+      GroupRequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
