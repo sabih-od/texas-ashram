@@ -17,13 +17,13 @@ export class PrayerRequest {
     @Column('varchar')
     contact: string;
 
-    @Column('varchar')
+    @Column({type: 'varchar', nullable: true})
     start_date: string;
 
-    @Column('varchar')
+    @Column({type: 'varchar', nullable: true})
     end_date: string;
 
-    @Column('varchar')
+    @Column({type: 'varchar', nullable: true})
     time: string;
 
     @Column('text')

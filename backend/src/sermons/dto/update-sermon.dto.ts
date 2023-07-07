@@ -20,5 +20,8 @@ export class UpdateSermonDto extends PartialType(CreateSermonDto) {
     @ApiProperty({ example: 'This is the description for sermons' })
     description: string;
 
+    @ApiProperty({ example: 'hvsGsu4' })
+    youtube_video_id: string;
+
     created_at: string;
 }

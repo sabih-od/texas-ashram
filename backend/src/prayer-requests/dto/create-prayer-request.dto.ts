@@ -17,15 +17,12 @@ export class CreatePrayerRequestDto {
     @ApiProperty({ example: '1234567890' })
     contact: string;
 
-    @IsNotEmpty()
     @ApiProperty({ example: '01-01-2023' })
     start_date: string;
 
-    @IsNotEmpty()
     @ApiProperty({ example: '01-01-2023' })
     end_date: string;
 
-    @IsNotEmpty()
     @ApiProperty({ example: '22:15' })
     time: string;
 

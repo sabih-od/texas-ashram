@@ -20,6 +20,9 @@ export class Sermon {
     @Column({type: 'text', nullable: true})
     description: string;
 
+    @Column({type: 'text', nullable: true})
+    youtube_video_id: string;
+
     @Column({ type: 'text', nullable: true })
     created_at: string;
 }
