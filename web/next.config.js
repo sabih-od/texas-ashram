@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    output: 'export',
+    // output: 'export',
     // Enable CSS modules for CSS file imports
     cssModules: true,
     images: {
