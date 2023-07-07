@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
-import event1 from "../images/event1.png";
-import event2 from "../images/event2.png";
-import event3 from "../images/event3.png";
 import {get} from "../services/eventService";
 import {format, parse} from "date-fns";
 

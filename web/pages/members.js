@@ -1,4 +1,3 @@
-import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParam} from "../services/global";
 import {useRouter} from 'next/router';
 import React, {useState, useEffect, useCallback} from 'react';
 import Layout from "../components/Layout";
