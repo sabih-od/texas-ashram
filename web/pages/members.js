@@ -179,39 +179,6 @@ function Members(props) {
                                     <button className="btn themeBtn green w-100" type="submit">Register</button>
                                     {errorMessage && <div className="error">{errorMessage}</div>}
                                 </form>
-                                {/*<form action="">
-                                    <label htmlFor="">First Name
-                                        <span className="text-danger">*</span>
-                                    </label>
-                                    <br/>
-                                    <input type="text" name="first_name" className="form-control"/>
-                                    <br/>
-                                    <label htmlFor="">Last Name
-                                        <span className="text-danger">*</span>
-                                    </label>
-                                    <br/>
-                                    <input type="text" name="last_name" className="form-control"/>
-                                    <br/>
-                                    <label htmlFor="">Username or email address
-                                        <span className="text-danger">*</span>
-                                    </label>
-                                    <br/>
-                                    <input type="email" name="user_email" className="form-control"/>
-                                    <br/>
-                                    <label htmlFor="">Phone Number <span className="text-danger">*</span></label>
-                                    <br/>
-                                    <input type="number" name="phone" className="form-control"/>
-                                    <br/>
-                                    <label htmlFor="">Password <span className="text-danger">*</span></label>
-                                    <br/>
-                                    <input type="password" name="password" className="form-control mb-4"/>
-                                    <label htmlFor="">Confirm Password <span className="text-danger">*</span></label>
-                                    <br/>
-                                    <input type="password" name="password_confirmation" className="form-control mb-4"/>
-
-                                    <button className="btn themeBtn green w-100">Login</button>
-                                </form>*/}
-
                             </div>
                             {/*Register Work End*/}
                         </div>

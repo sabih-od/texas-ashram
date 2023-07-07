@@ -26,6 +26,7 @@ async function bootstrap() {
         .addTag('Contacts')
         .addTag('Events')
         .addTag('Groups')
+        .addTag('Group Requests')
         .addTag('Messages')
         .addTag('Notifications')
         .addTag('Posts')

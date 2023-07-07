@@ -35,7 +35,7 @@ export class MessagesService {
             skip: (page - 1) * limit,
             take: limit,
             order: {
-                created_at: 'ASC'
+                created_at: 'DESC'
             },
             ...query_object
         });
@@ -53,6 +53,10 @@ export class MessagesService {
                 if (user.id) {
                     delete user.password;
                     delete user.otp;
+                    delete user.email;
+                    delete user.phone;
+                    delete user.role_id;
+                    delete user.created_at;
                 }
 
                 return { ...message, user };
