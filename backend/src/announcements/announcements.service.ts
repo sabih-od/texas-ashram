@@ -68,7 +68,7 @@ export class AnnouncementsService {
               return announcement;
           }
 
-          await this.announcementRepository.update(announcement, updateAnnouncementDto);
+          await this.announcementRepository.update(announcement.id, updateAnnouncementDto);
 
           return await this.findOne(id);
       } catch (error) {
@@ -87,6 +87,6 @@ export class AnnouncementsService {
           return announcement;
       }
 
-      return await this.announcementRepository.delete(announcement);
+      return await this.announcementRepository.delete(announcement.id);
   }
 }
