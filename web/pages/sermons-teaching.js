@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
-import video from "../images/video1.png";
 import {get} from "../services/sermonService";
-import {format, parse} from "date-fns";
 
 function SermonsTeaching(props) {
 

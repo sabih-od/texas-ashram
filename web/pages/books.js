@@ -2,9 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Link from "next/link";
 import Image from "next/image";
-import book1 from "../images/books/book1.png";
-import book2 from "../images/books/book2.png";
-import book3 from "../images/books/book3.png";
 import { get } from "../services/bookServices";
 
 function Books(props) {
@@ -54,13 +51,23 @@ function Books(props) {
                                 <div className="col-md-4" key={book.id}>
                                     <div className="card">
                                         <figure>
-                                            <Image
-                                                src={book.image}
+                                            {book.image ? (
+                                                <Image
+                                                    src={book.image}
+                                                    className="img-fluid"
+                                                    alt={book.title}
+                                                    width={300}
+                                                    height={400}
+                                                />
+                                            ) : (
+                                                <Image
+                                                src="../images/books/book1.png"
                                                 className="img-fluid"
-                                                alt={book.title}
+                                                alt="book 1"
                                                 width={300}
                                                 height={400}
-                                            />
+                                                />
+                                            )}
                                         </figure>
                                         <h4>{book.title}</h4>
                                         <a href={book.file} target="_blank" className="themeBtn grey">

@@ -5,7 +5,7 @@ import React, {useEffect} from "react";
 import dynamic from "next/dynamic";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Middleware from "./middleware";
+import Middleware from "../middleware/middleware";
 import Modal from 'react-modal';
 
 // Request Prayer Work For Error Handling

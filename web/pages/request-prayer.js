@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import {get} from "../services/prayerRequestService";
-import {apiUrl, getToken, urlWithParam} from "../services/global";
-import {useRouter} from 'next/router';
+import {apiUrl, getToken} from "../services/global";
 import Modal from 'react-modal';
-import {format, parse} from 'date-fns';
+import {format} from 'date-fns';
 
 function RequestPrayer(props) {
 
