@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@nestjs/common';
-import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
+import {CreateMessageDto} from './dto/create-message.dto';
+import {UpdateMessageDto} from './dto/update-message.dto';
 import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
 import {Message} from "./entities/message.entity";
 import {User} from "../users/entities/user.entity";
@@ -75,11 +75,36 @@ export class MessagesService {
 
     async findOne(id: number): Promise<any> {
         try {
-            return await this.messageRepository.findOneOrFail({
+            let message = await this.messageRepository.findOneOrFail({
                 where: {
                     id: id
                 }
             });
+
+            let user = await this.userRepository.findOne({
+                where: {
+                    id: message.user_id
+                }
+            });
+
+            delete message.user_id;
+            if (user.id) {
+                delete user.password;
+                delete user.otp;
+                delete user.email;
+                delete user.phone;
+                delete user.role_id;
+                delete user.created_at;
+            }
+
+            let new_message = {
+                user: user
+            };
+
+            return {
+                ...message,
+                ...new_message
+            };
         } catch (error) {
             if (error instanceof EntityNotFoundError) {
                 return {

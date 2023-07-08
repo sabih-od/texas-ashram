@@ -2,10 +2,27 @@ import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {ValidationPipe} from '@nestjs/common';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
-import * as express from 'express';
 import * as path from 'path';
 import {config} from 'dotenv';
 import {join} from 'path';
+
+//socker.io deps
+import * as express from 'express';
+const app = express();
+const http = require('http');
+const socket_io_server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(socket_io_server);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+});
+
+socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
+    console.log('listening on *:' + process.env.SOCKET_IO_PORT);
+});
+
+export const socketIoServer = socket_io_server;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true });

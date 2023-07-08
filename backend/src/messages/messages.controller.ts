@@ -6,6 +6,7 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {GroupsService} from "../groups/groups.service";
 import {UpdateGroupDto} from "../groups/dto/update-group.dto";
+import {socketIoServer} from "../main";
 
 @ApiTags('Messages')
 @ApiBearerAuth()
@@ -34,6 +35,11 @@ export class MessagesController {
       await this.groupService.update(group.id, updateGroupDto);
 
       let res = await this.messagesService.create(createMessageDto);
+
+      //emit notification
+      socketIoServer.emit('new-message-' + createMessageDto.group_id, {
+          ...res
+      });
 
       return {
           success: !res.error,
