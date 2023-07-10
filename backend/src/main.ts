@@ -6,11 +6,11 @@ import * as path from 'path';
 import {config} from 'dotenv';
 import {join} from 'path';
 
-//socker.io deps
+//socket.io deps
 import * as express from 'express';
-const app = express();
+const socket_app = express();
 const http = require('http');
-const socket_io_server = http.createServer(app);
+const socket_io_server = http.createServer(socket_app);
 const { Server } = require("socket.io");
 const io = new Server(socket_io_server);
 
