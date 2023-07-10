@@ -41,6 +41,11 @@ export class MessagesController {
           ...res
       });
 
+      //emit for group (for app dev)
+      socketIoServer.emit('group-message', {
+          ...res
+      });
+
       return {
           success: !res.error,
           message: res.error ? res.error : 'Message created successfully!',
