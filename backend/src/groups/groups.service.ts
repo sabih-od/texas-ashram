@@ -70,7 +70,7 @@ export class GroupsService {
                 return group;
             }
 
-            await this.groupRepository.update(group, updateGroupDto);
+            await this.groupRepository.update(id, updateGroupDto);
 
             return await this.findOne(id);
         } catch (error) {
@@ -89,6 +89,6 @@ export class GroupsService {
             return group;
         }
 
-        return await this.groupRepository.delete(group);
+        return await this.groupRepository.delete(id);
     }
 }

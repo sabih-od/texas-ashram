@@ -5,6 +5,8 @@ import EventIcon from '@mui/icons-material/EventOutlined';
 import PostIcon from '@mui/icons-material/DynamicFeedOutlined';
 import {BullhornOutline} from 'mdi-material-ui';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
+import MarkAsUnreadOutlinedIcon from '@mui/icons-material/MarkAsUnreadOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 
 
 const navigation = () => {
@@ -68,7 +70,7 @@ const navigation = () => {
 
         {
             title: 'Speaker',
-            icon: PostIcon,
+            icon: PeopleOutlinedIcon,
             path: '/speakers',
         },
 
@@ -136,6 +138,16 @@ const navigation = () => {
       title: 'Staff Members',
       icon: PeopleOutlinedIcon,
       path: '/staff-members',
+    },
+    {
+      title: 'Groups',
+      icon: GroupsOutlinedIcon,
+      path: '/groups',
+    },
+    {
+      title: 'Group Requests',
+      icon: MarkAsUnreadOutlinedIcon,
+      path: '/group-requests',
     },
 
 
