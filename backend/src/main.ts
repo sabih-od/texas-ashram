@@ -15,7 +15,7 @@ const { Server } = require("socket.io");
 const io = new Server(socket_io_server);
 
 io.on('connection', (socket) => {
-    console.log('socket', socket);
+    // console.log('socket', socket);
     console.log('a user connected');
 });
 
@@ -24,6 +24,7 @@ socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
 });
 
 export const socketIoServer = socket_io_server;
+export const socketIoServer_io = io;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true });
