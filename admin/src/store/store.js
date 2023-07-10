@@ -10,7 +10,6 @@ import {announcementsSlice} from "./slices/announcementsSlice";
 import {postsSlice} from "./slices/postsSlice"
 import {postSlice} from "./slices/postSlice"
 import {announcementSlice} from "./slices/announcementSlice";
-// import {postsSlice} from "./slices/postsSlice"
 import {staffMembersSlice} from "./slices/staffMembersSlice"
 import {staffMemberSlice} from "./slices/staffMemberSlice"
 import {eventSlice} from "./slices/EventSlice"
@@ -19,9 +18,11 @@ import {sermonsSlice} from "./slices/sermonsSlice"
 import {sermonSlice} from "./slices/sermonSlice"
 import {usersSlice} from "./slices/usersSlice";
 import {userSlice} from "./slices/userSlice";
-
+import {groupRequestsSlice} from "./slices/groupRequestsSlice";
 import {speakersSlice} from "./slices/speakersSlice";
 import {speakerSlice} from "./slices/speakerSlice";
+import {groupsSlice} from "./slices/groupsSlice";
+import {groupSlice} from "./slices/groupSlice";
 
 const makeStore = () =>
     configureStore({
@@ -46,6 +47,9 @@ const makeStore = () =>
             [userSlice.name]: userSlice.reducer,
             [speakersSlice.name]: speakersSlice.reducer,
             [speakerSlice.name]: speakerSlice.reducer,
+            [groupRequestsSlice.name]: groupRequestsSlice.reducer,
+            [groupsSlice.name]: groupsSlice.reducer,
+            [groupSlice.name]: groupSlice.reducer,
         },
         devTools: true,
     });
