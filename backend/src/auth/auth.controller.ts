@@ -27,7 +27,7 @@ import {UsersService} from "../users/users.service";
 import {UpdateUserDto} from "../users/dto/update-user.dto";
 import {ResetPasswordDto} from "./dto/reset-password.dto";
 import { firebaseAdmin } from '../firebase/firebase-admin';
-import {socketIoServer, socketIoServer_io} from "../main";
+import {socketIoServer} from "../main";
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -211,7 +211,7 @@ export class AuthController {
     @Get('socketio/test')
     async socketioTest() {
         //emit notification
-        socketIoServer_io.emit('test', {
+        socketIoServer.emit('test', {
             message: 'Test socketio notification'
         });
 

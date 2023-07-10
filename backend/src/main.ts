@@ -23,8 +23,7 @@ socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
     console.log('listening on *:' + process.env.SOCKET_IO_PORT);
 });
 
-export const socketIoServer = socket_io_server;
-export const socketIoServer_io = io;
+export const socketIoServer = io;
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true });
