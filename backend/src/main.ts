@@ -15,6 +15,7 @@ const { Server } = require("socket.io");
 const io = new Server(socket_io_server);
 
 io.on('connection', (socket) => {
+    console.log('socket', socket);
     console.log('a user connected');
 });
 
