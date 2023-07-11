@@ -32,7 +32,8 @@ export class AnnouncementsController {
       await firebaseService.sendNotification({
           data: {
               topic: 'announcement',
-              notification: notification
+              notification: notification,
+              announcement: res
           }
       });
 

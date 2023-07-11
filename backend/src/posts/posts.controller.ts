@@ -68,7 +68,8 @@ export class PostsController {
       await firebaseService.sendNotification({
           data: {
               topic: 'post',
-              notification: notification
+              notification: notification,
+              post: res
           }
       });
 

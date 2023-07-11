@@ -69,7 +69,8 @@ export class EventsController {
         await firebaseService.sendNotification({
             data: {
                 topic: 'event',
-                notification: notification
+                notification: notification,
+                event: res
             }
         });
 

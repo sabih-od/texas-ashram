@@ -42,7 +42,8 @@ export class PrayerRequestsController {
       await firebaseService.sendNotification({
           data: {
               topic: 'prayer-request',
-              notification: notification
+              notification: notification,
+              prayerRequest: res
           }
       });
 

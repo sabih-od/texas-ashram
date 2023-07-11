@@ -115,7 +115,8 @@ export class SermonsController {
         await firebaseService.sendNotification({
             data: {
                 topic: 'sermon',
-                notification: notification
+                notification: notification,
+                sermon: res
             }
         });
 

@@ -114,7 +114,8 @@ export class BooksController {
             await firebaseService.sendNotification({
                 data: {
                     topic: 'book',
-                    notification: notification
+                    notification: notification,
+                    book: res
                 }
             });
 
