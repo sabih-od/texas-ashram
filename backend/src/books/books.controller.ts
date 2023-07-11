@@ -114,6 +114,10 @@ export class BooksController {
             //send notification
             let firebaseService = new FirebaseService();
             await firebaseService.sendNotification({
+                notification: {
+                    title: 'New Book Upload',
+                    body: createBookDto.title
+                },
                 data: {
                     topic: 'book',
                     notification: notification,

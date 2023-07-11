@@ -68,6 +68,10 @@ export class PostsController {
       //send notification
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
+          notification: {
+              title: 'New Post',
+              body: createPostDto.title
+          },
           data: {
               topic: 'post',
               notification: notification,

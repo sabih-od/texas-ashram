@@ -115,6 +115,10 @@ export class SermonsController {
         //send notification
         let firebaseService = new FirebaseService();
         await firebaseService.sendNotification({
+            notification: {
+                title: 'New Sermon',
+                body: createSermonDto.title
+            },
             data: {
                 topic: 'sermon',
                 notification: notification,

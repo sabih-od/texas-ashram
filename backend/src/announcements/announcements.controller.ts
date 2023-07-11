@@ -32,6 +32,10 @@ export class AnnouncementsController {
       //send notification
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
+          notification: {
+              title: 'New Announcement',
+              body: createAnnouncementDto.title
+          },
           data: {
               topic: 'announcement',
               notification: notification,
