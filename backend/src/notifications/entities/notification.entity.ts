@@ -21,7 +21,7 @@ export class Notification {
     topic: string;
 
     @Column({type: 'int', nullable: true})
-    topic_id: string;
+    topic_id: number;
 
     @Column({type: 'varchar', nullable: true})
     created_at: string;
