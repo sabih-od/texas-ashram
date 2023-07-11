@@ -6,6 +6,7 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
+import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Announcements')
 @ApiBearerAuth()
@@ -24,7 +25,16 @@ export class AnnouncementsController {
       createNotificationDto.title = 'New Announcement';
       createNotificationDto.content = createAnnouncementDto.title;
       createNotificationDto.created_at = Date.now().toString();
-      await this.notificationsService.create(createNotificationDto);
+      let notification = await this.notificationsService.create(createNotificationDto);
+
+      //send notification
+      let firebaseService = new FirebaseService();
+      await firebaseService.sendNotification({
+          data: {
+              topic: 'announcement',
+              notification: notification
+          }
+      });
 
       return {
           success: !res.error,

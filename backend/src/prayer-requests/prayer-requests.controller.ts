@@ -8,6 +8,7 @@ import {AuthService} from "../auth/auth.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
+import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Prayer Requests')
 @ApiBearerAuth()
@@ -34,7 +35,16 @@ export class PrayerRequestsController {
       createNotificationDto.content = createPrayerRequestDto.description;
       createNotificationDto.icon = user.profile_picture ?? process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
       createNotificationDto.created_at = Date.now().toString();
-      await this.notificationsService.create(createNotificationDto);
+      let notification = await this.notificationsService.create(createNotificationDto);
+
+      //send notification
+      let firebaseService = new FirebaseService();
+      await firebaseService.sendNotification({
+          data: {
+              topic: 'prayer-request',
+              notification: notification
+          }
+      });
 
       return {
           success: !res.error,

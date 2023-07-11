@@ -33,6 +33,7 @@ import {map} from "rxjs/operators";
 import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
+import {FirebaseService} from "../firebase/firebase.service";
 const MAX_FILE_SIZE = 100000000;
 
 @Injectable()
@@ -107,7 +108,16 @@ export class SermonsController {
         createNotificationDto.title = 'New Sermon';
         createNotificationDto.content = createSermonDto.title;
         createNotificationDto.created_at = Date.now().toString();
-        await this.notificationsService.create(createNotificationDto);
+        let notification = await this.notificationsService.create(createNotificationDto);
+
+        //send notification
+        let firebaseService = new FirebaseService();
+        await firebaseService.sendNotification({
+            data: {
+                topic: 'sermon',
+                notification: notification
+            }
+        });
 
         return {
             success: !res.error,
