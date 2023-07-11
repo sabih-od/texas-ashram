@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query, Req} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
@@ -7,25 +7,38 @@ import {AuthGuard} from "../auth/auth.guard";
 import {GroupsService} from "../groups/groups.service";
 import {UpdateGroupDto} from "../groups/dto/update-group.dto";
 import {socketIoServer} from "../main";
+import {UsersService} from "../users/users.service";
 
 @ApiTags('Messages')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('messages')
 export class MessagesController {
-  constructor(private readonly messagesService: MessagesService, private readonly groupService: GroupsService) {}
+  constructor(
+      private readonly messagesService: MessagesService,
+      private readonly groupService: GroupsService,
+      private readonly usersService: UsersService
+  ) {}
 
   @Post()
-  async create(@Body() createMessageDto: CreateMessageDto) {
-      createMessageDto.created_at = Date.now().toString();
-
+  async create(@Req() req, @Body() createMessageDto: CreateMessageDto) {
       let group = await this.groupService.findOne(createMessageDto.group_id);
       if (group.error) {
           return {
               success: false,
               message: 'Group not found',
               data: []
-          }
+          };
+      }
+
+      const members_array = JSON.parse(group.members);
+      let user = await this.usersService.findOneByEmail(req.user.email);
+      if (!members_array || !members_array.includes(user.id)) {
+          return {
+              success: false,
+              message: 'User not in group',
+              data: []
+          };
       }
 
       let updateGroupDto = new UpdateGroupDto();
@@ -34,6 +47,7 @@ export class MessagesController {
 
       await this.groupService.update(group.id, updateGroupDto);
 
+      createMessageDto.created_at = Date.now().toString();
       let res = await this.messagesService.create(createMessageDto);
 
       //emit notification
