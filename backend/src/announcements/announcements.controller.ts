@@ -24,6 +24,8 @@ export class AnnouncementsController {
       let createNotificationDto = new CreateNotificationDto();
       createNotificationDto.title = 'New Announcement';
       createNotificationDto.content = createAnnouncementDto.title;
+      createNotificationDto.topic = 'announcement';
+      createNotificationDto.topic_id = res.id;
       createNotificationDto.created_at = Date.now().toString();
       let notification = await this.notificationsService.create(createNotificationDto);
 

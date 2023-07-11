@@ -17,6 +17,12 @@ export class Notification {
     @Column({type: 'text', nullable: true})
     content: string;
 
+    @Column({type: 'text', nullable: true})
+    topic: string;
+
+    @Column({type: 'int', nullable: true})
+    topic_id: string;
+
     @Column({type: 'varchar', nullable: true})
     created_at: string;
 }

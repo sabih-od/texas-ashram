@@ -107,6 +107,8 @@ export class SermonsController {
         let createNotificationDto = new CreateNotificationDto();
         createNotificationDto.title = 'New Sermon';
         createNotificationDto.content = createSermonDto.title;
+        createNotificationDto.topic = 'sermon';
+        createNotificationDto.topic_id = res.id;
         createNotificationDto.created_at = Date.now().toString();
         let notification = await this.notificationsService.create(createNotificationDto);
 

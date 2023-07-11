@@ -33,6 +33,8 @@ export class PrayerRequestsController {
       let createNotificationDto = new CreateNotificationDto();
       createNotificationDto.title = 'New Prayer Request for ' + createPrayerRequestDto.name;
       createNotificationDto.content = createPrayerRequestDto.description;
+      createNotificationDto.topic = 'prayer-request';
+      createNotificationDto.topic_id = res.id;
       createNotificationDto.icon = user.profile_picture ?? process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
       createNotificationDto.created_at = Date.now().toString();
       let notification = await this.notificationsService.create(createNotificationDto);

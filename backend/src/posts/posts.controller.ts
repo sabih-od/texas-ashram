@@ -60,6 +60,8 @@ export class PostsController {
       let createNotificationDto = new CreateNotificationDto();
       createNotificationDto.title = 'New Post';
       createNotificationDto.content = createPostDto.title;
+      createNotificationDto.topic = 'post';
+      createNotificationDto.topic_id = res.id;
       createNotificationDto.created_at = Date.now().toString();
       let notification = await this.notificationsService.create(createNotificationDto);
 

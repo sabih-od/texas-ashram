@@ -15,5 +15,9 @@ export class CreateNotificationDto {
     @ApiProperty({ example: 'New event' })
     content: string;
 
+    topic: string;
+
+    topic_id: number;
+
     created_at: string;
 }

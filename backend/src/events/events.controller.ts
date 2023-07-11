@@ -61,6 +61,8 @@ export class EventsController {
         let createNotificationDto = new CreateNotificationDto();
         createNotificationDto.title = 'New Event';
         createNotificationDto.content = createEventDto.title;
+        createNotificationDto.topic = 'event';
+        createNotificationDto.topic_id = res.id;
         createNotificationDto.created_at = Date.now().toString();
         let notification = await this.notificationsService.create(createNotificationDto);
 

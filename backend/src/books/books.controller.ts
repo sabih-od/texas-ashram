@@ -106,6 +106,8 @@ export class BooksController {
             let createNotificationDto = new CreateNotificationDto();
             createNotificationDto.title = 'New Book Upload';
             createNotificationDto.content = createBookDto.title;
+            createNotificationDto.topic = 'book';
+            createNotificationDto.topic_id = res.id;
             createNotificationDto.created_at = Date.now().toString();
             let notification = await this.notificationsService.create(createNotificationDto);
 
