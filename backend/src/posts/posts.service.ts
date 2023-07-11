@@ -86,6 +86,6 @@ export class PostsService {
           return post;
       }
 
-      return await this.postRepository.delete(post);
+      return await this.postRepository.delete(post.id);
   }
 }

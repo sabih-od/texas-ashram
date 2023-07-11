@@ -87,6 +87,6 @@ export class NotificationsService {
             return notification;
         }
 
-        return await this.notificationRepository.delete(notification);
+        return await this.notificationRepository.delete(notification.id);
     }
 }

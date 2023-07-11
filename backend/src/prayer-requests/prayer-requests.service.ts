@@ -103,6 +103,6 @@ export class PrayerRequestsService {
           return prayer_request;
       }
 
-      return await this.prayerRequestRepository.delete(prayer_request);
+      return await this.prayerRequestRepository.delete(prayer_request.id);
   }
 }

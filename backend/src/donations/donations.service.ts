@@ -87,6 +87,6 @@ export class DonationsService {
             return donation;
         }
 
-        return await this.donationRepository.delete(donation);
+        return await this.donationRepository.delete(donation.id);
     }
 }

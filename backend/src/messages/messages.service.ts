@@ -141,6 +141,6 @@ export class MessagesService {
             return message;
         }
 
-        return await this.messageRepository.delete(message);
+        return await this.messageRepository.delete(message.id);
     }
 }

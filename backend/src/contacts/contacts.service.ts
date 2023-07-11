@@ -87,6 +87,6 @@ export class ContactsService {
             return contact;
         }
 
-        return await this.contactRepository.delete(contact);
+        return await this.contactRepository.delete(contact.id);
     }
 }
