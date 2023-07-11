@@ -92,6 +92,6 @@ export class BooksService {
             return book;
         }
 
-        return await this.bookRepository.delete(book);
+        return await this.bookRepository.delete(book.id);
     }
 }
