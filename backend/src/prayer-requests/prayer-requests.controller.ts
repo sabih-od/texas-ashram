@@ -42,6 +42,10 @@ export class PrayerRequestsController {
       //send notification
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
+          notification: {
+              title: 'New Prayer Request for ' + createPrayerRequestDto.name,
+              body: createPrayerRequestDto.description
+          },
           data: {
               topic: 'prayer-request',
               notification: notification,
