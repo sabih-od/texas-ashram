@@ -87,6 +87,6 @@ export class SpeakersService {
             return speaker;
         }
 
-        return await this.speakerRepository.delete(speaker);
+        return await this.speakerRepository.delete(speaker.id);
     }
 }

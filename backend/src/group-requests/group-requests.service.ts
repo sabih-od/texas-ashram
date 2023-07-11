@@ -90,6 +90,6 @@ export class GroupRequestsService {
             return group_request;
         }
 
-        return await this.groupRequestRepository.delete(group_request);
+        return await this.groupRequestRepository.delete(group_request.id);
     }
 }

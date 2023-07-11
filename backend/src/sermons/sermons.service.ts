@@ -87,6 +87,6 @@ export class SermonsService {
             return sermon;
         }
 
-        return await this.sermonRepository.delete(sermon);
+        return await this.sermonRepository.delete(sermon.id);
     }
 }

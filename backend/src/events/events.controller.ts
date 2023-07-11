@@ -23,7 +23,6 @@ import {
 import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
-import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Events')
 @ApiBearerAuth()
@@ -61,20 +60,8 @@ export class EventsController {
         let createNotificationDto = new CreateNotificationDto();
         createNotificationDto.title = 'New Event';
         createNotificationDto.content = createEventDto.title;
-        createNotificationDto.topic = 'event';
-        createNotificationDto.topic_id = res.id;
         createNotificationDto.created_at = Date.now().toString();
-        let notification = await this.notificationsService.create(createNotificationDto);
-
-        //send notification
-        let firebaseService = new FirebaseService();
-        await firebaseService.sendNotification({
-            data: {
-                topic: 'event',
-                notification: notification,
-                event: res
-            }
-        });
+        await this.notificationsService.create(createNotificationDto);
 
         return {
             success: !res.error,

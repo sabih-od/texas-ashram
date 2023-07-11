@@ -87,6 +87,6 @@ export class StaffMembersService {
             return staff_member;
         }
 
-        return await this.staffMemberRepository.delete(staff_member);
+        return await this.staffMemberRepository.delete(staff_member.id);
     }
 }

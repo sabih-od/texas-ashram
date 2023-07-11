@@ -87,7 +87,7 @@ export class PagesService {
             return page;
         }
 
-        return await this.pageRepository.delete(page);
+        return await this.pageRepository.delete(page.id);
     }
 
     async getByName(name: string): Promise<any> {
