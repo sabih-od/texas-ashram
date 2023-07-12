@@ -36,11 +36,6 @@ export class AnnouncementsController {
               title: 'New Announcement',
               body: createAnnouncementDto.title
           },
-          data: {
-              topic: 'announcement',
-              notification: notification,
-              announcement: res
-          }
       });
 
       return {
