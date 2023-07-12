@@ -34,10 +34,11 @@ export class AnnouncementsController {
       await firebaseService.sendNotification({
           notification: {
               title: 'New Announcement',
-              body: createAnnouncementDto.title,
-              data: {
-                  inner_topic: 'announcement',
-              }
+              body: createAnnouncementDto.title
+          },
+          data: {
+              asd: 'asd',
+              asd2: 'asd2'
           }
       });
 
