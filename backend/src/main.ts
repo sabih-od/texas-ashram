@@ -5,6 +5,7 @@ import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import * as path from 'path';
 import {config} from 'dotenv';
 import {join} from 'path';
+import * as fs from 'fs';
 
 //socket.io deps
 import * as express from 'express';
@@ -25,8 +26,15 @@ socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
 
 export const socketIoServer = io;
 
+
+//https config
+const httpsOptions = {
+    key: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-key.txt').replace('dist', 'src')),
+    cert: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-cert.txt').replace('dist', 'src')),
+};
+
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule, { cors: true });
+    const app = await NestFactory.create(AppModule, { cors: true, ...httpsOptions });
     app.useGlobalPipes(new ValidationPipe());
     app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
     app.use('/images', express.static(path.join(__dirname, '..', 'images')));
