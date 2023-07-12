@@ -117,11 +117,6 @@ export class BooksController {
                 notification: {
                     title: 'New Book Upload',
                     body: createBookDto.title
-                },
-                data: {
-                    topic: 'book',
-                    notification: notification,
-                    book: res
                 }
             });
 

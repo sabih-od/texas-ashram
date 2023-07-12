@@ -35,10 +35,6 @@ export class AnnouncementsController {
           notification: {
               title: 'New Announcement',
               body: createAnnouncementDto.title
-          },
-          data: {
-              inner_topic: 'announcement',
-              inner_topic_id: res.id,
           }
       });
 
