@@ -34,7 +34,7 @@ const httpsOptions = {
 };
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule, { cors: true, ...httpsOptions });
+    const app = await NestFactory.create(AppModule, { cors: true, httpsOptions });
     app.useGlobalPipes(new ValidationPipe());
     app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
     app.use('/images', express.static(path.join(__dirname, '..', 'images')));
