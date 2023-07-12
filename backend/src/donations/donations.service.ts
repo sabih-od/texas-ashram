@@ -68,7 +68,7 @@ export class DonationsService {
                 return donation;
             }
 
-            await this.donationRepository.update(donation, updateDonationDto);
+            await this.donationRepository.update(donation.id, updateDonationDto);
 
             return await this.findOne(id);
         } catch (error) {

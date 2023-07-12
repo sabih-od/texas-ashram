@@ -71,7 +71,7 @@ export class GroupRequestsService {
                 return group_request;
             }
 
-            await this.groupRequestRepository.update(group_request, updateGroupRequestDto);
+            await this.groupRequestRepository.update(group_request.id, updateGroupRequestDto);
 
             return await this.findOne(id);
         } catch (error) {

@@ -68,7 +68,7 @@ export class NotificationsService {
                 return notification;
             }
 
-            await this.notificationRepository.update(notification, updateNotificationDto);
+            await this.notificationRepository.update(notification.id, updateNotificationDto);
 
             return await this.findOne(id);
         } catch (error) {

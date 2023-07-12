@@ -68,7 +68,7 @@ export class ContactsService {
                 return contact;
             }
 
-            await this.contactRepository.update(contact, updateContactDto);
+            await this.contactRepository.update(contact.id, updateContactDto);
 
             return await this.findOne(id);
         } catch (error) {

@@ -84,7 +84,7 @@ export class PrayerRequestsService {
               return prayer_request;
           }
 
-          await this.prayerRequestRepository.update(prayer_request, updatePrayerRequestDto);
+          await this.prayerRequestRepository.update(prayer_request.id, updatePrayerRequestDto);
 
           return await this.findOne(id);
       } catch (error) {

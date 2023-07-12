@@ -68,7 +68,7 @@ export class PagesService {
                 return page;
             }
 
-            await this.pageRepository.update(page, updatePageDto);
+            await this.pageRepository.update(page.id, updatePageDto);
 
             return await this.findOne(id);
         } catch (error) {
