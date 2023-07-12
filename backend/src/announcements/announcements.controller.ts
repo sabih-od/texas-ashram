@@ -35,7 +35,7 @@ export class AnnouncementsController {
           notification: {
               title: 'New Announcement',
               body: createAnnouncementDto.title
-          },
+          }
       });
 
       return {

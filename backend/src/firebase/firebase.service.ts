@@ -9,7 +9,7 @@ export class FirebaseService {
         try {
             const notification = {
                 ...body,
-                topic: 'newFirebaseNotification', // The topic to which the notification will be sent
+                topic: 'test', // The topic to which the notification will be sent
             };
 
             let response = await firebaseAdmin.messaging().send(notification);
