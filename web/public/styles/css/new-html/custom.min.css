@@ -557,3 +557,11 @@ footer {
 .reviewSlider .swiper-wrapper {
     padding: 5rem 0;
 }
+
+.funMain .swiper-wrapper {
+    padding: 0 0 5rem;
+}
+
+.funMain .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: var(--theme-color)
+}

@@ -16,6 +16,8 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 export default function Home() {
     return (
@@ -93,8 +95,17 @@ export default function Home() {
                         <div className="col-12">
                             <Swiper
                                 slidesPerView={3}
-                                autoPlay
-                                loop
+                                spaceBetween={30}
+                                centeredSlides={true}
+                                autoplay={{
+                                    delay: 2500,
+                                    disableOnInteraction: false,
+                                }}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                modules={[Autoplay, Pagination]}
+                                loop={true}
                             >
                                 <SwiperSlide>
                                     <div className="familyBox" data-aos='fade-right' data-aos-delay="150">
@@ -143,7 +154,8 @@ export default function Home() {
                                 <h2 className="heading" data-aos='fade-up'>We Serve The Entire Family</h2>
                                 <p data-aos='fade-up' data-aos-delay="150">At the Texas Christian Ashram, there is a
                                     group for everyone in your family!</p>
-                                <Link data-aos='fade-up' data-aos-delay="150" href="/prayer-request-form" className="newthemeBtn">2024
+                                <Link data-aos='fade-up' data-aos-delay="150" href="/prayer-request-form"
+                                      className="newthemeBtn">2024
                                     Schedule</Link>
                             </div>
                         </div>
@@ -171,96 +183,15 @@ export default function Home() {
                         <div className="col-lg-5 col-md-7">
                             <Swiper className='reviewSlider'
                                     slidesPerView={1}
-                                    autoPlay
+                                    autoplay={{
+                                        delay: 2500,
+                                        disableOnInteraction: false,
+                                    }}
+                                    pagination={{
+                                        clickable: true,
+                                    }}
                                     loop
                             >
-                                <SwiperSlide>
-                                    <div className="reviewContent">
-                                        <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
-                                        <p>As a parent, it can be challenging to find a spiritual retreat that
-                                            accommodates the
-                                            needs of
-                                            the entire family. The Texas Christian Ashram was the perfect solution
-                                            for us. Our
-                                            children
-                                            had a blast participating in age-appropriate activities, while my spouse
-                                            and I were
-                                            able to
-                                            deepen our faith through the adult programs. We left feeling closer to
-                                            each other
-                                            and closer
-                                            to God.</p>
-                                        <span>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                </span>
-                                        <div className="user">
-                                            <h4>Emma Rodriguez</h4>
-                                            <Image src={user1} className="img-fluid" alt={user1}/>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="reviewContent">
-                                        <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
-                                        <p>As a parent, it can be challenging to find a spiritual retreat that
-                                            accommodates the
-                                            needs of
-                                            the entire family. The Texas Christian Ashram was the perfect solution
-                                            for us. Our
-                                            children
-                                            had a blast participating in age-appropriate activities, while my spouse
-                                            and I were
-                                            able to
-                                            deepen our faith through the adult programs. We left feeling closer to
-                                            each other
-                                            and closer
-                                            to God.</p>
-                                        <span>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                </span>
-                                        <div className="user">
-                                            <h4>Emma Rodriguez</h4>
-                                            <Image src={user1} className="img-fluid" alt={user1}/>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="reviewContent">
-                                        <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
-                                        <p>As a parent, it can be challenging to find a spiritual retreat that
-                                            accommodates the
-                                            needs of
-                                            the entire family. The Texas Christian Ashram was the perfect solution
-                                            for us. Our
-                                            children
-                                            had a blast participating in age-appropriate activities, while my spouse
-                                            and I were
-                                            able to
-                                            deepen our faith through the adult programs. We left feeling closer to
-                                            each other
-                                            and closer
-                                            to God.</p>
-                                        <span>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                </span>
-                                        <div className="user">
-                                            <h4>Emma Rodriguez</h4>
-                                            <Image src={user1} className="img-fluid" alt={user1}/>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
                                 <SwiperSlide>
                                     <div className="reviewContent">
                                         <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
