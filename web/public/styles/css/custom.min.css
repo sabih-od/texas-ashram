@@ -308,7 +308,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    /*background-color: rgba(0, 0, 0, 0.5) !important;*/
 }
 
 .main-slider .caption {
@@ -1699,7 +1699,7 @@ button.logoutBtn {
     text-transform: uppercase;
     font-weight: 600 !important;
     display: inline-block;
-    padding: 1rem 0.75rem !important;
+    padding: 1rem 1.75rem !important;
     border-radius: 35px;
     line-height: normal;
     border: none;

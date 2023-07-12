@@ -1,47 +1,76 @@
 import React from 'react';
 import Image from "next/image";
-import logo from "../images/footerlogo.png";
+import Link from "next/link";
+import logo from "../images/new-html/footerlogo.png";
+import whatsAap from "../images/new-html/whatsap.png";
+import email from "../images/new-html/email.png";
+import loc from "../images/new-html/loc.png";
+import Cookie from "js-cookie";
 
 const Footer = () => {
+
+    // Show And Hide Work On Members Tab
+    const token = Cookie.get('token');
+
     return (
         <footer>
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-md-3">
-                        <a href="#" className="footerLogo">
-                            <Image src={logo} className="img-fluid" alt="img" width={300} height={200}/>
-                        </a>
-                        <p className="logotext">Come join us and experience the transformative power of community and
-                            faith, as we journey together toward a deeper relationship with Jesus Christ.</p>
-                    </div>
-                    <div className="col-md-3">
-                        <div className="quickList">
-                            <h2>Short Links</h2>
-                            <ul>
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/our-mission">Our Mission</a></li>
-                                <li><a href="/families">Families</a></li>
-                                <li><a href="/speakers">Speakers</a></li>
-                                <li><a href="/contact">Contact us</a></li>
-                                <li><a href="/testimonials">Testimonials</a></li>
-                            </ul>
-                        </div>
+                    <div className="col-md-4">
+                        <Link href="/" className="footerLogo">
+                            <Image src={logo} className="img-fluid" alt={logo}/>
+                        </Link>
                     </div>
                     <div className="col-md-4">
                         <div className="quickList">
-                            <h2>Contact Info</h2>
-                            <ul>
-                                <li><span>Scottsville Camp & Conference Center</span></li>
-                                <li><span>Email: <a
-                                    href="mailto:tcaregistrar@gmail.com">tcaregistrar@gmail.com</a></span></li>
-                                <li><span>Phone: <a href="tel:(123) 456 7890">(123) 456 7890</a></span></li>
-                            </ul>
+                            <h2>Quick Links</h2>
+                            <div className="d-flex">
+                                <ul>
+                                    <li><Link href="/">Home</Link></li>
+                                    <li><Link href="/our-mission">Our Mission</Link></li>
+                                    <li><Link href="/families">Families</Link></li>
+                                    <li><Link href="/speakers">Speakers</Link></li>
+                                    <li><Link href="/registration">Registration</Link></li>
+                                </ul>
+                                <ul>
+                                    {!token && (
+                                        <li className="">
+                                            <Link href="/members"
+                                                  className="nav-link"> Members </Link>
+                                        </li>
+                                    )}
+                                    <li><Link href="/contact">Contact</Link></li>
+                                    <li><Link href="/donate">Donation</Link></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="quickList">
+                            <h2>Contact Us</h2>
+                        </div>
+                        <div className="calFoter">
+                            <a href="tel:1234567890">
+                                <figure><Image src={whatsAap} className="img-fluid" alt={whatsAap}/></figure>
+                                <span>(123) 456
+                            7890</span>
+                            </a>
+                            <a href="mailto:tcaregistrar@gmail.com">
+                                <figure><Image src={email} className="img-fluid" alt={email}/></figure>
+                                <span>tcaregistrar@gmail.com</span>
+                            </a>
+                            <a>
+                                <figure><Image src={loc} className="img-fluid" alt={loc}/></figure>
+                                <span>Scottsville Camp & Conference Center</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="copyRight">
-                <p>Copyright © 2022 All Right Reserved</p>
+                <div className="row copyRight">
+                    <div className="col-md-12">
+                        <p>Copyright © 2023 Texas Christian Ashram. All Right Reserved</p>
+                    </div>
+                </div>
             </div>
         </footer>
     );
