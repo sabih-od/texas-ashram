@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "Texas Ashram Admin (3024)",
+            "script": "yarn run dev:static",
+            "instances": "1",
+            "autorestart": true,
+            "max_restarts": 100,
+            "time": true
+        }
+    ]
+}
