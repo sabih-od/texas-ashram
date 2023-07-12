@@ -1,7 +1,9 @@
+import {apiUrl, errorResponse, exceptionResponse, successResponse, getToken} from "../services/global";
 import React, { useState, useEffect } from 'react';
 import Layout from "../components/Layout";
 import donate from "../images/donate3.jpg";
 import Image from "next/image";
+import {loadStripe} from '@stripe/stripe-js';
 
 function Donate(props) {
 
@@ -44,6 +46,115 @@ function Donate(props) {
     useEffect(() => {
         showTab(0);
     }, []);
+
+    // Stripe Work
+    /*const stripePromise = loadStripe('pk_test_0rY5rGJ7GN1xEhCB40mAcWjg');
+    const handlePayment = async () => {
+        try {
+            const stripe = await stripePromise;
+            const formData = new FormData();
+            formData.append('amount', selectedAmount || parseFloat(customAmount));
+            const blobData = new Blob([JSON.stringify(Object.fromEntries(formData))], {type: 'application/json'});
+            console.log('blobData', blobData, formData);
+
+            const response = await fetch(`${apiUrl()}/donations`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                },
+                body: blobData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Payment request failed');
+            }
+
+            const session = await response.json();
+
+            const id = session?.data?.id;
+            const price = (selectedAmount || parseFloat(customAmount)) * 100;
+            const priceString = price.toFixed(0);
+
+            const result = stripe?.redirectToCheckout({
+                lineItems: [
+                    {
+                        price: priceString,
+                        quantity: 1,
+                    },
+                ],
+                sessionId: id,
+                mode: 'payment',
+                successUrl: window.location.href + 'success=true',
+                cancelUrl: window.location.href + '?success=false',
+            });
+            // const result = await stripe.redirectToCheckout({
+            //     lineItems:[{
+            //         price: priceString,
+            //         quantity: 1,
+            //     }],
+            //     sessionId: id,
+            //     mode: 'payment',
+            //     successUrl: `${window.location.origin}/?success=true`,
+            //     cancelUrl: `${window.location.origin}/?canceled=true`,
+            // });
+
+            if (result.error) {
+                throw new Error(result.error.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };*/
+    /*const handlePayment = async () => {
+        try {
+            const stripe = await stripePromise;
+            const amount = selectedAmount || parseFloat(customAmount);
+
+            // Create a Stripe Elements card element
+            const cardElement = stripe.elements().create('card');
+
+            // Mount the card element to the DOM or a container element
+
+            // Collect card details using Stripe Elements
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+            });
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            // Create PaymentIntent
+            const response = await fetch(`${apiUrl()}/donations`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                },
+                body: JSON.stringify({ amount }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Payment request failed');
+            }
+
+            const { clientSecret } = await response.json();
+
+            // Confirm PaymentIntent
+            const { error: confirmError } = await stripe.paymentMethod(clientSecret, {
+                payment_method: paymentMethod.id,
+            });
+
+            if (confirmError) {
+                throw new Error(confirmError.message);
+            }
+
+            // Payment successful
+            console.log('Payment successful');
+        } catch (error) {
+            console.error(error);
+        }
+    };*/
 
     return (
         <Layout>
@@ -142,6 +253,9 @@ function Donate(props) {
                                         custom Amount
                                     </button>
                                 </div>
+                                {/*<button className="btn themeBtn mt-5" onClick={() => handlePayment()} type="submit">
+                                    Continue <i className="fas fa-chevron-right ml-2" />
+                                </button>*/}
                                 <button className="btn themeBtn mt-5" onClick={() => showTab(2)}>
                                     Continue <i className="fas fa-chevron-right ml-2" />
                                 </button>

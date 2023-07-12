@@ -1,29 +1,16 @@
 import '../public/styles/css/all.min.css';
 import '../public/styles/css/custom.min.css';
 import '../public/styles/css/responsive.css';
+import '../public/styles/css/new-html/custom.min.css';
 import React, {useEffect} from "react";
-import dynamic from "next/dynamic";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Middleware from "../middleware/middleware";
 import Modal from 'react-modal';
+import Script from 'next/script';
+import Authentication from "../middleware/authentication";
 
 // Request Prayer Work For Error Handling
 Modal.setAppElement('#__next');
-
-const DynamicJSFiles = dynamic(
-    () =>
-        Promise.all([
-            import("../public/styles/js/all.min.js"),
-            import("../public/styles/js/custom.min.js"),
-            import("../public/styles/js/aos.js"),
-            import("../public/styles/js/gsap.js"),
-            import("../public/styles/js/scrollTrigger.js"),
-        ]).then((values) => {
-            return () => values.forEach((value) => value.default());
-        }),
-    {ssr: false}
-);
 
 function MyApp({Component, pageProps}) {
 
@@ -38,12 +25,19 @@ function MyApp({Component, pageProps}) {
     return (
         <>
 
-            <DynamicJSFiles/>
+            {/*<DynamicJSFiles/>*/}
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"/>
             <script src="https://unpkg.com/swiper/swiper-bundle.min.js"/>
-            <Middleware>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"/>
+            {/*<Script src="/styles/js/all.min.js" />*/}
+            {/*<Script src="/styles/js/aos.js" />*/}
+            <Script src="/styles/js/gsap.js" />
+            {/*<Script src="/styles/js/scrollTrigger.js" />*/}
+            <Script type="module" src="/styles/js/custom.min.js" />
+            {/*<Authentication>*/}
                 <Component {...pageProps} />
-            </Middleware>
+            {/*</Authentication>*/}
         </>
     );
 }
