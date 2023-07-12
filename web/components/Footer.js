@@ -35,12 +35,13 @@ const Footer = () => {
                                 <ul>
                                     {!token && (
                                         <li className="">
-                                            <Link href="/members"
-                                                  className="nav-link"> Members </Link>
+                                            <Link href="/members"> Members </Link>
                                         </li>
                                     )}
                                     <li><Link href="/contact">Contact</Link></li>
                                     <li><Link href="/donate">Donation</Link></li>
+                                    <li><Link href="/terms">Terms & Conditions</Link></li>
+                                    <li><Link href="/privacy">Privacy Policy</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -50,10 +51,9 @@ const Footer = () => {
                             <h2>Contact Us</h2>
                         </div>
                         <div className="calFoter">
-                            <a href="tel:1234567890">
+                            <a href="tel:(817) 917-5663">
                                 <figure><Image src={whatsAap} className="img-fluid" alt={whatsAap}/></figure>
-                                <span>(123) 456
-                            7890</span>
+                                <span>(817) 917-5663</span>
                             </a>
                             <a href="mailto:tcaregistrar@gmail.com">
                                 <figure><Image src={email} className="img-fluid" alt={email}/></figure>
