@@ -1,3 +1,27 @@
+.newthemeBtn {
+    background: #52938D;
+    font-size: 14px;
+    color: var(--white) !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    padding: 1.22em 3.1em;
+    border-radius: 50px;
+    line-height: normal;
+}
+
+.newthemeBtn.borderBtn {
+    background: transparent;
+    border: 2px solid #52938D;
+    padding: 1.04em 2em;
+    color: #52938D !important;
+}
+
+.familyBox:hover .newthemeBtn.borderBtn {
+    background: #52938D;
+    color: var(--white) !important;
+}
+
 /* mouse animation css  */
 
 .bounce-element {
@@ -188,7 +212,7 @@ header.sticky .logo img {
 }
 
 .navigation-menu .nav-inner .nav-link {
-    font-size: 25px;
+    font-size: 1.5rem;
     line-height: 1.4;
     text-transform: uppercase;
     color: var(--white);
@@ -332,7 +356,7 @@ header.sticky .row {
 }
 
 .familyBox p {
-    font-size: 22px;
+    font-size: 1.375rem;
     color: #D27C43;
     padding: 0 2.5rem;
     font-weight: bold;
@@ -340,7 +364,7 @@ header.sticky .row {
     margin: 0 0 1.2rem;
 }
 
-.familyBox:hover .themeBtn.borderBtn {
+.familyBox:hover .newthemeBtn.borderBtn {
     background: #52938D;
     color: var(--white);
 }
@@ -478,7 +502,7 @@ footer {
 }
 
 .calFoter a span {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: var(--white);
     font-weight: 400;
     -webkit-transition: all 0.5s ease;
@@ -505,7 +529,7 @@ footer {
     padding-bottom: 11rem;
 }
 
-.themeBtn:hover {
+.newthemeBtn:hover {
     background: var(D27C43);
     color: var(--white);
 }
@@ -528,4 +552,8 @@ footer {
 
 .slideContent:hover::before {
     width: 100%;
+}
+
+.reviewSlider .swiper-wrapper {
+    padding: 5rem 0;
 }

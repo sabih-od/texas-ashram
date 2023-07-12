@@ -4,8 +4,14 @@
     --white: #fff;
     --black: #000;
     --light-black: #333;
-    --primary: #58918a;
+    --theme-color: #58918a;
     --secondary: #ee9c00;
+    --white: #ffffff;
+    --black: #000;
+    --gary-color: #727272;
+    --lightgary-color: #b2b9bd;
+    --theme-color: #52938D;
+    --theme-color-color: #D27C43;
 }
 
 html {
@@ -112,7 +118,7 @@ figure {
 
 .preLoader.white {
     z-index: 11112;
-    background-color: var(--primary);
+    background-color: var(--theme-color);
 }
 
 
@@ -122,7 +128,7 @@ figure {
 /* btn css */
 
 .themeBtn {
-    background: var(--primary);
+    background: var(--theme-color) !important;
     font-size: 14px !important;
     color: var(--white) !important;
     text-transform: uppercase;
@@ -143,16 +149,16 @@ figure {
 
 .themeBtn.white {
     background: var(--white);
-    color: var(--primary) !important;
+    color: var(--theme-color) !important;
 }
 
 .themeBtn.white:hover {
     color: var(--white) !important;
-    background: var(--primary);
+    background: var(--theme-color);
 }
 
 .themeBtn.invert:hover {
-    background: var(--primary);
+    background: var(--theme-color);
 }
 
 
@@ -175,7 +181,7 @@ figure {
 }
 
 .text-primary {
-    color: var(--primary) !important;
+    color: var(--theme-color) !important;
 }
 
 
@@ -333,7 +339,7 @@ header {
 }
 
 .main-slider p {
-    color: var(--primary);
+    color: var(--theme-color);
     line-height: 1;
     font-size: 2.75rem;
     font-family: 'Reenie Beanie', cursive;
@@ -672,7 +678,7 @@ footer h2 {
 }
 
 .font_7 p {
-    font-size: 17px;
+    font-size: 1.125rem;
     color: #777777;
 }
 
@@ -694,7 +700,7 @@ hr {
 }
 
 .registrationpage p {
-    font-size: 17px;
+    font-size: 1.125rem;
     color: #777777;
 }
 
@@ -986,7 +992,7 @@ hr {
 }
 
 .notification-section .links {
-    color: var(--primary);
+    color: var(--theme-color);
     font-size: 1.25rem;
     text-decoration: underline !important;
 }
@@ -1011,7 +1017,7 @@ hr {
 }
 
 .notificationlist li.active .date {
-    color: var(--primary);
+    color: var(--theme-color);
 }
 
 .notificationlist li::before {
@@ -1029,7 +1035,7 @@ hr {
 
 .notificationlist li.active::before,
 .notificationlist li.active::after {
-    border-color: var(--primary);
+    border-color: var(--theme-color);
 }
 
 .notificationlist li.active::after {
@@ -1074,11 +1080,11 @@ hr {
 }
 
 .active .notify-item::before {
-    background-color: var(--primary);
+    background-color: var(--theme-color);
 }
 
 .notificationlist li.active .date {
-    color: var(--primary);
+    color: var(--theme-color);
 }
 
 .notify-item figure {
@@ -1266,7 +1272,7 @@ hr {
 
 .showingNavigation .pagination a.active,
 .showingNavigation .pagination a:hover {
-    background: var(--primary);
+    background: var(--theme-color);
     color: var(--white);
 }
 
@@ -1345,12 +1351,12 @@ hr {
 }
 
 .msg-option a {
-    color: var(--primary);
+    color: var(--theme-color);
     font-size: 2.5rem;
 }
 
 .sendbtn {
-    background-color: var(--primary);
+    background-color: var(--theme-color);
     color: var(--white);
     width: 65px;
     height: 65px;
@@ -1412,7 +1418,7 @@ a.paperPlane input {
     width: 100px;
     height: 3px;
     border-radius: 3px;
-    background-color: var(--primary);
+    background-color: var(--theme-color);
 }
 
 .donateCard .tab p {
@@ -1501,7 +1507,7 @@ a.paperPlane input {
 }
 
 .btn-link {
-    color: var(--primary);
+    color: var(--theme-color);
     text-decoration: underline !important;
 }
 
@@ -1693,7 +1699,7 @@ a.paperPlane input {
 }
 
 button.logoutBtn {
-    background: var(--primary);
+    background: var(--theme-color);
     font-size: 14px !important;
     color: var(--white) !important;
     text-transform: uppercase;
@@ -1753,3 +1759,8 @@ button.logoutBtn:focus {
     margin-top: 10px;
 }
 
+.videoBox img {
+    height: 500px;
+    object-fit: contain;
+    background: #000;
+}

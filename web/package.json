@@ -33,7 +33,7 @@
     "react-redux": "^8.1.1",
     "react-time-picker": "^6.2.0",
     "serve": "^14.2.0",
-    "swiper": "^9.4.1",
+    "swiper": "^10.0.4",
     "tailwindcss": "3.3.2"
   }
 }

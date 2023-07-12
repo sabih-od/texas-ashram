@@ -1,6 +1,6 @@
-import '../public/styles/css/all.min.css';
+// import '../public/styles/css/all.min.css';
 // import '../public/styles/css/custom.min.css';
-import '../public/styles/css/responsive.css';
+// import '../public/styles/css/responsive.css';
 // import '../public/styles/css/new-html/custom.min.css';
 import React, {useEffect, useState} from "react";
 import AOS from 'aos';
@@ -21,6 +21,7 @@ function MyApp({Component, pageProps}) {
     const [routePath, setRoutePath] = useState(null)
     const [isJquery, setIsJquery] = useState(false)
     const [isScrollTrigger, setIsScrollTrigger] = useState(false)
+    // const [isSwiper, setIsSwiper] = useState(false)
 
     // Animation Timing work
     useEffect(() => {
