@@ -5,7 +5,7 @@ import Link from "next/link";
 import Cookie from "js-cookie";
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
-import {initializeCustomScripts} from '../public/styles/js/custom.min';
+// import {initializeCustomScripts} from '../public/styles/js/custom.min';
 
 
 const Menu = () => {
@@ -27,9 +27,9 @@ const Menu = () => {
     const token = Cookie.get('token');
 
     // sidebar work start
-    useEffect(() => {
-        initializeCustomScripts();
-    }, []);
+    // useEffect(() => {
+    //     initializeCustomScripts();
+    // }, []);
     // sidebar work end
 
     return (
@@ -54,7 +54,6 @@ const Menu = () => {
                                         )}
                                         <div className="HomeMenu">
                                             <button id="btn_close_sidebar" className="menu-toggler" type="button"
-                                                    onClick={initializeCustomScripts}
                                                     data-target="#overlayNavigation">
                                                 <div className="d-inline-flex navbar-icon">
                                                     <span/>
