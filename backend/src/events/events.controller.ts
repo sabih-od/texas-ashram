@@ -70,11 +70,6 @@ export class EventsController {
             notification: {
                 title: 'New Event',
                 body: createEventDto.title
-            },
-            data: {
-                topic: 'event',
-                notification: notification,
-                book: res
             }
         });
 

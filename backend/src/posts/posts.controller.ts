@@ -71,11 +71,6 @@ export class PostsController {
           notification: {
               title: 'New Post',
               body: createPostDto.title
-          },
-          data: {
-              topic: 'post',
-              notification: notification,
-              post: res
           }
       });
 

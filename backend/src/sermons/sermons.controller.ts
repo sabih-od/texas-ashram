@@ -118,11 +118,6 @@ export class SermonsController {
             notification: {
                 title: 'New Sermon',
                 body: createSermonDto.title
-            },
-            data: {
-                topic: 'sermon',
-                notification: notification,
-                sermon: res
             }
         });
 

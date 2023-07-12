@@ -45,11 +45,6 @@ export class PrayerRequestsController {
           notification: {
               title: 'New Prayer Request for ' + createPrayerRequestDto.name,
               body: createPrayerRequestDto.description
-          },
-          data: {
-              topic: 'prayer-request',
-              notification: notification,
-              prayerRequest: res
           }
       });
 
