@@ -122,7 +122,7 @@ export class MessagesService {
                 return message;
             }
 
-            await this.messageRepository.update(message, updateMessageDto);
+            await this.messageRepository.update(message.id, updateMessageDto);
 
             return await this.findOne(id);
         } catch (error) {

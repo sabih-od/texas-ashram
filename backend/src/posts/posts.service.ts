@@ -67,7 +67,7 @@ export class PostsService {
               return post;
           }
 
-          await this.postRepository.update(post, updatePostDto);
+          await this.postRepository.update(post.id, updatePostDto);
 
           return await this.findOne(id);
       } catch (error) {

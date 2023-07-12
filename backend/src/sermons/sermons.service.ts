@@ -68,7 +68,7 @@ export class SermonsService {
                 return sermon;
             }
 
-            await this.sermonRepository.update(sermon, updateSermonDto);
+            await this.sermonRepository.update(sermon.id, updateSermonDto);
 
             return await this.findOne(id);
         } catch (error) {

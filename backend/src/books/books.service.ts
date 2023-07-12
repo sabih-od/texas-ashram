@@ -67,13 +67,13 @@ export class BooksService {
 
     async update(id: number, updateBookDto: UpdateBookDto): Promise<any> {
         try {
-            const event = await this.findOne(id);
+            const book = await this.findOne(id);
 
-            if (event.error) {
-                return event;
+            if (book.error) {
+                return book;
             }
 
-            await this.bookRepository.update(event, updateBookDto);
+            await this.bookRepository.update(book.id, updateBookDto);
 
             return await this.findOne(id);
         } catch (error) {

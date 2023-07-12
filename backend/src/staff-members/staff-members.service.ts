@@ -68,7 +68,7 @@ export class StaffMembersService {
                 return staff_member;
             }
 
-            await this.staffMemberRepository.update(staff_member, updateStaffMemberDto);
+            await this.staffMemberRepository.update(staff_member.id, updateStaffMemberDto);
 
             return await this.findOne(id);
         } catch (error) {

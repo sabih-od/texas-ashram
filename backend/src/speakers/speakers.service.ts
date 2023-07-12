@@ -68,7 +68,7 @@ export class SpeakersService {
                 return speaker;
             }
 
-            await this.speakerRepository.update(speaker, updateSpeakerDto);
+            await this.speakerRepository.update(speaker.id, updateSpeakerDto);
 
             return await this.findOne(id);
         } catch (error) {
