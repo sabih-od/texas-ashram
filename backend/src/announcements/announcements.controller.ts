@@ -37,8 +37,8 @@ export class AnnouncementsController {
               body: createAnnouncementDto.title
           },
           data: {
-              asd: 'asd',
-              asd2: 'asd2'
+              inner_topic: 'announcement',
+              inner_topic_id: res.id,
           }
       });
 
