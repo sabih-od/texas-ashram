@@ -1,17 +1,41 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../images/logo.png";
+import gsap from "gsap";
 
 function PreLoader() {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const tl = gsap.timeline({ onComplete: hideLoader });
+
+        function preLoader() {
+            tl.to(".preLoader.black > img", {
+                scale: 1.1,
+                autoAlpha: 0,
+            })
+                .to(".preLoader.black", {
+                    yPercent: -100,
+                })
+                .to(".preLoader.white", {
+                    yPercent: -100,
+                })
+                .to(".preLoader", {
+                    css: {
+                        display: "none",
+                    },
+                });
+        }
+
+        function hideLoader() {
             setIsLoading(false);
-        }, 3000); // Set the desired delay for the preloader
+        }
+
+        let timer = setTimeout(preLoader, 3000);
 
         return () => {
             clearTimeout(timer);
+            tl.kill();
         };
     }, []);
 
