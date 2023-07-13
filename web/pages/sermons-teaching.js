@@ -57,7 +57,7 @@ function SermonsTeaching(props) {
                                             width={300}
                                             height={400}
                                         />
-                                        <a href={sermon.file} target="_blank" data-fancybox=""><i className="fab fa-youtube"/></a>
+                                        <a href={sermon.url} target="_blank" data-fancybox=""><i className="fab fa-youtube"/></a>
 
                                     </div>
                                 </div>
