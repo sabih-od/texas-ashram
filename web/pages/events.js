@@ -13,20 +13,20 @@ function Events(props) {
                 const response = await get(1, 15);
                 const eventsArray = response.data?.data || [];
                 console.log(response.data?.data)
-                const formattedEvents = eventsArray.map((event) => {
-                    const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
-                    const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
-                    const formattedDateTo = format(parsedDateTo, 'MMM dd, yyyy');
-                    const formattedDateFrom = format(parsedDateFrom, 'MMM dd, yyyy');
+                // const formattedEvents = eventsArray.map((event) => {
+                //     const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
+                //     const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
+                //     const formattedDateTo = format(parsedDateTo, 'MMM dd, yyyy');
+                //     const formattedDateFrom = format(parsedDateFrom, 'MMM dd, yyyy');
+                //
+                //     return {
+                //         ...event,
+                //         formattedDateTo: formattedDateTo,
+                //         formattedDateFrom: formattedDateFrom,
+                //     };
+                // });
 
-                    return {
-                        ...event,
-                        formattedDateTo: formattedDateTo,
-                        formattedDateFrom: formattedDateFrom,
-                    };
-                });
-
-                setEvents(formattedEvents);
+                setEvents(eventsArray);
             } catch (error) {
                 console.error(error);
             }
@@ -72,7 +72,7 @@ function Events(props) {
                                             />
                                         </figure>
                                         <h4 className="">{event.title}</h4>
-                                        <span>{event.formattedDateTo} TO {event.formattedDateFrom}</span>
+                                        <span>{event.date_to} TO {event.date_from}</span>
                                         <p>
                                             <i className="fas fa-map-marker-alt text-primary mr-2"/>
                                             {event.location}</p>

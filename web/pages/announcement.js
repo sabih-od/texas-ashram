@@ -14,16 +14,16 @@ function Announcement(props) {
                 const response = await get(1, 15);
                 const announcementsArray = response.data?.data || [];
 
-                const formattedAnnouncements = announcementsArray.map((announcement) => {
-                    const parsedDate = parse(announcement.date, 'dd-MM-yyyy', new Date());
-                    const formattedDate = format(parsedDate, 'MMM dd, yyyy');
-                    return {
-                        ...announcement,
-                        formattedDate: formattedDate,
-                    };
-                });
+                // const formattedAnnouncements = announcementsArray.map((announcement) => {
+                //     const parsedDate = parse(announcement.date, 'dd-MM-yyyy', new Date());
+                //     const formattedDate = format(parsedDate, 'MMM dd, yyyy');
+                //     return {
+                //         ...announcement,
+                //         formattedDate: formattedDate,
+                //     };
+                // });
 
-                setAnnouncement(formattedAnnouncements);
+                setAnnouncement(announcementsArray);
             } catch (error) {
                 console.error(error);
             }
@@ -56,7 +56,7 @@ function Announcement(props) {
                                             </figure>
                                         </div>
                                         <div className="col-md-9">
-                                            <span>{announcement.formattedDate}</span>
+                                            <span>{announcement.date}</span>
                                             <a href="">
                                                 <h4>{announcement.title}</h4>
                                             </a>
