@@ -121,18 +121,18 @@ const Menu = () => {
                                                                     <Link href="/books"
                                                                           className="nav-link">Books</Link>
                                                                 </li>
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/chat-module"
                                                                           className="nav-link">Chat</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/events"
                                                                           className="nav-link">Events</Link>
                                                                 </li>
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/notifications"
                                                                           className="nav-link">Notifications</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/request-prayer"
                                                                           className="nav-link">Requested Prayer</Link>
