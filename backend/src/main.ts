@@ -7,11 +7,18 @@ import {config} from 'dotenv';
 import {join} from 'path';
 import * as fs from 'fs';
 
+//https config
+const httpsOptions = {
+    key: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-key.txt').replace('dist', 'src')),
+    cert: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-cert.txt').replace('dist', 'src')),
+};
+
 //socket.io deps
 import * as express from 'express';
 const socket_app = express();
 const http = require('http');
-const socket_io_server = http.createServer(socket_app);
+import * as https from 'https';
+const socket_io_server = https.createServer(httpsOptions, socket_app);
 const { Server } = require("socket.io");
 const io = new Server(socket_io_server);
 
@@ -25,13 +32,6 @@ socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
 });
 
 export const socketIoServer = io;
-
-
-//https config
-const httpsOptions = {
-    key: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-key.txt').replace('dist', 'src')),
-    cert: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-cert.txt').replace('dist', 'src')),
-};
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true, httpsOptions });
