@@ -3,7 +3,6 @@ import { CreateSermonDto } from './create-sermon.dto';
 import {IsUrl, MaxLength} from "class-validator";
 
 export class UpdateSermonDto extends PartialType(CreateSermonDto) {
-    @MaxLength(20)
     @ApiProperty({ example: 'Sermon title' })
     title: string;
 

@@ -53,7 +53,7 @@ function Event(props) {
             setDate_to(event.date_to)
             setDate_from(event.date_from)
             setLocation(event.location)
-            // setImage(event.image)
+            setImage(event.image)
         }
     }, [event])
 
@@ -173,6 +173,7 @@ function Event(props) {
                                             component="label"
                                         >
                                             Upload Image
+
                                             <input
                                                 type="file"
                                                 hidden
@@ -180,6 +181,7 @@ function Event(props) {
                                                     setImage(e.target?.files[0] ?? null)
                                                 }}
                                             />
+
                                         </Button>
                                     </Stack>
                                 </Grid>

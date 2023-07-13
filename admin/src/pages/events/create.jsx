@@ -126,11 +126,11 @@ function Create(props) {
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Date To' value={date_to}
+                                    <TextField fullWidth type="date" label='Date To' value={date_to}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='Date From' value={date_from}
+                                    <TextField fullWidth type="date" label='Date From' value={date_from}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 

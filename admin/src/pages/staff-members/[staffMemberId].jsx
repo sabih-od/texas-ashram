@@ -44,6 +44,7 @@ function StaffMember(props) {
         if (staffMember) {
             setName(staffMember.name)
             setDescription(staffMember.description)
+            setImage(staffMember.image)
         }
     }, [staffMember])
 
