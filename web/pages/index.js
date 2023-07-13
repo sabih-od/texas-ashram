@@ -112,7 +112,7 @@ export default function Home() {
                                         <figure><Image src={family1} className="img-fluid" alt={family1}/></figure>
                                         <h2>Family Activities:</h2>
                                         <p>Experience Love and Acceptance in a Unique Setting</p>
-                                        <a href="#" className="newthemeBtn borderBtn">Read More</a>
+                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -120,7 +120,7 @@ export default function Home() {
                                         <figure><Image src={family2} className="img-fluid" alt={family2}/></figure>
                                         <h2>Adult Activities::</h2>
                                         <p>Grow in Faith and Fellowship with Other Adults</p>
-                                        <a href="#" className="newthemeBtn borderBtn">Read More</a>
+                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -128,7 +128,7 @@ export default function Home() {
                                         <figure><Image src={family3} className="img-fluid" alt={family3}/></figure>
                                         <h2>Youth Activities:</h2>
                                         <p>Discover the Power of Community and Faith</p>
-                                        <a href="#" className="newthemeBtn borderBtn">Read More</a>
+                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -136,7 +136,7 @@ export default function Home() {
                                         <figure><Image src={noPath} className="img-fluid" alt={noPath}/></figure>
                                         <h2>Children's Activities</h2>
                                         <p>Learn about Jesus in a Fun and Engaging Way</p>
-                                        <a href="#" className="newthemeBtn borderBtn">Read More</a>
+                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
