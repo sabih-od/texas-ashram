@@ -50,7 +50,7 @@ export class MessagesService {
                 });
 
                 delete message.user_id;
-                if (user.id) {
+                if (user && user.id) {
                     delete user.password;
                     delete user.otp;
                     delete user.email;
