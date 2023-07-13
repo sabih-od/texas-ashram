@@ -18,10 +18,12 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
+import PreLoader from "./preLoader";
 
 export default function Home() {
     return (
         <Layout>
+            <PreLoader/>
             <section className="mainSlider">
                 <div className="swiper-container homeSlider">
                     <div className="swiper-wrapper">

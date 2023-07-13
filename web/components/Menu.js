@@ -34,12 +34,6 @@ const Menu = () => {
 
     return (
         <div>
-            <PreLoader/>
-            {/*<div className="preLoader black">
-                <Image src={Logo} width="240px" alt="img"/>
-            </div>
-            <div className="preLoader white"/>*/}
-
             <header className="fixed">
                 <div className="main-navigate">
                     <div className="an-navbar">
