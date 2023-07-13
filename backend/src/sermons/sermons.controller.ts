@@ -61,12 +61,12 @@ export class MaxFileSizeInterceptor implements NestInterceptor {
 }
 
 @ApiTags('Sermons')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('sermons')
 export class SermonsController {
   constructor(private readonly sermonsService: SermonsService, private readonly notificationsService: NotificationsService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(
       FileFieldsInterceptor([
@@ -139,6 +139,8 @@ export class SermonsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     let res = await this.sermonsService.findOne(+id);
@@ -150,6 +152,8 @@ export class SermonsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post(':id')
   @UseInterceptors(
       FileFieldsInterceptor([
@@ -217,6 +221,8 @@ export class SermonsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
       let sermon = await this.sermonsService.findOne(+id);

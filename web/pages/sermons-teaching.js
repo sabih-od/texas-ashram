@@ -51,7 +51,7 @@ function SermonsTeaching(props) {
                                     <div className="videoItems">
                                         {/*<Image src={sermon.image} className="img-fluid" alt="video"/>*/}
                                         <Image
-                                            src={sermon.image}
+                                            src={sermon.image ?? '#'}
                                             className="img-fluid"
                                             alt={sermon.title}
                                             width={300}

@@ -26,13 +26,13 @@ import {CreateNotificationDto} from "../notifications/dto/create-notification.dt
 import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Events')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('events')
 export class EventsController {
     constructor(private readonly eventsService: EventsService, private readonly notificationsService: NotificationsService) {
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Post()
     @UseInterceptors(FileInterceptor('image'))
     async create(@Body() createEventDto: CreateEventDto, @UploadedFile(
@@ -91,6 +91,8 @@ export class EventsController {
         }
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Get(':id')
     async findOne(@Param('id') id: string) {
         let res = await this.eventsService.findOne(+id);
@@ -102,6 +104,8 @@ export class EventsController {
         }
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Post(':id')
     @UseInterceptors(FileInterceptor('image'))
     async update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto, @UploadedFile(
@@ -154,6 +158,8 @@ export class EventsController {
         }
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Delete(':id')
     async remove(@Param('id') id: string) {
         let event = await this.eventsService.findOne(+id);
