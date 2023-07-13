@@ -5,6 +5,7 @@ import Link from "next/link";
 import Cookie from "js-cookie";
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
+import PreLoader from "../pages/preLoader";
 // import {initializeCustomScripts} from '../public/styles/js/custom.min';
 
 const Menu = () => {
@@ -33,6 +34,12 @@ const Menu = () => {
 
     return (
         <div>
+            <PreLoader/>
+            {/*<div className="preLoader black">
+                <Image src={Logo} width="240px" alt="img"/>
+            </div>
+            <div className="preLoader white"/>*/}
+
             <header className="fixed">
                 <div className="main-navigate">
                     <div className="an-navbar">
