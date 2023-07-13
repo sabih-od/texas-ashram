@@ -47,7 +47,7 @@ console.log("prayer" , prayers)
 
     const handleDelete = async (e, id) => {
         e.preventDefault()
-        console.log(id)
+        // console.log(id)
         // await dispatch(deletePost({id}))
         await dispatch(getPrayers({page}))
     }
@@ -82,8 +82,6 @@ console.log("prayer" , prayers)
                                             <TableCell>Name</TableCell>
                                             <TableCell>Email</TableCell>
                                             <TableCell>Contact</TableCell>
-                                            <TableCell>Start_date</TableCell>
-                                            <TableCell>End_date</TableCell>
                                             <TableCell>Time</TableCell>
                                             <TableCell>Description</TableCell>
                                         </TableRow>
@@ -105,36 +103,11 @@ console.log("prayer" , prayers)
                                                         <span>{prayer.contact}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{prayer.start_date}</span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <span>{prayer.end_date}</span>
-                                                    </TableCell>
-                                                    <TableCell>
                                                         <span>{prayer.time}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{prayer.description}</span>
                                                     </TableCell>
-
-                                                    {/*<TableCell width="200">*/}
-                                                    {/*    <IconButton*/}
-                                                    {/*        size="small"*/}
-                                                    {/*        variant="outlined"*/}
-                                                    {/*        onClick={e => {*/}
-                                                    {/*            e.preventDefault()*/}
-                                                    {/*            push(`/prayerss/${prayers.id}`)*/}
-                                                    {/*        }} sx={{marginLeft: 'auto'}}>*/}
-                                                    {/*        <Pencil/>*/}
-                                                    {/*    </IconButton>*/}
-                                                    {/*    <IconButton*/}
-                                                    {/*        size="small"*/}
-                                                    {/*        variant="outlined"*/}
-                                                    {/*        onClick={e => handleDelete(e, prayers.id)}*/}
-                                                    {/*        sx={{marginLeft: 'auto'}}>*/}
-                                                    {/*        <Delete/>*/}
-                                                    {/*    </IconButton>*/}
-                                                    {/*</TableCell>*/}
                                                 </TableRow>
                                             )
                                         })}

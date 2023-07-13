@@ -124,6 +124,8 @@ function Announcement(props) {
                                             showYearDropdown
                                             showMonthDropdown
                                             placeholderText='MM-DD-YYYY'
+                                            todayButton={"Current Date"}
+                                            includeDates={[new Date(), date]}
                                             customInput={<CustomDateInput/>}
                                             id='form-layouts-separator-date'
                                             onChange={date => setDate(date)}

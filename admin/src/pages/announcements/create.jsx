@@ -107,6 +107,8 @@ function Create(props) {
                                             showYearDropdown
                                             showMonthDropdown
                                             placeholderText='MM-DD-YYYY'
+                                            todayButton={"Current Date"}
+                                            includeDates={[new Date()]}
                                             customInput={<CustomDateInput/>}
                                             id='form-layouts-separator-date'
                                             onChange={date => setDate(date)}
