@@ -29,6 +29,7 @@ const initialState = {
     errors: null,
     donations: [],
     total: 0,
+    totalPages: 0,
 };
 
 export const donationsSlice = createSlice({
@@ -61,6 +62,7 @@ export const donationsSlice = createSlice({
 
             state.donations = data?.data ?? []
             state.total = data?.total ?? 0
+            state.totalPages = data?.totalPages ?? 0
 
             state.loading = false
             state.errors = message
@@ -92,8 +94,8 @@ export const donationsSlice = createSlice({
             console.log("delete data", data, message)
 
             state.loading = false
-            state.success = !message
-            state.errors = message
+            // state.success = !message
+            // state.errors = message
         })
     }
 });
@@ -102,6 +104,7 @@ export const {setSuccess, setErrors} = donationsSlice.actions;
 export const donations = (state) => state.donations.donations;
 export const loading = (state) => state.donations.loading;
 export const total = (state) => state.donations.total;
+export const totalPages = (state) => state.donations.totalPages;
 export const errors = (state) => state.donations.errors;
 export const success = (state) => state.donations.success;
 export default donationsSlice.reducer;
