@@ -19,12 +19,12 @@ import {FileInterceptor} from "@nestjs/platform-express";
 import {deleteFileFromUploads, getRandomFileName, uploadFile} from "../helpers/helper";
 
 @ApiTags('Speakers')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('speakers')
 export class SpeakersController {
   constructor(private readonly speakersService: SpeakersService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async create(@Body() createSpeakerDto: CreateSpeakerDto, @UploadedFile(
@@ -67,6 +67,8 @@ export class SpeakersController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
       let res = await this.speakersService.findOne(+id);
@@ -78,6 +80,8 @@ export class SpeakersController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post(':id')
   @UseInterceptors(FileInterceptor('image'))
   async update(@Param('id') id: string, @Body() updateSpeakerDto: UpdateSpeakerDto, @UploadedFile(
@@ -130,6 +134,8 @@ export class SpeakersController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
       let speaker = await this.speakersService.findOne(+id);

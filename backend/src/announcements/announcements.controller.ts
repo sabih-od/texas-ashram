@@ -9,12 +9,13 @@ import {CreateNotificationDto} from "../notifications/dto/create-notification.dt
 import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Announcements')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('announcements')
 export class AnnouncementsController {
   constructor(private readonly announcementsService: AnnouncementsService, private readonly notificationsService: NotificationsService) {}
 
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   async create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
       createAnnouncementDto.created_at = Date.now().toString();
@@ -56,6 +57,8 @@ export class AnnouncementsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
       let res = await this.announcementsService.findOne(+id);
@@ -67,6 +70,8 @@ export class AnnouncementsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post(':id')
   async update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto) {
       let announcement = await this.announcementsService.findOne(+id);
@@ -87,6 +92,8 @@ export class AnnouncementsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
       let announcement = await this.announcementsService.findOne(+id);

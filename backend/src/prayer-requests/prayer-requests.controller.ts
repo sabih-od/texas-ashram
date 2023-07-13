@@ -11,8 +11,6 @@ import {NotificationsService} from "../notifications/notifications.service";
 import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Prayer Requests')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('prayer-requests')
 export class PrayerRequestsController {
   constructor(
@@ -21,6 +19,8 @@ export class PrayerRequestsController {
       private readonly notificationsService: NotificationsService
   ) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   async create(@Body() createPrayerRequestDto: CreatePrayerRequestDto, @Request() req) {
       let user = await this.authService.getUserByEmail(req.user.email);
@@ -66,6 +66,8 @@ export class PrayerRequestsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
       let res = await this.prayerRequestsService.findOne(+id);
@@ -77,6 +79,8 @@ export class PrayerRequestsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get('get-by-user-id/:user_id')
   async findOneByUserId(@Param('user_id') user_id: number) {
       let res = await this.prayerRequestsService.findOneByUserId(user_id);
@@ -88,6 +92,8 @@ export class PrayerRequestsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post(':id')
   async update(@Param('id') id: string, @Body() updatePrayerRequestDto: UpdatePrayerRequestDto) {
       let prayer_request = await this.prayerRequestsService.findOne(+id);
@@ -108,6 +114,8 @@ export class PrayerRequestsController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
       let user = await this.prayerRequestsService.findOne(+id);
