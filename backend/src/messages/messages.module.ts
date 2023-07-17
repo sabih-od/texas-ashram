@@ -5,9 +5,10 @@ import {messageProviders} from "./messages.provider";
 import {DatabaseModule} from "../database.module";
 import {GroupsModule} from "../groups/groups.module";
 import {UsersModule} from "../users/users.module";
+import {NotificationsModule} from "../notifications/notifications.module";
 
 @Module({
-    imports: [DatabaseModule, forwardRef(() => GroupsModule), UsersModule],
+    imports: [DatabaseModule, NotificationsModule, forwardRef(() => GroupsModule), UsersModule],
   controllers: [MessagesController],
   providers: [MessagesService, ...messageProviders],
     exports: [MessagesService],

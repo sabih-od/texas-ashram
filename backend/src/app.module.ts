@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -20,6 +20,7 @@ import { GroupsModule } from './groups/groups.module';
 import { MessagesModule } from './messages/messages.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { GroupRequestsModule } from './group-requests/group-requests.module';
+import {AbusiveWordsMiddleware} from "./middlewares/abusiveWords.middleware";
 
 @Module({
   imports: [
@@ -46,4 +47,8 @@ import { GroupRequestsModule } from './group-requests/group-requests.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AbusiveWordsMiddleware).forRoutes('*');
+    }
+}

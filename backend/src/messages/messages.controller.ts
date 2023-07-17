@@ -8,6 +8,9 @@ import {GroupsService} from "../groups/groups.service";
 import {UpdateGroupDto} from "../groups/dto/update-group.dto";
 import {socketIoServer} from "../main";
 import {UsersService} from "../users/users.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
+import {NotificationsService} from "../notifications/notifications.service";
+import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Messages')
 @ApiBearerAuth()
@@ -17,6 +20,7 @@ export class MessagesController {
   constructor(
       private readonly messagesService: MessagesService,
       private readonly groupService: GroupsService,
+      private readonly notificationsService: NotificationsService,
       private readonly usersService: UsersService
   ) {}
 
@@ -59,6 +63,32 @@ export class MessagesController {
       socketIoServer.emit('group-message', {
           ...res
       });
+
+      //emit firebase notification
+      let group_members = JSON.parse(group.members);
+      if (group_members && group_members.length > 0) {
+          for (const user_id of group_members) {
+              let createNotificationDto = new CreateNotificationDto();
+              createNotificationDto.user_id = user_id;
+              createNotificationDto.title = 'New Message';
+              createNotificationDto.content = createMessageDto.message;
+              createNotificationDto.topic = 'message';
+              createNotificationDto.topic_id = group.id;
+              createNotificationDto.icon = process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
+              createNotificationDto.created_at = Date.now().toString();
+              let notification = await this.notificationsService.create(createNotificationDto);
+          }
+
+          //send notification
+          let firebaseService = new FirebaseService();
+          await firebaseService.sendNotification({
+              notification: {
+                  title: 'New Message',
+                  body: createMessageDto.message,
+                  group_id: createMessageDto.group_id
+              }
+          });
+      }
 
       return {
           success: !res.error,
@@ -119,6 +149,11 @@ export class MessagesController {
               data: [],
           }
       }
+
+      //emit notification
+      socketIoServer.emit('deleted-message-' + message.group_id, {
+          ...message
+      });
 
       let res = await this.messagesService.remove(+id);
 
