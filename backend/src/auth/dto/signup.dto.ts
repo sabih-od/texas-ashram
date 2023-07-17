@@ -13,7 +13,6 @@ export class SignupDto {
     @IsEmail()
     email: string;
 
-    @IsNotEmpty()
     phone: string;
 
     @IsNotEmpty()

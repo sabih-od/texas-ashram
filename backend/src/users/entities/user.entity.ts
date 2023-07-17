@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable} from 'typeorm';
+import {Group} from "../../groups/entities/group.entity";
 
 @Entity()
 export class User {
@@ -14,7 +15,7 @@ export class User {
     @Column({ type: 'varchar', unique: true })
     email: string;
 
-    @Column('varchar')
+    @Column({type: 'varchar', nullable: true})
     phone: string;
 
     @Column('text')
@@ -22,4 +23,18 @@ export class User {
 
     @Column({ type: 'int', default: 2 })
     role_id: number;
+
+    @Column({ type: 'text', nullable: true})
+    profile_picture: string;
+
+    @Column({ type: 'text', nullable: true})
+    otp: string;
+
+    @Column({ type: 'text', nullable: true })
+    created_at: string;
+
+    // //relations
+    // @ManyToMany(() => Group, (group) => group.members)
+    // @JoinTable({name: 'group_users'})
+    // groups: Group[];
 }

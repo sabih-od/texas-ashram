@@ -17,7 +17,6 @@ export class CreateUserDto {
     @ApiProperty({ example: 'asd441@mailinator.com' })
     email: string;
 
-    @IsNotEmpty()
     @ApiProperty({ example: '123456' })
     phone: string;
 
@@ -27,4 +26,5 @@ export class CreateUserDto {
 
     role_id: number;
 
+    created_at: string;
 }

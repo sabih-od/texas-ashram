@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,27 +13,76 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    createUserDto.created_at = Date.now().toString();
+    let res = await this.usersService.create(createUserDto);
+
+    return {
+        success: !res.error,
+        message: res.error ? res.error : 'User created successfully!',
+        data: res.error ? [] : res,
+    }
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+    let res = await this.usersService.findAll(page, limit);
+
+      return {
+          success: true,
+          message: '',
+          ...res
+      }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    let res = await this.usersService.findOne(+id);
+
+    return {
+        success: !res.error,
+        message: res.error ? res.error : '',
+        data: res.error ? [] : res,
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @Post(':id')
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    let user = await this.usersService.findOne(+id);
+    if (user.error) {
+      return {
+          success: false,
+          message: user.error,
+          data: [],
+      }
+    }
+
+    let res = await this.usersService.update(+id, updateUserDto);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'User updated successfully!',
+          data: res.error ? [] : res,
+      }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    let user = await this.usersService.findOne(+id);
+    if (user.error) {
+      return {
+          success: false,
+          message: user.error,
+          data: [],
+      }
+    }
+
+    let res = await this.usersService.remove(+id);
+
+      return {
+          success: !res.error,
+          message: res.error ? res.error : 'User deleted successfully!',
+          data: res.error ? [] : res,
+      }
   }
 }
