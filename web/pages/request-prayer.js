@@ -18,30 +18,30 @@ function RequestPrayer(props) {
                 const response = await get(1, 15);
                 const prayersArray = response.data?.data || [];
 
-                // const formattedEvents = await Promise.all(prayersArray.map(async (prayer) => {
-                //     const parsedDateTo = new Date(prayer.start_date);
-                //     const parsedDateFrom = new Date(prayer.end_date);
-                //     const formattedDateTo = format(parsedDateTo, 'MMM dd, yyyy');
-                //     const formattedDateFrom = format(parsedDateFrom, 'MMM dd, yyyy');
-                //
-                //     const userResponse = await fetch(`${apiUrl()}/users/${prayer.user_id}`, {
-                //         method: 'GET',
-                //         headers: {
-                //             'Content-Type': 'application/json',
-                //             'Authorization': `Bearer ${getToken()}`
-                //         }
-                //     });
-                //
-                //     const userData = await userResponse.json();
-                //
-                //     return {
-                //         ...prayer,
-                //         formattedDateTo,
-                //         formattedDateFrom,
-                //         user: userData.data
-                //     };
-                // }));
-                setPrayers(prayersArray);
+                const formattedEvents = await Promise.all(prayersArray.map(async (prayer) => {
+                    const parsedDateTo = new Date(prayer.start_date);
+                    const parsedDateFrom = new Date(prayer.end_date);
+                    const formattedDateTo = format(parsedDateTo, 'MMM dd, yyyy');
+                    const formattedDateFrom = format(parsedDateFrom, 'MMM dd, yyyy');
+
+                    const userResponse = await fetch(`${apiUrl()}/users/${prayer.user_id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${getToken()}`
+                        }
+                    });
+
+                    const userData = await userResponse.json();
+
+                    return {
+                        ...prayer,
+                        formattedDateTo,
+                        formattedDateFrom,
+                        user: userData.data
+                    };
+                }));
+                setPrayers(formattedEvents);
             } catch (error) {
                 console.error(error);
             }
@@ -169,8 +169,10 @@ function RequestPrayer(props) {
                                         <td>
                                             <div className="d-flex align-items-center">{prayer.name}</div>
                                         </td>
-                                        <td>{prayer.start_date}</td>
-                                        <td>{prayer.end_date}</td>
+                                        <td>{prayer.formattedDateTo}</td>
+                                        <td>{prayer.formattedDateFrom}</td>
+                                        {/*<td>{prayer.start_date}</td>
+                                        <td>{prayer.end_date}</td>*/}
 
                                         {/* User Data Retrieve */}
                                         <td>{prayer.user ? `${prayer.user.first_name} ${prayer.user.last_name}` : 'N/A'}</td>
@@ -227,7 +229,7 @@ function RequestPrayer(props) {
                 {selectedPrayer && (
                     <div>
                         <h2>Prayer Details</h2>
-                        <p>Description: {selectedPrayer.description}</p>
+                        <p><span className="text-dark">Description:</span> `{selectedPrayer.description}`</p>
                         {/* Display other prayer details as needed */}
                     </div>
                 )}

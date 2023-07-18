@@ -5,6 +5,7 @@ import missionImg from "../images/new-html/missionimg.png";
 import family1 from "../images/new-html/family1.png";
 import family2 from "../images/new-html/family2.png";
 import family3 from "../images/new-html/family3.png";
+import shape from "../public/Shape.png";
 import testImg1 from "../images/new-html/testiimg1.png";
 import testImg2 from "../images/new-html/testimg2.png";
 import quote from "../images/new-html/quote.png";
@@ -58,6 +59,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                <Image src={shape} className="img-fluid mainImg" alt={shape}/>
             </section>
 
             <section className="missionSec mt-3">
@@ -78,7 +80,7 @@ export default function Home() {
                                     common,
                                     is that life is tough sometimes. Sometimes we just need to unplug from all of life’s
                                     stressors and proactively focus on Jesus to recharge.</p>
-                                <Link data-aos='fade-up' data-aos-delay="200" href="/about"
+                                <Link data-aos='fade-up' data-aos-delay="200" href="/about#ourMission"
                                       className="newthemeBtn">About Us</Link>
                             </div>
                         </div>
@@ -127,7 +129,7 @@ export default function Home() {
                                         <figure><Image src={family1} className="img-fluid" alt={family1}/></figure>
                                         <h2>Family Activities:</h2>
                                         <p>Experience Love and Acceptance in a Unique Setting</p>
-                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
+                                        <Link href="/about#family" className="newthemeBtn borderBtn">Read More</Link>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -135,7 +137,7 @@ export default function Home() {
                                         <figure><Image src={family2} className="img-fluid" alt={family2}/></figure>
                                         <h2>Adult Activities::</h2>
                                         <p>Grow in Faith and Fellowship with Other Adults</p>
-                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
+                                        <Link href="/about#adult" className="newthemeBtn borderBtn">Read More</Link>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -143,7 +145,7 @@ export default function Home() {
                                         <figure><Image src={family3} className="img-fluid" alt={family3}/></figure>
                                         <h2>Youth Activities:</h2>
                                         <p>Discover the Power of Community and Faith</p>
-                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
+                                        <Link href="/about#youth" className="newthemeBtn borderBtn">Read More</Link>
                                     </div>
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -151,7 +153,7 @@ export default function Home() {
                                         <figure><Image src={noPath} className="img-fluid" alt={noPath}/></figure>
                                         <h2>Children's Activities</h2>
                                         <p>Learn about Jesus in a Fun and Engaging Way</p>
-                                        <a href="/about" className="newthemeBtn borderBtn">Read More</a>
+                                        <Link href="/about#children" className="newthemeBtn borderBtn">Read More</Link>
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
