@@ -13,7 +13,6 @@ export class CreatePrayerRequestDto {
     @ApiProperty({ example: 'asd441@mailinator.com' })
     email: string;
 
-    @IsNotEmpty()
     @ApiProperty({ example: '1234567890' })
     contact: string;
 

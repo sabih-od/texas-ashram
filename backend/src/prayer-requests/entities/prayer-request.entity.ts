@@ -14,7 +14,7 @@ export class PrayerRequest {
     @Column('varchar')
     email: string;
 
-    @Column('varchar')
+    @Column({type: 'varchar', nullable: true})
     contact: string;
 
     @Column({type: 'varchar', nullable: true})
