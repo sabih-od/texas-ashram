@@ -21,7 +21,7 @@ const Footer = () => {
                             <Image src={logo} className="img-fluid" alt={logo}/>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    {/*<div className="col-md-4">
                         <div className="quickList">
                             <h2>Quick Links</h2>
                             <div className="d-flex">
@@ -45,8 +45,8 @@ const Footer = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-md-3">
+                    </div>*/}
+                    <div className="col-md-7">
                         <div className="quickList">
                             <h2>Contact Us</h2>
                         </div>

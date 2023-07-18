@@ -10,12 +10,24 @@ module.exports = {
     images: { unoptimized: true },
 
     publicRuntimeConfig: {
-        apiUrls: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3023',
+        apiUrls: 'https://localhost:3023',
     },
 
     // Add aliases for commonly used directories
     // You can customize these aliases based on your project structure
     webpack: (config, { isServer }) => {
+        config.module.rules.push({
+            test: /\.(mp4|webm)$/,
+            use: {
+                loader: 'file-loader',
+                options: {
+                    publicPath: '/_next/static/videos/',
+                    outputPath: 'static/videos/',
+                    name: '[name].[hash].[ext]',
+                    esModule: false,
+                },
+            },
+        });
         // Add aliases for commonly used directories
         // config.resolve.alias['@components'] = path.join(__dirname, 'src/components');
         // config.resolve.alias['@styles'] = path.join(__dirname, 'src/styles');

@@ -118,7 +118,7 @@ figure {
 
 .preLoader.white {
     z-index: 11112;
-    background-color: var(--theme-color);
+    background-color: #487874;
 }
 
 
@@ -140,7 +140,9 @@ figure {
 }
 
 .themeBtn:hover {
-    background-color: var(--secondary);
+    background: transparent !important;
+    color: #52938D !important;
+    /*background-color: var(--secondary);*/
 }
 
 .themeBtn.invert {
@@ -588,7 +590,7 @@ footer {
 }
 
 footer .footerLogo img {
-    width: 235px;
+    width: 300px;
     margin-bottom: 1rem;
 }
 
@@ -1713,8 +1715,8 @@ button.logoutBtn {
 }
 
 button.logoutBtn:hover {
-    background-color: #fcbd32;
-    color: white;
+    background: transparent !important;
+    color: #52938D !important;
 }
 
 button.logoutBtn:focus {
@@ -1763,4 +1765,26 @@ button.logoutBtn:focus {
     height: 500px;
     object-fit: contain;
     background: #000;
+}
+
+.forgetBtn {
+    background: var(--theme-color) !important;
+    font-size: 14px !important;
+    color: var(--white) !important;
+    text-transform: uppercase;
+    font-weight: 600 !important;
+    display: inline-block;
+    padding: 1rem 1.75rem !important;
+    border-radius: 35px;
+    line-height: normal;
+}
+
+.forgetBtn:hover {
+    color: var(--theme-color) !important;
+    background: var(--white) !important;
+    border-color: var(--theme-color) !important;
+}
+
+.contactUs {
+    margin-left: 10rem;
 }
