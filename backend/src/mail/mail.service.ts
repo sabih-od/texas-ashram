@@ -8,7 +8,7 @@ export class MailService {
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
-            secure: false, // Set to true if using SSL/TLS
+            secure: true, // Set to true if using SSL/TLS
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD,

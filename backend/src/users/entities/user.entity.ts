@@ -30,6 +30,9 @@ export class User {
     @Column({ type: 'text', nullable: true})
     otp: string;
 
+    @Column({type: 'varchar', nullable: true})
+    blocked_at: string;
+
     @Column({ type: 'text', nullable: true })
     created_at: string;
 

@@ -7,7 +7,7 @@ import {AuthGuard} from "../auth/auth.guard";
 import {MessagesService} from "../messages/messages.service";
 import {AddUserDto} from "./dto/add-user.dto";
 import {UsersService} from "../users/users.service";
-import {Repository} from "typeorm";
+import {IsNull, Repository} from "typeorm";
 import {Group} from "./entities/group.entity";
 
 @ApiTags('Groups')
@@ -60,7 +60,8 @@ export class GroupsController {
 
       let res = await this.messageService.findAll(page, limit, {
           where: {
-              group_id: group_id
+              group_id: group_id,
+              blocked_at: IsNull()
           }});
 
       return {

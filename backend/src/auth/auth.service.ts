@@ -28,6 +28,12 @@ export class AuthService {
             return user;
         }
 
+        if (user.blocked_at && user.blocked_at != "") {
+            return {
+                error: 'Your account has been blocked.'
+            }
+        }
+
         if (!await bcrypt.compare(signInDto.password, user?.password)) {
             return {
                 error: 'Unauthorized'

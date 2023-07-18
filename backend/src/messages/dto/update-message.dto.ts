@@ -10,4 +10,6 @@ export class UpdateMessageDto extends PartialType(CreateMessageDto) {
 
     @ApiProperty({ example: 'Hello!' })
     message: string;
+
+    blocked_at: string;
 }

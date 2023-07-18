@@ -16,5 +16,8 @@ export class Message {
     message: string;
 
     @Column({type: 'varchar', nullable: true})
+    blocked_at: string;
+
+    @Column({type: 'varchar', nullable: true})
     created_at: string;
 }

@@ -58,6 +58,7 @@ async function bootstrap() {
         .addTag('Posts')
         .addTag('Pages')
         .addTag('Prayer Requests')
+        .addTag('Reports')
         .addTag('Sermons')
         .addTag('Speakers')
         .addTag('Staff Members')

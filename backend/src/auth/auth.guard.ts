@@ -31,6 +31,12 @@ export class AuthGuard implements CanActivate {
         } catch {
             throw new UnauthorizedException();
         }
+
+        //if user is blocked
+        if (request['user'].blocked_at && request['user'].blocked_at != null && request['user'].blocked_at != "") {
+            throw new UnauthorizedException();
+        }
+
         return true;
     }
 

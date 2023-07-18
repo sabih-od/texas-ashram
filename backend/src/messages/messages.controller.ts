@@ -11,6 +11,7 @@ import {UsersService} from "../users/users.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {NotificationsService} from "../notifications/notifications.service";
 import {FirebaseService} from "../firebase/firebase.service";
+import {IsNull} from "typeorm";
 
 @ApiTags('Messages')
 @ApiBearerAuth()
@@ -99,7 +100,7 @@ export class MessagesController {
 
   @Get()
   async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
-      let res = await this.messagesService.findAll(page, limit);
+      let res = await this.messagesService.findAll(page, limit, {where: {blocked_at: IsNull()}});
 
       return {
           success: true,
