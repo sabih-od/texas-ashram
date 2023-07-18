@@ -585,5 +585,11 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.375);
+    background: rgba(0, 0, 0, 0.375);
+}
+
+.mainImg {
+    position: absolute;
+    width: 100%;
+    top: 70%;
 }
