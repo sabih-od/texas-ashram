@@ -3,9 +3,10 @@ import { SpeakersService } from './speakers.service';
 import { SpeakersController } from './speakers.controller';
 import {DatabaseModule} from "../database.module";
 import {speakerProviders} from "./speakers.provider";
+import {UsersModule} from "../users/users.module";
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [DatabaseModule, UsersModule],
   controllers: [SpeakersController],
   providers: [SpeakersService, ...speakerProviders],
     exports: [SpeakersService]

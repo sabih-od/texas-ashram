@@ -1,16 +1,22 @@
 import {
     CanActivate,
-    ExecutionContext,
+    ExecutionContext, Inject,
     Injectable,
     UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { Request } from 'express';
+import {Repository} from "typeorm";
+import {User} from "../users/entities/user.entity";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private jwtService: JwtService) {}
+    constructor(
+        @Inject('USER_REPOSITORY')
+        private userRepository: Repository<User>,
+        private jwtService: JwtService,
+    ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
@@ -33,7 +39,13 @@ export class AuthGuard implements CanActivate {
         }
 
         //if user is blocked
-        if (request['user'].blocked_at && request['user'].blocked_at != null && request['user'].blocked_at != "") {
+        let user = await this.userRepository.findOneOrFail({
+            where: {
+                id: request['user'].id
+            }
+        });
+
+        if (user.blocked_at && user.blocked_at != null && user.blocked_at != "") {
             throw new UnauthorizedException();
         }
 

@@ -4,9 +4,10 @@ import { DonationsController } from './donations.controller';
 import {DatabaseModule} from "../database.module";
 import {donationProviders} from "./donations.provider";
 import {AuthModule} from "../auth/auth.module";
+import {UsersModule} from "../users/users.module";
 
 @Module({
-    imports: [DatabaseModule, AuthModule],
+    imports: [DatabaseModule, AuthModule, UsersModule],
   controllers: [DonationsController],
   providers: [DonationsService, ...donationProviders]
 })
