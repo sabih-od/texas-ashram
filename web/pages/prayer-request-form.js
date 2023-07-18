@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../components/Layout';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {create} from '../services/prayerRequestService';
 import {useRouter} from 'next/router';
+import Cookie from "js-cookie";
+import Link from "next/link";
 
 function PrayerRequestForm(props) {
     const [name, setName] = useState('');
@@ -34,6 +36,11 @@ function PrayerRequestForm(props) {
     const validateEmail = (email) => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
+
+    // useEffect(() => {
+    //     const loggedIn = Cookie.get('token');
+    //     setIsLoggedIn(!loggedIn);
+    // }, []);
 
     const handlePrayerForm = async (e) => {
         e.preventDefault();
@@ -76,9 +83,19 @@ function PrayerRequestForm(props) {
             return;
         }
 
-        // Clear form errors and submit the form
+        // Check if the user is logged in
+        const loggedIn = Cookie.get('token');
+        if (!loggedIn) {
+            setErrorMessage('Please first logged in then submit the form');
+            return;
+        }
+
+        // Clear form errors
         setFormErrors({});
+
+        // Submit the form
         setIsFormSubmitted(true);
+
 
         const result = await create(name, email, contact, startDate, endDate, time, description);
         console.log('prayer', result);
@@ -86,7 +103,7 @@ function PrayerRequestForm(props) {
         if (result.data.success === true) {
             await router.push('/');
         } else {
-            setErrorMessage(result.error);
+            setErrorMessage("Exception Error!");
             router.back();
         }
     };
@@ -201,6 +218,12 @@ function PrayerRequestForm(props) {
                                             onChange={(e) => setDescription(e.target.value)}
                                         />
                                     </div>
+                                    <br/>
+                                    <div className="col-md-12 mb-4">
+                                        {errorMessage && <p className="error">{errorMessage}</p>}
+                                    </div>
+
+                                    <br/>
                                     <div className="col-12">
                                         <button className="btn themeBtn invert" type="submit">
                                             Submit Now

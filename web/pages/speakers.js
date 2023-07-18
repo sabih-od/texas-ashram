@@ -22,17 +22,17 @@ function Speakers(props) {
             {/*!--!Main Heading --*/}
 
 
-            <section className="innerPage">
-                <div className="container">
-                    <div className="row align-items-center justify-content-center mx-5">
-                        <div className="col-md-7 text-center" data-aos="fade-up">
-                        {/*<div className="col-md-7 text-center" data-aos="">*/}
-                            <h6 className="subheading text-secondary">Texas Christian Ashram</h6>
-                            <h1 className="heading mb-0">2021 Speakers</h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {/*<section className="innerPage">*/}
+            {/*    <div className="container">*/}
+            {/*        <div className="row align-items-center justify-content-center mx-5">*/}
+            {/*            <div className="col-md-7 text-center" data-aos="fade-up">*/}
+            {/*            /!*<div className="col-md-7 text-center" data-aos="">*!/*/}
+            {/*                <h6 className="subheading text-secondary">Texas Christian Ashram</h6>*/}
+            {/*                <h1 className="heading mb-0">2021 Speakers</h1>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
             <section className="pb-0">
                 <div className="container">
                     <div className="row mx-4">

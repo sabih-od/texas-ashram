@@ -104,7 +104,7 @@ function AboutUs(props) {
                 </div>
             </section>
 
-            <section className="mission-section">
+            <section className="mission-section" id="ourMission">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-9 mx-auto text-center">
@@ -190,7 +190,7 @@ function AboutUs(props) {
             <section className="p-0">
                 <div className="container">
                     <div className="row mx-4 align-items-end">
-                        <div className="col-md-6">
+                        <div className="col-md-6" id="family">
                             <Image src={familiesImg} className="img-fluid" alt="familiesIm g"/>
                         </div>
                         <div className="col-md-6 px-5">
@@ -223,7 +223,7 @@ function AboutUs(props) {
                         <div className="col-12">
                             <hr/>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6" id="adult">
                             <Image src={famImg} className="img-fluid" alt="famIm g"/>
                         </div>
                         <div className="col-md-6 px-5">
@@ -245,7 +245,7 @@ function AboutUs(props) {
                         <div className="col-12">
                             <hr/>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6" id="youth">
                             <Image src={famImg2} className="img-fluid" alt="famImg 2"/>
                         </div>
                         <div className="col-md-6 px-5">
@@ -266,7 +266,7 @@ function AboutUs(props) {
                         <div className="col-12">
                             <hr/>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6" id="children">
                             <Image src={famImg3} className="img-fluid" alt="famImg 3"/>
                         </div>
                         <div className="col-md-6 px-5">
