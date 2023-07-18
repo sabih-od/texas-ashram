@@ -17,6 +17,11 @@
     color: #52938D !important;
 }
 
+.newthemeBtn:hover {
+    background: transparent;
+    color: #52938D !important;
+}
+
 .familyBox:hover .newthemeBtn.borderBtn {
     background: #52938D;
     color: var(--white) !important;
@@ -254,8 +259,8 @@ header.sticky .row {
 /* slider css */
 
 .mainSlider {
-    background: url(/slidebg.png) no-repeat top center/ cover;
-    height: 1134px;
+    background: url(/banner.mp4) no-repeat top center/ cover;
+    height: 100vh;
     padding: 0;
     display: flex;
     align-items: center;
@@ -564,4 +569,20 @@ footer {
 
 .funMain .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background: var(--theme-color)
+}
+
+.mainSlider > video {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    background: #000;
+}
+
+.slideContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.375);
 }

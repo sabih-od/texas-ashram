@@ -10,9 +10,14 @@ import testImg2 from "../images/new-html/testimg2.png";
 import quote from "../images/new-html/quote.png";
 import user1 from "../images/new-html/user1.png";
 import noPath from "../images/NoPath.png";
+import bannerVideo from "../public/banner.mp4";
+import { useEffect, useRef } from 'react';
 import Link from "next/link";
+import ReactPlayer from 'react-player'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
+import url from 'url';
+
 
 // Import Swiper styles
 import 'swiper/css';
@@ -21,33 +26,41 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import PreLoader from "./preLoader";
 
 export default function Home() {
+
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(error => {
+                // Handle any errors that may occur during video playback
+                console.error('Error playing video:', error);
+            });
+        }
+    }, []);
+
     return (
         <Layout>
             <PreLoader/>
             <section className="mainSlider">
-                <div className="swiper-container homeSlider">
-                    <div className="swiper-wrapper">
-                        <div className="swiper-slide">
-                            <div className="slide-inner bg-image">
-                                <div className="container">
-                                    <div className="row align-items-center justify-content-center">
-                                        <div className="col-12">
-                                            <div className="slideContent slideOne">
-                                                <h6 data-aos='fade-up'>Welcome to</h6>
-                                                <h2 data-aos='fade-up' data-aos-delay="150">Texas Christian Ashram</h2>
-                                                <Link href="/about" className="newthemeBtn" data-aos='fade-up'
-                                                      data-aos-delay="150">About Us</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <video ref={videoRef} className="video-player" playsInline autoPlay loop muted>
+                    <source src={bannerVideo} type="video/mp4" />
+                </video>
+                <div className="slideContent slideOne">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12">
+                                <h6 data-aos='fade-up'>Welcome to</h6>
+                                <h2 data-aos='fade-up' data-aos-delay="150">Texas Christian Ashram</h2>
+                                <Link href="/about" className="newthemeBtn" data-aos='fade-up' data-aos-delay="150">
+                                    About Us
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="missionSec">
+            <section className="missionSec mt-3">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-5">
@@ -65,7 +78,7 @@ export default function Home() {
                                     common,
                                     is that life is tough sometimes. Sometimes we just need to unplug from all of life’s
                                     stressors and proactively focus on Jesus to recharge.</p>
-                                <Link data-aos='fade-up' data-aos-delay="200" href="/our-mission"
+                                <Link data-aos='fade-up' data-aos-delay="200" href="/about"
                                       className="newthemeBtn">About Us</Link>
                             </div>
                         </div>
@@ -165,8 +178,7 @@ export default function Home() {
                 </div>
             </section>
 
-
-            <section className="testimonialMain">
+            {/*<section className="testimonialMain">
                 <div className="container">
                     <h2 className="heading text-center">Our Testimonials</h2>
                     <div className="row align-items-center">
@@ -253,15 +265,15 @@ export default function Home() {
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
-                            {/*<div className="reviewsSlider swiper">*/}
-                            {/*    <div className="swiper-wrapper">*/}
+                            <div className="reviewsSlider swiper">
+                                <div className="swiper-wrapper">
 
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>*/}
         </Layout>
     );
 }

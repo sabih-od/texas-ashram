@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import Image from "next/image";
 import logo from "../images/logo.png";
 import gsap from "gsap";
@@ -7,7 +7,7 @@ function PreLoader() {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const tl = gsap.timeline({ onComplete: hideLoader });
+        const tl = gsap.timeline({onComplete: hideLoader});
 
         function preLoader() {
             tl.to(".preLoader.black > img", {
@@ -41,7 +41,10 @@ function PreLoader() {
 
     return (
         <div className={`preLoader ${isLoading ? "black" : "white"}`}>
-            <Image src={logo} width={240} alt="Logo" />
+            <div className="preLoader black">
+                <Image src={logo} width={240} alt="Logo"/>
+            </div>
+            <div className="preLoader white"/>
         </div>
     );
 }

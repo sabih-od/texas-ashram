@@ -82,10 +82,10 @@ const Menu = () => {
                                                                 <li className="active mt-3">
                                                                     <Link href="/" className="nav-link">HOME</Link>
                                                                 </li>
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/our-mission" className="nav-link">Our
                                                                         Mission</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/about" className="nav-link">
                                                                         About Us
@@ -111,7 +111,7 @@ const Menu = () => {
                                                                 )}
                                                                 <li className="">
                                                                     <Link href="/contact"
-                                                                          className="nav-link">Contact </Link>
+                                                                          className="nav-link">Contact Us </Link>
                                                                 </li>
                                                                 <li className="">
                                                                     <Link href="/announcement"
@@ -121,18 +121,18 @@ const Menu = () => {
                                                                     <Link href="/books"
                                                                           className="nav-link">Books</Link>
                                                                 </li>
-                                                                <li className="">
-                                                                    <Link href="/chat-module"
-                                                                          className="nav-link">Chat</Link>
-                                                                </li>
+                                                                {/*<li className="">*/}
+                                                                {/*    <Link href="/chat-module"*/}
+                                                                {/*          className="nav-link">Chat</Link>*/}
+                                                                {/*</li>*/}
                                                                 <li className="">
                                                                     <Link href="/events"
                                                                           className="nav-link">Events</Link>
                                                                 </li>
-                                                                <li className="">
-                                                                    <Link href="/notifications"
-                                                                          className="nav-link">Notifications</Link>
-                                                                </li>
+                                                                {/*<li className="">*/}
+                                                                {/*    <Link href="/notifications"*/}
+                                                                {/*          className="nav-link">Notifications</Link>*/}
+                                                                {/*</li>*/}
                                                                 <li className="">
                                                                     <Link href="/request-prayer"
                                                                           className="nav-link">Requested Prayer</Link>
@@ -141,10 +141,10 @@ const Menu = () => {
                                                                     <Link href="/sermons-teaching"
                                                                           className="nav-link">Sermons Teaching</Link>
                                                                 </li>
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/testimonials"
                                                                           className="nav-link">Testimonials</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/prayer-request-form"
                                                                           className="nav-link">Prayer Request

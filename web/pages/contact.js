@@ -1,8 +1,78 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from "../components/Layout";
 import Link from "next/link";
+import {useRouter} from 'next/router';
+import {create} from "../services/contactService";
 
 function Contact(props) {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [company, setCompany] = useState('');
+    const [message, setMessage] = useState('');
+    const [formErrors, setFormErrors] = useState({});
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const router = useRouter();
+    const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const handleContactForm = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            // Perform form validation
+            const errors = {};
+
+            if (!name) {
+                errors.name = 'Name is required';
+            }
+
+            if (!email) {
+                errors.email = 'Email is required';
+            } else if (!validateEmail(email)) {
+                errors.email = 'Invalid email format';
+            }
+
+            if (!phone) {
+                errors.phone = 'Phone is required';
+            }
+
+            if (!company) {
+                errors.company = 'Company is required';
+            }
+
+            if (Object.keys(errors).length > 0) {
+                setFormErrors(errors);
+                // return;
+            }
+
+            // Clear form errors and submit the form
+            setFormErrors({});
+            setIsFormSubmitted(true);
+
+            const result = await create({name, email, phone, company, message});
+            console.log('contact', result);
+
+            if (result?.data?.success === true) {
+                // Handle success
+                await router.push('/');
+            } else {
+                // Handle error
+                setErrorMessage('Failed to send email.');
+                router.back();
+            }
+        } catch (error) {
+            console.error(error);
+            setErrorMessage('Failed to send email.');
+            router.back();
+        }
+    }
+
     return (
         <Layout>
             {/*<!--Main Heading -->*/}
@@ -22,7 +92,7 @@ function Contact(props) {
             <section className="contact-section py-5">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6 px-5 border-right py-4">
+                        {/*<div className="col-md-6 px-5 border-right py-4">
                             <span className="heading-2">INFORMATION QUESTIONS</span>
                             <h4>FREQUENTLY ASKED QUESTIONS</h4>
                             <div id="accordion">
@@ -96,47 +166,71 @@ function Contact(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-6 px-5 py-4">
-                            <span className="heading-2">INFORMATION ABOUT US</span>
-                            <h4>CONTACT US FOR ANY QUESTIONS</h4>
-                            <form action="">
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="input-group">
-                                            <label for="">Your Name</label>
-                                            <input type="text" className="form-control" placeholder=""/>
+                        </div>*/}
+                        {/*<div className="col-md-8 px-5 py-4">*/}
+                        <div className="col-md-10">
+                            <div className="contactUs">
+                                <span className="heading-2">INFORMATION ABOUT US</span>
+                                <h4>CONTACT US FOR ANY QUESTIONS</h4>
+
+                                {isFormSubmitted && <p className="success">Form submitted successfully!</p>}
+                                <form onSubmit={handleContactForm}>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label htmlFor="">Your Name</label>
+                                                <input type="text" name="name" value={name} className="form-control"
+                                                       onChange={(e) => setName(e.target.value)}
+                                                       placeholder=""/>
+                                            </div>
+                                            {formErrors.name && <p className="error">{formErrors.name}</p>}
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label htmlFor="">Your Email</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    className="form-control"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
+                                            </div>
+                                            {formErrors.email && <p className="error">{formErrors.email}</p>}
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label htmlFor="">Phone Number</label>
+                                                <input type="text" name="phone" value={phone}
+                                                       onChange={(e) => setPhone(e.target.value)}
+                                                       className="form-control" placeholder=""/>
+                                            </div>
+                                            {formErrors.phone && <p className="error">{formErrors.phone}</p>}
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label htmlFor="">Company</label>
+                                                <input type="text" name="company" value={company}
+                                                       onChange={(e) => setCompany(e.target.value)}
+                                                       className="form-control" placeholder=""/>
+                                            </div>
+                                            {formErrors.company &&
+                                            <p className="error">{formErrors.company}</p>}
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="input-group">
+                                                <label htmlFor="">Your Message</label>
+                                                <textarea className="form-control" rows="10" value={message}
+                                                          onChange={(e) => setMessage(e.target.value)}
+                                                          name="message"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <button className="btn submitbtn" type="submit">Submit</button>
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="input-group">
-                                            <label for="">Your Email</label>
-                                            <input type="text" className="form-control" placeholder=""/>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="input-group">
-                                            <label for="">Phone Number</label>
-                                            <input type="text" className="form-control" placeholder=""/>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="input-group">
-                                            <label for="">Company</label>
-                                            <input type="text" className="form-control" placeholder=""/>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-12">
-                                        <div className="input-group">
-                                            <label for="">Your Message</label>
-                                            <textarea className="form-control" rows="10"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <button className="btn submitbtn">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
