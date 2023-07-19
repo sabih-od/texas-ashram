@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getUsers,
-    loading as usersLoading,
-    users as usersList,
-    total as usersTotal,
-    totalPages as usersTotalPages,
-    deleteUser
-} from '../../store/slices/usersSlice'
+    getReports,
+    loading as reportLoading,
+    reports as reportList,
+    total as reportTotal,
+    totalPages as reportTotalPages,
+    deleteReport,
+    acceptReport
+} from '../../store/slices/reportsSlice'
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
@@ -21,20 +22,20 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import {IconButton, Pagination, Stack} from "@mui/material";
-import {Pencil, Delete} from 'mdi-material-ui'
-import moment from "moment";
+import {Alert, IconButton, Pagination, Stack} from "@mui/material";
+import {Delete} from 'mdi-material-ui'
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 
-function Announcements(props) {
+function Reports(props) {
 
     const dispatch = useDispatch()
-    const {push} = useRouter()
 
-    const loading = useSelector(usersLoading)
-    const users = useSelector(usersList)
-    const total = useSelector(usersTotal)
-    const totalPages = useSelector(usersTotalPages)
+    const loading = useSelector(reportLoading)
+    const reports = useSelector(reportList)
+    const total = useSelector(reportTotal)
+    const totalPages = useSelector(reportTotalPages)
 
+    const [success, setSuccess] = useState(null)
     const [page, setPage] = useState(1)
 
     function onPageChange(e, p) {
@@ -43,12 +44,27 @@ function Announcements(props) {
 
     const handleDelete = async (e, id) => {
         e.preventDefault()
-        await dispatch(deleteUser({id}))
-        await dispatch(getUsers({page}))
+        await dispatch(deleteReport({id}))
+        await dispatch(getReports({page}))
+        showSuccess("User deleted successfully.")
+    }
+
+    const handleAccept = async (e, id) => {
+        e.preventDefault()
+        await dispatch(acceptReport({id}))
+        await dispatch(getReports({page}))
+        showSuccess("User blocked successfully.")
+    }
+
+    const showSuccess = (msg) => {
+        setSuccess(msg)
+        setTimeout(() => {
+            setSuccess(null)
+        }, 1500)
     }
 
     useEffect(() => {
-        dispatch(getUsers({page}))
+        dispatch(getReports({page}))
     }, [page])
 
     return (
@@ -56,10 +72,10 @@ function Announcements(props) {
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Users
+                        Reports
                     </Typography>
-                    <Button component={Link} href='/users/create' sx={{marginLeft: 'auto'}}>
-                        Create User
+                    <Button component={Link} href='/reports/create' sx={{marginLeft: 'auto'}}>
+                        Create Report
                     </Button>
                 </Stack>
             </Grid>
@@ -68,52 +84,45 @@ function Announcements(props) {
             <Grid item xs={12}>
                 <Card>
                     <Paper sx={{width: '100%', overflow: 'hidden'}}>
+                        {success ? (
+                            <Alert severity="success">{success}</Alert>
+                        ) : null}
                         {loading ? <Typography variant='h5' sx={{my: 3}} textAlign='center'>Loading...</Typography> : (
                             <TableContainer sx={{maxHeight: 440}}>
                                 <Table stickyHeader aria-label='sticky table'>
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Email</TableCell>
-                                            <TableCell>Phone</TableCell>
-                                            <TableCell>Blocked at</TableCell>
+                                            <TableCell>Reported User</TableCell>
+                                            <TableCell>Reported By</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {users.map(user => {
+                                        {reports.map(report => {
                                             return (
-                                                <TableRow hover role='checkbox' tabIndex={-1} key={user.id}>
+                                                <TableRow hover role='checkbox' tabIndex={-1} key={report.id}>
                                                     <TableCell>
-                                                        <span>{user.id}</span>
-                                                    </TableCell>
-                                                    <TableCell width="200">
-                                                        <span>{user.first_name} {user.last_name}</span>
+                                                        <span>{report.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{user.email}</span>
+                                                        <span>{`${report.reportedUser.first_name} ${report.reportedUser.last_name} (${report.reportedUser.email})`}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{user.phone}</span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <span>{user?.blocked_at ? moment(parseInt(user?.blocked_at)).format('H:m:s DD/MM/YYYY') : null}</span>
+                                                        <span>{report.user_id}</span>
                                                     </TableCell>
                                                     <TableCell width="200">
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => {
-                                                                e.preventDefault()
-                                                                push(`/users/${user.id}`)
-                                                            }} sx={{marginLeft: 'auto'}}>
-                                                            <Pencil/>
+                                                            onClick={e => handleAccept(e, report.id)}
+                                                            sx={{marginLeft: 'auto'}}>
+                                                            <BlockOutlinedIcon/>
                                                         </IconButton>
                                                         <IconButton
                                                             size="small"
                                                             variant="outlined"
-                                                            onClick={e => handleDelete(e, user.id)}
+                                                            onClick={e => handleDelete(e, report.id)}
                                                             sx={{marginLeft: 'auto'}}>
                                                             <Delete/>
                                                         </IconButton>
@@ -136,4 +145,4 @@ function Announcements(props) {
     );
 }
 
-export default Announcements;
+export default Reports;

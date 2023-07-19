@@ -7,36 +7,37 @@ import {BullhornOutline} from 'mdi-material-ui';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import MarkAsUnreadOutlinedIcon from '@mui/icons-material/MarkAsUnreadOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
 
 
 const navigation = () => {
-  return [
-    // {
-    //   title: 'Dashboard',
-    //   icon: HomeOutline,
-    //   path: '/'
-    // },
-    {
-      title: 'Books',
-        icon: BookIcon,
-      path: '/books'
-    },
-    {
-      title: 'Announcements',
-      icon: BullhornOutline,
-      path: '/announcements'
-    },
+    return [
+        // {
+        //   title: 'Dashboard',
+        //   icon: HomeOutline,
+        //   path: '/'
+        // },
+        {
+            title: 'Books',
+            icon: BookIcon,
+            path: '/books'
+        },
+        {
+            title: 'Announcements',
+            icon: BullhornOutline,
+            path: '/announcements'
+        },
 
-    // {
-    //   title: 'Account Settings',
-    //   icon: AccountCogOutline,
-    //   path: '/account-settings'
-    // },
-    {
-      title: 'Contacts',
-      icon: ContactIcon,
-      path: '/contacts'
-    },
+        // {
+        //   title: 'Account Settings',
+        //   icon: AccountCogOutline,
+        //   path: '/account-settings'
+        // },
+        {
+            title: 'Contacts',
+            icon: ContactIcon,
+            path: '/contacts'
+        },
 
         {
             title: 'Donations',
@@ -78,6 +79,12 @@ const navigation = () => {
             title: 'Users',
             icon: PeopleOutlinedIcon,
             path: '/users',
+        },
+
+        {
+            title: 'Reports',
+            icon: ReportOutlinedIcon,
+            path: '/reports',
         },
 
         // {
@@ -134,79 +141,78 @@ const navigation = () => {
         //   title: 'Form Layouts',
         //   path: '/form-layouts'
         // }
-    {
-      title: 'Staff Members',
-      icon: PeopleOutlinedIcon,
-      path: '/staff-members',
-    },
-    {
-      title: 'Groups',
-      icon: GroupsOutlinedIcon,
-      path: '/groups',
-    },
-    {
-      title: 'Group Requests',
-      icon: MarkAsUnreadOutlinedIcon,
-      path: '/group-requests',
-    },
+        {
+            title: 'Staff Members',
+            icon: PeopleOutlinedIcon,
+            path: '/staff-members',
+        },
+        {
+            title: 'Groups',
+            icon: GroupsOutlinedIcon,
+            path: '/groups',
+        },
+        {
+            title: 'Group Requests',
+            icon: MarkAsUnreadOutlinedIcon,
+            path: '/group-requests',
+        },
 
 
-
-    // {
-    //   title: 'Account Settings',
-    //   icon: AccountCogOutline,
-    //   path: '/account-settings'
-    // },
-    // {
-    //   sectionTitle: 'Pages'
-    // },
-    // {
-    //   title: 'Login',
-    //   icon: Login,
-    //   path: '/pages/login',
-    //   openInNewTab: true
-    // },
-    // {
-    //   title: 'Register',
-    //   icon: AccountPlusOutline,
-    //   path: '/pages/register',
-    //   openInNewTab: true
-    // },
-    // {
-    //   title: 'Error',
-    //   icon: AlertCircleOutline,
-    //   path: '/pages/error',
-    //   openInNewTab: true
-    // },
-    // {
-    //   sectionTitle: 'User Interface'
-    // },
-    // {
-    //   title: 'Typography',
-    //   icon: FormatLetterCase,
-    //   path: '/typography'
-    // },
-    // {
-    //   title: 'Icons',
-    //   path: '/icons',
-    //   icon: GoogleCirclesExtended
-    // },
-    // {
-    //   title: 'Cards',
-    //   icon: CreditCardOutline,
-    //   path: '/cards'
-    // },
-    // {
-    //   title: 'Tables',
-    //   icon: Table,
-    //   path: '/tables'
-    // },
-    // {
-    //   icon: CubeOutline,
-    //   title: 'Form Layouts',
-    //   path: '/form-layouts'
-    // }
-  ]
+        // {
+        //   title: 'Account Settings',
+        //   icon: AccountCogOutline,
+        //   path: '/account-settings'
+        // },
+        // {
+        //   sectionTitle: 'Pages'
+        // },
+        // {
+        //   title: 'Login',
+        //   icon: Login,
+        //   path: '/pages/login',
+        //   openInNewTab: true
+        // },
+        // {
+        //   title: 'Register',
+        //   icon: AccountPlusOutline,
+        //   path: '/pages/register',
+        //   openInNewTab: true
+        // },
+        // {
+        //   title: 'Error',
+        //   icon: AlertCircleOutline,
+        //   path: '/pages/error',
+        //   openInNewTab: true
+        // },
+        // {
+        //   sectionTitle: 'User Interface'
+        // },
+        // {
+        //   title: 'Typography',
+        //   icon: FormatLetterCase,
+        //   path: '/typography'
+        // },
+        // {
+        //   title: 'Icons',
+        //   path: '/icons',
+        //   icon: GoogleCirclesExtended
+        // },
+        // {
+        //   title: 'Cards',
+        //   icon: CreditCardOutline,
+        //   path: '/cards'
+        // },
+        // {
+        //   title: 'Tables',
+        //   icon: Table,
+        //   path: '/tables'
+        // },
+        // {
+        //   icon: CubeOutline,
+        //   title: 'Form Layouts',
+        //   path: '/form-layouts'
+        // }
+    ]
 }
 
 export default navigation
