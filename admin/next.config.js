@@ -9,7 +9,7 @@ module.exports = {
     //   jsconfigPaths: true // enables it for both jsconfig.json and tsconfig.json
     // },
     publicRuntimeConfig: {
-        apiUrl: 'https://localhost:3023',
+        apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
     },
     webpack: (config) => {
         config.resolve.alias = {
