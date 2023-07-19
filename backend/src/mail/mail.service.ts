@@ -1,22 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
+const smtpTransport = require('nodemailer-smtp-transport');
 
 @Injectable()
 export class MailService {
     async sendEmail(to: string, subject: string, text: string): Promise<any> {
         // Configure the SMTP transport
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
-            secure: true, // Set to true if using SSL/TLS
+        // const transporter = nodemailer.createTransport({
+        //     host: process.env.SMTP_HOST,
+        //     port: process.env.SMTP_PORT,
+        //     secure: true, // Set to true if using SSL/TLS
+        //     auth: {
+        //         user: process.env.SMTP_USER,
+        //         pass: process.env.SMTP_PASSWORD,
+        //     },
+        //     tls: {
+        //         rejectUnauthorized: false,
+        //         ciphers:'SSLv3',
+        //         maxVersion: 'TLSv1.2'
+        //     }
+        // });
+        const transporter = nodemailer.createTransport(smtpTransport({
+            host: process.env.SMTP_HOST, //mail.example.com (your server smtp)
+            port: process.env.SMTP_PORT, //2525 (specific port)
+            secureConnection: true, //true or false
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD,
-            },
-            tls: {
-                rejectUnauthorized: false
             }
-        });
+        }));
 
         // Prepare the email message
         const mailOptions = {

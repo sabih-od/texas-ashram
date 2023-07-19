@@ -37,6 +37,7 @@
     "joi": "^17.9.2",
     "mysql2": "^3.3.4",
     "nodemailer": "^6.9.3",
+    "nodemailer-smtp-transport": "^2.7.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "socket.io": "^4.7.1",
