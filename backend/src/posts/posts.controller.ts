@@ -58,7 +58,7 @@ export class PostsController {
 
       //create notification
       let createNotificationDto = new CreateNotificationDto();
-      createNotificationDto.title = 'New Post';
+      createNotificationDto.title = 'Post';
       createNotificationDto.content = createPostDto.title;
       createNotificationDto.topic = 'post';
       createNotificationDto.topic_id = res.id;
@@ -69,7 +69,7 @@ export class PostsController {
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
           notification: {
-              title: 'New Post',
+              title: 'Post',
               body: createPostDto.title
           }
       });

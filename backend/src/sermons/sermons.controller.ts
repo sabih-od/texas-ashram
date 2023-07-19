@@ -105,7 +105,7 @@ export class SermonsController {
 
         //create notification
         let createNotificationDto = new CreateNotificationDto();
-        createNotificationDto.title = 'New Sermon';
+        createNotificationDto.title = 'Sermon';
         createNotificationDto.content = createSermonDto.title;
         createNotificationDto.topic = 'sermon';
         createNotificationDto.topic_id = res.id;
@@ -116,7 +116,7 @@ export class SermonsController {
         let firebaseService = new FirebaseService();
         await firebaseService.sendNotification({
             notification: {
-                title: 'New Sermon',
+                title: 'Sermon',
                 body: createSermonDto.title
             }
         });

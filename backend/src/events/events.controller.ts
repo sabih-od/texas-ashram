@@ -59,7 +59,7 @@ export class EventsController {
 
         //create notification
         let createNotificationDto = new CreateNotificationDto();
-        createNotificationDto.title = 'New Event';
+        createNotificationDto.title = 'Event';
         createNotificationDto.content = createEventDto.title;
         createNotificationDto.created_at = Date.now().toString();
         let notification = await this.notificationsService.create(createNotificationDto);
@@ -68,7 +68,7 @@ export class EventsController {
         let firebaseService = new FirebaseService();
         await firebaseService.sendNotification({
             notification: {
-                title: 'New Event',
+                title: 'Event',
                 body: createEventDto.title
             }
         });

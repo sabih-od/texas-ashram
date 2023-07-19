@@ -23,7 +23,7 @@ export class AnnouncementsController {
 
       //create notification
       let createNotificationDto = new CreateNotificationDto();
-      createNotificationDto.title = 'New Announcement';
+      createNotificationDto.title = 'Announcement';
       createNotificationDto.content = createAnnouncementDto.title;
       createNotificationDto.topic = 'announcement';
       createNotificationDto.topic_id = res.id;
@@ -34,7 +34,7 @@ export class AnnouncementsController {
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
           notification: {
-              title: 'New Announcement',
+              title: 'Announcement',
               body: createAnnouncementDto.title
           }
       });

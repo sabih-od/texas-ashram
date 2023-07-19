@@ -68,17 +68,17 @@ export class MessagesController {
       //emit firebase notification
       let group_members = JSON.parse(group.members);
       if (group_members && group_members.length > 0) {
-          for (const user_id of group_members) {
-              let createNotificationDto = new CreateNotificationDto();
-              createNotificationDto.user_id = user_id;
-              createNotificationDto.title = 'New Message';
-              createNotificationDto.content = createMessageDto.message;
-              createNotificationDto.topic = 'message';
-              createNotificationDto.topic_id = group.id;
-              createNotificationDto.icon = process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
-              createNotificationDto.created_at = Date.now().toString();
-              let notification = await this.notificationsService.create(createNotificationDto);
-          }
+          // for (const user_id of group_members) {
+          //     let createNotificationDto = new CreateNotificationDto();
+          //     createNotificationDto.user_id = user_id;
+          //     createNotificationDto.title = 'New Message';
+          //     createNotificationDto.content = createMessageDto.message;
+          //     createNotificationDto.topic = 'message';
+          //     createNotificationDto.topic_id = group.id;
+          //     createNotificationDto.icon = process.env.APP_URL + ':' + process.env.PORT + "/images/logo.png";
+          //     createNotificationDto.created_at = Date.now().toString();
+          //     let notification = await this.notificationsService.create(createNotificationDto);
+          // }
 
           //send notification
           let firebaseService = new FirebaseService();

@@ -31,7 +31,7 @@ export class PrayerRequestsController {
 
       //create notification
       let createNotificationDto = new CreateNotificationDto();
-      createNotificationDto.title = 'New Prayer Request for ' + createPrayerRequestDto.name;
+      createNotificationDto.title = 'Prayer Request for ' + createPrayerRequestDto.name;
       createNotificationDto.content = createPrayerRequestDto.description;
       createNotificationDto.topic = 'prayer-request';
       createNotificationDto.topic_id = res.id;
@@ -43,7 +43,7 @@ export class PrayerRequestsController {
       let firebaseService = new FirebaseService();
       await firebaseService.sendNotification({
           notification: {
-              title: 'New Prayer Request for ' + createPrayerRequestDto.name,
+              title: 'Prayer Request for ' + createPrayerRequestDto.name,
               body: createPrayerRequestDto.description
           }
       });
