@@ -96,7 +96,7 @@ export class MessagesController {
           notification: {
               title: 'New Message',
               body: createMessageDto.message,
-              group_id: createMessageDto.group_id
+              group_id: createMessageDto.group_id.toString()
           }
       });
 

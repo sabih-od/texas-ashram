@@ -41,7 +41,7 @@ export class MessagesService {
         });
 
         //populate user object in place of user_id
-        const enrichedData = await Promise.all(
+        let enrichedData = await Promise.all(
             data.map(async (message) => {
                 const user = await this.userRepository.findOne({
                     where: {
@@ -65,6 +65,9 @@ export class MessagesService {
                 }
             }),
         );
+
+        // Remove null entries from the array
+        enrichedData = enrichedData.filter((entry) => entry !== null && entry !== undefined);
 
         const totalPages = Math.ceil(total / limit);
 
