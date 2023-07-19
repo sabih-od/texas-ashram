@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@nestjs/common';
 import {CreateMessageDto} from './dto/create-message.dto';
 import {UpdateMessageDto} from './dto/update-message.dto';
-import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
+import {EntityNotFoundError, IsNull, QueryFailedError, Repository} from "typeorm";
 import {Message} from "./entities/message.entity";
 import {User} from "../users/entities/user.entity";
 
@@ -31,7 +31,7 @@ export class MessagesService {
     }
 
     async findAll(page: number = 1, limit: number = 10, query_object = {}): Promise<any> {
-        const [data, total] = await this.messageRepository.findAndCount({
+        let [data, total] = await this.messageRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
             order: {
@@ -45,7 +45,8 @@ export class MessagesService {
             data.map(async (message) => {
                 const user = await this.userRepository.findOne({
                     where: {
-                        id: message.user_id
+                        id: message.user_id,
+                        blocked_at: IsNull()
                     }
                 });
 
@@ -57,9 +58,11 @@ export class MessagesService {
                     delete user.phone;
                     delete user.role_id;
                     delete user.created_at;
-                }
 
-                return { ...message, user };
+                    return { ...message, user };
+                } else {
+                    total -= 1;
+                }
             }),
         );
 
