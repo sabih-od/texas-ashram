@@ -58,6 +58,43 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+##JWT
+-jwt auth middleware is present in /src/auth/auth.guard.ts
+
+##Firebase
+-firebase credentials located in /src/firebase/fbase.json
+
+##Helpers
+-located in /src/helpers/helper.ts
+
+##Mailing (smtp)
+-located in /src/mail
+
+-smtp credentials located in .env [SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, MAIL_FROM_ADDRESS]
+
+##Middlewares
+-located in /src/middlewares
+
+##Socket-io
+-initialised in /src/main.ts
+
+-socket port is defined in .env file [SOCKET_IO_PORT]
+
+##SSL (for https):
+-generate .key and .cert files and place them in /src/ssl directory
+
+-include certificate and key main.ts file
+
+-example (main.ts):
+
+```
+//https config
+const httpsOptions = {
+    key: fs.readFileSync(path.join(__dirname, '', '/ssl/<key-filename>').replace('dist', 'src')),
+    cert: fs.readFileSync(path.join(__dirname, '', '/ssl/<cert-filename>').replace('dist', 'src')),
+};
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
