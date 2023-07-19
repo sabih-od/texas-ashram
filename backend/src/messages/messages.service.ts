@@ -84,7 +84,7 @@ export class MessagesService {
                 }
             });
 
-            let user = await this.userRepository.findOne({
+            let user = await this.userRepository.findOneOrFail({
                 where: {
                     id: message.user_id
                 }

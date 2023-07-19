@@ -36,6 +36,15 @@ export class MessagesController {
           };
       }
 
+      let user_exists_check = await this.usersService.findOne(createMessageDto.user_id);
+      if (user_exists_check.error) {
+          return {
+              success: false,
+              message: 'User does not exist. (Invalid user_id)',
+              data: []
+          };
+      }
+
       // const members_array = JSON.parse(group.members);
       // let user = await this.usersService.findOneByEmail(req.user.email);
       // if (!members_array || !members_array.includes(user.id)) {
@@ -79,17 +88,17 @@ export class MessagesController {
           //     createNotificationDto.created_at = Date.now().toString();
           //     let notification = await this.notificationsService.create(createNotificationDto);
           // }
-
-          //send notification
-          let firebaseService = new FirebaseService();
-          await firebaseService.sendNotification({
-              notification: {
-                  title: 'New Message',
-                  body: createMessageDto.message,
-                  group_id: createMessageDto.group_id
-              }
-          });
       }
+
+      //send notification
+      let firebaseService = new FirebaseService();
+      await firebaseService.sendNotification({
+          notification: {
+              title: 'New Message',
+              body: createMessageDto.message,
+              group_id: createMessageDto.group_id
+          }
+      });
 
       return {
           success: !res.error,
