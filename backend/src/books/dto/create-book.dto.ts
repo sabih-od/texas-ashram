@@ -6,6 +6,9 @@ export class CreateBookDto {
     @ApiProperty({example: 'Books Lorem Ipsum'})
     title: string;
 
+    @ApiProperty({example: 'Books Description'})
+    description: string;
+
     @ApiProperty({example: 'OneDrive files Upload'})
     file: string;
 

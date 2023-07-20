@@ -1,15 +1,11 @@
 import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParams} from "./global";
 
-export const create = async ({
-                                 title,
-                                 file,
-                                 image
-                             }) => {
+export const create = async (payload) => {
     try {
         const form = new FormData()
-        form.append('title', title)
-        form.append('file', file)
-        form.append('image', image)
+        for (const payloadKey in payload) {
+            form.append(payloadKey, payload[payloadKey])
+        }
 
         const response = await fetch(`${apiUrl()}/books`, {
             method: 'POST',
@@ -37,7 +33,6 @@ export const update = async ({
                                  ...payload
                              }) => {
     try {
-        console.log("payload", payload)
         const form = new FormData()
         for (const payloadKey in payload) {
             form.append(payloadKey, payload[payloadKey])

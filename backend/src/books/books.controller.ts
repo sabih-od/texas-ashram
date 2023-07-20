@@ -8,7 +8,7 @@ import {
     UseInterceptors,
     Query, UseGuards, UploadedFiles
 } from '@nestjs/common';
-import { FileFieldsInterceptor, FileInterceptor } from "@nestjs/platform-express";
+import {FileFieldsInterceptor, FileInterceptor} from "@nestjs/platform-express";
 import {
     deleteFileFromUploads,
     generateRandomString,
@@ -16,23 +16,32 @@ import {
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
-import { promises as fsPromises } from "fs";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { AuthGuard } from "../auth/auth.guard";
-import { Injectable,NestInterceptor, ExecutionContext, BadRequestException, ParseIntPipe, CallHandler} from '@nestjs/common';
-import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/create-book.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {promises as fsPromises} from "fs";
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {AuthGuard} from "../auth/auth.guard";
+import {
+    Injectable,
+    NestInterceptor,
+    ExecutionContext,
+    BadRequestException,
+    ParseIntPipe,
+    CallHandler
+} from '@nestjs/common';
+import {BooksService} from './books.service';
+import {CreateBookDto} from './dto/create-book.dto';
+import {UpdateBookDto} from './dto/update-book.dto';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {FirebaseService} from "../firebase/firebase.service";
+
 const MAX_FILE_SIZE = 100000000;
 
 @Injectable()
 export class MaxFileSizeInterceptor implements NestInterceptor {
-    constructor(private readonly maxSize: number) {}
+    constructor(private readonly maxSize: number) {
+    }
 
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         const request = context.switchToHttp().getRequest();
@@ -57,15 +66,16 @@ export class MaxFileSizeInterceptor implements NestInterceptor {
 @ApiTags('Books')
 @Controller('books')
 export class BooksController {
-    constructor(private readonly booksService: BooksService, private readonly notificationsService: NotificationsService) {}
+    constructor(private readonly booksService: BooksService, private readonly notificationsService: NotificationsService) {
+    }
 
     @ApiBearerAuth()
     @UseGuards(AuthGuard)
     @Post()
     @UseInterceptors(
         FileFieldsInterceptor([
-            { name: 'file', maxCount: 1 },
-            { name: 'image', maxCount: 1 },
+            {name: 'file', maxCount: 1},
+            {name: 'image', maxCount: 1},
         ]),
         new MaxFileSizeInterceptor(MAX_FILE_SIZE), // Use the MaxFileSizeInterceptor
     )
@@ -130,7 +140,6 @@ export class BooksController {
     }
 
 
-
     @Get()
     async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
         let res = await this.booksService.findAll(page, limit);
@@ -147,7 +156,6 @@ export class BooksController {
     @Get(':id')
     async findOne(@Param('id') id: string) {
         let res = await this.booksService.findOne(+id);
-
         return {
             success: !res.error,
             message: res.error ? res.error : '',
@@ -160,15 +168,14 @@ export class BooksController {
     @Post(':id')
     @UseInterceptors(
         FileFieldsInterceptor([
-            { name: 'file', maxCount: 1 },
-            { name: 'image', maxCount: 1 },
+            {name: 'file', maxCount: 1},
+            {name: 'image', maxCount: 1},
         ]),
         new MaxFileSizeInterceptor(MAX_FILE_SIZE),
     )
     async update(
         @Param('id', ParseIntPipe) id: number,
         @Body() updateBookDto: UpdateBookDto,
-
         @UploadedFiles() files: { image?: Express.Multer.File[], file?: Express.Multer.File[] },
     ) {
         try {
@@ -193,6 +200,8 @@ export class BooksController {
                 let file_path = '.' + dir_path + file_name;
 
                 await uploadFile('.' + dir_path, file_path, files.file[0]);
+
+                updateBookDto.file = app_url + dir_path + file_name;
             }
 
             // Image upload work
@@ -205,6 +214,8 @@ export class BooksController {
                 let file_path = '.' + dir_path + file_name;
 
                 await uploadFile('.' + dir_path, file_path, files.image[0]);
+
+                updateBookDto.image = app_url + dir_path + file_name;
             }
 
             if (!Object.keys(updateBookDto).length) {

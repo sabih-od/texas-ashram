@@ -30,6 +30,8 @@ function Book(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
+    const [url, setUrl] = useState('')
+    const [description, setDescription] = useState('')
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
 
@@ -42,6 +44,8 @@ function Book(props) {
     useEffect(() => {
         if (book) {
             setTitle(book.title)
+            setUrl(book.url ?? '')
+            setDescription(book.description ?? '')
         }
     }, [book])
 
@@ -64,7 +68,9 @@ function Book(props) {
 
         // if (!fileValidation()) return;
         let data = {
-            title
+            title,
+            url,
+            description
         }
 
         if (image)
@@ -122,10 +128,18 @@ function Book(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row>
+                            <Grid container>
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
+                                </Grid>
+                                <Grid item xs={12} mt={5}>
+                                    <TextField fullWidth label='URL' value={url}
+                                               onChange={e => setUrl(e.target.value)}/>
+                                </Grid>
+                                <Grid item xs={12} mt={5}>
+                                    <TextField fullWidth label='Description' multiline rows={4} value={description}
+                                               onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>

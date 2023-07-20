@@ -163,7 +163,6 @@ export class EventsController {
     @Delete(':id')
     async remove(@Param('id') id: string) {
         let event = await this.eventsService.findOne(+id);
-        console.log("delete id", id, event)
         if (event.error) {
             return {
                 success: false,
