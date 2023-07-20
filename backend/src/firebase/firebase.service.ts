@@ -32,11 +32,11 @@ export class FirebaseService {
         try {
             const notification = {
                 ...body,
-                topic: 'test', // The topic to which the notification will be sent
-                tokens: [fcm_token], // The topic to which the notification will be sent
+                // topic: 'test', // The topic to which the notification will be sent
+                // tokens: [fcm_token], // The topic to which the notification will be sent
             };
 
-            let response = await firebaseAdmin.messaging().sendMulticast(notification);
+            let response = await firebaseAdmin.messaging().sendToDevice(fcm_token, notification);
 
             return {
                 success: true,

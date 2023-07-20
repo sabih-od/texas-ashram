@@ -11,6 +11,8 @@ import {FindOneOptions, Repository} from "typeorm";
 import {Group} from "../groups/entities/group.entity";
 import {GroupRequest} from "./entities/group-request.entity";
 import {FirebaseService} from "../firebase/firebase.service";
+import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
+import {NotificationsService} from "../notifications/notifications.service";
 
 @ApiTags('Group Requests')
 @ApiBearerAuth()
@@ -21,6 +23,7 @@ export class GroupRequestsController {
       private readonly groupRequestsService: GroupRequestsService,
       private readonly groupsService: GroupsService,
       private readonly usersService: UsersService,
+      private readonly notificationsService: NotificationsService,
       @Inject('GROUP_REPOSITORY')
       private groupRepository: Repository<Group>,
       @Inject('GROUP_REQUEST_REPOSITORY')
@@ -65,6 +68,17 @@ export class GroupRequestsController {
       createGroupRequestDto.created_at = Date.now().toString();
       let res = await this.groupRequestsService.create(createGroupRequestDto);
 
+      //create notification
+      let createNotificationDto = new CreateNotificationDto();
+      createNotificationDto.user_id = user.id;
+      createNotificationDto.title = 'Group Request';
+      createNotificationDto.content = 'Your group request has been accepted';
+      createNotificationDto.topic = 'group-request';
+      createNotificationDto.topic_id = res.id;
+      createNotificationDto.created_at = Date.now().toString();
+      let notification = await this.notificationsService.create(createNotificationDto);
+
+      //emit firebase notification
       if (user.fcm_token) {
           let firebaseService = new FirebaseService();
           await firebaseService.sendNotificationToDevice(user.fcm_token, {
