@@ -23,6 +23,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import {IconButton, Pagination, Stack} from "@mui/material";
 import {Pencil, Delete} from 'mdi-material-ui'
+import moment from "moment";
 
 function Events(props) {
 
@@ -45,6 +46,8 @@ function Events(props) {
         await dispatch(deleteEvent({id}))
         await dispatch(getEvents({page}))
     }
+
+    const formatDate = (date) => moment(date, 'YYYY-MM-DDTHH:mm').format('HH:mm DD/MM/YYYY')
 
     useEffect(() => {
         dispatch(getEvents({page}))
@@ -90,10 +93,10 @@ function Events(props) {
                                                         <span>{event.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{event.date_to}</span>
+                                                        <span>{formatDate(event.date_to)}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{event.date_from}</span>
+                                                        <span>{formatDate(event.date_from)}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{event.title}</span>

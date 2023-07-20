@@ -126,11 +126,26 @@ function Create(props) {
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth  label='Date To' type="date" value={date_to}
+                                    <TextField fullWidth label='Date To'
+                                               type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'datetime-local'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={date_to}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth  label='Date From' type="date" value={date_from}
+                                    <TextField fullWidth label='Date From' type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'datetime-local'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={date_from}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 
