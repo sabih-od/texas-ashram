@@ -154,9 +154,10 @@ function RequestPrayer(props) {
                         <table className="table table-responsive-lg">
                             <thead className="thead-dark">
                             <tr>
-                                <th scope="col" className="text-left">Pray For</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
+                                <th scope="col" className="">Pray For</th>
+                                {/*<th scope="col" className="text-left">Pray For</th>*/}
+                                {/*<th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>*/}
                                 <th scope="col">Requester</th>
                                 <th scope="col">Contact Info</th>
                                 <th scope="col">Actions</th>
@@ -167,10 +168,11 @@ function RequestPrayer(props) {
                                 displayedPrayers.map((prayer) => (
                                     <tr key={prayer.id}>
                                         <td>
-                                            <div className="d-flex align-items-center">{prayer.name}</div>
+                                            <div className="">{prayer.name}</div>
+                                            {/*<div className="d-flex align-items-center">{prayer.name}</div>*/}
                                         </td>
-                                        <td>{prayer.formattedDateTo}</td>
-                                        <td>{prayer.formattedDateFrom}</td>
+                                        {/*<td>{prayer.formattedDateTo}</td>
+                                        <td>{prayer.formattedDateFrom}</td>*/}
                                         {/*<td>{prayer.start_date}</td>
                                         <td>{prayer.end_date}</td>*/}
 

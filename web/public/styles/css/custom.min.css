@@ -1788,3 +1788,12 @@ button.logoutBtn:focus {
 .contactUs {
     margin-left: 10rem;
 }
+
+.qr-code {
+    width: 39%;
+}
+
+.funny {
+    width: 122%;
+    height: 104%;
+}

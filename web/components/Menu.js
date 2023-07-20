@@ -115,7 +115,7 @@ const Menu = () => {
                                                                 </li>
                                                                 <li className="">
                                                                     <Link href="/announcement"
-                                                                          className="nav-link">Announcement</Link>
+                                                                          className="nav-link">Announcements</Link>
                                                                 </li>
                                                                 <li className="">
                                                                     <Link href="/books"

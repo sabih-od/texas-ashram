@@ -9,6 +9,9 @@ export class CreateBookDto {
     @ApiProperty({example: 'OneDrive files Upload'})
     file: string;
 
+    @ApiProperty({example: 'https://www.google.com'})
+    url: string;
+
     @ApiProperty({example: 'Place Your Book Image'})
     image: string;
 

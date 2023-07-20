@@ -1,14 +1,11 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateEventDto } from './create-event.dto';
-import {MaxLength} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {
-    @MaxLength(20)
     @ApiProperty({ example: 'Texas Ashram' })
     title: string;
 
-    @MaxLength(200)
     @ApiProperty({ example: 'Text Your Description' })
     description: string;
 

@@ -14,11 +14,7 @@ export class BooksService {
 
     async create(createBookDto: CreateBookDto): Promise<any> {
         try {
-            const book = await this.bookRepository.create({
-                title: createBookDto.title,
-                file: createBookDto.file,
-                image: createBookDto.image,
-            });
+            const book = await this.bookRepository.create(createBookDto);
 
             await this.bookRepository.save(book);
 

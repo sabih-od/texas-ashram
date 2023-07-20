@@ -6,13 +6,16 @@ import family1 from "../images/new-html/family1.png";
 import family2 from "../images/new-html/family2.png";
 import family3 from "../images/new-html/family3.png";
 import shape from "../public/Shape.png";
+import shape2 from "../images/Shap2.png";
+import shape3 from "../images/Shap3.png";
+import shape4 from "../images/Shap4.png";
 import testImg1 from "../images/new-html/testiimg1.png";
 import testImg2 from "../images/new-html/testimg2.png";
 import quote from "../images/new-html/quote.png";
 import user1 from "../images/new-html/user1.png";
 import noPath from "../images/NoPath.png";
 import bannerVideo from "../public/banner.mp4";
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef} from 'react';
 import Link from "next/link";
 import ReactPlayer from 'react-player'
 // Import Swiper React components
@@ -23,7 +26,7 @@ import url from 'url';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Pagination } from 'swiper/modules';
+import {Autoplay, Pagination} from 'swiper/modules';
 import PreLoader from "./preLoader";
 
 export default function Home() {
@@ -44,7 +47,7 @@ export default function Home() {
             <PreLoader/>
             <section className="mainSlider">
                 <video ref={videoRef} className="video-player" playsInline autoPlay loop muted>
-                    <source src={bannerVideo} type="video/mp4" />
+                    <source src={bannerVideo} type="video/mp4"/>
                 </video>
                 <div className="slideContent slideOne">
                     <div className="container">
@@ -80,13 +83,13 @@ export default function Home() {
                                     common,
                                     is that life is tough sometimes. Sometimes we just need to unplug from all of life’s
                                     stressors and proactively focus on Jesus to recharge.</p>
-                                <Link data-aos='fade-up' data-aos-delay="200" href="/about#ourMission"
-                                      className="newthemeBtn">About Us</Link>
+                                {/*<Link data-aos='fade-up' data-aos-delay="200" href="/about#ourMission"
+                                      className="newthemeBtn">About Us</Link>*/}
                             </div>
                         </div>
                         <div className="col-md-7">
                             <figure data-aos='zoom-in' data-aos-delay="150" className="missionImg">
-                                <Image src={missionImg} className="img-fluid" alt={missionImg}/>
+                                <Image src={shape2} className="img-fluid" alt={shape2}/>
                             </figure>
                         </div>
                     </div>
@@ -110,7 +113,39 @@ export default function Home() {
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <Swiper
+                            <div className="family d-flex">
+                                <div className="familyBox" data-aos='fade-right' data-aos-delay="150">
+                                    <figure><Image src={family1} className="img-fluid" alt={family1}/></figure>
+                                    <h2>Family Activities:</h2>
+                                    <p>Experience Love and Acceptance in a Unique Setting</p>
+                                    <Link href="/about#family" className="newthemeBtn borderBtn">Read More</Link>
+                                </div>
+                                <div className="familyBox" data-aos='fade-right' data-aos-delay="150">
+                                    <figure><Image src={shape4} className="img-fluid" alt={shape4}/></figure>
+                                    <h2>Adult Activities:</h2>
+                                    <p>Grow in Faith and Fellowship with Other Adults</p>
+                                    <Link href="/about#adult" className="newthemeBtn borderBtn">Read More</Link>
+                                </div>
+                                <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
+                                    <figure><Image src={family3} className="img-fluid" alt={family3}/></figure>
+                                    <h2>Youth Activities:</h2>
+                                    <p>Game Time, Jesus Time, Down Time… About Time!</p>
+                                    <Link href="/about#youth" className="newthemeBtn borderBtn">Read More</Link>
+                                </div>
+                                <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
+                                    <figure><Image src={noPath} className="img-fluid" alt={noPath}/></figure>
+                                    <h2>Children's Activities</h2>
+                                    <p>Learn about Jesus in a Fun and Engaging Way</p>
+                                    <Link href="/about#children" className="newthemeBtn borderBtn">Read More</Link>
+                                </div>
+                                <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
+                                    <figure><Image src={shape3} className="img-fluid" alt={shape3}/></figure>
+                                    <h2>Young Adults</h2>
+                                    <p>Learn about Jesus in a Fun and Engaging Way</p>
+                                    <Link href="/about#young" className="newthemeBtn borderBtn">Read More</Link>
+                                </div>
+                            </div>
+                            {/*<Swiper
                                 slidesPerView={3}
                                 spaceBetween={30}
                                 centeredSlides={true}
@@ -156,7 +191,7 @@ export default function Home() {
                                         <Link href="/about#children" className="newthemeBtn borderBtn">Read More</Link>
                                     </div>
                                 </SwiperSlide>
-                            </Swiper>
+                            </Swiper>*/}
                         </div>
                     </div>
                 </div>
@@ -171,7 +206,7 @@ export default function Home() {
                                 <h2 className="heading" data-aos='fade-up'>We Serve The Entire Family</h2>
                                 <p data-aos='fade-up' data-aos-delay="150">At the Texas Christian Ashram, there is a
                                     group for everyone in your family!</p>
-                                <Link data-aos='fade-up' data-aos-delay="150" href="/prayer-request-form"
+                                <Link data-aos='fade-up' data-aos-delay="150" href="/about#schedule"
                                       className="newthemeBtn">2024
                                     Schedule</Link>
                             </div>
@@ -180,9 +215,9 @@ export default function Home() {
                 </div>
             </section>
 
-            {/*<section className="testimonialMain">
+            <section className="testimonialMain">
                 <div className="container">
-                    <h2 className="heading text-center">Our Testimonials</h2>
+                    <h2 className="heading text-center">Need Prayer?</h2>
                     <div className="row align-items-center">
                         <div className="col-lg-7 col-md-5">
                             <div className="testiImg">
@@ -211,33 +246,23 @@ export default function Home() {
                                 <SwiperSlide>
                                     <div className="reviewContent">
                                         <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
-                                        <p>As a parent, it can be challenging to find a spiritual retreat that
-                                            accommodates the
-                                            needs of
-                                            the entire family. The Texas Christian Ashram was the perfect solution
-                                            for us. Our
-                                            children
-                                            had a blast participating in age-appropriate activities, while my spouse
-                                            and I were
-                                            able to
-                                            deepen our faith through the adult programs. We left feeling closer to
-                                            each other
-                                            and closer
-                                            to God.</p>
-                                        <span>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                </span>
-                                        <div className="user">
+                                        <p>It takes a village! If you are going through some tough times, have some
+                                            great news to share, and/or need some prayer for others, please submit the
+                                            request so we can pray with you!</p>
+                                        {/*<span>
+                                            <i className="fas fa-star"/>
+                                            <i className="fas fa-star"/>
+                                            <i className="fas fa-star"/>
+                                            <i className="fas fa-star"/>
+                                            <i className="fas fa-star"/>
+                                        </span>*/}
+                                        {/*<div className="user">
                                             <h4>Emma Rodriguez</h4>
                                             <Image src={user1} className="img-fluid" alt={user1}/>
-                                        </div>
+                                        </div>*/}
                                     </div>
                                 </SwiperSlide>
-                                <SwiperSlide>
+                                {/*<SwiperSlide>
                                     <div className="reviewContent">
                                         <figure><Image src={quote} className="img-fluid" alt={quote}/></figure>
                                         <p>As a parent, it can be challenging to find a spiritual retreat that
@@ -253,19 +278,19 @@ export default function Home() {
                                             each other
                                             and closer
                                             to God.</p>
-                                        <span>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                    <i className="fas fa-star"/>
-                                </span>
+                                            <span>
+                                                <i className="fas fa-star"/>
+                                                <i className="fas fa-star"/>
+                                                <i className="fas fa-star"/>
+                                                <i className="fas fa-star"/>
+                                                <i className="fas fa-star"/>
+                                            </span>
                                         <div className="user">
                                             <h4>Emma Rodriguez</h4>
                                             <Image src={user1} className="img-fluid" alt={user1}/>
                                         </div>
                                     </div>
-                                </SwiperSlide>
+                                </SwiperSlide>*/}
                             </Swiper>
                             <div className="reviewsSlider swiper">
                                 <div className="swiper-wrapper">
@@ -275,7 +300,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </section>*/}
+            </section>
         </Layout>
     );
 }
