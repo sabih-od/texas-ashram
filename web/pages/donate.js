@@ -1,5 +1,5 @@
 import {apiUrl, errorResponse, exceptionResponse, successResponse, getToken} from "../services/global";
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Layout from "../components/Layout";
 import donate from "../images/donate3.jpg";
 import Image from "next/image";
@@ -179,15 +179,21 @@ function Donate(props) {
                         <div className="donateCard mx-4">
                             <div className="tab">
                                 <div className="col-md-10 mx-auto">
-                                    <h4 className="title">Support Our Cause</h4>
-                                    <p>Help our organization by donating today! All donations go directly to making a
-                                        difference for our cause.</p>
+                                    <h4 className="title">Thank you for your support</h4>
+                                    <p>With a completely volunteer staff, all donations go directly to scholarships,
+                                        speakers, camp improvements, and supplies. You are making a difference directly
+                                        into people’s lives. You are able to donate through Venmo or mail your donation
+                                        to Texas Christian Ashram”
+                                        <br/>
+                                        Texas Christian Ashram
+                                        2402 Nilelake Ct
+                                        Friendswood, TX 77546.</p>
                                 </div>
                                 <figure>
                                     <Image src={donate} className="img-fluid" alt="donate"/>
                                 </figure>
                                 <button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
-                                    Donate Now <i className="fas fa-chevron-right ml-2" />
+                                    Venmo <i className="fas fa-chevron-right ml-2"/>
                                 </button>
                             </div>
 
@@ -195,13 +201,14 @@ function Donate(props) {
                             <div className="tab pt-0">
                                 <div className="tab-header card-header">
                                     <button className="btn" onClick={() => showTab(0)}>
-                                        <i className="fas fa-chevron-left" />
+                                        <i className="fas fa-chevron-left"/>
                                     </button>
                                     <strong className="mx-auto">Choose Amount</strong>
                                 </div>
                                 <div className="col-md-10 mx-auto mt-4">
                                     <p>
-                                        How much would you like to donate? As a contributor to Nazareth, we make sure your
+                                        How much would you like to donate? As a contributor to Nazareth, we make sure
+                                        your
                                         donation goes directly to supporting our cause. Thank you for your generosity!
                                     </p>
                                     <div className="inputBox">
@@ -257,7 +264,7 @@ function Donate(props) {
                                     Continue <i className="fas fa-chevron-right ml-2" />
                                 </button>*/}
                                 <button className="btn themeBtn mt-5" onClick={() => showTab(2)}>
-                                    Continue <i className="fas fa-chevron-right ml-2" />
+                                    Continue <i className="fas fa-chevron-right ml-2"/>
                                 </button>
                             </div>
                             {/* choose price work */}

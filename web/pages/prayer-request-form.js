@@ -6,6 +6,7 @@ import {create} from '../services/prayerRequestService';
 import {useRouter} from 'next/router';
 import Cookie from "js-cookie";
 import Link from "next/link";
+const sendEmail = require('./sendEmail.js');
 
 function PrayerRequestForm(props) {
     const [name, setName] = useState('');
@@ -52,17 +53,17 @@ function PrayerRequestForm(props) {
             errors.name = 'Name is required';
         }
 
-        if (!email) {
+        /*if (!email) {
             errors.email = 'Email is required';
         } else if (!validateEmail(email)) {
             errors.email = 'Invalid email format';
-        }
+        }*/
 
-        if (!contact) {
+        /*if (!contact) {
             errors.contact = 'Contact is required';
-        }
+        }*/
 
-        if (!time) {
+        /*if (!time) {
             errors.time = 'Time is required';
         }
 
@@ -72,7 +73,7 @@ function PrayerRequestForm(props) {
 
         if (!endDate) {
             errors.endDate = 'End Date is required';
-        }
+        }*/
 
         if (!description) {
             errors.description = 'Description is required';
@@ -97,6 +98,7 @@ function PrayerRequestForm(props) {
         setIsFormSubmitted(true);
 
 
+        // Submit the form data to your API route
         const result = await create(name, email, contact, startDate, endDate, time, description);
         console.log('prayer', result);
 
@@ -106,6 +108,24 @@ function PrayerRequestForm(props) {
             setErrorMessage("Exception Error!");
             router.back();
         }
+
+        /*if (result.data.success === true) {
+            // Send the email using the server-side function
+            const emailSent = await sendEmail(name, email, contact, startDate, endDate, time, description);
+
+            if (emailSent) {
+                // Handle successful form submission
+                console.log('Form submitted successfully!');
+                await router.push('/');
+            } else {
+                // Handle email sending failure
+                setErrorMessage('Error sending email. Please try again later.');
+            }
+        } else {
+            // Handle form submission failure
+            setErrorMessage('Exception Error!');
+            router.back();
+        }*/
     };
 
     return (
@@ -161,8 +181,8 @@ function PrayerRequestForm(props) {
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
-                                    <div className="col-md-6 mb-4">
-                                        <label htmlFor="">Contact *</label>
+                                    <div className="col-md-12 mb-4">
+                                        <label htmlFor="">Phone Number *</label>
                                         {formErrors.contact && <p className="error">{formErrors.contact}</p>}
                                         <input
                                             type="text"
@@ -172,7 +192,7 @@ function PrayerRequestForm(props) {
                                             onChange={(e) => setContact(e.target.value)}
                                         />
                                     </div>
-                                    <div className="col-md-6 mb-4">
+                                    {/*<div className="col-md-6 mb-4">
                                         <label htmlFor="">Time *</label>
                                         {formErrors.time && <p className="error">{formErrors.time}</p>}
                                         <input
@@ -192,7 +212,7 @@ function PrayerRequestForm(props) {
                                                 onChange={handleStartDateChange}
                                                 className="form-control"
                                             />
-                                            {/*<span className="mx-4 mt-5">To</span>*/}
+                                            <span className="mx-4 mt-5">To</span>
                                         </div>
                                     </div>
                                     <div className="col-md-6 mb-4 my-4">
@@ -205,7 +225,7 @@ function PrayerRequestForm(props) {
                                                 className="form-control"
                                             />
                                         </div>
-                                    </div>
+                                    </div>*/}
 
                                     <div className="col-md-12 mb-4">
                                         <label htmlFor="">Description *</label>

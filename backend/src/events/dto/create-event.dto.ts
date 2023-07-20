@@ -1,14 +1,12 @@
-import {IsNotEmpty, MaxLength} from "class-validator";
+import {IsNotEmpty} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class CreateEventDto {
     @IsNotEmpty()
-    @MaxLength(20)
     @ApiProperty({ example: 'Texas Ashram' })
     title: string;
 
     @IsNotEmpty()
-    @MaxLength(200)
     @ApiProperty({ example: 'Text Your Description' })
     description: string;
 

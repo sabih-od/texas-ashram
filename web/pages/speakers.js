@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import speaker from "../images/speaker1.png";
 import speaker2 from "../images/speaker2.png";
+import andy from "../images/dr.andy.jpg";
 
 function Speakers(props) {
     return (
@@ -21,25 +22,25 @@ function Speakers(props) {
             </div>
             {/*!--!Main Heading --*/}
 
+            {/*<section className="innerPage">
+                <div className="container">
+                    <div className="row align-items-center justify-content-center mx-5">
+                        <div className="col-md-7 text-center" data-aos="fade-up">
+                        <div className="col-md-7 text-center" data-aos="">
+                            <h6 className="subheading text-secondary">Texas Christian Ashram</h6>
+                            <h1 className="heading mb-0">2021 Speakers</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>*/}
 
-            {/*<section className="innerPage">*/}
-            {/*    <div className="container">*/}
-            {/*        <div className="row align-items-center justify-content-center mx-5">*/}
-            {/*            <div className="col-md-7 text-center" data-aos="fade-up">*/}
-            {/*            /!*<div className="col-md-7 text-center" data-aos="">*!/*/}
-            {/*                <h6 className="subheading text-secondary">Texas Christian Ashram</h6>*/}
-            {/*                <h1 className="heading mb-0">2021 Speakers</h1>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
             <section className="pb-0">
                 <div className="container">
                     <div className="row mx-4">
                         <div className="col-md-9 px-5">
-                            <h6 className="subheading text-secondary">Evangelist</h6>
-                            <h1 className="heading">Bob Hayes</h1>
-                            <p className="text">Bob Hayes was born in Houston, Texas, and is the third generation of
+                            <h6 className="subheading text-secondary">Doctor</h6>
+                            <h1 className="heading">Dr. Andy Hurst</h1>
+                            <p className="text">Andy Hurst was born in Houston, Texas, and is the third generation of
                                 Methodist ministers in his family. Growing up in a Methodist parsonage the call to
                                 ministry came early, and at age 13, Robert gave his life to Christ. He says that his
                                 life was shaped by his father's preaching and his mother's knowledge of the great hymns
@@ -58,32 +59,7 @@ function Speakers(props) {
                                 excited to have him back this summer at the Texas Christian Ashram.</p>
                         </div>
                         <div className="col-md-3 mt-5">
-                            <Image src={speaker} className="img-fluid mt-5" alt="speaker" />
-                        </div>
-
-
-                        <div className="col-12">
-                            <hr />
-                        </div>
-
-                        <div className="col-md-9 px-5 mt-5">
-                            <h6 className="subheading text-secondary">Bible Teacher</h6>
-                            <h1 className="heading">Brian Shimer</h1>
-                            <p className="text">Brian Shimer became involved in the Christian Ashram movement first at
-                                the California Winter Ashram in February 1981.</p>
-                            <p className="text">The movement began to work on his life through the leadership of Mary
-                                Webster, who had traveled with Brother Stanley all over the world. Mary Webster was a
-                                marvel and wanted Brian and his fiancé to marry while at camp! "Love is too precious to
-                                wait," she said.​</p>
-                            <p className="text">Brian and Karen have been married for 39 years and have four grown
-                                daughters and five grandchildren. He has taught as a Bible Teacher and Evangelist at
-                                Christian Ashrams in the USA and Canada over the last 30 years, serves on the Ashram
-                                International Board, and has been director of the California Winter Ashram for two
-                                years.</p>
-                        </div>
-                        <div className="col-md-3 mt-5">
-                            <br />
-                                <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2" />
+                            <Image src={andy} className="img-fluid mt-5" alt="andy" />
                         </div>
                     </div>
                 </div>

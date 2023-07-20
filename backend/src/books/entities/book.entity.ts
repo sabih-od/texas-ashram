@@ -12,6 +12,9 @@ export class Book {
     file: string;
 
     @Column({type: 'text', nullable: true})
+    url: string;
+
+    @Column({type: 'text', nullable: true})
     image: string;
 
     @Column({ type: 'text', nullable: true })

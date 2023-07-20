@@ -37,7 +37,7 @@ function Announcement(props) {
             {/*<!-- Main Heading -->*/}
             <div className="innertitle">
                 <section className="innerHeading">
-                    <h1 className="mb-5">Announcement</h1>
+                    <h1 className="mb-5">Announcements</h1>
                 </section>
             </div>
             {/*<!-- !Main Heading -->*/}

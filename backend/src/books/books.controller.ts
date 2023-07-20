@@ -25,7 +25,6 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {FirebaseService} from "../firebase/firebase.service";

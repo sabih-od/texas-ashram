@@ -14,6 +14,7 @@ import missionImg8 from "../images/mission8.jpg";
 import missionImg9 from "../images/mission9.jpg";
 import missionImg10 from "../images/mission10.jpg";
 import missionImg11 from "../images/mission11.jpg";
+import shape3 from "../images/Shap3.png";
 import Link from "next/link";
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -77,27 +78,13 @@ function AboutUs(props) {
                             <h6 className="subheading text-primary">Welcome to the</h6>
                             <h1 className="heading">Texas Christian Ashram</h1>
                             <p>For more than 80 years, individuals and families have attended Christian Ashram retreats
-                                all
-                                around the world to find rest and recreation, encouraging teaching, and meaningful
-                                friendship. Each retreat offers a life-transforming opportunity to focus on JESUS in the
-                                midst of other people who believe in the hope of God's unshakable kingdom.</p>
+                                all around the world. The purpose of the retreat is to focus on JESUS, find rest and
+                                recreation, listen to encouraging teaching, and find meaningful friendships.</p>
                             <p>We recognize that each person is at a different place in life. One thing we have in
-                                common,
-                                is that life is tough sometimes. Sometimes we just need to unplug from all of life’s
-                                stressors and proactively focus on Jesus to recharge. If you are looking for a place to
-                                have
-                                fun, recharge, learn, and grow in faith, surrounded by a group of fellow believers, this
-                                is
-                                the place for you and your family.</p>
-                            <p>Our retreats are designed to provide a well-rounded experience, with inspiring teaching,
-                                uplifting worship, and engaging fellowship for all age groups. You'll have the
-                                opportunity
-                                to participate in small group discussions, reflective times of prayer, and fun
-                                recreational
-                                activities.</p>
-                            <p>We believe that rest and recreation are important parts of spiritual growth, so we also
-                                offer
-                                a variety of recreational activities such as hiking, swimming, and games.</p>
+                                common, is that life is tough sometimes. Sometimes we just need to unplug from all of
+                                life’s stressors and proactively focus on Jesus to recharge.</p>
+                            <p>Our sole purpose is to be another tool in God’s tool box that he can use to help
+                                strengthen the body of Christ and us as Christ Followers.</p>
                             {/*<a href="" className="themeBtn invert">Read More</a>*/}
                         </div>
                     </div>
@@ -127,43 +114,43 @@ function AboutUs(props) {
                             </div>
 
                             <Swiper className='missionSlider my-5 pb-5'
-                                slidesPerView={1}
-                                autoPlay
-                                loop
+                                    slidesPerView={1}
+                                    autoPlay
+                                    loop
                             >
-                                    <SwiperSlide>
-                                        <Image src={missionImg1} alt={missionImg1} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg2} alt={missionImg2} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg3} alt={missionImg3} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg4} alt={missionImg4} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg5} alt={missionImg5} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg6} alt={missionImg6} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg7} alt={missionImg7} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg8} alt={missionImg8} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg9} alt={missionImg9} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg10} alt={missionImg10} />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <Image src={missionImg11} alt={missionImg11} />
-                                    </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg1} alt={missionImg1}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg2} alt={missionImg2}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg3} alt={missionImg3}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg4} alt={missionImg4}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg5} alt={missionImg5}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg6} alt={missionImg6}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg7} alt={missionImg7}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg8} alt={missionImg8}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg9} alt={missionImg9}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg10} alt={missionImg10}/>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <Image src={missionImg11} alt={missionImg11}/>
+                                </SwiperSlide>
                             </Swiper>
                             {/*<a href="" className="themeBtn invert mt-4">Read More</a>*/}
                         </div>
@@ -179,9 +166,12 @@ function AboutUs(props) {
                             <h1 className="heading">We Serve the Entire Family</h1>
                             <p>At the Texas Christian Ashram, there is a group for everyone in your family!</p>
                         </div>
-                        <div className="col-md-1 text-center">
+                        <div className="col-md-1 text-center" data-aos='fade-bottom'>
+                            <Link href="/events" className="newthemeBtn">
+                                Events
+                            </Link>
                             <a href="#" download="">
-                                <Image src={iconImg} width="70" alt="iconImg"/>
+                                {/*<Image src={iconImg} width="70" alt="iconImg"/>*/}
                             </a>
                         </div>
                     </div>
@@ -282,6 +272,28 @@ function AboutUs(props) {
                                 through his son, Jesus Christ. Plenty of practice is provided as children learn how to
                                 experience the love of God and how to love God through Biblical studies, worship, arts,
                                 music, and recreation. </p>
+                        </div>
+                        <div className="col-12">
+                            <hr/>
+                        </div>
+                        <div className="col-md-6" id="children">
+                            <Image src={shape3} className="img-fluid" alt="shape3"/>
+                        </div>
+                        <div className="col-md-6 px-5" id="young">
+                            <h1 className="heading">Young Adults</h1>
+                            <p className="mb-0 text">The youth, middle school through high school, have their own
+                                leaders to guide them through the week. They will spend some of their time listening to
+                                the Bible teacher and/or Evangelist and some of the evening time enjoying the family
+                                singing.Our focus in all programs is the life we can experience as part of the Kingdom
+                                of God through his son, Jesus Christ. Plenty of practice is provided as children learn
+                                how to experience the love of God and how to love God through Biblical studies, worship,
+                                arts, music, and recreation.</p>
+                        </div>
+                        <div className="col-md-11 mx-auto mt-5 font_7">
+                            <p>Our focus in all programs is the life we can experience as part of the Kingdom of God
+                                through his son, Jesus Christ. Plenty of practice is provided as children learn how to
+                                experience the love of God and how to love God through Biblical studies, worship, arts,
+                                music, and recreation. </p>
                             <br/>
                             <p>Activities are provided during the mornings, afternoon prayer group time, and evening
                                 sessions. We all enjoy singing and sharing together in the evening before children
@@ -326,12 +338,12 @@ function AboutUs(props) {
                                 excited to have him back this summer at the Texas Christian Ashram.</p>
                         </div>
                         <div className="col-md-3 mt-5">
-                            <Image src={speaker} className="img-fluid mt-5" alt="speaker" />
+                            <Image src={speaker} className="img-fluid mt-5" alt="speaker"/>
                         </div>
 
 
                         <div className="col-12">
-                            <hr />
+                            <hr/>
                         </div>
 
                         <div className="col-md-9 px-5 mt-5">
@@ -350,9 +362,86 @@ function AboutUs(props) {
                                 years.</p>
                         </div>
                         <div className="col-md-3 mt-5">
-                            <br />
-                            <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2" />
+                            <br/>
+                            <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2"/>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="inner-about-section innerPage">
+                <div className="container">
+                    <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
+                    <h1 className="heading text-center mt-4 mb-3">Safety</h1>
+                    <div className="row mx-4">
+                        <div className="col-md-12 px-5">
+                            {/*<h6 className="subheading text-secondary">Evangelist</h6>*/}
+                            {/*<h1 className="heading">Bob Hayes</h1>*/}
+                            <p className="text">Safe sanctuary guidelines are practiced so parents and guardians can be
+                                assured their children are safe and secure during scheduled class times. Since the
+                                campgrounds are deep and wide, parents and guardians are responsible to supervise their
+                                children to ensure everyone’s safety at all other times.</p>
+                            <br/>
+                            <p className="text">Nurses are present to assist anyone who needs them.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="inner-about-section innerPage" id="We Serve the Entire Family">
+                <div className="container">
+                    <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
+                    <h1 className="heading text-center mt-4 mb-3">Schedule On It</h1>
+                    <div className="row mx-4">
+                        <div className="col-md-12 px-5">
+                            <h6 className="subheading text-secondary">Evangelist</h6>
+                            <h1 className="heading">Bob Hayes</h1>
+                            <p className="text">Bob Hayes was born in Houston, Texas, and is the third generation of
+                                Methodist ministers in his family. Growing up in a Methodist parsonage the call to
+                                ministry came early, and at age 13, Robert gave his life to Christ. He says that his
+                                life was shaped by his father's preaching and his mother's knowledge of the great hymns
+                                of the faith.</p>
+                            <p className="text">Bob is married to Deliliah "Dee” Hayes and is the proud father of three
+                                grown children: Joya, Robert III, and Ryan. After retiring from his service as a United
+                                Methodist bishop he joined the staff of The Woodlands Methodist Church and was recently
+                                elected to serve the United Christian Ashram ministry as a member of The Four, the
+                                governing staff of the UCA that was set up by E. Stanley Jones when the ministry began.
+                                ​</p>
+                            <p className="text">Bob completed his undergraduate studies at Huston-Tillotson College in
+                                Austin, Texas, majoring in English, and did his seminary graduate work at Perkins School
+                                of Theology, SMU, Dallas, Texas. He later completed his D.Min. at Drew University in
+                                Madison, New Jersey.</p>
+                            <p className="text">Bob is known as one of the best communicators in the faith and we are
+                                excited to have him back this summer at the Texas Christian Ashram.</p>
+                        </div>
+                        {/*<div className="col-md-3 mt-5">
+                            <Image src={speaker} className="img-fluid mt-5" alt="speaker"/>
+                        </div>*/}
+
+
+                        <div className="col-12">
+                            <hr/>
+                        </div>
+
+                        <div className="col-md-12 px-5 mt-5">
+                            <h6 className="subheading text-secondary">Bible Teacher</h6>
+                            <h1 className="heading">Brian Shimer</h1>
+                            <p className="text">Brian Shimer became involved in the Christian Ashram movement first at
+                                the California Winter Ashram in February 1981.</p>
+                            <p className="text">The movement began to work on his life through the leadership of Mary
+                                Webster, who had traveled with Brother Stanley all over the world. Mary Webster was a
+                                marvel and wanted Brian and his fiancé to marry while at camp! "Love is too precious to
+                                wait," she said.​</p>
+                            <p className="text">Brian and Karen have been married for 39 years and have four grown
+                                daughters and five grandchildren. He has taught as a Bible Teacher and Evangelist at
+                                Christian Ashrams in the USA and Canada over the last 30 years, serves on the Ashram
+                                International Board, and has been director of the California Winter Ashram for two
+                                years.</p>
+                        </div>
+                        {/*<div className="col-md-3 mt-5">
+                            <br/>
+                            <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2"/>
+                        </div>*/}
                     </div>
                 </div>
             </section>

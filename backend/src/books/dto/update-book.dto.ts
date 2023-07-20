@@ -10,6 +10,9 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
     @ApiProperty({example: 'OneDrive Files Upload'})
     file: string;
 
+    @ApiProperty({example: 'https://www.google.com'})
+    url: string;
+
     @ApiProperty({example: 'Place Your Book Image'})
     image: string;
 

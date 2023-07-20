@@ -21,13 +21,13 @@ const Footer = () => {
                             <Image src={logo} className="img-fluid" alt={logo}/>
                         </Link>
                     </div>
-                    {/*<div className="col-md-4">
+                    <div className="col-md-4">
                         <div className="quickList">
                             <h2>Quick Links</h2>
                             <div className="d-flex">
                                 <ul>
                                     <li><Link href="/">Home</Link></li>
-                                    <li><Link href="/our-mission">Our Mission</Link></li>
+                                    <li><Link href="/about">About Us</Link></li>
                                     <li><Link href="/families">Families</Link></li>
                                     <li><Link href="/speakers">Speakers</Link></li>
                                     <li><Link href="/registration">Registration</Link></li>
@@ -38,15 +38,15 @@ const Footer = () => {
                                             <Link href="/members"> Members </Link>
                                         </li>
                                     )}
-                                    <li><Link href="/contact">Contact</Link></li>
+                                    <li><Link href="/contact">Contact Us</Link></li>
                                     <li><Link href="/donate">Donation</Link></li>
                                     <li><Link href="/terms">Terms & Conditions</Link></li>
                                     <li><Link href="/privacy">Privacy Policy</Link></li>
                                 </ul>
                             </div>
                         </div>
-                    </div>*/}
-                    <div className="col-md-7">
+                    </div>
+                    <div className="col-md-4">
                         <div className="quickList">
                             <h2>Contact Us</h2>
                         </div>
