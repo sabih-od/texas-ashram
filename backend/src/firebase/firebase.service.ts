@@ -30,12 +30,13 @@ export class FirebaseService {
 
     async sendNotificationToDevice(fcm_token: string, body: {}): Promise<any> {
         try {
-            const notification = firebaseAdmin.messaging.MessagingPayload({
+            const notification = {
                 ...body,
                 topic: 'test', // The topic to which the notification will be sent
-            });
+                tokens: [fcm_token], // The topic to which the notification will be sent
+            };
 
-            let response = await firebaseAdmin.messaging().sendToDevice(fcm_token, notification);
+            let response = await firebaseAdmin.messaging().sendMulticast(notification);
 
             return {
                 success: true,
