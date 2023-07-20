@@ -28,18 +28,36 @@ export class GroupRequestsController {
 
   @Post()
   async create(@Body() createGroupRequestDto: CreateGroupRequestDto) {
-      let check = await this.groupRequestRepository.findOne({
+      let redundancy_check = await this.groupRequestRepository.findOne({
           where: {
               user_id: createGroupRequestDto.user_id,
               group_id: createGroupRequestDto.group_id,
           },
       });
 
-      if (check) {
+      if (redundancy_check) {
           return {
               success: false,
               message: 'You have already sent request. Please wait for approval.',
               data: []
+          }
+      }
+
+      let user = await this.usersService.findOne(+createGroupRequestDto.user_id);
+      if (user.error){
+          return {
+              success: false,
+              message: user.error,
+              data: [],
+          }
+      }
+
+      let group = await this.groupsService.findOne(+createGroupRequestDto.group_id);
+      if (group.error){
+          return {
+              success: false,
+              message: group.error,
+              data: [],
           }
       }
 
