@@ -7,6 +7,9 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
     @ApiProperty({example: 'Books Lorem Ipsum'})
     title: string;
 
+    @ApiProperty({example: 'Books Description'})
+    description: string;
+
     @ApiProperty({example: 'OneDrive Files Upload'})
     file: string;
 

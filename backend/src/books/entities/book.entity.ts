@@ -9,6 +9,9 @@ export class Book {
     title: string;
 
     @Column({type: 'text', nullable: true})
+    description: string;
+
+    @Column({type: 'text', nullable: true})
     file: string;
 
     @Column({type: 'text', nullable: true})
@@ -17,6 +20,6 @@ export class Book {
     @Column({type: 'text', nullable: true})
     image: string;
 
-    @Column({ type: 'text', nullable: true })
+    @Column({type: 'text', nullable: true})
     created_at: string;
 }
