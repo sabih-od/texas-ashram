@@ -24,5 +24,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
     role_id: number;
 
+    fcm_token: string;
+
     blocked_at: string;
 }

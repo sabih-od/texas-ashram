@@ -33,6 +33,9 @@ export class User {
     @Column({type: 'varchar', nullable: true})
     blocked_at: string;
 
+    @Column({type: 'text', nullable: true})
+    fcm_token: string;
+
     @Column({ type: 'text', nullable: true })
     created_at: string;
 

@@ -26,5 +26,7 @@ export class CreateUserDto {
 
     role_id: number;
 
+    fcm_token: string;
+
     created_at: string;
 }
