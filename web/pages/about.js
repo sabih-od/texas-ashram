@@ -14,7 +14,7 @@ import missionImg8 from "../images/mission8.jpg";
 import missionImg9 from "../images/mission9.jpg";
 import missionImg10 from "../images/mission10.jpg";
 import missionImg11 from "../images/mission11.jpg";
-import shape3 from "../images/Shap3.png";
+import shape3 from "../images/young adult.jpg";
 import Link from "next/link";
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -44,20 +44,25 @@ function AboutUs(props) {
             </div>
             <section className="inner-about-section innerPage">
                 <div className="container">
-                    <h1 className="heading text-center mt-4 mb-3">What we Believe</h1>
+                    <h1 className="heading text-center mt-4 mb-3">Welcome to the Texas Christian Ashram</h1>
+                    {/*<h1 className="heading text-center mt-4 mb-3">What we Believe</h1>*/}
                     <div className="row align-items-center mx-5 text-center">
                         <div className="col-12">
                             <figure className="margin-top">
                                 <Image src={aboutMain} className="img-fluid" alt="missionImg 2"/>
                             </figure>
                             <div className="py-4 pr-5">
-                                <h2 className="text-secondary">What is a Christian Ashram?</h2>
-                                <p className="text">It is a disciplined Christian experience held in a retreat setting
-                                    for
-                                    the purpose of deeper spiritual growth which makes God more real in daily living.
-                                    This provides a break from the hustle and bustle of everyday life and a move toward
-                                    the grace and presence of Jesus Christ.
-                                    What can I expect at a Christian Ashram?</p>
+                                <h2 className="text-secondary">What is the Texas Christian Ashram</h2>
+                                {/*<h2 className="text-secondary">What is a Christian Ashram?</h2>*/}
+                                <p className="text">It is a family Christian experience (like youth camp, but for the
+                                    whole family) held in a retreat setting for the sole purpose of providing a
+                                    Christian atmosphere for the whole family. Whether you are an infant or a young
+                                    adult or a wiser young adult, a full day’s schedule is planned for all ages that is
+                                    full of fun, fellowship, and Jesus. The camp is currently hosted at Scottsville Camp
+                                    and Conference Center in Marshall, TX. Link:
+                                    <Link href="https://www.scottsvillecamp.com" target="_blank" className="text-dark">
+                                        https://www.scottsvillecamp.com
+                                    </Link></p>
                             </div>
                         </div>
                     </div>
@@ -67,14 +72,33 @@ function AboutUs(props) {
             <section className="about-section">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6" data-aos="fade-right">
+                        <div className="col-md-12" data-aos="fade-up">
                             <div className="videoBox">
                                 <Image src={AboutImg} alt={AboutImg}/>
                                 <a href="https://vimeo.com/95424842" data-fancybox="" className="btn"><i
                                     className="far fa-play"/></a>
+
+                            </div>
+                            <div className="my-5">
+                                <h6 className="subheading text-primary">Welcome to the</h6>
+                                <h1 className="heading">Texas Christian Ashram</h1>
+                                <p>For more than 80 years, individuals and families have attended Christian Ashram
+                                    retreats all around the world. The purpose of the retreat is to focus on JESUS, find
+                                    rest and recreation, listen to encouraging teaching, and find meaningful
+                                    friendships.</p>
+                                <p>We recognize that each person is at a different place in life. One thing we have in
+                                    common, is that life is tough sometimes. Sometimes we just need to unplug from all
+                                    of life’s stressors and proactively focus on Jesus to recharge.</p>
+                                <p>Our sole purpose is to provide a Christian Atmosphere for all ages. We are another
+                                    tool in God’s toolbox that He can use to help strengthen the body of Christ and us
+                                    as Christ Followers.</p>
+                                <p>Our camp is designed to provide a well-rounded experience, with inspiring teaching,
+                                    uplifting worship, and engaging fellowship for all age groups. You'll have the
+                                    opportunity to participate in small group discussions, reflective times of prayer,
+                                    and fun recreational activities.</p>
                             </div>
                         </div>
-                        <div className="col-md-6 px-5" data-aos="fade-left">
+                        {/*<div className="col-md-6 px-5" data-aos="fade-left">
                             <h6 className="subheading text-primary">Welcome to the</h6>
                             <h1 className="heading">Texas Christian Ashram</h1>
                             <p>For more than 80 years, individuals and families have attended Christian Ashram retreats
@@ -85,13 +109,13 @@ function AboutUs(props) {
                                 life’s stressors and proactively focus on Jesus to recharge.</p>
                             <p>Our sole purpose is to be another tool in God’s tool box that he can use to help
                                 strengthen the body of Christ and us as Christ Followers.</p>
-                            {/*<a href="" className="themeBtn invert">Read More</a>*/}
-                        </div>
+                            <a href="" className="themeBtn invert">Read More</a>
+                        </div>*/}
                     </div>
                 </div>
             </section>
 
-            <section className="mission-section" id="ourMission">
+            {/*<section className="mission-section" id="ourMission">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-9 mx-auto text-center">
@@ -152,11 +176,12 @@ function AboutUs(props) {
                                     <Image src={missionImg11} alt={missionImg11}/>
                                 </SwiperSlide>
                             </Swiper>
-                            {/*<a href="" className="themeBtn invert mt-4">Read More</a>*/}
+                            <a href="" className="themeBtn invert mt-4">Read More</a>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>*/}
+
             <section className="innerPage">
                 <div className="container">
                     <div className="row align-items-center justify-content-center mx-5 mb-5">
@@ -314,7 +339,7 @@ function AboutUs(props) {
             <section className="inner-about-section innerPage">
                 <div className="container">
                     <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
-                    <h1 className="heading text-center mt-4 mb-3">Staff Members</h1>
+                    <h1 className="heading text-center mt-4 mb-3">Staff</h1>
                     <div className="row mx-4">
                         <div className="col-md-9 px-5">
                             <h6 className="subheading text-secondary">Evangelist</h6>
@@ -369,7 +394,7 @@ function AboutUs(props) {
                 </div>
             </section>
 
-            <section className="inner-about-section innerPage">
+            <section className="inner-about-section">
                 <div className="container">
                     <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
                     <h1 className="heading text-center mt-4 mb-3">Safety</h1>
@@ -388,15 +413,15 @@ function AboutUs(props) {
                 </div>
             </section>
 
-            <section className="inner-about-section innerPage" id="We Serve the Entire Family">
+            <section className="inner-about-section innerPage" id="schedule">
                 <div className="container">
                     <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
                     <h1 className="heading text-center mt-4 mb-3">Schedule On It</h1>
                     <div className="row mx-4">
                         <div className="col-md-12 px-5">
-                            <h6 className="subheading text-secondary">Evangelist</h6>
-                            <h1 className="heading">Bob Hayes</h1>
-                            <p className="text">Bob Hayes was born in Houston, Texas, and is the third generation of
+                            {/*<h6 className="subheading text-secondary">Evangelist</h6>*/}
+                            {/*<h1 className="heading">Bob Hayes</h1>*/}
+                            <p className="text mt-5">Bob Hayes was born in Houston, Texas, and is the third generation of
                                 Methodist ministers in his family. Growing up in a Methodist parsonage the call to
                                 ministry came early, and at age 13, Robert gave his life to Christ. He says that his
                                 life was shaped by his father's preaching and his mother's knowledge of the great hymns
@@ -419,13 +444,13 @@ function AboutUs(props) {
                         </div>*/}
 
 
-                        <div className="col-12">
-                            <hr/>
-                        </div>
+                        {/*<div className="col-12">*/}
+                        {/*    <hr/>*/}
+                        {/*</div>*/}
 
                         <div className="col-md-12 px-5 mt-5">
-                            <h6 className="subheading text-secondary">Bible Teacher</h6>
-                            <h1 className="heading">Brian Shimer</h1>
+                            {/*<h6 className="subheading text-secondary">Bible Teacher</h6>*/}
+                            {/*<h1 className="heading">Brian Shimer</h1>*/}
                             <p className="text">Brian Shimer became involved in the Christian Ashram movement first at
                                 the California Winter Ashram in February 1981.</p>
                             <p className="text">The movement began to work on his life through the leadership of Mary

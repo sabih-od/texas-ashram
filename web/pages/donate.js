@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Layout from "../components/Layout";
 import donate from "../images/donate3.jpg";
 import Image from "next/image";
+import Link from "next/link";
 import {loadStripe} from '@stripe/stripe-js';
 
 function Donate(props) {
@@ -183,7 +184,7 @@ function Donate(props) {
                                     <p>With a completely volunteer staff, all donations go directly to scholarships,
                                         speakers, camp improvements, and supplies. You are making a difference directly
                                         into people’s lives. You are able to donate through Venmo or mail your donation
-                                        to Texas Christian Ashram”
+                                        to Texas Christian Ashram.
                                         <br/>
                                         Texas Christian Ashram
                                         2402 Nilelake Ct
@@ -192,9 +193,13 @@ function Donate(props) {
                                 <figure>
                                     <Image src={donate} className="img-fluid" alt="donate"/>
                                 </figure>
-                                <button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
+                                <Link className="btn themeBtn mt-5" target="_blank"
+                                   href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
                                     Venmo <i className="fas fa-chevron-right ml-2"/>
-                                </button>
+                                </Link>
+                                {/*<button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
+                                    Venmo <i className="fas fa-chevron-right ml-2"/>
+                                </button>*/}
                             </div>
 
                             {/* choose price work */}
@@ -264,7 +269,6 @@ function Donate(props) {
                                     Continue <i className="fas fa-chevron-right ml-2" />
                                 </button>*/}
                                 <button className="btn themeBtn mt-5" onClick={() => showTab(2)}>
-                                    Continue <i className="fas fa-chevron-right ml-2"/>
                                 </button>
                             </div>
                             {/* choose price work */}

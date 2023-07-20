@@ -40,12 +40,12 @@ function Create(props) {
     const errors = useSelector(BookErrors)
     const success = useSelector(BookSuccess)
 
-    const [successMsg, setSuccessMessage] = useState(null)
+    const [successMsg, setSuccessMessage] = useState('')
     const [title, setTitle] = useState('')
     const [url, setUrl] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [file, setFile] = useState(null)
+    const [image, setImage] = useState('')
+    const [file, setFile] = useState('')
 
     useEffect(() => {
         dispatch(setSuccess(false))
@@ -74,12 +74,12 @@ function Create(props) {
 
     const fileValidation = () => {
         let _errors = []
-        if (file === null) {
+        /*if (file === null) {
             _errors.push("File is required!")
         }
         if (image === null) {
             _errors.push("Image is required!")
-        }
+        }*/
 
         if (_errors.length > 0) {
             dispatch(setErrors(_errors))
@@ -104,7 +104,7 @@ function Create(props) {
                                 <AlertTitle>Success</AlertTitle>
                                 <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         {errors && errors.length > 0 ? (
                             <Alert severity="error" sx={{mb: 4}}>
                                 <AlertTitle>Errors</AlertTitle>
@@ -112,7 +112,7 @@ function Create(props) {
                                     <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
                                 ))}
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         <form onSubmit={handleSubmit}>
                             <Grid row>
                                 <Grid item xs={12}>
@@ -138,7 +138,7 @@ function Create(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setFile(e.target?.files[0] ?? null)
+                                                    setFile(e.target?.files[0] ?? '')
                                                 }}
                                             />
                                         </Button>
@@ -151,7 +151,7 @@ function Create(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setImage(e.target?.files[0] ?? null)
+                                                    setImage(e.target?.files[0] ?? '')
                                                 }}
                                             />
                                         </Button>

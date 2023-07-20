@@ -13,20 +13,22 @@ function Events(props) {
                 const response = await get(1, 15);
                 const eventsArray = response.data?.data || [];
                 console.log(response.data?.data)
-                // const formattedEvents = eventsArray.map((event) => {
-                //     const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
-                //     const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
-                //     const formattedDateTo = format(parsedDateTo, 'MMM dd, yyyy');
-                //     const formattedDateFrom = format(parsedDateFrom, 'MMM dd, yyyy');
-                //
-                //     return {
-                //         ...event,
-                //         formattedDateTo: formattedDateTo,
-                //         formattedDateFrom: formattedDateFrom,
-                //     };
-                // });
+                const formattedEvents = eventsArray.map((event) => {
+                    // const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
+                    // const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
+                    const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd\'T\'HH:mm', new Date());
+                    const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd\'T\'HH:mm', new Date());
+                    const formattedDateTo = format(parsedDateTo, "MMM dd, h:mm a");
+                    const formattedDateFrom = format(parsedDateFrom, "MMM dd, h:mm a");
 
-                setEvents(eventsArray);
+                    return {
+                        ...event,
+                        formattedDateTo: formattedDateTo,
+                        formattedDateFrom: formattedDateFrom,
+                    };
+                });
+
+                setEvents(formattedEvents);
             } catch (error) {
                 console.error(error);
             }
@@ -63,16 +65,19 @@ function Events(props) {
                                     <div className="eventcard">
                                         <figure>
                                             {/*<Image src={event1} className="img-fluid" alt="event 1"/>*/}
-                                            <Image
-                                                src={event.image}
-                                                className="img-fluid"
-                                                alt={event.title}
-                                                width={300}
-                                                height={400}
-                                            />
+                                            {(event.image !== null && event.image !== 'null') ? (
+                                                <Image
+                                                    src={event.image}
+                                                    className="img-fluid"
+                                                    alt={event.title}
+                                                    width={300}
+                                                    height={400}
+                                                />
+                                            ) : null}
                                         </figure>
                                         <h4 className="">{event.title}</h4>
-                                        <span>{event.date_to} TO {event.date_from}</span>
+                                        <span>{event.formattedDateTo} TO {event.formattedDateFrom}</span>
+                                        {/*<span>{event.date_to} TO {event.date_from}</span>*/}
                                         <p>
                                             <i className="fas fa-map-marker-alt text-primary mr-2"/>
                                             {event.location}</p>

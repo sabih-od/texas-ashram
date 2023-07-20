@@ -91,10 +91,10 @@ const Menu = () => {
                                                                         About Us
                                                                     </Link>
                                                                 </li>
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/families"
                                                                           className="nav-link">Families</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/speakers"
                                                                           className="nav-link"> Speakers</Link>
@@ -133,13 +133,13 @@ const Menu = () => {
                                                                 {/*    <Link href="/notifications"*/}
                                                                 {/*          className="nav-link">Notifications</Link>*/}
                                                                 {/*</li>*/}
-                                                                <li className="">
+                                                                {/*<li className="">
                                                                     <Link href="/request-prayer"
                                                                           className="nav-link">Requested Prayer</Link>
-                                                                </li>
+                                                                </li>*/}
                                                                 <li className="">
                                                                     <Link href="/sermons-teaching"
-                                                                          className="nav-link">Sermons Teaching</Link>
+                                                                          className="nav-link">Messages</Link>
                                                                 </li>
                                                                 {/*<li className="">
                                                                     <Link href="/testimonials"

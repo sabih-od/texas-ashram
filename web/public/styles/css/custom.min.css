@@ -1797,3 +1797,19 @@ button.logoutBtn:focus {
     width: 122%;
     height: 104%;
 }
+
+.family {
+    gap: 20px;
+}
+
+.familyBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+}
