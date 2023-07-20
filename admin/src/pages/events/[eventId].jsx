@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 export const CustomDateInput = forwardRef((props, ref) => {
     return <TextField fullWidth {...props} inputRef={ref} label='Date' autoComplete='off'/>
 })
@@ -34,10 +35,10 @@ function Event(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
-    const [description, setDescription] = useState(null)
-    const [date_to, setDate_to] = useState(null)
-    const [date_from, setDate_from] = useState(null)
-    const [location, setLocation] = useState(null)
+    const [description, setDescription] = useState('')
+    const [date_to, setDate_to] = useState('')
+    const [date_from, setDate_from] = useState('')
+    const [location, setLocation] = useState('')
     const [image, setImage] = useState(null)
 
     useEffect(() => {
@@ -69,6 +70,8 @@ function Event(props) {
             }, 500)
         }
     }, [success, loading])
+
+    const formatDate = (date) => moment(date, 'YYYY-MM-DDTHH:mm').format('MM/DD/YYYY, hh:mm A')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -138,7 +141,7 @@ function Event(props) {
                             </Alert>
                         ) : null}
                         <form onSubmit={handleSubmit}>
-                            <Grid row className="my-4">
+                            <Grid container className="my-4">
                                 <Grid item xs={12}>
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
@@ -149,12 +152,28 @@ function Event(props) {
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth type="date" label='date_to' value={date_to}
+                                    <TextField fullWidth type="text"
+                                               label='date_to'
+                                               value={date_to}
+                                               onFocus={e => {
+                                                   e.target.type = 'datetime-local'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
                                                onChange={e => setDate_to(e.target.value)}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth type="date" label='date_from' value={date_from}
+                                    <TextField fullWidth type="text"
+                                               label='date_from'
+                                               value={date_from}
+                                               onFocus={e => {
+                                                   e.target.type = 'datetime-local'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
                                                onChange={e => setDate_from(e.target.value)}/>
                                 </Grid>
 
