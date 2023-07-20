@@ -42,7 +42,7 @@ export class GroupsService {
                 if (group.members != null && group.members != "" && group.members != "[]") {
                     group.members = JSON.parse(group.members);
                 } else {
-                    delete group.members;
+                    group.members = null;
                 }
 
                 return group;
