@@ -15,6 +15,12 @@ export class UpdateEventDto extends PartialType(CreateEventDto) {
     @ApiProperty({ example: '05-07-2023' })
     date_from: string;
 
+    @ApiProperty({ example: '10:37 PM' })
+    start_time: string;
+
+    @ApiProperty({ example: '10:37 AM' })
+    end_time: string;
+
     @ApiProperty({ example: 'USA' })
     location: string;
 

@@ -17,6 +17,12 @@ export class Event {
     @Column('varchar')
     date_from: string;
 
+    @Column({ type: 'varchar', nullable: true })
+    start_time: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    end_time: string;
+
     @Column({ type: 'text', nullable: true })
     location: string;
 
