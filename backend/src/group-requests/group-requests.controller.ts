@@ -7,8 +7,9 @@ import {AuthGuard} from "../auth/auth.guard";
 import {AcceptGroupRequestDto} from "./dto/accept-group-request.dto";
 import {GroupsService} from "../groups/groups.service";
 import {UsersService} from "../users/users.service";
-import {Repository} from "typeorm";
+import {FindOneOptions, Repository} from "typeorm";
 import {Group} from "../groups/entities/group.entity";
+import {GroupRequest} from "./entities/group-request.entity";
 
 @ApiTags('Group Requests')
 @ApiBearerAuth()
@@ -21,10 +22,27 @@ export class GroupRequestsController {
       private readonly usersService: UsersService,
       @Inject('GROUP_REPOSITORY')
       private groupRepository: Repository<Group>,
+      @Inject('GROUP_REQUEST_REPOSITORY')
+      private groupRequestRepository: Repository<GroupRequest>,
   ) {}
 
   @Post()
   async create(@Body() createGroupRequestDto: CreateGroupRequestDto) {
+      let check = await this.groupRequestRepository.findOne({
+          where: {
+              user_id: createGroupRequestDto.user_id,
+              group_id: createGroupRequestDto.group_id,
+          },
+      });
+
+      if (check) {
+          return {
+              success: false,
+              message: 'You have already sent request. Please wait for approval.',
+              data: []
+          }
+      }
+
       createGroupRequestDto.created_at = Date.now().toString();
       let res = await this.groupRequestsService.create(createGroupRequestDto);
 

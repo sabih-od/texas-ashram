@@ -28,13 +28,26 @@ export class GroupsService {
     }
 
     async findAll(page: number = 1, limit: number = 10): Promise<any> {
-        const [data, total] = await this.groupRepository.findAndCount({
+        let [data, total] = await this.groupRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
             order: {
                 last_updated: 'DESC'
             }
         });
+
+        //modify members to array of integers
+        data = await Promise.all(
+            data.map(async (group) => {
+                if (group.members != null && group.members != "" && group.members != "[]") {
+                    group.members = JSON.parse(group.members);
+                } else {
+                    delete group.members;
+                }
+
+                return group;
+            })
+        );
 
         const totalPages = Math.ceil(total / limit);
 
