@@ -201,8 +201,7 @@ export class AuthController {
             topic: 'test', // The topic to which the notification will be sent
         };
 
-        // let response = await firebaseAdmin.messaging().send(message);
-        let response = await firebaseAdmin.messaging().sendNotificationToDevice('cXJHcMOMTk2nlhKkgCNKKH:APA91bHzKI4oPp20ETUDFJgWIIrNoeJPhX9-5BLG7IHyaIG-PwN3rDrk9LRkreob1NWwU9OZHgHxP9R3v3NMvoD5L0M7m_k_kaPTxBC8q36tzsfdnqjmdeh3P6TiP49urA__pB3fX9WE', message);
+        let response = await firebaseAdmin.messaging().send(message);
 
         console.log(response);
 

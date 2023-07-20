@@ -10,6 +10,7 @@ import {UsersService} from "../users/users.service";
 import {FindOneOptions, Repository} from "typeorm";
 import {Group} from "../groups/entities/group.entity";
 import {GroupRequest} from "./entities/group-request.entity";
+import {FirebaseService} from "../firebase/firebase.service";
 
 @ApiTags('Group Requests')
 @ApiBearerAuth()
@@ -63,6 +64,16 @@ export class GroupRequestsController {
 
       createGroupRequestDto.created_at = Date.now().toString();
       let res = await this.groupRequestsService.create(createGroupRequestDto);
+
+      if (user.fcm_token) {
+          let firebaseService = new FirebaseService();
+          await firebaseService.sendNotificationToDevice(user.fcm_token, {
+              notification: {
+                  title: 'Group Request',
+                  body: 'Your group request has been accepted'
+              }
+          });
+      }
 
       return {
           success: !res.error,

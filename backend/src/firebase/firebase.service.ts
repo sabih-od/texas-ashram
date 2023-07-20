@@ -27,4 +27,27 @@ export class FirebaseService {
             };
         }
     }
+
+    async sendNotificationToDevice(fcm_token: string, body: {}): Promise<any> {
+        try {
+            const notification = firebaseAdmin.messaging.MessagingPayload({
+                ...body,
+                topic: 'test', // The topic to which the notification will be sent
+            });
+
+            let response = await firebaseAdmin.messaging().sendToDevice(fcm_token, notification);
+
+            return {
+                success: true,
+                message: 'Notification sent successfully',
+                data: response
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: 'Notification not sent',
+                data: error
+            };
+        }
+    }
 }
