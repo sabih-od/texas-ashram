@@ -113,33 +113,38 @@ export default function Home() {
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <div className="family d-flex">
+                            <div className="family d-flex justify-content-center">
                                 <div className="familyBox" data-aos='fade-right' data-aos-delay="150">
-                                    <figure><Image src={family1} className="img-fluid" alt={family1}/></figure>
+                                    <figure><Image src={family1} className="img-fluid imgContainer" alt={family1}/>
+                                    </figure>
                                     <h2>Family Activities:</h2>
                                     <p>Experience Love and Acceptance in a Unique Setting</p>
                                     <Link href="/about#family" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                                 <div className="familyBox" data-aos='fade-right' data-aos-delay="150">
-                                    <figure><Image src={shape4} className="img-fluid" alt={shape4}/></figure>
+                                    <figure><Image src={shape4} className="img-fluid imgContainer" alt={shape4}/>
+                                    </figure>
                                     <h2>Adult Activities:</h2>
                                     <p>Grow in Faith and Fellowship with Other Adults</p>
                                     <Link href="/about#adult" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                                 <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
-                                    <figure><Image src={family3} className="img-fluid" alt={family3}/></figure>
+                                    <figure><Image src={family3} className="img-fluid imgContainer" alt={family3}/>
+                                    </figure>
                                     <h2>Youth Activities:</h2>
                                     <p>Game Time, Jesus Time, Down Time… About Time!</p>
                                     <Link href="/about#youth" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                                 <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
-                                    <figure><Image src={noPath} className="img-fluid" alt={noPath}/></figure>
+                                    <figure><Image src={noPath} className="img-fluid imgContainer" alt={noPath}/>
+                                    </figure>
                                     <h2>Children's Activities</h2>
                                     <p>Learn about Jesus in a Fun and Engaging Way</p>
                                     <Link href="/about#children" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                                 <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
-                                    <figure><Image src={shape3} className="img-fluid" alt={shape3}/></figure>
+                                    <figure><Image src={shape3} className="img-fluid imgContainer" alt={shape3}/>
+                                    </figure>
                                     <h2>Young Adults</h2>
                                     <p>Learn about Jesus in a Fun and Engaging Way</p>
                                     <Link href="/about#young" className="newthemeBtn borderBtn">Read More</Link>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Link from "next/link";
 import Image from "next/image";
-import { get } from "../services/bookServices";
+import {get} from "../services/bookServices";
 
 function Books(props) {
     const [books, setBooks] = useState([]);
@@ -61,18 +61,20 @@ function Books(props) {
                                                 />
                                             ) : (
                                                 <Image
-                                                src="../images/books/book1.png"
-                                                className="img-fluid"
-                                                alt="book 1"
-                                                width={300}
-                                                height={400}
+                                                    src="../images/books/book1.png"
+                                                    className="img-fluid"
+                                                    alt="book 1"
+                                                    width={300}
+                                                    height={400}
                                                 />
                                             )}
                                         </figure>
                                         <h4>{book.title}</h4>
-                                        <a href={book.file} target="_blank" className="themeBtn grey">
-                                            Read More
-                                        </a>
+                                        { !book.url && !book.file ? '' :
+                                            <Link href={ book.url ? book.url : book.file ? book.file : '#' } target="_blank" className="themeBtn grey">
+                                                Read More
+                                            </Link>
+                                        }
                                     </div>
                                 </div>
                             ))
@@ -87,7 +89,7 @@ function Books(props) {
             </section>
             {/*<!-- !Books Section -->*/}
         </Layout>
-);
+    );
 }
 
 export default Books;

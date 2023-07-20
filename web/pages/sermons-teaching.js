@@ -29,11 +29,11 @@ function SermonsTeaching(props) {
             {/*<!-- Main Heading -->*/}
             <div className="innertitle">
                 <section className="innerHeading">
-                    <h1>Sermons And Teaching</h1>
+                    <h1>Messages</h1>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="/">Home</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Sermons And Teaching</li>
+                            <li className="breadcrumb-item active" aria-current="page">Messages</li>
                         </ol>
                     </nav>
                 </section>
