@@ -68,27 +68,6 @@ export class GroupRequestsController {
       createGroupRequestDto.created_at = Date.now().toString();
       let res = await this.groupRequestsService.create(createGroupRequestDto);
 
-      //create notification
-      let createNotificationDto = new CreateNotificationDto();
-      createNotificationDto.user_id = user.id;
-      createNotificationDto.title = 'Group Request';
-      createNotificationDto.content = 'Your group request has been accepted';
-      createNotificationDto.topic = 'group-request';
-      createNotificationDto.topic_id = res.id;
-      createNotificationDto.created_at = Date.now().toString();
-      let notification = await this.notificationsService.create(createNotificationDto);
-
-      //emit firebase notification
-      if (user.fcm_token) {
-          let firebaseService = new FirebaseService();
-          await firebaseService.sendNotificationToDevice(user.fcm_token, {
-              notification: {
-                  title: 'Group Request',
-                  body: 'Your group request has been accepted'
-              }
-          });
-      }
-
       return {
           success: !res.error,
           message: res.error ? res.error : 'Group Request created successfully!',
@@ -213,6 +192,27 @@ export class GroupRequestsController {
       await this.groupRepository.save(group);
 
       await this.groupRequestsService.remove(+acceptGroupRequestDto.id)
+
+      //create notification
+      let createNotificationDto = new CreateNotificationDto();
+      createNotificationDto.user_id = user.id;
+      createNotificationDto.title = 'Group Request';
+      createNotificationDto.content = 'Your group request has been accepted';
+      createNotificationDto.topic = 'group-request';
+      createNotificationDto.topic_id = acceptGroupRequestDto.id;
+      createNotificationDto.created_at = Date.now().toString();
+      let notification = await this.notificationsService.create(createNotificationDto);
+
+      //emit firebase notification
+      if (user.fcm_token) {
+          let firebaseService = new FirebaseService();
+          await firebaseService.sendNotificationToDevice(user.fcm_token, {
+              notification: {
+                  title: 'Group Request',
+                  body: 'Your group request has been accepted'
+              }
+          });
+      }
 
       return {
           success: true,
