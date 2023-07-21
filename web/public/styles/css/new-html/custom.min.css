@@ -357,12 +357,12 @@ header.sticky .row {
 }
 
 .familyBox h2 {
-    font-size: 1.75rem;
+    font-size: 1.125rem;
     margin-top: 1.5rem;
 }
 
 .familyBox p {
-    font-size: 1.375rem;
+    font-size:1.125rem;
     color: #D27C43;
     padding: 1rem 0rem;
     font-weight: bold;

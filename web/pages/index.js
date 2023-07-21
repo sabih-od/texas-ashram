@@ -95,7 +95,6 @@ export default function Home() {
                 </div>
             </section>
 
-
             <section className="funMain">
                 <div className="container">
                     <div className="row justify-content-center">
@@ -144,9 +143,9 @@ export default function Home() {
                                 <div className="familyBox" data-aos='fade-left' data-aos-delay="150">
                                     <figure><Image src={shape3} className="img-fluid imgContainer" alt={shape3}/>
                                     </figure>
-                                    <h2>Young Adults</h2>
+                                    <h2>Young Adults Activities</h2>
                                     <p>Learn about Jesus in a Fun and Engaging Way</p>
-                                    <Link href="/about#young" className="newthemeBtn borderBtn mt-4">Read More</Link>
+                                    <Link href="/about#young" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                             </div>
                             {/*<Swiper
@@ -201,7 +200,6 @@ export default function Home() {
                 </div>
             </section>
 
-
             <section className="serveBg">
                 <div className="container">
                     <div className="row justify-content-end">
@@ -227,7 +225,8 @@ export default function Home() {
                             <div className="testiImg">
                                 <figure>
                                     <span data-aos='zoom-in' data-aos-delay="150" className="circle1"/>
-                                    <Image data-aos='fade-up' data-aos-delay="150" src={familyPicture} className="img-fluid"
+                                    <Image data-aos='fade-up' data-aos-delay="150" src={familyPicture}
+                                           className="img-fluid"
                                            alt={familyPicture}/>
                                     <span data-aos='zoom-in' data-aos-delay="150" className="testiSecnd">
                                         <Image src={testImg2} className="img-fluid" alt={testImg2}/></span>

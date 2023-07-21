@@ -305,7 +305,7 @@ function AboutUs(props) {
                             <Image src={shape3} className="img-fluid" alt="shape3"/>
                         </div>
                         <div className="col-md-6 px-5" id="young">
-                            <h1 className="heading">Young Adults</h1>
+                            <h1 className="heading">Young Adults Activities</h1>
                             <p className="mb-0 text">The youth, middle school through high school, have their own
                                 leaders to guide them through the week. They will spend some of their time listening to
                                 the Bible teacher and/or Evangelist and some of the evening time enjoying the family

@@ -6,7 +6,6 @@ import {create} from '../services/prayerRequestService';
 import {useRouter} from 'next/router';
 import Cookie from "js-cookie";
 import Link from "next/link";
-const sendEmail = require('./sendEmail.js');
 
 function PrayerRequestForm(props) {
     const [name, setName] = useState('');
