@@ -160,7 +160,7 @@ function PrayerRequestForm(props) {
                             <form onSubmit={handlePrayerForm}>
                                 <div className="row">
                                     <div className="col-md-6 mb-4">
-                                        <label htmlFor="">Name *</label>
+                                        <label htmlFor="">Name</label>
                                         {formErrors.name && <p className="error">{formErrors.name}</p>}
                                         <input
                                             type="text"
@@ -171,7 +171,7 @@ function PrayerRequestForm(props) {
                                         />
                                     </div>
                                     <div className="col-md-6 mb-4">
-                                        <label htmlFor="">Email *</label>
+                                        <label htmlFor="">Email</label>
                                         {formErrors.email && <p className="error">{formErrors.email}</p>}
                                         <input
                                             type="email"
@@ -182,7 +182,7 @@ function PrayerRequestForm(props) {
                                         />
                                     </div>
                                     <div className="col-md-12 mb-4">
-                                        <label htmlFor="">Phone Number *</label>
+                                        <label htmlFor="">Phone Number</label>
                                         {formErrors.contact && <p className="error">{formErrors.contact}</p>}
                                         <input
                                             type="text"
@@ -228,7 +228,7 @@ function PrayerRequestForm(props) {
                                     </div>*/}
 
                                     <div className="col-md-12 mb-4">
-                                        <label htmlFor="">Description *</label>
+                                        <label htmlFor="">Description</label>
                                         {formErrors.description && <p className="error">{formErrors.description}</p>}
                                         <textarea
                                             rows="10"

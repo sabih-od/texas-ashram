@@ -14,6 +14,7 @@ import testImg2 from "../images/new-html/testimg2.png";
 import quote from "../images/new-html/quote.png";
 import user1 from "../images/new-html/user1.png";
 import noPath from "../images/NoPath.png";
+import familyPicture from "../images/family-picture.png";
 import bannerVideo from "../public/banner.mp4";
 import {useEffect, useRef} from 'react';
 import Link from "next/link";
@@ -72,17 +73,15 @@ export default function Home() {
                             <div className="missionContent">
                                 <h2 data-aos='fade-up' className="heading">Our Mission</h2>
                                 <p data-aos='fade-up' data-aos-delay="150">For more than 80 years, individuals and
-                                    families have attended Christian Ashram
-                                    retreats all
-                                    around the world to find rest and recreation, encouraging teaching, and meaningful
-                                    friendship. Each retreat offers a life-transforming opportunity to focus on JESUS in
-                                    the
-                                    midst of other people who believe in the hope of God's unshakable kingdom.</p>
+                                    families have attended Christian Ashram retreats all around the world. The purpose
+                                    of the retreat is to focus on JESUS, find rest and recreation, listen to encouraging
+                                    teaching, and find meaningful friendships.</p>
                                 <p data-aos='fade-up' data-aos-delay="150">We recognize that each person is at a
-                                    different place in life. One thing we have in
-                                    common,
-                                    is that life is tough sometimes. Sometimes we just need to unplug from all of life’s
-                                    stressors and proactively focus on Jesus to recharge.</p>
+                                    different place in life. One thing we have in common, is that life is tough
+                                    sometimes. Sometimes we just need to unplug from all of life’s stressors and
+                                    proactively focus on Jesus to recharge.</p>
+                                <p>Our sole purpose is to be another tool in God’s tool box that he can use to help
+                                    strengthen the body of Christ and us as Christ Followers.</p>
                                 {/*<Link data-aos='fade-up' data-aos-delay="200" href="/about#ourMission"
                                       className="newthemeBtn">About Us</Link>*/}
                             </div>
@@ -147,7 +146,7 @@ export default function Home() {
                                     </figure>
                                     <h2>Young Adults</h2>
                                     <p>Learn about Jesus in a Fun and Engaging Way</p>
-                                    <Link href="/about#young" className="newthemeBtn borderBtn">Read More</Link>
+                                    <Link href="/about#young" className="newthemeBtn borderBtn mt-4">Read More</Link>
                                 </div>
                             </div>
                             {/*<Swiper
@@ -228,8 +227,8 @@ export default function Home() {
                             <div className="testiImg">
                                 <figure>
                                     <span data-aos='zoom-in' data-aos-delay="150" className="circle1"/>
-                                    <Image data-aos='fade-up' data-aos-delay="150" src={testImg1} className="img-fluid"
-                                           alt={testImg1}/>
+                                    <Image data-aos='fade-up' data-aos-delay="150" src={familyPicture} className="img-fluid"
+                                           alt={familyPicture}/>
                                     <span data-aos='zoom-in' data-aos-delay="150" className="testiSecnd">
                                         <Image src={testImg2} className="img-fluid" alt={testImg2}/></span>
                                     <span data-aos='zoom-in' data-aos-delay="150" className="circle2"/>
