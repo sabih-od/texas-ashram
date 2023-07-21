@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Query, Request, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Inject, Param, Post, Query, Request, UseGuards} from '@nestjs/common';
 import {ReportsService} from './reports.service';
 import {CreateReportDto} from './dto/create-report.dto';
 import {ApiBearerAuth, ApiQuery, ApiTags} from "@nestjs/swagger";
@@ -10,6 +10,8 @@ import {ReportUserDto} from "./dto/report-user.fto";
 import {UsersService} from "../users/users.service";
 import {UpdateMessageDto} from "../messages/dto/update-message.dto";
 import {UpdateUserDto} from "../users/dto/update-user.dto";
+import {Repository} from "typeorm";
+import {Report} from "./entities/report.entity";
 
 @ApiTags('Reports')
 @ApiBearerAuth()
@@ -21,6 +23,8 @@ export class ReportsController {
         private readonly messageService: MessagesService,
         private readonly authService: AuthService,
         private readonly userService: UsersService,
+        @Inject('REPORT_REPOSITORY')
+        private reportRepository: Repository<Report>,
     ) {
     }
 
@@ -39,6 +43,22 @@ export class ReportsController {
     @Post('report-message')
     async reportMessage(@Body() reportMessageDto: ReportMessageDto, @Request() req) {
         let user = await this.authService.getUserByEmail(req.user.email);
+
+        let redundancy_check = await this.reportRepository.findOne({
+            where: {
+                user_id: user.id,
+                module: 'message',
+                module_id: reportMessageDto.message_id,
+            },
+        });
+
+        if (redundancy_check) {
+            return {
+                success: false,
+                message: 'You have already reported the message. Please wait for approval.',
+                data: []
+            }
+        }
 
         let message = await this.messageService.findOne(reportMessageDto.message_id);
         if (message.error) {
@@ -67,6 +87,22 @@ export class ReportsController {
     @Post('report-user')
     async reportUser(@Body() reportUserDto: ReportUserDto, @Request() req) {
         let user = await this.authService.getUserByEmail(req.user.email);
+
+        let redundancy_check = await this.reportRepository.findOne({
+            where: {
+                user_id: user.id,
+                module: 'user',
+                module_id: reportUserDto.user_id,
+            },
+        });
+
+        if (redundancy_check) {
+            return {
+                success: false,
+                message: 'You have already reported the user. Please wait for approval.',
+                data: []
+            }
+        }
 
         let user_to_report = await this.userService.findOne(reportUserDto.user_id);
         if (user_to_report.error) {
@@ -138,13 +174,18 @@ export class ReportsController {
 
         res.data = await Promise.all(
             res.data.map(async (report) => {
+                let reported_by = await this.userService.findOne(+report.user_id);
+                if (reported_by.error) {
+                    reported_by = null;
+                }
+
                 let module = {};
                 if (report.module == 'message') {
                     let message = await this.messageService.findOne(report.module_id);
                     if (!message.error) {
                         delete message.user_id;
 
-                        return {...report, reportedMessage: message};
+                        return {...report, reported_by, reportedMessage: message};
                     }
                 } else if (report.module == 'user') {
                     let user = await this.userService.findOne(report.module_id);
@@ -154,7 +195,7 @@ export class ReportsController {
                         delete user.role_id;
                         delete user.created_at;
 
-                        return {...report, reportedUser: user};
+                        return {...report, reported_by, reportedUser: user};
                     }
                 }
             }),

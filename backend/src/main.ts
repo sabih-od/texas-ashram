@@ -50,6 +50,7 @@ async function bootstrap() {
         .addTag('Announcements')
         .addTag('Books')
         .addTag('Contacts')
+        .addTag('Donations')
         .addTag('Events')
         .addTag('Groups')
         .addTag('Group Requests')

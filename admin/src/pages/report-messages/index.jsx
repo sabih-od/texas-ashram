@@ -102,15 +102,15 @@ function ReportMessages(props) {
                                             return (
                                                 <TableRow hover role='checkbox' tabIndex={-1} key={report.id}>
                                                     <TableCell>
-                                                        <span>{report.id}</span>
+                                                        <span>{report?.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{`${report.reportedMessage.message}`}</span>
+                                                        <span>{`${report?.reportedMessage?.message}`}</span>
                                                         <br/>
-                                                        <span>{`${report.reportedMessage.user.first_name} ${report.reportedMessage.user.last_name}`}</span>
+                                                        <span>{`${report?.reportedMessage?.user.first_name} ${report?.reportedMessage?.user.last_name}`}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{report.user_id}</span>
+                                                        <span>{`${report?.reported_by?.first_name} ${report?.reported_by?.last_name} (${report?.reported_by?.email})`}</span>
                                                     </TableCell>
                                                     <TableCell width="200">
                                                         <IconButton
