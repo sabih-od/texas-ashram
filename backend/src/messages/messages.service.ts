@@ -4,6 +4,7 @@ import {UpdateMessageDto} from './dto/update-message.dto';
 import {EntityNotFoundError, IsNull, QueryFailedError, Repository} from "typeorm";
 import {Message} from "./entities/message.entity";
 import {User} from "../users/entities/user.entity";
+import {GroupsService} from "../groups/groups.service";
 
 @Injectable()
 export class MessagesService {
@@ -12,6 +13,7 @@ export class MessagesService {
         private messageRepository: Repository<Message>,
         @Inject('USER_REPOSITORY')
         private userRepository: Repository<User>,
+        private groupService: GroupsService,
     ) {}
 
     async create(createMessageDto: CreateMessageDto): Promise<any> {
@@ -30,7 +32,7 @@ export class MessagesService {
         }
     }
 
-    async findAll(page: number = 1, limit: number = 10, query_object = {}): Promise<any> {
+    async findAll(page: number = 1, limit: number = 10, query_object = {}, withGroupMembers = false, group_id = null): Promise<any> {
         let [data, total] = await this.messageRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
@@ -71,9 +73,23 @@ export class MessagesService {
 
         const totalPages = Math.ceil(total / limit);
 
+        let members = null;
+        if (withGroupMembers && group_id) {
+            let group = await this.groupService.findOne(+group_id);
+
+            if (!group.error) {
+                if (group.members != null && group.members != "" && group.members != "[]") {
+                    members = JSON.parse(group.members);
+                } else {
+                    members = null;
+                }
+            }
+        }
+
         return {
             data: enrichedData,
             total,
+            members,
             currentPage: page,
             totalPages,
         };

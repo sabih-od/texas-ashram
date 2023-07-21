@@ -45,15 +45,15 @@ export class MessagesController {
           };
       }
 
-      // const members_array = JSON.parse(group.members);
-      // let user = await this.usersService.findOneByEmail(req.user.email);
-      // if (!members_array || !members_array.includes(user.id)) {
-      //     return {
-      //         success: false,
-      //         message: 'User not in group',
-      //         data: []
-      //     };
-      // }
+      const members_array = JSON.parse(group.members);
+      let user = await this.usersService.findOneByEmail(req.user.email);
+      if (!members_array || !members_array.includes(user.id)) {
+          return {
+              success: false,
+              message: 'User not in group',
+              data: []
+          };
+      }
 
       let updateGroupDto = new UpdateGroupDto();
       updateGroupDto.last_message = createMessageDto.message;

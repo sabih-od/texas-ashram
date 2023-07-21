@@ -208,7 +208,7 @@ export class GroupRequestsController {
           let firebaseService = new FirebaseService();
           await firebaseService.sendNotificationToDevice(user.fcm_token, {
               notification: {
-                  title: 'Group Request',
+                  title: 'Group Request Accepted',
                   body: 'Your group request has been accepted'
               }
           });

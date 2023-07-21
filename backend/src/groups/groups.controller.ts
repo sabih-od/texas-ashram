@@ -49,8 +49,6 @@ export class GroupsController {
   @Get('get-messages/:group_id')
   async getMessages(@Param('group_id') group_id: string, @Query('page') page?: number, @Query('limit') limit?: number) {
       let group = await this.groupsService.findOne(+group_id);
-      // console.log('grrrrrrrrrrrrrrrrrrroup');
-      // console.log(group);
 
       if (group.error) {
           return {
@@ -64,7 +62,7 @@ export class GroupsController {
           where: {
               group_id: group_id,
               blocked_at: IsNull()
-          }});
+          }}, true, group_id);
 
       return {
           success: true,
