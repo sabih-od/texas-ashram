@@ -44,8 +44,8 @@ function Create(props) {
     const [title, setTitle] = useState('')
     const [url, setUrl] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState('')
-    const [file, setFile] = useState('')
+    const [image, setImage] = useState(null)
+    const [file, setFile] = useState(null)
 
     useEffect(() => {
         dispatch(setSuccess(false))

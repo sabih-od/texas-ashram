@@ -4,7 +4,9 @@ export const create = async (payload) => {
     try {
         const form = new FormData()
         for (const payloadKey in payload) {
-            form.append(payloadKey, payload[payloadKey])
+            if (payload[payloadKey] != null) {
+                form.append(payloadKey, payload[payloadKey])
+            }
         }
 
         const response = await fetch(`${apiUrl()}/books`, {
