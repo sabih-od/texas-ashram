@@ -4,8 +4,8 @@ import {destroy, acceptReport as accept, get} from '../../services/reportService
 
 export const getReports = createAsyncThunk(
     'reports/get',
-    async ({page = 1}, thunkAPI) => {
-        return await get(page)
+    async ({page = 1, type}, thunkAPI) => {
+        return await get({page, type})
     }
 )
 

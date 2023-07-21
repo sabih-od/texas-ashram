@@ -82,9 +82,15 @@ const navigation = () => {
         },
 
         {
-            title: 'Reports',
+            title: 'Report Users',
             icon: ReportOutlinedIcon,
-            path: '/reports',
+            path: '/report-users',
+        },
+
+        {
+            title: 'Report Messages',
+            icon: ReportOutlinedIcon,
+            path: '/report-messages',
         },
 
         // {

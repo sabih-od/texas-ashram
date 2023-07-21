@@ -39,9 +39,10 @@ export class EventsController {
         new ParseFilePipe({
             validators: [
                 new MaxFileSizeValidator({maxSize: 100000000})
-            ]
+            ],
+            fileIsRequired: false,
         })
-    ) image: Express.Multer.File) {
+    ) image?: Express.Multer.File) {
         //file upload work
         if (image && image.originalname && image.buffer) {
             let file_name = getRandomFileName(image);

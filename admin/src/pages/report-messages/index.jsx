@@ -26,7 +26,7 @@ import {Alert, IconButton, Pagination, Stack} from "@mui/material";
 import {Delete} from 'mdi-material-ui'
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 
-function Reports(props) {
+function ReportMessages(props) {
 
     const dispatch = useDispatch()
 
@@ -38,6 +38,8 @@ function Reports(props) {
     const [success, setSuccess] = useState(null)
     const [page, setPage] = useState(1)
 
+    const type = 'message'
+
     function onPageChange(e, p) {
         setPage(p)
     }
@@ -45,15 +47,15 @@ function Reports(props) {
     const handleDelete = async (e, id) => {
         e.preventDefault()
         await dispatch(deleteReport({id}))
-        await dispatch(getReports({page}))
-        showSuccess("User deleted successfully.")
+        await dispatch(getReports({page, type}))
+        showSuccess("Report deleted successfully.")
     }
 
     const handleAccept = async (e, id) => {
         e.preventDefault()
         await dispatch(acceptReport({id}))
-        await dispatch(getReports({page}))
-        showSuccess("User blocked successfully.")
+        await dispatch(getReports({page, type}))
+        showSuccess("Message blocked successfully.")
     }
 
     const showSuccess = (msg) => {
@@ -64,7 +66,7 @@ function Reports(props) {
     }
 
     useEffect(() => {
-        dispatch(getReports({page}))
+        dispatch(getReports({page, type}))
     }, [page])
 
     return (
@@ -72,11 +74,8 @@ function Reports(props) {
             <Grid item xs={12}>
                 <Stack direction="row">
                     <Typography variant='h5'>
-                        Reports
+                        Report Messages
                     </Typography>
-                    <Button component={Link} href='/reports/create' sx={{marginLeft: 'auto'}}>
-                        Create Report
-                    </Button>
                 </Stack>
             </Grid>
 
@@ -93,7 +92,7 @@ function Reports(props) {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
-                                            <TableCell>Reported User</TableCell>
+                                            <TableCell>Reported Message</TableCell>
                                             <TableCell>Reported By</TableCell>
                                             <TableCell>Action</TableCell>
                                         </TableRow>
@@ -106,7 +105,9 @@ function Reports(props) {
                                                         <span>{report.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{`${report.reportedUser.first_name} ${report.reportedUser.last_name} (${report.reportedUser.email})`}</span>
+                                                        <span>{`${report.reportedMessage.message}`}</span>
+                                                        <br/>
+                                                        <span>{`${report.reportedMessage.user.first_name} ${report.reportedMessage.user.last_name}`}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{report.user_id}</span>
@@ -145,4 +146,4 @@ function Reports(props) {
     );
 }
 
-export default Reports;
+export default ReportMessages;
