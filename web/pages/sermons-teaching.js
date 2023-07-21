@@ -60,6 +60,8 @@ function SermonsTeaching(props) {
                                         <a href={sermon.url} target="_blank" data-fancybox=""><i className="fab fa-youtube"/></a>
 
                                     </div>
+                                    <h4 className="mt-5">{sermon.title}</h4>
+                                    <p>{sermon.description}</p>
                                 </div>
                             ))
                         ) : (
