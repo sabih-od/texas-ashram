@@ -18,6 +18,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+
 export const CustomDateInput = forwardRef((props, ref) => {
     return <TextField fullWidth {...props} inputRef={ref} label='Date' autoComplete='off'/>
 })
@@ -81,7 +82,7 @@ function Event(props) {
 
         dispatch(updateEvent({
             id: eventId,
-            title, description, date_to ,date_from ,location , image
+            title, description, date_to, date_from, location, image
         }))
 
     }
@@ -147,7 +148,7 @@ function Event(props) {
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='description' value={description}
+                                    <TextField fullWidth label='description' multiline rows={4} value={description}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
@@ -181,7 +182,6 @@ function Event(props) {
                                     <TextField fullWidth label='location' value={location}
                                                onChange={e => setLocation(e.target.value)}/>
                                 </Grid>
-
 
 
                                 <Grid item xs={12} sx={{mt: 5}}>

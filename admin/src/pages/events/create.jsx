@@ -28,10 +28,10 @@ function Create(props) {
 
     const [successMsg, setSuccessMessage] = useState(null)
     const [title, setTitle] = useState('')
-    const [description, setDescription] = useState(null)
-    const [date_to, setDate_to] = useState(null)
-    const [date_from, setDate_from] = useState(null)
-    const [location, setLocation] = useState(null)
+    const [description, setDescription] = useState('')
+    const [date_to, setDate_to] = useState('')
+    const [date_from, setDate_from] = useState('')
+    const [location, setLocation] = useState('')
     const [image, setImage] = useState(null)
 
 
@@ -52,7 +52,7 @@ function Create(props) {
         e.preventDefault()
         if (loading) return
 
-        if (!fileValidation()) return;
+        // if (!fileValidation()) return;
 
         dispatch(addEvent({
             title, description, date_to, date_from, location, image
@@ -122,6 +122,7 @@ function Create(props) {
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='Description' value={description}
+                                               multiline rows={4}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 

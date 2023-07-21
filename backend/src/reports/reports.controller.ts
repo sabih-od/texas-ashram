@@ -1,7 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Post, Query, Request, UseGuards} from '@nestjs/common';
 import {ReportsService} from './reports.service';
 import {CreateReportDto} from './dto/create-report.dto';
-import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiQuery, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {ReportMessageDto} from "./dto/report-message.fto";
 import {MessagesService} from "../messages/messages.service";
@@ -16,12 +16,13 @@ import {UpdateUserDto} from "../users/dto/update-user.dto";
 @UseGuards(AuthGuard)
 @Controller('reports')
 export class ReportsController {
-  constructor(
-      private readonly reportsService: ReportsService,
-      private readonly messageService: MessagesService,
-      private readonly authService: AuthService,
-      private readonly userService: UsersService,
-  ) {}
+    constructor(
+        private readonly reportsService: ReportsService,
+        private readonly messageService: MessagesService,
+        private readonly authService: AuthService,
+        private readonly userService: UsersService,
+    ) {
+    }
 
     // @Post()
     // async create(@Body() createReportDto: CreateReportDto) {
@@ -117,8 +118,23 @@ export class ReportsController {
     }
 
     @Get()
-    async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
-        let res = await this.reportsService.findAll(page, limit);
+    @ApiQuery({name: 'type', required: false, type: String})
+    async findAll(
+        @Query('page') page?: number,
+        @Query('limit') limit?: number,
+        @Query('type') type: string = '',
+    ) {
+        let _q = {}
+
+        if (type) {
+            _q = {
+                where: {
+                    module: type
+                }
+            }
+        }
+
+        let res = await this.reportsService.findAll(page, limit, _q);
 
         res.data = await Promise.all(
             res.data.map(async (report) => {

@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@nestjs/common';
-import { CreateReportDto } from './dto/create-report.dto';
-import { UpdateReportDto } from './dto/update-report.dto';
+import {CreateReportDto} from './dto/create-report.dto';
+import {UpdateReportDto} from './dto/update-report.dto';
 import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
 import {Report} from "./entities/report.entity";
 
@@ -9,7 +9,8 @@ export class ReportsService {
     constructor(
         @Inject('REPORT_REPOSITORY')
         private reportRepository: Repository<Report>,
-    ) {}
+    ) {
+    }
 
     async create(createReportDto: CreateReportDto): Promise<any> {
         try {
@@ -27,11 +28,16 @@ export class ReportsService {
         }
     }
 
-    async findAll(page: number = 1, limit: number = 10, query_object: {} = {order: {id: 'DESC'}}): Promise<any> {
+    async findAll(page: number = 1, limit: number = 10, query_object: {} = {}): Promise<any> {
+        const _q: {} = {
+            order: {id: 'DESC'},
+            ...query_object
+        }
+
         const [data, total] = await this.reportRepository.findAndCount({
             skip: (page - 1) * limit,
             take: limit,
-            ...query_object
+            ..._q
         });
 
         const totalPages = Math.ceil(total / limit);

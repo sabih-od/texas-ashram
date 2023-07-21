@@ -47,7 +47,13 @@ function Events(props) {
         await dispatch(getEvents({page}))
     }
 
-    const formatDate = (date) => moment(date, 'YYYY-MM-DDTHH:mm').format('HH:mm DD/MM/YYYY')
+    const formatDate = (date) => {
+        const _date = moment(date, 'YYYY-MM-DDTHH:mm')
+
+        if (!_date.isValid()) return ""
+
+        return _date.format('HH:mm DD/MM/YYYY')
+    }
 
     useEffect(() => {
         dispatch(getEvents({page}))

@@ -1,9 +1,13 @@
 import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, urlWithParams} from "./global";
 
-export const get = async (page = 1, limit = 15) => {
+export const get = async ({
+                              page = 1,
+                              limit = 15,
+                              type = 'user'
+                          }) => {
     try {
         const response = await fetch(urlWithParams(`${apiUrl()}/reports`, {
-            page, limit
+            page, limit, type
         }), {
             method: 'GET',
             headers: {
