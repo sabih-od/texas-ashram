@@ -142,11 +142,13 @@ export class AuthService {
 
             //save otp to database
             await this.userRepository.update(user.id, {
-                otp: generated_otp
+                otp: generated_otp,
+                otp_expires_at: (Date.now() + 60 * 60 * 1000).toString()
             });
 
             let mailService = new MailService();
-            await mailService.sendEmail(user.email, 'Texas Ashram | OTP', 'Your OTP is: ' + generated_otp);
+            let html = "Thank you for using our service! Please find your One-Time Password (OTP) below:<br/><br/>Dear "+ (user.first_name + ' ' + user.last_name) +",<br/><br/>Thank you for using our service! Please find your One-Time Password (OTP) below:<br/><br/>OTP: "+ generated_otp +"<br/><br/>Please use this OTP to complete your action or verification. This code is valid for a single use and will expire in an hour.<br/><br/>If you did not request this OTP, please ignore this email. Your account and information are safe.<br/><br/>Thank you,<br/>Texas Christian Ashram.";
+            await mailService.sendEmail(user.email, 'OTP - Texas Christian Ashram', html);
 
             return 'An OTP was sent to your email';
         } catch (error) {
@@ -174,6 +176,19 @@ export class AuthService {
                     error: 'Your OTP was incorrect'
                 };
             }
+
+            //if OTP has expired
+            if (parseInt(user.otp_expires_at) <= Date.now() || user.otp_expires_at == null) {
+                return {
+                    error: 'Your OTP has expired. You could request for another one.'
+                };
+            }
+
+            //clear OTP fields
+            await this.userRepository.update(user.id, {
+                otp: null,
+                otp_expires_at: null
+            });
 
             const payload = { sub: user.id, ...user};
 

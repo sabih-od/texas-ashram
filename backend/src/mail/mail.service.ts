@@ -20,7 +20,7 @@ export class MailService {
             from: process.env.MAIL_FROM_ADDRESS,
             to: to,
             subject: subject,
-            text: text,
+            html: text,
         };
 
         try {
