@@ -74,10 +74,10 @@ function Book(props) {
         }
 
         if (image)
-            data['image'] = image
+            data['image'] = image ?? ''
 
         if (file)
-            data['file'] = file
+            data['file'] = file ?? ''
 
         dispatch(updateBook({
             id: bookId,
