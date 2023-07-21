@@ -28,12 +28,12 @@ function Book(props) {
     const errors = useSelector(bookErrors)
     const success = useSelector(bookSuccess)
 
-    const [successMsg, setSuccessMessage] = useState(null)
+    const [successMsg, setSuccessMessage] = useState('')
     const [title, setTitle] = useState('')
     const [url, setUrl] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [file, setFile] = useState(null)
+    const [image, setImage] = useState('')
+    const [file, setFile] = useState('')
 
     useEffect(() => {
         if (bookId) {
@@ -57,7 +57,7 @@ function Book(props) {
         if (!loading && success) {
             setSuccessMessage('Book updated successfully!')
             setTimeout(() => {
-                push('/books')
+                push('/books').then((r) => 'success');
             }, 500)
         }
     }, [success, loading])
@@ -118,7 +118,7 @@ function Book(props) {
                                 <AlertTitle>Success</AlertTitle>
                                 <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         {errors && errors.length > 0 ? (
                             <Alert severity="error" sx={{mb: 4}}>
                                 <AlertTitle>Errors</AlertTitle>
@@ -126,7 +126,7 @@ function Book(props) {
                                     <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
                                 ))}
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         <form onSubmit={handleSubmit}>
                             <Grid container>
                                 <Grid item xs={12}>
@@ -152,7 +152,7 @@ function Book(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setFile(e.target?.files[0] ?? null)
+                                                    setFile(e.target?.files[0] ?? '')
                                                 }}
                                             />
                                         </Button>
@@ -165,7 +165,7 @@ function Book(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setImage(e.target?.files[0] ?? null)
+                                                    setImage(e.target?.files[0] ?? '')
                                                 }}
                                             />
                                         </Button>
