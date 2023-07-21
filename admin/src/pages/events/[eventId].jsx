@@ -18,7 +18,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-
 export const CustomDateInput = forwardRef((props, ref) => {
     return <TextField fullWidth {...props} inputRef={ref} label='Date' autoComplete='off'/>
 })
@@ -34,13 +33,15 @@ function Event(props) {
     const errors = useSelector(eventErrors)
     const success = useSelector(eventSuccess)
 
-    const [successMsg, setSuccessMessage] = useState(null)
+    const [successMsg, setSuccessMessage] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [date_to, setDate_to] = useState('')
     const [date_from, setDate_from] = useState('')
+    const [start_time, setStart_time] = useState('')
+    const [end_time, setEnd_time] = useState('')
     const [location, setLocation] = useState('')
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
 
     useEffect(() => {
         if (eventId) {
@@ -54,6 +55,8 @@ function Event(props) {
             setDescription(event.description)
             setDate_to(event.date_to)
             setDate_from(event.date_from)
+            setStart_time(event.start_time)
+            setEnd_time(event.end_time)
             setLocation(event.location)
             setImage(event.image)
         }
@@ -67,7 +70,7 @@ function Event(props) {
         if (!loading && success) {
             setSuccessMessage('Event updated successfully!')
             setTimeout(() => {
-                push('/events')
+                push('/events').then((r) => 'error')
             }, 500)
         }
     }, [success, loading])
@@ -82,7 +85,7 @@ function Event(props) {
 
         dispatch(updateEvent({
             id: eventId,
-            title, description, date_to, date_from, location, image
+            title, description, date_to ,date_from, start_time, end_time, location , image
         }))
 
     }
@@ -132,7 +135,7 @@ function Event(props) {
                                 <AlertTitle>Success</AlertTitle>
                                 <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         {errors && errors.length > 0 ? (
                             <Alert severity="error" sx={{mb: 4}}>
                                 <AlertTitle>Errors</AlertTitle>
@@ -140,7 +143,7 @@ function Event(props) {
                                     <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
                                 ))}
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         <form onSubmit={handleSubmit}>
                             <Grid container className="my-4">
                                 <Grid item xs={12}>
@@ -148,16 +151,16 @@ function Event(props) {
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='description' multiline rows={4} value={description}
+                                    <TextField fullWidth label='description' value={description}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth type="text"
-                                               label='date_to'
+                                               label='Date To'
                                                value={date_to}
                                                onFocus={e => {
-                                                   e.target.type = 'datetime-local'
+                                                   e.target.type = 'date'
                                                }}
                                                onBlur={e => {
                                                    e.target.type = 'text'
@@ -167,15 +170,38 @@ function Event(props) {
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth type="text"
-                                               label='date_from'
+                                               label='Date From'
                                                value={date_from}
                                                onFocus={e => {
-                                                   e.target.type = 'datetime-local'
+                                                   e.target.type = 'date'
                                                }}
                                                onBlur={e => {
                                                    e.target.type = 'text'
                                                }}
                                                onChange={e => setDate_from(e.target.value)}/>
+                                </Grid>
+
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Start Time' type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'time'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={start_time}
+                                               onChange={e => setStart_time(e.target.value)}/>
+                                </Grid>
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='End Time' type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'time'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={end_time}
+                                               onChange={e => setEnd_time(e.target.value)}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
@@ -197,7 +223,7 @@ function Event(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setImage(e.target?.files[0] ?? null)
+                                                    setImage(e.target?.files[0] ?? '')
                                                 }}
                                             />
 

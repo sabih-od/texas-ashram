@@ -47,13 +47,8 @@ function Events(props) {
         await dispatch(getEvents({page}))
     }
 
-    const formatDate = (date) => {
-        const _date = moment(date, 'YYYY-MM-DDTHH:mm')
-
-        if (!_date.isValid()) return ""
-
-        return _date.format('HH:mm DD/MM/YYYY')
-    }
+    const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
+    const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a')
 
     useEffect(() => {
         dispatch(getEvents({page}))
@@ -82,10 +77,12 @@ function Events(props) {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
-                                            <TableCell width='120'>Date To</TableCell>
-                                            <TableCell width='120'>Date From</TableCell>
                                             <TableCell>Title</TableCell>
                                             <TableCell>Description</TableCell>
+                                            <TableCell width='120'>Date To</TableCell>
+                                            <TableCell width='120'>Date From</TableCell>
+                                            <TableCell width='120'>Start Time</TableCell>
+                                            <TableCell width='120'>End Time</TableCell>
                                             <TableCell>Location</TableCell>
                                             <TableCell>Image</TableCell>
                                             <TableCell width='150'>Action</TableCell>
@@ -99,16 +96,22 @@ function Events(props) {
                                                         <span>{event.id}</span>
                                                     </TableCell>
                                                     <TableCell>
+                                                        <span>{event.title}</span>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <span>{event.description}</span>
+                                                    </TableCell>
+                                                    <TableCell>
                                                         <span>{formatDate(event.date_to)}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{formatDate(event.date_from)}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{event.title}</span>
+                                                        <span>{formatTime(event.start_time)}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{event.description}</span>
+                                                        <span>{formatTime(event.end_time)}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{event.location}</span>
@@ -120,7 +123,7 @@ function Events(props) {
                                                                     size="small" sx={{textAlign: 'center'}}>
                                                                 View Image
                                                             </Button>
-                                                        ) : null}
+                                                        ) : ''}
                                                     </TableCell>
                                                     <TableCell>
                                                         <IconButton

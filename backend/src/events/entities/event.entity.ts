@@ -8,13 +8,13 @@ export class Event {
     @Column('varchar')
     title: string;
 
-    @Column({ type: 'text'})
+    @Column({ type: 'text', nullable: true })
     description: string;
 
-    @Column('varchar')
+    @Column({ type: 'varchar', nullable: true })
     date_to: string;
 
-    @Column('varchar')
+    @Column({ type: 'varchar', nullable: true })
     date_from: string;
 
     @Column({ type: 'varchar', nullable: true })

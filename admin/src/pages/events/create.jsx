@@ -26,13 +26,15 @@ function Create(props) {
     const errors = useSelector(EventErrors)
     const success = useSelector(EventSuccess)
 
-    const [successMsg, setSuccessMessage] = useState(null)
+    const [successMsg, setSuccessMessage] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [date_to, setDate_to] = useState('')
     const [date_from, setDate_from] = useState('')
+    const [start_time, setStart_time] = useState('')
+    const [end_time, setEnd_time] = useState('')
     const [location, setLocation] = useState('')
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
 
 
     useEffect(() => {
@@ -55,39 +57,38 @@ function Create(props) {
         // if (!fileValidation()) return;
 
         dispatch(addEvent({
-            title, description, date_to, date_from, location, image
+            title, description, date_to, date_from, start_time, end_time, location, image
         }))
 
     }
 
     const fileValidation = () => {
-        let _errors = []
-        // if (title === null) {
-        //     _errors.push("Title is required!")
-        // }
-        // if (description === null) {
-        //     _errors.push("Description is required!")
-        // }
-        //
-        // if (date_to === null) {
-        //     _errors.push("Date 1 is required!")
-        // }
-        // if (date_from === null) {
-        //     _errors.push("Date 2 is required!")
-        // }
-        // if (location === null) {
-        //     _errors.push("Location is required!")
-        // }
-        if (image === null) {
-            _errors.push("Image is required!")
+        let _errors = [];
+        if (title.trim() === "") {
+            _errors.push("Title is required!");
+        }
+        // Remove other checks for description, location, and image since they are unrequired now.
+
+        if (date_to.trim() === "") {
+            _errors.push("Date To is required!");
+        }
+        if (date_from.trim() === "") {
+            _errors.push("Date From is required!");
+        }
+        if (start_time.trim() === "") {
+            _errors.push("Start Time is required!");
+        }
+        if (end_time.trim() === "") {
+            _errors.push("End Time is required!");
         }
 
         if (_errors.length > 0) {
-            dispatch(setErrors(_errors))
+            dispatch(setErrors(_errors));
         }
 
-        return _errors.length < 1
-    }
+        return _errors.length < 1;
+    };
+
 
     return (
         <Grid container spacing={6}>
@@ -105,7 +106,7 @@ function Create(props) {
                                 <AlertTitle>Success</AlertTitle>
                                 <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         {errors && errors.length > 0 ? (
                             <Alert severity="error" sx={{mb: 4}}>
                                 <AlertTitle>Errors</AlertTitle>
@@ -113,7 +114,7 @@ function Create(props) {
                                     <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
                                 ))}
                             </Alert>
-                        ) : null}
+                        ) : ''}
                         <form onSubmit={handleSubmit}>
                             <Grid row>
                                 <Grid item xs={12}>
@@ -122,7 +123,6 @@ function Create(props) {
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='Description' value={description}
-                                               multiline rows={4}
                                                onChange={e => setDescription(e.target.value)}/>
                                 </Grid>
 
@@ -130,7 +130,7 @@ function Create(props) {
                                     <TextField fullWidth label='Date To'
                                                type="text"
                                                onFocus={e => {
-                                                   e.target.type = 'datetime-local'
+                                                   e.target.type = 'date'
                                                }}
                                                onBlur={e => {
                                                    e.target.type = 'text'
@@ -141,7 +141,7 @@ function Create(props) {
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='Date From' type="text"
                                                onFocus={e => {
-                                                   e.target.type = 'datetime-local'
+                                                   e.target.type = 'date'
                                                }}
                                                onBlur={e => {
                                                    e.target.type = 'text'
@@ -151,12 +151,35 @@ function Create(props) {
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='Start Time' type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'time'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={start_time}
+                                               onChange={e => setStart_time(e.target.value)}/>
+                                </Grid>
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <TextField fullWidth label='End Time' type="text"
+                                               onFocus={e => {
+                                                   e.target.type = 'time'
+                                               }}
+                                               onBlur={e => {
+                                                   e.target.type = 'text'
+                                               }}
+                                               value={end_time}
+                                               onChange={e => setEnd_time(e.target.value)}/>
+                                </Grid>
+
+                                <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='Location' value={location}
                                                onChange={e => setLocation(e.target.value)}/>
                                 </Grid>
 
 
-                                <Grid item xs={12} sx={{mt: 5}}>
+                                {setImage ? <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
 
                                         <Button
@@ -168,13 +191,12 @@ function Create(props) {
                                                 type="file"
                                                 hidden
                                                 onChange={e => {
-                                                    setImage(e.target?.files[0] ?? null)
+                                                    setImage(e.target?.files[0] ?? '')
                                                 }}
                                             />
                                         </Button>
                                     </Stack>
-                                </Grid>
-
+                                </Grid> : ''}
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Button type='submit' variant='contained' disabled={loading}>

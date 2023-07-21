@@ -20,7 +20,6 @@ import {
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
-import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {FirebaseService} from "../firebase/firebase.service";
@@ -40,7 +39,7 @@ export class EventsController {
             validators: [
                 new MaxFileSizeValidator({maxSize: 100000000})
             ],
-            fileIsRequired: false,
+            fileIsRequired: false
         })
     ) image?: Express.Multer.File) {
         //file upload work

@@ -14,16 +14,24 @@ function Events(props) {
                 const eventsArray = response.data?.data || [];
                 console.log(response.data?.data)
                 const formattedEvents = eventsArray.map((event) => {
-                    const parsedDateTo = parse(event.date_to, 'dd-MM-yyyy', new Date());
-                    const parsedDateFrom = parse(event.date_from, 'dd-MM-yyyy', new Date());
+                    const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
+                    const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
+
+                    const parsedStartTime = parse(event.start_time, 'HH:mm', new Date());
+                    const parsedEndTime = parse(event.end_time, 'HH:mm', new Date());
 
                     const formattedStartDate = format(new Date(parsedDateTo), 'dd MMM,');
                     const formattedEndDate = format(new Date(parsedDateFrom), 'dd MMM,');
+
+                    const formattedStartTime = format(new Date(parsedStartTime), 'h:mm a,');
+                    const formattedEndTime = format(new Date(parsedEndTime), 'h:mm a,');
 
                     return {
                         ...event,
                         formattedDateFrom: formattedStartDate,
                         formattedDateTo: formattedEndDate,
+                        formattedStartT: formattedStartTime,
+                        formattedEndT: formattedEndTime,
                     };
                 });
 
@@ -75,10 +83,11 @@ function Events(props) {
                                             ) : null}
                                         </figure>
                                         <h4 className="">{event.title}</h4>
-                                        <span>{event.formattedDateTo}{event.start_time} TO {event.formattedDateFrom}{event.end_time}</span>
-                                        <p>
+                                        <span>{event.formattedDateFrom} {event.formattedStartT} TO {event.formattedDateTo} {event.formattedEndT}</span>
+                                        {/*<span>{event.formattedDateTo}{event.start_time} TO {event.formattedDateFrom}{event.end_time}</span>*/}
+                                        {event.location ? <p>
                                             <i className="fas fa-map-marker-alt text-primary mr-2"/>
-                                            {event.location}</p>
+                                            {event.location}</p> : ''}
                                         {/*<a href="#" className="themeBtn">Interested</a>*/}
                                     </div>
                                 </div>
