@@ -88,12 +88,12 @@ function Book(props) {
 
     const fileValidation = () => {
         let _errors = []
-        if (file === null) {
+        /*if (file === null) {
             _errors.push("File is required!")
         }
         if (image === null) {
             _errors.push("Image is required!")
-        }
+        }*/
 
         if (_errors.length > 0) {
             dispatch(setErrors(_errors))
@@ -137,10 +137,10 @@ function Book(props) {
                                     <TextField fullWidth label='URL' value={url}
                                                onChange={e => setUrl(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12} mt={5}>
+                                {/*<Grid item xs={12} mt={5}>
                                     <TextField fullWidth label='Description' multiline rows={4} value={description}
                                                onChange={e => setDescription(e.target.value)}/>
-                                </Grid>
+                                </Grid>*/}
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Stack direction="row" gap={2}>
                                         <Button

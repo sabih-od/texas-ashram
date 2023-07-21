@@ -74,7 +74,7 @@ function Books(props) {
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Title</TableCell>
-                                            <TableCell>Description</TableCell>
+                                            {/*<TableCell>Description</TableCell>*/}
                                             <TableCell className="text-center" width="150">Link</TableCell>
                                             <TableCell className="text-center" width="150">File</TableCell>
                                             <TableCell className="text-center" width="150">Image</TableCell>
@@ -91,9 +91,9 @@ function Books(props) {
                                                     <TableCell>
                                                         <span>{book.title}</span>
                                                     </TableCell>
-                                                    <TableCell>
+                                                    {/*<TableCell>
                                                         <span>{book.description}</span>
-                                                    </TableCell>
+                                                    </TableCell>*/}
                                                     <TableCell className="text-center">
                                                         {(book?.url && book.url.length > 0) ? (
                                                             <Button tag='a' href={book.url} target="_blank"
