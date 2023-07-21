@@ -26,7 +26,7 @@ export const uploadFile = async (dir_path, file_path, file) => {
 }
 
 export const deleteFileFromUploads = async (app_url, delete_path) => {
-    if (delete_path.includes('uploads') && delete_path.includes(app_url)) {
+    if (delete_path != null && delete_path.includes('uploads') && delete_path.includes(app_url)) {
         delete_path = delete_path.replace(app_url, '.');
         try {
             if (existsSync(delete_path))
