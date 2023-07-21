@@ -198,11 +198,11 @@ export class AuthController {
                 title: 'Test Notification',
                 body: 'Test Body',
             },
-            topic: 'test', // The topic to which the notification will be sent
+            // topic: 'test', // The topic to which the notification will be sent
         };
 
-        let response = await firebaseAdmin.messaging().send(message);
-        // let response = await firebaseAdmin.messaging().sendToDevice('cXJHcMOMTk2nlhKkgCNKKH:APA91bHzKI4oPp20ETUDFJgWIIrNoeJPhX9-5BLG7IHyaIG-PwN3rDrk9LRkreob1NWwU9OZHgHxP9R3v3NMvoD5L0M7m_k_kaPTxBC8q36tzsfdnqjmdeh3P6TiP49urA__pB3fX9WE', message);
+        // let response = await firebaseAdmin.messaging().send(message);
+        let response = await firebaseAdmin.messaging().sendToDevice(['cK-GQIkDT065HxEaeydpBr:APA91bHZuskTSOaPArpLkRCU3D4iNYtEnRNZsZN-lA2aaEXGwtvbUIMrAN1u0qeOntdRWXVjgbxuE6rt40RBSfbzo21sBMwFCL6KhR7U8vZVHuK_KeMKTP9N6GQqz_O21va2ZvwzeXw6'], message);
 
         console.log(response);
 
