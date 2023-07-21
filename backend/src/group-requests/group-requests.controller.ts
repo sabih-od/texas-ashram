@@ -7,7 +7,7 @@ import {AuthGuard} from "../auth/auth.guard";
 import {AcceptGroupRequestDto} from "./dto/accept-group-request.dto";
 import {GroupsService} from "../groups/groups.service";
 import {UsersService} from "../users/users.service";
-import {FindOneOptions, Repository} from "typeorm";
+import {Repository} from "typeorm";
 import {Group} from "../groups/entities/group.entity";
 import {GroupRequest} from "./entities/group-request.entity";
 import {FirebaseService} from "../firebase/firebase.service";
@@ -78,6 +78,28 @@ export class GroupRequestsController {
   @Get()
   async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
       let res = await this.groupRequestsService.findAll(page, limit);
+
+      res.data = await Promise.all(
+          res.data.map(async (group_request) => {
+              let group = await this.groupsService.findOne(group_request.group_id);
+
+              if (group.error) {
+                  group = null;
+              }
+
+              let user = await this.usersService.findOne(group_request.user_id);
+
+              if (user.error) {
+                  user = null;
+              }
+
+              return {
+                  ...group_request,
+                  group,
+                  user
+              }
+          })
+      );
 
       return {
           success: true,
