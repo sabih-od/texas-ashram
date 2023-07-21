@@ -31,12 +31,17 @@ function Registration(props) {
                 <div className="container">
                     <div className="col-md-9 row mx-auto align-items-center ">
                         <div className="col-md-8 px-5">
-                            <p className="mb-3">To register and pay online, please click here: <Link href="/"> Online
+                            <p className="mb-3">To register and pay online, please click here: <Link
+                                href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU"> Online
                                 Registration</Link></p>
                             <p className="mb-3">To print the registration form and mail it with a registration fee
-                                check, please click here: <Link href="/">2023 Registration Form</Link>​</p>
+                                check, please click here: <Link
+                                    href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">2023
+                                    Registration Form</Link>​</p>
                             <p className="mb-3">To fill out your family’s health forms in advance to save time at
-                                check-in, please click here: <a href="">Printable Health Form</a></p>
+                                check-in, please click here: <Link
+                                    href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">Printable
+                                    Health Form</Link></p>
                             <p className="mb-3">Important Note: You will need one Health Form for every person in your
                                 family. There are two forms on each page. Please bring with you to the Ashram.</p>
                             <p className="mb-3">If you have any questions, please email us at <a
