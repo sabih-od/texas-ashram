@@ -37,6 +37,8 @@ export class FirebaseService {
             };
 
             let response = await firebaseAdmin.messaging().sendMulticast(notification);
+            console.log('----sendNotificationToDevice----');
+            console.log(response);
 
             return {
                 success: true,
