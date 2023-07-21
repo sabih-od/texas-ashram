@@ -5,6 +5,8 @@ export const create = async ({
                                  description,
                                  date_to,
                                  date_from,
+                                 start_time,
+                                 end_time,
                                  location,
                                  image
                              }) => {
@@ -14,6 +16,8 @@ export const create = async ({
         form.append('description', description)
         form.append('date_to', date_to)
         form.append('date_from', date_from)
+        form.append('start_time', start_time)
+        form.append('end_time', end_time)
         form.append('location', location)
         form.append('image', image)
 
@@ -44,6 +48,8 @@ export const update = async ({
                                  description,
                                  date_to,
                                  date_from,
+                                 start_time,
+                                 end_time,
                                  location,
                                  image
                              }) => {
@@ -60,6 +66,8 @@ export const update = async ({
         form.append('description', description)
         form.append('date_to', date_to)
         form.append('date_from', date_from)
+        form.append('start_time', start_time)
+        form.append('end_time', end_time)
         form.append('location', location)
         form.append('image', image)
 

@@ -6,15 +6,12 @@ export class CreateEventDto {
     @ApiProperty({ example: 'Texas Ashram' })
     title: string;
 
-    // @IsNotEmpty()
     @ApiProperty({ example: 'Text Your Description' })
     description: string;
 
-    // @IsNotEmpty()
     @ApiProperty({ example: '05-07-2023' })
     date_to: string;
 
-    // @IsNotEmpty()
     @ApiProperty({ example: '05-07-2023' })
     date_from: string;
 
@@ -24,7 +21,6 @@ export class CreateEventDto {
     @ApiProperty({ example: '10:37 AM' })
     end_time: string;
 
-    // @IsNotEmpty()
     @ApiProperty({ example: 'USA' })
     location: string;
 
