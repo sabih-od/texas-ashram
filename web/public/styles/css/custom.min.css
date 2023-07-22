@@ -1810,6 +1810,41 @@ button.logoutBtn:focus {
 }
 
 .imgContainer {
-    height:227px;
-    width:225px;
+    height: 227px;
+    width: 225px;
+}
+
+/* Add your own CSS file or modify the existing one */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-button {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #555;
+    padding: 8px 16px;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.pagination-button:hover {
+    background-color: #db8245;
+    border-color: #db8245;
+    color: #fff;
+}
+
+.pagination-button.active {
+    background-color: #56928d;
+    color: #fff;
+    border-color: #56928d;
+    outline: none;
+}
+
+.pagination-button:focus {
+    outline: none !important;
 }
