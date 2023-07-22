@@ -159,7 +159,7 @@ function Create(props) {
                                                    e.target.type = 'text'
                                                }}
                                                value={start_time}
-                                               onChange={e => setStart_time(e.target.value)}/>
+                                               onChange={e => new Date(setStart_time(e.target.value))}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='End Time' type="text"
@@ -170,7 +170,7 @@ function Create(props) {
                                                    e.target.type = 'text'
                                                }}
                                                value={end_time}
-                                               onChange={e => setEnd_time(e.target.value)}/>
+                                               onChange={e => new Date(setEnd_time(e.target.value))}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
