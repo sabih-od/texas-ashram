@@ -49,6 +49,7 @@ function Events(props) {
 
     const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
     const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a')
+    console.log('formatTime', formatTime);
 
     useEffect(() => {
         dispatch(getEvents({page}))

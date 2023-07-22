@@ -17,10 +17,10 @@ export class Event {
     @Column({ type: 'varchar', nullable: true })
     date_from: string;
 
-    @Column({ type: 'varchar', nullable: true })
+    @Column({ type: 'text', nullable: true })
     start_time: string;
 
-    @Column({ type: 'varchar', nullable: true })
+    @Column({ type: 'text', nullable: true })
     end_time: string;
 
     @Column({ type: 'text', nullable: true })
