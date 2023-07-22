@@ -7,58 +7,28 @@ import moment from "moment";
 
 function Events(props) {
     const [events, setEvents] = useState([]);
-    // console.log('events', events);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD MMM, ')
     const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a')
-    // console.log('formatTime', formatTime);
 
     useEffect(() => {
-        async function fetchEvents() {
+        async function fetchEvents(page, perPage) {
             try {
-                const response = await get(1, 15);
+                const response = await get(page, perPage);
                 const eventsArray = response.data?.data || [];
                 console.log('eventsArray', eventsArray);
 
-                /*const formattedEvents = eventsArray.map((event) => {
-                    const parsedDateTo = parse(event.date_to, 'yyyy-MM-dd', new Date());
-                    const parsedDateFrom = parse(event.date_from, 'yyyy-MM-dd', new Date());
-
-                    const formattedStartDate = format('2000-01-01' + parsedDateTo, 'dd MMM,');
-                    const formattedEndDate = format('2000-01-01' + parsedDateFrom, 'dd MMM,');
-
-                    // const formattedStartTime = formatTime(event.start_time, 'h:mm a,');
-                    // console.log('formattedStartTime', formattedStartTime)
-
-                    // const parsedStartTime = new Date(event.start_time);
-                    // const parsedEndTime = new Date(event.end_time);
-                    // const parsedStartTime = parseISO(event.start_time);
-                    // const parsedEndTime = parseISO(event.end_time);
-
-                    // const formattedStartTime = format(new Date(parsedStartTime), 'h:mm a,');
-                    // const formattedEndTime = format(new Date(parsedEndTime), 'h:mm a,');
-
-
-                    // const formattedEndTime = format(parsedEndTime, 'h:mm a,');
-
-                    return {
-                        ...event,
-                        formattedDateFrom: formattedStartDate,
-                        formattedDateTo: formattedEndDate,
-                        // formattedStartT: formattedStartTime,
-                        // formattedEndT: formattedEndTime,
-                    };
-                });*/
-
                 setEvents(eventsArray);
-                // console.log('setEvents(eventsArray)', setEvents(eventsArray));
+                setTotalPages(response.data?.totalPages || 1);
             } catch (error) {
                 console.error(error);
             }
-
         }
 
-        fetchEvents().then((r) => 'error');
-    }, []);
+        fetchEvents(currentPage, 15).then((r) => 'error'); // Fetch the events for the first page with 15 items per page
+    }, [currentPage]);
 
     return (
         <Layout>
@@ -114,6 +84,28 @@ function Events(props) {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className="pagination">
+                    {/* Pagination Controls */}
+                    {currentPage > 1 && (
+                        <button className="pagination-button" onClick={() => setCurrentPage((prev) => prev - 1)}>
+                            Previous
+                        </button>
+                    )}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <button
+                            key={page}
+                            className={`pagination-button ${page === currentPage ? 'active' : ''}`}
+                            onClick={() => setCurrentPage(page)}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                    {currentPage < totalPages && (
+                        <button className="pagination-button" onClick={() => setCurrentPage((prev) => prev + 1)}>
+                            Next
+                        </button>
+                    )}
                 </div>
             </section>
             {/*!--!Books Section --*/}
