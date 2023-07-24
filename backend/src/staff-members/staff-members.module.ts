@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { StaffMembersService } from './staff-members.service';
 import { StaffMembersController } from './staff-members.controller';
-import {DatabaseModule} from "../database.module";
+import {DatabaseModule} from "../database/database.module";
 import {staffMemberProviders} from "./staff-members.provider";
 import {UsersModule} from "../users/users.module";
 

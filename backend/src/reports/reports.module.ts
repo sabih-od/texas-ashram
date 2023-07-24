@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { ReportsController } from './reports.controller';
-import {DatabaseModule} from "../database.module";
+import {DatabaseModule} from "../database/database.module";
 import {reportProviders} from "./reports.provider";
 import {MessagesModule} from "../messages/messages.module";
 import {AuthModule} from "../auth/auth.module";

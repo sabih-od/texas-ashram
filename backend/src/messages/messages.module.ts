@@ -2,7 +2,7 @@ import {forwardRef, Module} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { MessagesController } from './messages.controller';
 import {messageProviders} from "./messages.provider";
-import {DatabaseModule} from "../database.module";
+import {DatabaseModule} from "../database/database.module";
 import {GroupsModule} from "../groups/groups.module";
 import {UsersModule} from "../users/users.module";
 import {NotificationsModule} from "../notifications/notifications.module";
