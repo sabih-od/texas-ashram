@@ -1,10 +1,8 @@
-import {apiUrl, errorResponse, exceptionResponse, successResponse, getToken} from "../services/global";
 import React, {useState, useEffect} from 'react';
 import Layout from "../components/Layout";
 import donate from "../images/donate3.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import {loadStripe} from '@stripe/stripe-js';
 
 function Donate(props) {
 

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import {useEffect, useState} from 'react';
-import Cookie from "js-cookie";
 import {apiUrl, getToken} from "../services/global";
 import {authUser} from "../services/authService";
 

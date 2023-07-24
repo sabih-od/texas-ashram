@@ -3,7 +3,6 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import speaker from "../images/icon/speaker.png";
 import { get } from "../services/announcementService";
-import { parse, format } from "date-fns";
 
 function Announcement(props) {
     const [announcements, setAnnouncement] = useState([]);

@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Layout from '../components/Layout';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {create} from '../services/prayerRequestService';
 import {useRouter} from 'next/router';
 import Cookie from "js-cookie";
-import Link from "next/link";
 
 
 function PrayerRequestForm(props) {

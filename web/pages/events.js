@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
 import {get} from "../services/eventService";
-import {format, parse, parseISO} from "date-fns";
 import moment from "moment";
 
 function Events(props) {

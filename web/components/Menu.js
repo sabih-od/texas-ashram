@@ -4,8 +4,6 @@ import Logo from "../images/new-html/logo.png";
 import Link from "next/link";
 import Cookie from "js-cookie";
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
-import PreLoader from "../pages/preLoader";
 // import {initializeCustomScripts} from '../public/styles/js/custom.min';
 
 const Menu = () => {

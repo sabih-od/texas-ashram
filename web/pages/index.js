@@ -1,33 +1,26 @@
 import Layout from "../components/Layout";
 import Image from "next/image";
 import React from "react";
-import missionImg from "../images/new-html/missionimg.png";
 import family1 from "../images/new-html/family1.png";
-import family2 from "../images/new-html/family2.png";
 import family3 from "../images/new-html/family3.png";
 import shape from "../public/Shape.png";
 import shape2 from "../images/Shap2.png";
 import shape3 from "../images/Shap3.png";
 import shape4 from "../images/Shap4.png";
-import testImg1 from "../images/new-html/testiimg1.png";
 import testImg2 from "../images/new-html/testimg2.png";
 import quote from "../images/new-html/quote.png";
-import user1 from "../images/new-html/user1.png";
 import noPath from "../images/NoPath.png";
 import familyPicture from "../images/family-picture.png";
 import bannerVideo from "../public/banner.mp4";
 import {useEffect, useRef} from 'react';
 import Link from "next/link";
-import ReactPlayer from 'react-player'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
-import url from 'url';
 
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import {Autoplay, Pagination} from 'swiper/modules';
 import PreLoader from "./preLoader";
 
 export default function Home() {

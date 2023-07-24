@@ -86,10 +86,10 @@ function GroupRequests(props) {
                                                         <span>{g_request.id}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{g_request.group_id}</span>
+                                                        <span>{`${g_request?.group?.name}`}</span>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <span>{g_request.user_id}</span>
+                                                        <span>{`${g_request?.user?.first_name} ${g_request?.user?.last_name} (${g_request?.user?.email})`}</span>
                                                     </TableCell>
                                                     <TableCell width="200">
                                                         <IconButton

@@ -1,6 +1,5 @@
 import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse} from "./global";
-import {useRouter} from 'next/router';
-import React, {useState, useEffect, useCallback} from 'react';
+import React, from 'react';
 import Cookie from "js-cookie";
 
 export const forgotPassword = async ({ email }) => {

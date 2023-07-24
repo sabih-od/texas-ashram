@@ -3,21 +3,9 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import aboutMain from "../images/missionimg2.jpg";
 import AboutImg from "../images/imgpsh_fullsize_anim.png";
-import missionImg1 from "../images/mission1.jpg";
-import missionImg2 from "../images/mission2.jpg";
-import missionImg3 from "../images/mission3.jpg";
-import missionImg4 from "../images/mission4.jpg";
-import missionImg5 from "../images/mission5.jpg";
-import missionImg6 from "../images/mission6.jpg";
-import missionImg7 from "../images/mission7.jpg";
-import missionImg8 from "../images/mission8.jpg";
-import missionImg9 from "../images/mission9.jpg";
-import missionImg10 from "../images/mission10.jpg";
-import missionImg11 from "../images/mission11.jpg";
 import shape3 from "../images/young adult.jpg";
 import Link from "next/link";
 // Import Swiper React components
-import {Swiper, SwiperSlide} from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import iconImg from "../images/icon/pdf-icon.png";

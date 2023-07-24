@@ -3,11 +3,9 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import registration from "../images/registeration.jpeg";
 import Link from "next/link";
-import speaker from "../images/speaker1.png";
 import fun from "../images/funning.jpg";
 // import qrCode from "../images/QR-Code.png";
 import qrCode from "../images/qrcode.png";
-import speaker2 from "../images/speaker2.png";
 
 function Registration(props) {
     return (

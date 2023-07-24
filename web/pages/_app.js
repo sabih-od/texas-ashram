@@ -7,7 +7,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Modal from 'react-modal';
 import Script from 'next/script';
-import Authentication from "../middleware/authentication";
 import {useRouter} from "next/router";
 import {initNav} from '../utils/nav-script'
 

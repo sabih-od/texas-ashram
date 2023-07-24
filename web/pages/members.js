@@ -7,7 +7,6 @@ import {loginUser} from '../services/authService';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 
 // ** Icons Imports

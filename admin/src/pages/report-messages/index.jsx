@@ -9,8 +9,6 @@ import {
     deleteReport,
     acceptReport
 } from '../../store/slices/reportsSlice'
-import Link from "next/link";
-import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -21,7 +19,6 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import {Alert, IconButton, Pagination, Stack} from "@mui/material";
 import {Delete} from 'mdi-material-ui'
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
