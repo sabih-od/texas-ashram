@@ -78,6 +78,9 @@ export class GroupsController {
           })
       );
 
+      // Remove null entries from the array
+      res.data = res.data.filter((entry) => entry !== null && entry !== undefined);
+
       return {
           success: true,
           message: '',

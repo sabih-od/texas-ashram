@@ -20,7 +20,7 @@ $ nest new backend
 $ cd backend
 
 # 3. install packages
-$ npm i @nestjs/swagger @nestjs/jwt @nestjs/config @types/multer class-validator typeorm firebase firebase-admin nodemailer socket.io mysql2 dotenv class-transformer
+$ npm i @nestjs/swagger @nestjs/jwt @nestjs/config @types/multer class-validator typeorm firebase firebase-admin nodemailer socket.io mysql2 dotenv class-transformer bcrypt
 
 # 4. copy the following folders from 'src' directory 
 -auth 
@@ -141,6 +141,8 @@ const app = await NestFactory.create(AppModule, { cors: true, httpsOptions });
     SwaggerModule.setup('api', app, document);
 
     await app.listen(process.env.PORT);
+    
+# 12. copy backend/README.md file
 
 ```
 
