@@ -40,6 +40,9 @@ export class User {
     fcm_token: string;
 
     @Column({ type: 'text', nullable: true })
+    blocked_users: string;
+
+    @Column({ type: 'text', nullable: true })
     created_at: string;
 
     // //relations

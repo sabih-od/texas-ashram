@@ -28,5 +28,7 @@ export class CreateUserDto {
 
     fcm_token: string;
 
+    blocked_users: string;
+
     created_at: string;
 }

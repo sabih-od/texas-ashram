@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Param, Delete, Query, UseGuards, Inject} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, Query, UseGuards, Inject, Request} from '@nestjs/common';
 import { GroupsService } from './groups.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
@@ -47,7 +47,7 @@ export class GroupsController {
   }
 
   @Get('get-messages/:group_id')
-  async getMessages(@Param('group_id') group_id: string, @Query('page') page?: number, @Query('limit') limit?: number) {
+  async getMessages(@Request() req, @Param('group_id') group_id: string, @Query('page') page?: number, @Query('limit') limit?: number) {
       let group = await this.groupsService.findOne(+group_id);
 
       if (group.error) {
@@ -58,11 +58,25 @@ export class GroupsController {
           }
       }
 
+      let user = await this.usersService.findOneByEmail(req.user.email);
+      let blocked_users = (user.blocked_users == null) ? [] : JSON.parse(user.blocked_users);
+
       let res = await this.messageService.findAll(page, limit, {
           where: {
               group_id: group_id,
               blocked_at: IsNull()
           }}, true, group_id);
+
+      //filter messages of blocked users
+      res.data = await Promise.all(
+          res.data.map(async (message) => {
+              if (!blocked_users.includes(message.user_id)) {
+                  return {
+                      ...message
+                  }
+              }
+          })
+      );
 
       return {
           success: true,

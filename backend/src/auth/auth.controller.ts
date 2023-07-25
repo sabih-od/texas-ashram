@@ -8,7 +8,7 @@ import {
     Request,
     UseGuards,
     UseInterceptors,
-    UploadedFile, ParseFilePipe, MaxFileSizeValidator
+    UploadedFile, ParseFilePipe, MaxFileSizeValidator, Param, Inject
 } from '@nestjs/common';
 import {AuthService} from "./auth.service";
 import { AuthGuard } from './auth.guard';
@@ -28,11 +28,19 @@ import {UpdateUserDto} from "../users/dto/update-user.dto";
 import {ResetPasswordDto} from "./dto/reset-password.dto";
 import { firebaseAdmin } from '../firebase/firebase-admin';
 import {socketIoServer} from "../main";
+import {BlockUserDto} from "./dto/block-user.dto";
+import {Repository} from "typeorm";
+import {User} from "../users/entities/user.entity";
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService, private userService: UsersService) {}
+    constructor(
+        private authService: AuthService,
+        private userService: UsersService,
+        @Inject('USER_REPOSITORY')
+        private userRepository: Repository<User>,
+    ) {}
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
@@ -188,6 +196,109 @@ export class AuthController {
             success: !res.error,
             message: res.error ? res.error : 'Your password was reset',
             data: res.error ? [] : res,
+        }
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('block-user/:flag')
+    @ApiBearerAuth()
+    async blockUser (@Request() req, @Body() blockUserDto: BlockUserDto, @Param('flag') flag: number) {
+        let user = await this.userService.findOneByEmail(req.user.email);
+        if (user.id == blockUserDto.user_id) {
+            return {
+                success: false,
+                message: 'You cannot block yourself.',
+                data: [],
+            }
+        }
+
+        let user_to_block = await this.userService.findOne(+blockUserDto.user_id);
+        if (user_to_block.error) {
+            return {
+                success: false,
+                message: user_to_block.error,
+                data: [],
+            }
+        }
+
+        if (flag == 1) {
+            if (user.blocked_users == null) {
+                user.blocked_users = JSON.stringify([user_to_block.id]);
+            } else {
+                let blocked_users = JSON.parse(user.blocked_users);
+
+                const isBlocked = blocked_users.some((member) => member === user_to_block.id);
+                if (isBlocked) {
+                    return {
+                        success: false,
+                        message: 'User is already blocked.',
+                        data: [],
+                    };
+                }
+
+                blocked_users.push(user.id);
+                user.blocked_users = JSON.stringify(blocked_users);
+            }
+        } else if (flag == 0) {
+            if (user.blocked_users == null) {
+                user.blocked_users = JSON.stringify([]);
+                await this.userRepository.save(user);
+                return {
+                    success: false,
+                    message: 'User is already un-blocked.',
+                    data: [],
+                };
+            } else {
+                let blocked_users = JSON.parse(user.blocked_users);
+
+                const isBlocked = blocked_users.some((member) => member === user_to_block.id);
+                if (!isBlocked) {
+                    return {
+                        success: false,
+                        message: 'User is already un-blocked.',
+                        data: [],
+                    };
+                }
+
+                blocked_users = blocked_users.filter((user_id) => user_id !== user_to_block.id);
+                user.blocked_users = JSON.stringify(blocked_users);
+            }
+        } else {
+            return {
+                success: false,
+                message: 'Invalid flag parameter. Expected values: [0, 1]',
+                data: [],
+            }
+        }
+
+        await this.userRepository.save(user);
+        return {
+            success: true,
+            message: 'User ' + ((flag == 0) ? 'un-' : '') + 'blocked successfully.',
+            data: [],
+        }
+    }
+
+    @UseGuards(AuthGuard)
+    @Get('blocked-users')
+    @ApiBearerAuth()
+    async blockedUsers (@Request() req) {
+        let user = await this.userService.findOneByEmail(req.user.email);
+        if (user.error) {
+            return {
+                success: false,
+                message: user.error,
+                data: [],
+            }
+        }
+
+        let blocked_users = (user.blocked_users == null) ? JSON.stringify([]) : user.blocked_users;
+        blocked_users = JSON.parse(blocked_users);
+
+        return {
+            success: true,
+            message: '',
+            data: blocked_users,
         }
     }
 

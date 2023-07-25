@@ -52,13 +52,13 @@ export class MessagesService {
                     }
                 });
 
-                delete message.user_id;
                 if (user && user.id) {
                     delete user.password;
                     delete user.otp;
                     delete user.email;
                     delete user.phone;
                     delete user.role_id;
+                    delete user.blocked_users;
                     delete user.created_at;
 
                     return { ...message, user };
