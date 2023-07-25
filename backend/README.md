@@ -47,7 +47,9 @@ $ npm i @nestjs/swagger @nestjs/jwt @nestjs/config @types/multer class-validator
 .env
 uploads/*
 
-# 9. import modules in app module, modify src/app.module.ts as follows
+# 9. copy backend/pm2.json file
+
+# 10. import modules in app module, modify src/app.module.ts as follows
 convert:
 imports: [],
 to:
@@ -73,7 +75,7 @@ export class AppModule {
     }
 }
 
-# 10. setup src/main.ts file 
+# 11. setup src/main.ts file 
 
 -add following code above 'bootstrap' method
 
@@ -120,8 +122,8 @@ const app = await NestFactory.create(AppModule, { cors: true, httpsOptions });
 
     //swagger
     const swagger_config = new DocumentBuilder()
-        .setTitle('Texas Ashram')
-        .setDescription('Texas Ashram API Documentation')
+        .setTitle('<project name>')
+        .setDescription('<project name> API Documentation')
         .setVersion('1.0')
         .addTag('Auth')
         .addTag('Contacts')
