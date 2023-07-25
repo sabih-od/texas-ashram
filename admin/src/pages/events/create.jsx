@@ -122,8 +122,11 @@ function Create(props) {
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
                                 <Grid item xs={12} sx={{mt: 5}}>
+
                                     <TextField fullWidth label='Description' value={description}
+                                               multiline rows={4}
                                                onChange={e => setDescription(e.target.value)}/>
+
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>
