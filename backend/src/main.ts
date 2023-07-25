@@ -16,7 +16,7 @@ const httpsOptions = {
 //socket.io deps
 import * as express from 'express';
 const socket_app = express();
-const http = require('http');
+// const http = require('http');
 import * as https from 'https';
 const socket_io_server = https.createServer(httpsOptions, socket_app);
 const { Server } = require("socket.io");

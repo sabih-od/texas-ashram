@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GroupRequestsService } from './group-requests.service';
 import { GroupRequestsController } from './group-requests.controller';
-import {DatabaseModule} from "../database.module";
+import {DatabaseModule} from "../database/database.module";
 import {groupRequestProviders} from "./group-requests.provider";
 import {GroupsModule} from "../groups/groups.module";
 import {UsersModule} from "../users/users.module";

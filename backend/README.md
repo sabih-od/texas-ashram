@@ -8,6 +8,140 @@
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
 
 
+## Setup
+
+```bash
+# 1. install nest cli
+$ npm i -g @nestjs/cli
+$ cd project-name
+
+# 2. create folder named 'backend' for your nestjs application
+$ nest new backend
+$ cd backend
+
+# 3. install packages
+$ npm i @nestjs/swagger @nestjs/jwt @nestjs/config @types/multer class-validator typeorm firebase firebase-admin nodemailer socket.io mysql2 dotenv class-transformer
+
+# 4. copy the following folders from 'src' directory 
+-auth 
+-contacts
+-database 
+-firebase 
+-groups (for group chats) 
+-group-requests (for group chats) 
+-helpers 
+-mail 
+-messages (for group chats) 
+-middlewares 
+-notifications
+-ssl
+-users 
+
+# 5. create backend/uploads directory
+
+# 6. create backend/images directory
+ 
+# 7. copy .env.example file and prepare .env file according to .env.example
+
+# 8. add following code to backend/.gitignore file
+.env
+uploads/*
+
+# 9. import modules in app module, modify src/app.module.ts as follows
+convert:
+imports: [],
+to:
+imports: [
+      ConfigModule.forRoot(),
+      UsersModule,
+      AuthModule,
+      ContactsModule,
+      MailModule,
+      GroupsModule,
+      MessagesModule,
+      NotificationsModule,
+      GroupRequestsModule,
+  ],
+  
+//apply abusive words filter
+convert:
+export class AppModule {}
+to:
+export class AppModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AbusiveWordsMiddleware).forRoutes('*');
+    }
+}
+
+# 10. setup src/main.ts file 
+
+-add following code above 'bootstrap' method
+
+//import code
+import * as fs from "fs";
+import * as path from 'path';
+
+//https config
+const httpsOptions = {
+    key: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-key.txt').replace('dist', 'src')),
+    cert: fs.readFileSync(path.join(__dirname, '', '/ssl/texas-cert.txt').replace('dist', 'src')),
+};
+
+//socket.io deps
+import * as express from 'express';
+const socket_app = express();
+import * as https from 'https';
+const socket_io_server = https.createServer(httpsOptions, socket_app);
+const { Server } = require("socket.io");
+const io = new Server(socket_io_server);
+
+io.on('connection', (socket) => {
+    // console.log('socket', socket);
+    console.log('a user connected');
+});
+
+socket_io_server.listen(process.env.SOCKET_IO_PORT, () => {
+    console.log('listening on *:' + process.env.SOCKET_IO_PORT);
+});
+
+export const socketIoServer = io;
+
+
+convert:
+const app = await NestFactory.create(AppModule);
+await app.listen(3000);
+to:
+const app = await NestFactory.create(AppModule, { cors: true, httpsOptions });
+    app.useGlobalPipes(new ValidationPipe());
+    app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+    app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+
+    config({path: join(__dirname, '../.env')});
+
+    //swagger
+    const swagger_config = new DocumentBuilder()
+        .setTitle('Texas Ashram')
+        .setDescription('Texas Ashram API Documentation')
+        .setVersion('1.0')
+        .addTag('Auth')
+        .addTag('Contacts')
+        .addTag('Groups')
+        .addTag('Group Requests')
+        .addTag('Messages')
+        .addTag('Notifications')
+        .addTag('Users')
+        .addSecurity('bearer', {
+            type: 'http',
+            scheme: 'bearer',
+        })
+        .build();
+    const document = SwaggerModule.createDocument(app, swagger_config);
+    SwaggerModule.setup('api', app, document);
+
+    await app.listen(process.env.PORT);
+
+```
+
 ## Running the app
 
 ```bash
