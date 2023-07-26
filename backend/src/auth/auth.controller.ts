@@ -292,8 +292,22 @@ export class AuthController {
             }
         }
 
-        let blocked_users = (user.blocked_users == null) ? JSON.stringify([]) : user.blocked_users;
-        blocked_users = JSON.parse(blocked_users);
+        let blocked_users_ids = (user.blocked_users == null) ? JSON.stringify([]) : user.blocked_users;
+        blocked_users_ids = JSON.parse(blocked_users_ids);
+
+        let blocked_users = await Promise.all(
+            blocked_users_ids.map(async (blocked_users_id) => {
+                let blocked_user = await this.userService.findOne(+blocked_users_id);
+
+                if (!blocked_user.error) {
+                    delete blocked_user.otp;
+                    delete blocked_user.password;
+
+                    return blocked_user;
+                }
+
+            }).filter((item) => item !== null && item !== undefined)
+        );
 
         return {
             success: true,
