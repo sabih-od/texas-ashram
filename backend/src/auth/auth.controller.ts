@@ -227,7 +227,7 @@ export class AuthController {
             } else {
                 let blocked_users = JSON.parse(user.blocked_users);
 
-                const isBlocked = blocked_users.some((member) => member === user_to_block.id);
+                const isBlocked = blocked_users.some((member) => member == user_to_block.id);
                 if (isBlocked) {
                     return {
                         success: false,
@@ -236,7 +236,7 @@ export class AuthController {
                     };
                 }
 
-                blocked_users.push(user.id);
+                blocked_users.push(user_to_block.id);
                 user.blocked_users = JSON.stringify(blocked_users);
             }
         } else if (flag == 0) {
@@ -275,7 +275,7 @@ export class AuthController {
         return {
             success: true,
             message: 'User ' + ((flag == 0) ? 'un-' : '') + 'blocked successfully.',
-            data: [],
+            data: user_to_block ,
         }
     }
 
