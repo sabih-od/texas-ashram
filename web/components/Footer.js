@@ -33,11 +33,11 @@ const Footer = () => {
                                     <li><Link href="/registration">Registration</Link></li>
                                 </ul>
                                 <ul>
-                                    {!token && (
-                                        <li className="">
-                                            <Link href="/members"> Members </Link>
-                                        </li>
-                                    )}
+                                    {/*{!token && (*/}
+                                    {/*    <li className="">*/}
+                                    {/*        <Link href="/members"> Members </Link>*/}
+                                    {/*    </li>*/}
+                                    {/*)}*/}
                                     <li><Link href="/contact">Contact Us</Link></li>
                                     <li><Link href="/donate">Donation</Link></li>
                                     <li><Link href="/terms">Terms & Conditions</Link></li>

@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import Image from "next/image";
-import logo from "../images/logo.png";
+import logo from "../images/logo2.png";
 import gsap from "gsap";
 
 function PreLoader() {
