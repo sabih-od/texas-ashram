@@ -137,8 +137,7 @@ export default function Home() {
                                     <figure><Image src={shape3} className="img-fluid imgContainer" alt={shape3}/>
                                     </figure>
                                     <h2>Young Adults Activities</h2>
-                                    <p>Destress, Unwind, and Purposefully pursue Jesus.</p>
-                                    {/*<p>Learn about Jesus in a Fun and Engaging Way</p>*/}
+                                    <p>Learn about Jesus in a Fun and Engaging Way</p>
                                     <Link href="/about#young" className="newthemeBtn borderBtn">Read More</Link>
                                 </div>
                             </div>
@@ -202,12 +201,9 @@ export default function Home() {
                                 <h2 className="heading" data-aos='fade-up'>We Serve The Entire Family</h2>
                                 <p data-aos='fade-up' data-aos-delay="150">At the Texas Christian Ashram, there is a
                                     group for everyone in your family!</p>
-                                {/*<Link data-aos='fade-up' data-aos-delay="150" href="/about#schedule"*/}
-                                {/*      className="newthemeBtn">2024*/}
-                                {/*    Schedule</Link>*/}
-                                <Link data-aos='fade-up' data-aos-delay="150" href="/events"
-                                      className="newthemeBtn">
-                                    Event</Link>
+                                <Link data-aos='fade-up' data-aos-delay="150" href="/about#schedule"
+                                      className="newthemeBtn">2024
+                                    Schedule</Link>
                             </div>
                         </div>
                     </div>
