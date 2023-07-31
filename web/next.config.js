@@ -10,7 +10,7 @@ module.exports = {
     images: { unoptimized: true },
 
     publicRuntimeConfig: {
-        apiUrls: 'https://localhost:3023',
+        apiUrls: 'https://localhost:3020',
     },
 
     // Add aliases for commonly used directories

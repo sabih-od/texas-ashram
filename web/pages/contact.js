@@ -170,9 +170,9 @@ function Contact(props) {
                         {/*<div className="col-md-8 px-5 py-4">*/}
                         <div className="col-md-10">
                             <div className="contactUs">
-                                <span className="heading-2">INFORMATION ABOUT US</span>
-                                <h4>CONTACT US FOR ANY QUESTIONS</h4>
-
+                                {/*<span className="heading-2">INFORMATION ABOUT US</span>*/}
+                                {/*<h4>CONTACT US FOR ANY QUESTIONS</h4>*/}
+                                <h4> How can we help?</h4>
                                 {isFormSubmitted && <p className="success">Form submitted successfully!</p>}
                                 <form onSubmit={handleContactForm}>
                                     <div className="row">
@@ -207,16 +207,16 @@ function Contact(props) {
                                             </div>
                                             {formErrors.phone && <p className="error">{formErrors.phone}</p>}
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="input-group">
-                                                <label htmlFor="">Company</label>
-                                                <input type="text" name="company" value={company}
-                                                       onChange={(e) => setCompany(e.target.value)}
-                                                       className="form-control" placeholder=""/>
-                                            </div>
-                                            {formErrors.company &&
-                                            <p className="error">{formErrors.company}</p>}
-                                        </div>
+                                        {/*<div className="col-md-6">*/}
+                                        {/*    <div className="input-group">*/}
+                                        {/*        <label htmlFor="">Company</label>*/}
+                                        {/*        <input type="text" name="company" value={company}*/}
+                                        {/*               onChange={(e) => setCompany(e.target.value)}*/}
+                                        {/*               className="form-control" placeholder=""/>*/}
+                                        {/*    </div>*/}
+                                        {/*    {formErrors.company &&*/}
+                                        {/*    <p className="error">{formErrors.company}</p>}*/}
+                                        {/*</div>*/}
                                         <div className="col-md-12">
                                             <div className="input-group">
                                                 <label htmlFor="">Your Message</label>

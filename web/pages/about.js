@@ -13,7 +13,7 @@ import familiesImg from "../images/familiesimg.webp";
 import famImg from "../images/fam.png";
 import famImg2 from "../images/fam2.png";
 import famImg3 from "../images/fam3.png";
-import speaker from "../images/speaker1.png";
+import speaker from "../images/Executive-Director.png";
 import speaker2 from "../images/speaker2.png";
 
 function AboutUs(props) {
@@ -67,25 +67,39 @@ function AboutUs(props) {
                                     className="far fa-play"/></a>
 
                             </div>
+                            {/*<div className="my-5">*/}
+                            {/*    <h6 className="subheading text-primary">Welcome to the</h6>*/}
+                            {/*    <h1 className="heading">Texas Christian Ashram</h1>*/}
+                            {/*    <p>For more than 80 years, individuals and families have attended Christian Ashram*/}
+                            {/*        retreats all around the world. The purpose of the retreat is to focus on JESUS, find*/}
+                            {/*        rest and recreation, listen to encouraging teaching, and find meaningful*/}
+                            {/*        friendships.</p>*/}
+                            {/*    <p>We recognize that each person is at a different place in life. One thing we have in*/}
+                            {/*        common, is that life is tough sometimes. Sometimes we just need to unplug from all*/}
+                            {/*        of life’s stressors and proactively focus on Jesus to recharge.</p>*/}
+                            {/*    <p>Our sole purpose is to provide a Christian Atmosphere for all ages. We are another*/}
+                            {/*        tool in God’s toolbox that He can use to help strengthen the body of Christ and us*/}
+                            {/*        as Christ Followers.</p>*/}
+                            {/*    <p>Our camp is designed to provide a well-rounded experience, with inspiring teaching,*/}
+                            {/*        uplifting worship, and engaging fellowship for all age groups. You'll have the*/}
+                            {/*        opportunity to participate in small group discussions, reflective times of prayer,*/}
+                            {/*        and fun recreational activities.</p>*/}
+                            {/*</div>*/}
                             <div className="my-5">
                                 <h6 className="subheading text-primary">Welcome to the</h6>
                                 <h1 className="heading">Texas Christian Ashram</h1>
-                                <p>For more than 80 years, individuals and families have attended Christian Ashram
-                                    retreats all around the world. The purpose of the retreat is to focus on JESUS, find
-                                    rest and recreation, listen to encouraging teaching, and find meaningful
-                                    friendships.</p>
-                                <p>We recognize that each person is at a different place in life. One thing we have in
-                                    common, is that life is tough sometimes. Sometimes we just need to unplug from all
-                                    of life’s stressors and proactively focus on Jesus to recharge.</p>
-                                <p>Our sole purpose is to provide a Christian Atmosphere for all ages. We are another
-                                    tool in God’s toolbox that He can use to help strengthen the body of Christ and us
-                                    as Christ Followers.</p>
-                                <p>Our camp is designed to provide a well-rounded experience, with inspiring teaching,
-                                    uplifting worship, and engaging fellowship for all age groups. You'll have the
-                                    opportunity to participate in small group discussions, reflective times of prayer,
-                                    and fun recreational activities.</p>
+                                <p> For more than 80 years, individuals and families have attended Christian Ashram retreats all around the world.
+                                    The purpose of the retreat is to focus on JESUS, find rest and recreation, listen to encouraging teaching, and find meaningful friendships.</p>
+
+                                <p>We recognize that each person is at a different place in life. One thing we have in common, is that life is tough sometimes.
+                                    Sometimes we just need to unplug from all of life’s stressors and proactively focus on Jesus to recharge.</p>
+
+                                <p>Our sole purpose is to be another tool in God’s tool box that he can use to help strengthen the body of Christ and us as Christ Followers.</p>
+
                             </div>
                         </div>
+
+
                         {/*<div className="col-md-6 px-5" data-aos="fade-left">
                             <h6 className="subheading text-primary">Welcome to the</h6>
                             <h1 className="heading">Texas Christian Ashram</h1>
@@ -269,11 +283,15 @@ function AboutUs(props) {
                         <div className="col-12">
                             <hr/>
                         </div>
-                        <div className="col-md-6" id="children">
-                            <Image src={famImg3} className="img-fluid" alt="famImg 3"/>
+                        <div className="col-md-6 pt-3" id="children">
+
+                            <Image src={famImg3} className="img-fluid" style={{height:'408px'}} alt="famImg 3"/>
+
                         </div>
-                        <div className="col-md-6 px-5">
-                            <h1 className="heading">Children's Activities</h1>
+                        <div className="col-md-6 px-5 pt-3">
+                            <h1 className="heading">Children's  Activities</h1>
+
+                            {/*<h1 className="heading">Children's Activities</h1>*/}
                             <p className="mb-0 text">Children of all ages are welcomed into the age appropriate programs
                                 with teachers and volunteers that seek to share the love of Jesus. As a family camp, we
                                 have infant and toddler, pre-school, and elementary programs. We want to come alongside
@@ -323,35 +341,31 @@ function AboutUs(props) {
                     </div>
                 </div>
             </section>
-
             <section className="inner-about-section innerPage">
                 <div className="container">
                     <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
-                    <h1 className="heading text-center mt-4 mb-3">Staff</h1>
+                    <h1 className="heading text-center mt-4 mb-3">Executive Director</h1>
                     <div className="row mx-4">
                         <div className="col-md-9 px-5">
                             <h6 className="subheading text-secondary">Evangelist</h6>
-                            <h1 className="heading">Bob Hayes</h1>
-                            <p className="text">Bob Hayes was born in Houston, Texas, and is the third generation of
-                                Methodist ministers in his family. Growing up in a Methodist parsonage the call to
-                                ministry came early, and at age 13, Robert gave his life to Christ. He says that his
-                                life was shaped by his father's preaching and his mother's knowledge of the great hymns
-                                of the faith.</p>
-                            <p className="text">Bob is married to Deliliah "Dee” Hayes and is the proud father of three
-                                grown children: Joya, Robert III, and Ryan. After retiring from his service as a United
-                                Methodist bishop he joined the staff of The Woodlands Methodist Church and was recently
-                                elected to serve the United Christian Ashram ministry as a member of The Four, the
-                                governing staff of the UCA that was set up by E. Stanley Jones when the ministry began.
-                                ​</p>
-                            <p className="text">Bob completed his undergraduate studies at Huston-Tillotson College in
-                                Austin, Texas, majoring in English, and did his seminary graduate work at Perkins School
-                                of Theology, SMU, Dallas, Texas. He later completed his D.Min. at Drew University in
-                                Madison, New Jersey.</p>
-                            <p className="text">Bob is known as one of the best communicators in the faith and we are
-                                excited to have him back this summer at the Texas Christian Ashram.</p>
+                            <h1 className="heading">Joseph (J.T.) Adkins</h1>
+                            <p className="text">Joseph (J.T.) Adkins is the Executive Director of the Texas Christian Ashram
+                                (TCA). He has been involved with TCA since 1983. J.T. met Jesus for the first time at TCA in
+                                1996 while a member of the youth program. TCA has been instrumental in his development as a
+                                Christian and a leader. He now serves as a board member of the United Christian Ashrams
+                                International and the Chair of Marketing and Communications.
+                            </p>
+                            <p className="text">Ministry for me began in 1999 when I left Louisiana at 19 and joined a dramatic
+                                ministry that took me all around the nation and Canada spreading the good news of Jesus Christ.
+                                The ministry focused on Youth and family restoration, I was able to see multiple generations restored.
+                                Ever since, I have been heavily involved in local church ministry, small group leadership, youth ministry,
+                                traveling evangelism, president of a non-profit, and in leadership at the Texas Christian Ashram. My true
+                                passion is for the love of Jesus to be made famous and the Ashram is a perfect place for that to happen.
+                                This year, I am looking forward to serving you. God Bless You! Jesus is Lord!</p>
+
                         </div>
                         <div className="col-md-3 mt-5">
-                            <Image src={speaker} className="img-fluid mt-5" alt="speaker"/>
+                            <Image src={speaker} className="img-fluid mt-5" style={{height:'350px'}} alt="speaker"/>
                         </div>
 
 
@@ -381,6 +395,63 @@ function AboutUs(props) {
                     </div>
                 </div>
             </section>
+            {/*<section className="inner-about-section innerPage">*/}
+            {/*    <div className="container">*/}
+            {/*        <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>*/}
+            {/*        <h1 className="heading text-center mt-4 mb-3">Staff</h1>*/}
+            {/*        <div className="row mx-4">*/}
+            {/*            <div className="col-md-9 px-5">*/}
+            {/*                <h6 className="subheading text-secondary">Evangelist</h6>*/}
+            {/*                <h1 className="heading">Bob Hayes</h1>*/}
+            {/*                <p className="text">Bob Hayes was born in Houston, Texas, and is the third generation of*/}
+            {/*                    Methodist ministers in his family. Growing up in a Methodist parsonage the call to*/}
+            {/*                    ministry came early, and at age 13, Robert gave his life to Christ. He says that his*/}
+            {/*                    life was shaped by his father's preaching and his mother's knowledge of the great hymns*/}
+            {/*                    of the faith.</p>*/}
+            {/*                <p className="text">Bob is married to Deliliah "Dee” Hayes and is the proud father of three*/}
+            {/*                    grown children: Joya, Robert III, and Ryan. After retiring from his service as a United*/}
+            {/*                    Methodist bishop he joined the staff of The Woodlands Methodist Church and was recently*/}
+            {/*                    elected to serve the United Christian Ashram ministry as a member of The Four, the*/}
+            {/*                    governing staff of the UCA that was set up by E. Stanley Jones when the ministry began.*/}
+            {/*                    ​</p>*/}
+            {/*                <p className="text">Bob completed his undergraduate studies at Huston-Tillotson College in*/}
+            {/*                    Austin, Texas, majoring in English, and did his seminary graduate work at Perkins School*/}
+            {/*                    of Theology, SMU, Dallas, Texas. He later completed his D.Min. at Drew University in*/}
+            {/*                    Madison, New Jersey.</p>*/}
+            {/*                <p className="text">Bob is known as one of the best communicators in the faith and we are*/}
+            {/*                    excited to have him back this summer at the Texas Christian Ashram.</p>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-3 mt-5">*/}
+            {/*                <Image src={speaker} className="img-fluid mt-5" alt="speaker"/>*/}
+            {/*            </div>*/}
+
+
+            {/*            <div className="col-12">*/}
+            {/*                <hr/>*/}
+            {/*            </div>*/}
+
+            {/*            <div className="col-md-9 px-5 mt-5">*/}
+            {/*                <h6 className="subheading text-secondary">Bible Teacher</h6>*/}
+            {/*                <h1 className="heading">Brian Shimer</h1>*/}
+            {/*                <p className="text">Brian Shimer became involved in the Christian Ashram movement first at*/}
+            {/*                    the California Winter Ashram in February 1981.</p>*/}
+            {/*                <p className="text">The movement began to work on his life through the leadership of Mary*/}
+            {/*                    Webster, who had traveled with Brother Stanley all over the world. Mary Webster was a*/}
+            {/*                    marvel and wanted Brian and his fiancé to marry while at camp! "Love is too precious to*/}
+            {/*                    wait," she said.​</p>*/}
+            {/*                <p className="text">Brian and Karen have been married for 39 years and have four grown*/}
+            {/*                    daughters and five grandchildren. He has taught as a Bible Teacher and Evangelist at*/}
+            {/*                    Christian Ashrams in the USA and Canada over the last 30 years, serves on the Ashram*/}
+            {/*                    International Board, and has been director of the California Winter Ashram for two*/}
+            {/*                    years.</p>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-3 mt-5">*/}
+            {/*                <br/>*/}
+            {/*                <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2"/>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
 
             <section className="inner-about-section">
                 <div className="container">

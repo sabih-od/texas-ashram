@@ -45,9 +45,13 @@ function Registration(props) {
                                 To register and pay online, please click here: <Link
                                 href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU"> Online
                                 Registration</Link></p>
+                            {/*<p className="mb-3">To print the registration form and mail it with a registration fee*/}
+                            {/*    check, please click here: <Link*/}
+                            {/*        href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">2023*/}
+                            {/*        Registration Form</Link>​</p>*/}
                             <p className="mb-3">To print the registration form and mail it with a registration fee
                                 check, please click here: <Link
-                                    href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">2023
+                                    href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">
                                     Registration Form</Link>​</p>
                             <p className="mb-3">To fill out your family’s health forms in advance to save time at
                                 check-in, please click here: <Link

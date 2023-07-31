@@ -74,7 +74,7 @@ function PrayerRequestForm(props) {
         }*/
 
         if (!description) {
-            errors.description = 'Description is required';
+            errors.description = 'Prayer Request is required';
         }
 
         if (Object.keys(errors).length > 0) {
@@ -226,7 +226,7 @@ function PrayerRequestForm(props) {
                                     </div>*/}
 
                                     <div className="col-md-12 mb-4">
-                                        <label htmlFor="">Description</label>
+                                        <label htmlFor="">Prayer Request</label>
                                         {formErrors.description && <p className="error">{formErrors.description}</p>}
                                         <textarea
                                             rows="10"
