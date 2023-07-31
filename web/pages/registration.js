@@ -26,10 +26,23 @@ function Registration(props) {
 
 
             <section className="registrationpage innerPage">
+
                 <div className="container">
+
+
                     <div className="col-md-9 row mx-auto align-items-center ">
-                        <div className="col-md-8 px-5">
-                            <p className="mb-3">To register and pay online, please click here: <Link
+
+                        <div className="col-3">
+                            <h6 className="subheading text-secondary">QR CODE:</h6>
+                            <Image src={qrCode} className="img-fluid qr-code" style={{width:'500px'}} alt="qrCode" />
+                            {/*<div className="col-md-6" style={{ width: '100rem' }}>*/}
+                            {/*    */}
+                            {/*</div> */}
+                        </div>
+
+                        <div className="col-md-5 px-5">
+                            <p className="mb-3">
+                                To register and pay online, please click here: <Link
                                 href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU"> Online
                                 Registration</Link></p>
                             <p className="mb-3">To print the registration form and mail it with a registration fee
@@ -49,6 +62,7 @@ function Registration(props) {
                             {/*<!-- <br> -->*/}
                             {/*<strong><a href="">Scottsville Conference Center</a></strong>*/}
                         </div>
+
                         <div className="col-md-4 ">
                             <Image src={registration} className="img-fluid" alt="registration"/>
                         </div>
@@ -60,35 +74,35 @@ function Registration(props) {
             {/*    <hr/>*/}
             {/*</div>*/}
 
-            <section className="inner-about-section innerPage">
-                <div className="container">
-                    <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>
-                    <h1 className="heading text-center mt-4 mb-3">Upcoming Events</h1>
-                    <div className="row mx-5">
-                        <div className="col-md-3 mx-4">
-                            <Image src={fun} className="img funny" alt="fun"/>
-                        </div>
-                        <div className="col-md-7 px-5">
-                            {/*<h1 className="heading">Bob Hayes</h1>*/}
-                            <p className="text">a) First Saturday of every month @8am – Morning Devotional and
-                                Prayer</p>
-                            <p className="text">b) July 13-18, 2024 – Summer Event</p>
-                            <p>Permalink: <Link className="text-dark" target="_blank"
-                                                href="https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">
-                                https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU
-                            </Link>
-                            </p>
-                            <p>Shortened URL: <Link className="text-dark" target="_blank"
-                                                    href="https://zfrmz.com/I95iNc1vYkc60D7920VB">https://zfrmz.com/I95iNc1vYkc60D7920VB </Link>
-                            </p>
-                            <h6 className="subheading text-secondary">QR CODE:</h6>
-                        </div>
-                        <div className="col-md-6 text-right mx-5">
-                            <Image src={qrCode} className="img-fluid qr-code" alt="qrCode"/>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {/*<section className="inner-about-section innerPage">*/}
+            {/*    <div className="container">*/}
+            {/*        <h6 className="subheading text-secondary text-center">Texas Christian Ashram</h6>*/}
+            {/*        <h1 className="heading text-center mt-4 mb-3">Upcoming Events</h1>*/}
+            {/*        <div className="row mx-5">*/}
+            {/*            <div className="col-md-3 mx-4">*/}
+            {/*                <Image src={fun} className="img funny" alt="fun"/>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-7 px-5">*/}
+            {/*                /!*<h1 className="heading">Bob Hayes</h1>*!/*/}
+            {/*                <p className="text">a) First Saturday of every month @8am – Morning Devotional and*/}
+            {/*                    Prayer</p>*/}
+            {/*                <p className="text">b) July 13-18, 2024 – Summer Event</p>*/}
+            {/*                <p>Permalink: <Link className="text-dark" target="_blank"*/}
+            {/*                                    href="https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU">*/}
+            {/*                    https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU*/}
+            {/*                </Link>*/}
+            {/*                </p>*/}
+            {/*                <p>Shortened URL: <Link className="text-dark" target="_blank"*/}
+            {/*                                        href="https://zfrmz.com/I95iNc1vYkc60D7920VB">https://zfrmz.com/I95iNc1vYkc60D7920VB </Link>*/}
+            {/*                </p>*/}
+            {/*                <h6 className="subheading text-secondary">QR CODE:</h6>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-6 text-right mx-5">*/}
+            {/*                <Image src={qrCode} className="img-fluid qr-code" alt="qrCode"/>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
         </Layout>
     )
         ;

@@ -55,7 +55,7 @@ function Announcement(props) {
                                             </figure>
                                         </div>
                                         <div className="col-md-9">
-                                            <span>{announcement.date}</span>
+                                            <span>{new Date(announcement.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</span>
                                             <a href="">
                                                 <h4>{announcement.title}</h4>
                                             </a>
