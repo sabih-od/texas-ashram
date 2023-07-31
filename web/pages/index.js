@@ -202,7 +202,7 @@ export default function Home() {
                                 <p data-aos='fade-up' data-aos-delay="150">At the Texas Christian Ashram, there is a
                                     group for everyone in your family!</p>
                                 <Link data-aos='fade-up' data-aos-delay="150" href="/events"
-                                      className="newthemeBtn">
+                                      className="newthemeBtn">2024
                                     Event</Link>
                             </div>
                         </div>
