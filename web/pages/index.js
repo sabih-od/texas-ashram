@@ -206,7 +206,7 @@ export default function Home() {
                                 {/*      className="newthemeBtn">2024*/}
                                 {/*    Schedule</Link>*/}
                                 <Link data-aos='fade-up' data-aos-delay="150" href="/events"
-                                      className="newthemeBtn">
+                                      className="newthemeBtn">2024
                                     Event</Link>
                             </div>
                         </div>
