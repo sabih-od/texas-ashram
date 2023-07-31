@@ -101,12 +101,12 @@ const Menu = () => {
                                                                     <Link href="/registration" className="nav-link">
                                                                         Registration</Link>
                                                                 </li>
-                                                                {!token && (
-                                                                    <li className="">
-                                                                        <Link href="/members"
-                                                                              className="nav-link"> Members </Link>
-                                                                    </li>
-                                                                )}
+                                                                {/*{!token && (*/}
+                                                                {/*    <li className="">*/}
+                                                                {/*        <Link href="/members"*/}
+                                                                {/*              className="nav-link"> Members </Link>*/}
+                                                                {/*    </li>*/}
+                                                                {/*)}*/}
                                                                 <li className="">
                                                                     <Link href="/contact"
                                                                           className="nav-link">Contact Us </Link>

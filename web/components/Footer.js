@@ -55,9 +55,9 @@ const Footer = () => {
                                 <figure><Image src={whatsAap} className="img-fluid" alt={whatsAap}/></figure>
                                 <span>(817) 917-5663</span>
                             </a>
-                            <a href="mailto:tcaregistrar@gmail.com">
+                            <a href="mailto:info@texaschristianashram.org">
                                 <figure><Image src={email} className="img-fluid" alt={email}/></figure>
-                                <span>tcaregistrar@gmail.com</span>
+                                <span>info@texaschristianashram.org</span>
                             </a>
                             <a>
                                 <figure><Image src={loc} className="img-fluid" alt={loc}/></figure>
