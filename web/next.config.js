@@ -2,15 +2,10 @@ const path = require('path');
 
 module.exports = {
     output: 'export',
-    // Enable CSS modules for CSS file imports
-    // cssModules: true,
-    // images: {
-    //     domains: ['service.demowebsitelinks.com', 'localhost'],
-    // },
     images: { unoptimized: true },
 
     publicRuntimeConfig: {
-        apiUrls: 'https://localhost:3020',
+        apiUrls: process.env.NEXT_PUBLIC_API_URL || 'https://localhost:3020',
     },
 
     // Add aliases for commonly used directories
@@ -28,19 +23,6 @@ module.exports = {
                 },
             },
         });
-        // Add aliases for commonly used directories
-        // config.resolve.alias['@components'] = path.join(__dirname, 'src/components');
-        // config.resolve.alias['@styles'] = path.join(__dirname, 'src/styles');
-
-        // Add a rule to handle popper.js file
-        // config.module.rules.push({
-        //     test: /popper\.js$/,
-        //     loader: 'imports-loader',
-        //     options: {
-        //         type: 'commonjs',
-        //         imports: ['single global jQuery=$', 'single global Popper=Popper'],
-        //     },
-        // });
 
         return config;
     },
