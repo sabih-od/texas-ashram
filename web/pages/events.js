@@ -6,21 +6,26 @@ import moment from "moment";
 
 function Events(props) {
     const [events, setEvents] = useState([]);
+    const [nextPage, setNextPage] = useState(null);
 
     const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD MMM, ')
     const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a')
 
-    useEffect(() => {
-        async function fetchEvents() {
-            try {
-                const response = await get(1, 15);
-                const eventsArray = response.data?.data || [];
-                setEvents(eventsArray);
-            } catch (error) {
-                console.error(error);
-            }
-        }
+    const fetchEvents = async (page = 1) => {
+        try {
+            const response = await get(page, 15);
+            const c_page = parseInt(response.data?.currentPage ?? 1)
+            const totalPages = response.data?.totalPages ?? 1
+            setNextPage(c_page < totalPages ? c_page + 1 : null)
+            const eventsArray = response.data?.data || [];
 
+            setEvents(c_page < 2 ? eventsArray : [...events, ...eventsArray]);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
         fetchEvents().then((r) => 'error');
     }, []);
     return (
@@ -82,7 +87,7 @@ function Events(props) {
             <section>
                 <table className="table">
                     <thead>
-                    <h3 style={{ color: 'black' }}>Typical Schedule for July Event</h3>
+                    <h3 style={{color: 'black'}}>Typical Schedule for July Event</h3>
                     <tr className="table-header">
                         <th>Start</th>
                         <th>End</th>
@@ -93,7 +98,7 @@ function Events(props) {
                     {Array.isArray(events) && events.length > 0 ? (
                         events.map((event) => (
                             <tr key={event.id}>
-                                <td>{formatTime(event.start_time)}</td>
+                                <td>{formatTime(event.start_time)} {event.id}</td>
                                 <td>{formatTime(event.end_time)}</td>
                                 <td>{event.title}</td>
                             </tr>
@@ -105,6 +110,14 @@ function Events(props) {
                     )}
                     </tbody>
                 </table>
+                {nextPage ? (
+                    <div className="text-center mt-3">
+                        <button className="btn btn-primary" onClick={e => {
+                            e.preventDefault()
+                            fetchEvents(nextPage)
+                        }}>Load More</button>
+                    </div>
+                ) : null}
             </section>
             {/*Event Table End*/}
 

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {HYDRATE} from 'next-redux-wrapper';
-import {update, showByName} from '../../services/eventPageService';
+import {update, showByName, create} from '../../services/eventPageService';
 
 export const getPage = createAsyncThunk(
     'event-page/get',
@@ -9,10 +9,10 @@ export const getPage = createAsyncThunk(
     }
 )
 
-export const createEvent = createAsyncThunk(
+export const createPage = createAsyncThunk(
     'event-page/create',
     async (payload, thunkAPI) => {
-        return await update(payload)
+        return await create(payload)
     }
 )
 
@@ -55,21 +55,22 @@ export const eventPageSlice = createSlice({
             state.loading = true
             state.errors = null
         })
+        
         builder.addCase(getPage.fulfilled, (state, action) => {
             const {data, message} = action.payload
-console.log(data);
             state.page = data?.data ?? null
 
             state.loading = false
             state.errors = message
         })
 
-        builder.addCase(createEvent.pending, (state, action) => {
+        builder.addCase(createPage.pending, (state, action) => {
             state.loading = true
             state.success = false
             state.errors = null
         })
-        builder.addCase(createEvent.fulfilled, (state, action) => {
+
+        builder.addCase(createPage.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
             state.loading = false
@@ -93,7 +94,7 @@ console.log(data);
 });
 
 export const {setSuccess, setErrors} = eventPageSlice.actions;
-export const event = (state) => state.event.event;
+export const page = (state) => state.event.page;
 export const loading = (state) => state.event.loading;
 export const errors = (state) => state.event.errors;
 export const success = (state) => state.event.success;
