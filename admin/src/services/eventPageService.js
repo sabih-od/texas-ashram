@@ -9,7 +9,7 @@ export const create = async (payload) => {
             }
         }
 
-        const response = await fetch(`${apiUrl()}/events`, {
+        const response = await fetch(`${apiUrl()}/pages`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -32,22 +32,19 @@ export const create = async (payload) => {
 
 export const update = async ({
                                  id,
-    ...payload
+                                 title,
+                                 description,
+                                 date
                              }) => {
     try {
-        const form = new FormData()
-        for (const payloadKey in payload) {
-            if (payload[payloadKey] != null) {
-                form.append(payloadKey, payload[payloadKey])
-            }
-        }
 
-        const response = await fetch(`${apiUrl()}/events/${id}`, {
+        const response = await fetch(`${apiUrl()}/announcements/${id}`, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${getToken()}`
             },
-            body: form,
+            body: JSON.stringify({title, description, date}),
         });
 
         const data = await response.json();
@@ -65,7 +62,7 @@ export const update = async ({
 
 export const get = async (page = 1, limit = 15) => {
     try {
-        const response = await fetch(urlWithParams(`${apiUrl()}/events`, {
+        const response = await fetch(urlWithParams(`${apiUrl()}/announcements`, {
             page, limit
         }), {
             method: 'GET',
@@ -90,7 +87,29 @@ export const get = async (page = 1, limit = 15) => {
 
 export const show = async (id) => {
     try {
-        const response = await fetch(`${apiUrl()}/events/${id}`, {
+        const response = await fetch(`${apiUrl()}/announcements/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (data?.success === false) {
+            return errorResponse(null, data?.message ?? 'Server Error')
+        }
+
+        return successResponse(data)
+    } catch (e) {
+        return exceptionResponse()
+    }
+}
+
+export const showByName = async (name) => {
+    try {
+        const response = await fetch(`${apiUrl()}/pages/get-by-name/${name}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +133,7 @@ export const destroy = async ({
                                   id
                               }) => {
     try {
-        const response = await fetch(`${apiUrl()}/events/${id}`, {
+        const response = await fetch(`${apiUrl()}/announcements/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${getToken()}`

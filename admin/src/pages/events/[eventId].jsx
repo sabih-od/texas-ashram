@@ -35,13 +35,13 @@ function Event(props) {
 
     const [successMsg, setSuccessMessage] = useState('')
     const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [date_to, setDate_to] = useState('')
-    const [date_from, setDate_from] = useState('')
+    // const [description, setDescription] = useState('')
+    // const [date_to, setDate_to] = useState('')
+    // const [date_from, setDate_from] = useState('')
     const [start_time, setStart_time] = useState('')
     const [end_time, setEnd_time] = useState('')
-    const [location, setLocation] = useState('')
-    const [image, setImage] = useState('')
+    // const [location, setLocation] = useState('')
+    // const [image, setImage] = useState('')
 
     useEffect(() => {
         if (eventId) {
@@ -52,13 +52,13 @@ function Event(props) {
     useEffect(() => {
         if (event) {
             setTitle(event.title)
-            setDescription(event.description)
-            setDate_to(event.date_to)
-            setDate_from(event.date_from)
+            // setDescription(event.description)
+            // setDate_to(event.date_to)
+            // setDate_from(event.date_from)
             setStart_time(event.start_time)
             setEnd_time(event.end_time)
-            setLocation(event.location)
-            setImage(event.image)
+            // setLocation(event.location)
+            // setImage(event.image)
         }
     }, [event])
 
@@ -85,39 +85,46 @@ function Event(props) {
 
         dispatch(updateEvent({
             id: eventId,
-            title, description, date_to ,date_from, start_time, end_time, location , image
+            title,
+            // description,
+            // date_to ,
+            // date_from,
+            start_time,
+            end_time,
+            // location ,
+            // image
         }))
 
     }
 
-    const fileValidation = () => {
-        let _errors = []
-        if (title === null) {
-            _errors.push("Title is required!")
-        }
-        if (description === null) {
-            _errors.push("Description is required!")
-        }
-
-        if (date_to === null) {
-            _errors.push("Date 1 is required!")
-        }
-        if (date_from === null) {
-            _errors.push("Date 2 is required!")
-        }
-        if (location === null) {
-            _errors.push("Location is required!")
-        }
-        if (image === null) {
-            _errors.push("Image is required!")
-        }
-
-        if (_errors.length > 0) {
-            dispatch(setErrors(_errors))
-        }
-
-        return _errors.length < 1
-    }
+    // const fileValidation = () => {
+    //     let _errors = []
+    //     if (title === null) {
+    //         _errors.push("Title is required!")
+    //     }
+    //     if (description === null) {
+    //         _errors.push("Description is required!")
+    //     }
+    //
+    //     if (date_to === null) {
+    //         _errors.push("Date 1 is required!")
+    //     }
+    //     if (date_from === null) {
+    //         _errors.push("Date 2 is required!")
+    //     }
+    //     if (location === null) {
+    //         _errors.push("Location is required!")
+    //     }
+    //     if (image === null) {
+    //         _errors.push("Image is required!")
+    //     }
+    //
+    //     if (_errors.length > 0) {
+    //         dispatch(setErrors(_errors))
+    //     }
+    //
+    //     return _errors.length < 1
+    // }
 
     return (
         <Grid container spacing={6}>
@@ -150,37 +157,37 @@ function Event(props) {
                                     <TextField fullWidth label='Title' value={title}
                                                onChange={e => setTitle(e.target.value)}/>
                                 </Grid>
-                                <Grid item xs={12} sx={{mt: 5}}>
+                                {/*<Grid item xs={12} sx={{mt: 5}}>*/}
 
-                                    <TextField fullWidth label='description' multiline rows={4} value={description}
-                                               onChange={e => setDescription(e.target.value)}/>
-                                </Grid>
+                                {/*    <TextField fullWidth label='description' multiline rows={4} value={description}*/}
+                                {/*               onChange={e => setDescription(e.target.value)}/>*/}
+                                {/*</Grid>*/}
 
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth type="text"
-                                               label='Date To'
-                                               value={date_to}
-                                               onFocus={e => {
-                                                   e.target.type = 'date'
-                                               }}
-                                               onBlur={e => {
-                                                   e.target.type = 'text'
-                                               }}
-                                               onChange={e => setDate_to(e.target.value)}/>
-                                </Grid>
+                                {/*<Grid item xs={12} sx={{mt: 5}}>*/}
+                                {/*    <TextField fullWidth type="text"*/}
+                                {/*               label='Date To'*/}
+                                {/*               value={date_to}*/}
+                                {/*               onFocus={e => {*/}
+                                {/*                   e.target.type = 'date'*/}
+                                {/*               }}*/}
+                                {/*               onBlur={e => {*/}
+                                {/*                   e.target.type = 'text'*/}
+                                {/*               }}*/}
+                                {/*               onChange={e => setDate_to(e.target.value)}/>*/}
+                                {/*</Grid>*/}
 
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth type="text"
-                                               label='Date From'
-                                               value={date_from}
-                                               onFocus={e => {
-                                                   e.target.type = 'date'
-                                               }}
-                                               onBlur={e => {
-                                                   e.target.type = 'text'
-                                               }}
-                                               onChange={e => setDate_from(e.target.value)}/>
-                                </Grid>
+                                {/*<Grid item xs={12} sx={{mt: 5}}>*/}
+                                {/*    <TextField fullWidth type="text"*/}
+                                {/*               label='Date From'*/}
+                                {/*               value={date_from}*/}
+                                {/*               onFocus={e => {*/}
+                                {/*                   e.target.type = 'date'*/}
+                                {/*               }}*/}
+                                {/*               onBlur={e => {*/}
+                                {/*                   e.target.type = 'text'*/}
+                                {/*               }}*/}
+                                {/*               onChange={e => setDate_from(e.target.value)}/>*/}
+                                {/*</Grid>*/}
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <TextField fullWidth label='Start Time' type="text"
@@ -205,32 +212,32 @@ function Event(props) {
                                                onChange={e => setEnd_time(e.target.value)}/>
                                 </Grid>
 
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <TextField fullWidth label='location' value={location}
-                                               onChange={e => setLocation(e.target.value)}/>
-                                </Grid>
+                                {/*<Grid item xs={12} sx={{mt: 5}}>*/}
+                                {/*    <TextField fullWidth label='location' value={location}*/}
+                                {/*               onChange={e => setLocation(e.target.value)}/>*/}
+                                {/*</Grid>*/}
 
 
-                                <Grid item xs={12} sx={{mt: 5}}>
-                                    <Stack direction="row" gap={2}>
+                                {/*<Grid item xs={12} sx={{mt: 5}}>*/}
+                                {/*    <Stack direction="row" gap={2}>*/}
 
-                                        <Button
-                                            variant="contained"
-                                            component="label"
-                                        >
-                                            Upload Image
+                                {/*        <Button*/}
+                                {/*            variant="contained"*/}
+                                {/*            component="label"*/}
+                                {/*        >*/}
+                                {/*            Upload Image*/}
 
-                                            <input
-                                                type="file"
-                                                hidden
-                                                onChange={e => {
-                                                    setImage(e.target?.files[0] ?? '')
-                                                }}
-                                            />
+                                {/*            <input*/}
+                                {/*                type="file"*/}
+                                {/*                hidden*/}
+                                {/*                onChange={e => {*/}
+                                {/*                    setImage(e.target?.files[0] ?? '')*/}
+                                {/*                }}*/}
+                                {/*            />*/}
 
-                                        </Button>
-                                    </Stack>
-                                </Grid>
+                                {/*        </Button>*/}
+                                {/*    </Stack>*/}
+                                {/*</Grid>*/}
 
                                 <Grid item xs={12} sx={{mt: 5}}>
                                     <Button type='submit' variant='contained' disabled={loading}>

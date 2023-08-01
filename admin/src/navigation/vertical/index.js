@@ -46,12 +46,6 @@ const navigation = () => {
         },
 
         {
-            title: 'Events',
-            icon: EventIcon,
-            path: '/events'
-        },
-
-        {
             title: 'Posts',
             icon: PostIcon,
             path: '/posts',
@@ -92,6 +86,38 @@ const navigation = () => {
             icon: ReportOutlinedIcon,
             path: '/report-messages',
         },
+
+        {
+            title: 'Staff Members',
+            icon: PeopleOutlinedIcon,
+            path: '/staff-members',
+        },
+        {
+            title: 'Groups',
+            icon: GroupsOutlinedIcon,
+            path: '/groups',
+        },
+        {
+            title: 'Group Requests',
+            icon: MarkAsUnreadOutlinedIcon,
+            path: '/group-requests',
+        },
+
+        {
+            sectionTitle: 'Events'
+        },
+        {
+            title: 'Event List',
+            icon: EventIcon,
+            path: '/events'
+        },
+        {
+            title: 'Page CMS',
+            icon: EventIcon,
+            path: '/events/page-cms'
+        },
+
+
 
         // {
         //   title: 'Account Settings',
@@ -147,22 +173,6 @@ const navigation = () => {
         //   title: 'Form Layouts',
         //   path: '/form-layouts'
         // }
-        {
-            title: 'Staff Members',
-            icon: PeopleOutlinedIcon,
-            path: '/staff-members',
-        },
-        {
-            title: 'Groups',
-            icon: GroupsOutlinedIcon,
-            path: '/groups',
-        },
-        {
-            title: 'Group Requests',
-            icon: MarkAsUnreadOutlinedIcon,
-            path: '/group-requests',
-        },
-
 
         // {
         //   title: 'Account Settings',

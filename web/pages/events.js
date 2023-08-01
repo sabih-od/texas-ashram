@@ -6,29 +6,23 @@ import moment from "moment";
 
 function Events(props) {
     const [events, setEvents] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
 
     const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD MMM, ')
     const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a')
 
     useEffect(() => {
-        async function fetchEvents(page, perPage) {
+        async function fetchEvents() {
             try {
-                const response = await get(page, perPage);
+                const response = await get(1, 15);
                 const eventsArray = response.data?.data || [];
-                console.log('eventsArray', eventsArray);
-
                 setEvents(eventsArray);
-                setTotalPages(response.data?.totalPages || 1);
             } catch (error) {
                 console.error(error);
             }
         }
 
-        fetchEvents(currentPage, 15).then((r) => 'error');
-    }, [currentPage]);
-
+        fetchEvents().then((r) => 'error');
+    }, []);
     return (
         <Layout>
             {/*!--Main Heading --*/}
@@ -54,7 +48,6 @@ function Events(props) {
             <div style={{display: 'flex', justifyContent: 'center', height: '500px'}}>
                 <img src="../images/zoom.png" alt="Placeholder Image"/>
             </div>
-
             <h1 style={{textAlign: 'left', fontWeight: 'bold', color: 'black'}}>Main Campus Event</h1>
             <p style={{textAlign: 'left', color: 'black'}}>The Texas Christian Ashram (TCA) is in the heart of beautiful
                 East Texas at Scottsville Camp and Conference Center. Located near Marshall, TX, just 30 minutes from
@@ -89,7 +82,7 @@ function Events(props) {
             <section>
                 <table className="table">
                     <thead>
-                    <h3 style={{color: 'black'}}>Typical Schedule for July Event</h3>
+                    <h3 style={{ color: 'black' }}>Typical Schedule for July Event</h3>
                     <tr className="table-header">
                         <th>Start</th>
                         <th>End</th>
@@ -97,127 +90,19 @@ function Events(props) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>7:00 AM</td>
-                        <td>7:45 AM</td>
-                        <td>Lakeside Devotion</td>
-                    </tr>
-                    <tr>
-                        <td>8:00 AM</td>
-                        <td>8:45 AM</td>
-                        <td>Breakfast</td>
-                    </tr>
-                    <tr>
-                        <td>8:50 AM</td>
-                        <td>11:50 AM</td>
-                        <td>Nursery is open</td>
-                    </tr>
-                    <tr>
-                        <td>9:00 AM</td>
-                        <td>11:50 AM</td>
-                        <td>
-                            Pre-School Program<br/>
-                            Children’s Program<br/>
-                            Middle School and High School Program<br/>
-                            Young Adults
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>9:00 AM</td>
-                        <td>9:50 AM</td>
-                        <td>Morning Session</td>
-                    </tr>
-                    <tr>
-                        <td>10:00 AM</td>
-                        <td>10:50 AM</td>
-                        <td>Small Groups</td>
-                    </tr>
-                    <tr>
-                        <td>11:00 AM</td>
-                        <td>11:50 AM</td>
-                        <td>Mid-day Session</td>
-                    </tr>
-                    <tr>
-                        <td>12:00 PM</td>
-                        <td>1:00 PM</td>
-                        <td>Lunch</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 PM</td>
-                        <td>2:00 PM</td>
-                        <td>Sewing Projects</td>
-                    </tr>
-                    <tr>
-                        <td>2:00 PM</td>
-                        <td>3:00 PM</td>
-                        <td>Choir Practice</td>
-                    </tr>
-                    <tr>
-                        <td>2:00 PM</td>
-                        <td>4:00 PM</td>
-                        <td>Family Pool Time</td>
-                    </tr>
-                    <tr>
-                        <td>4:20 PM</td>
-                        <td>5:30 PM</td>
-                        <td>Nursery is open</td>
-                    </tr>
-                    <tr>
-                        <td>4:30 PM</td>
-                        <td>5:20 PM</td>
-                        <td>
-                            Pre-School Program<br/>
-                            Children’s Program<br/>
-                            Middle School and High School Program<br/>
-                            Young Adults
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4:30 PM</td>
-                        <td>5:30 PM</td>
-                        <td>Small Groups</td>
-                    </tr>
-                    <tr>
-                        <td>5:30 PM</td>
-                        <td>6:30 PM</td>
-                        <td>Dinner</td>
-                    </tr>
-                    <tr>
-                        <td>6:40 PM</td>
-                        <td>9:00 PM</td>
-                        <td>Nursery is open</td>
-                    </tr>
-                    <tr>
-                        <td>6:45 PM</td>
-                        <td>7:30 PM</td>
-                        <td>Praise and Worship</td>
-                    </tr>
-                    <tr>
-                        <td>7:30 PM</td>
-                        <td>8:50 PM</td>
-                        <td>
-                            Pre-School Program<br/>
-                            Children’s Program<br/>
-                            Middle School and High School Program<br/>
-                            Young Adults
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7:30 PM</td>
-                        <td>8:50 PM</td>
-                        <td>Evening Session</td>
-                    </tr>
-                    <tr>
-                        <td>9:00 PM</td>
-                        <td>10:00 PM</td>
-                        <td>Ice Cream Social</td>
-                    </tr>
-                    <tr>
-                        <td>11:00 PM</td>
-                        <td></td>
-                        <td>End of Day - Quiet Requested for people sleeping</td>
-                    </tr>
+                    {Array.isArray(events) && events.length > 0 ? (
+                        events.map((event) => (
+                            <tr key={event.id}>
+                                <td>{formatTime(event.start_time)}</td>
+                                <td>{formatTime(event.end_time)}</td>
+                                <td>{event.title}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3">Events are not available at this moment.</td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </section>

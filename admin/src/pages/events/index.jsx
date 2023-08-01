@@ -79,13 +79,13 @@ function Events(props) {
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Title</TableCell>
-                                            <TableCell>Description</TableCell>
-                                            <TableCell width='120'>Date To</TableCell>
-                                            <TableCell width='120'>Date From</TableCell>
+                                            {/*<TableCell>Description</TableCell>*/}
+                                            {/*<TableCell width='120'>Date To</TableCell>*/}
+                                            {/*<TableCell width='120'>Date From</TableCell>*/}
                                             <TableCell width='120'>Start Time</TableCell>
                                             <TableCell width='120'>End Time</TableCell>
-                                            <TableCell>Location</TableCell>
-                                            <TableCell>Image</TableCell>
+                                            {/*<TableCell>Location</TableCell>*/}
+                                            {/*<TableCell>Image</TableCell>*/}
                                             <TableCell width='150'>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -99,33 +99,33 @@ function Events(props) {
                                                     <TableCell>
                                                         <span>{event.title}</span>
                                                     </TableCell>
-                                                    <TableCell>
-                                                        <span>{event.description}</span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <span>{formatDate(event.date_to)}</span>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <span>{formatDate(event.date_from)}</span>
-                                                    </TableCell>
+                                                    {/*<TableCell>*/}
+                                                    {/*    <span>{event.description}</span>*/}
+                                                    {/*</TableCell>*/}
+                                                    {/*<TableCell>*/}
+                                                    {/*    <span>{formatDate(event.date_to)}</span>*/}
+                                                    {/*</TableCell>*/}
+                                                    {/*<TableCell>*/}
+                                                    {/*    <span>{formatDate(event.date_from)}</span>*/}
+                                                    {/*</TableCell>*/}
                                                     <TableCell>
                                                         <span>{formatTime(event.start_time)}</span>
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>{formatTime(event.end_time)}</span>
                                                     </TableCell>
-                                                    <TableCell>
-                                                        <span>{event.location}</span>
-                                                    </TableCell>
-                                                    <TableCell className="text-center">
-                                                        {(event.image !== null && event.image !== 'null') ? (
-                                                            <Button tag='a' href={event.image} target="_blank"
-                                                                    layout="link"
-                                                                    size="small" sx={{textAlign: 'center'}}>
-                                                                View Image
-                                                            </Button>
-                                                        ) : ''}
-                                                    </TableCell>
+                                                    {/*<TableCell>*/}
+                                                    {/*    <span>{event.location}</span>*/}
+                                                    {/*</TableCell>*/}
+                                                    {/*<TableCell className="text-center">*/}
+                                                    {/*    {(event.image !== null && event.image !== 'null') ? (*/}
+                                                    {/*        <Button tag='a' href={event.image} target="_blank"*/}
+                                                    {/*                layout="link"*/}
+                                                    {/*                size="small" sx={{textAlign: 'center'}}>*/}
+                                                    {/*            View Image*/}
+                                                    {/*        </Button>*/}
+                                                    {/*    ) : ''}*/}
+                                                    {/*</TableCell>*/}
                                                     <TableCell>
                                                         <IconButton
                                                             size="small"
