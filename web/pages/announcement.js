@@ -41,29 +41,40 @@ function Announcement(props) {
             </div>
             {/*<!-- !Main Heading -->*/}
 
-            {/*<!-- Announcements Section -->*/}
             <section className="announcement-section pb-0">
                 <div className="container custom-container">
                     <div className="col-md-10 mx-auto">
                         {Array.isArray(announcements) && announcements.length > 0 ? (
-                            announcements.map((announcement) => (
-                                <div className="card-items mb-4" key={announcement.id}>
-                                    <div className="row align-items-center">
-                                        <div className="col-md-3">
-                                            <figure>
-                                                <Image src={speaker} className="img-fluid" alt="speaker" />
-                                            </figure>
-                                        </div>
-                                        <div className="col-md-9">
-                                            <span>{new Date(announcement.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</span>
-                                            <a href="">
-                                                <h4>{announcement.title}</h4>
-                                            </a>
-                                            <p>{announcement.description}</p>
+                            announcements.map((announcement) => {
+                                // Split the date string to get day, month, and year
+                                const [day, month, year] = announcement.date.split('-');
+
+                                // Construct a valid Date object
+                                const dateObj = new Date(`${year}-${month}-${day}`);
+
+                                return (
+                                    <div className="card-items mb-4" key={announcement.id}>
+                                        <div className="row align-items-center">
+                                            <div className="col-md-3">
+                                                <figure>
+                                                    <Image src={speaker} className="img-fluid" alt="speaker" />
+                                                </figure>
+                                            </div>
+                                            <div className="col-md-9">
+                                                <p>{dateObj.toLocaleDateString('en-US', {
+                                                    month: 'long',
+                                                    day: 'numeric',
+                                                    year: 'numeric'
+                                                })}</p>
+                                                <a href="">
+                                                    <h4>{announcement.title}</h4>
+                                                </a>
+                                                <p>{announcement.description}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
+                                );
+                            })
                         ) : (
                             <div className="col-md-12">
                                 <p>Announcements are not available at this moment.</p>
@@ -72,6 +83,7 @@ function Announcement(props) {
                     </div>
                 </div>
             </section>
+
             {/*<!-- !Announcements Section -->*/}
         </Layout>
     );

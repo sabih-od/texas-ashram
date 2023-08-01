@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from "../components/Layout";
 import Image from "next/image";
-import registration from "../images/registeration.jpeg";
+import registration from "../images/family_fun.jpeg";
 import Link from "next/link";
 import fun from "../images/funning.jpg";
 // import qrCode from "../images/QR-Code.png";
@@ -25,14 +25,15 @@ function Registration(props) {
             {/*<!-- !Main Heading -->*/}
 
 
-            <section className="registrationpage innerPage">
+            <section className="registrationpage innerPage pt-5" style={{backgroundPosition:"top center !important"}}>
 
                 <div className="container">
 
 
-                    <div className="col-md-9 row mx-auto align-items-center ">
+                    <h1 className="text-center mb-5">Summer Event: July 13-18th, 2024</h1>
+                    <div className="col-md-12 row mx-auto ">
 
-                        <div className="col-3">
+                        <div className="col-md-2">
                             <h6 className="subheading text-secondary">QR CODE:</h6>
                             <Image src={qrCode} className="img-fluid qr-code" style={{width:'500px'}} alt="qrCode" />
                             {/*<div className="col-md-6" style={{ width: '100rem' }}>*/}
@@ -40,7 +41,7 @@ function Registration(props) {
                             {/*</div> */}
                         </div>
 
-                        <div className="col-md-5 px-5">
+                        <div className="col-md-6 px-lg-5">
                             <p className="mb-3">
                                 To register and pay online, please click here: <Link
                                 href="/https://forms.zohopublic.com/texaschristianashram/form/2024TexasChristianAshram/formperma/FSYLFpHhvePWUe2-4hPnIMp6BNC8hhpnB6yh4AxHROU"> Online
@@ -62,6 +63,9 @@ function Registration(props) {
                             <p className="mb-3">If you have any questions, please email us at <a
                                 href="mailto:registration@texaschristianashram.org">registration@texaschristianashram.org</a> .
                             </p>
+                            <Link data-aos='fade-up' data-aos-delay="150" href="/events"
+                                  className="newthemeBtn">
+                                Event</Link>
                             {/*href="mailto:tcaregistrar@gmail.com">tcaregistrar@gmail.com</a> .</p>*/}
                             {/*<!-- <br> -->*/}
                             {/*<strong><a href="">Scottsville Conference Center</a></strong>*/}
