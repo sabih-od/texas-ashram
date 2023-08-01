@@ -24,6 +24,7 @@ import {speakerSlice} from "./slices/speakerSlice";
 import {groupsSlice} from "./slices/groupsSlice";
 import {groupSlice} from "./slices/groupSlice";
 import {reportsSlice} from "./slices/reportsSlice";
+import {eventPageSlice} from "./slices/eventPageSlice";
 
 const makeStore = () =>
     configureStore({
@@ -52,6 +53,7 @@ const makeStore = () =>
             [groupsSlice.name]: groupsSlice.reducer,
             [groupSlice.name]: groupSlice.reducer,
             [reportsSlice.name]: reportsSlice.reducer,
+            [eventPageSlice.name]: eventPageSlice.reducer,
         },
         devTools: true,
     });
