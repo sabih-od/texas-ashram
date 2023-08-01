@@ -36,6 +36,20 @@ function PrayerRequestForm(props) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
+    const isValidPhoneNumber = (contact) => {
+        // Replace this validation logic with your desired phone number format
+        // The regular expression allows for digits, spaces, parentheses, hyphens, and plus sign
+        return /^(\+?\d{1,2}\s*)?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/.test(contact);
+    };
+
+    const handlePhoneChange = (e) => {
+        const inputValue = e.target.value;
+        setContact(inputValue);
+
+        // Validate the phone number
+        const isValid = isValidPhoneNumber(inputValue);
+        setFormErrors({ contact: isValid ? '' : 'Invalid phone number format' });
+    };
     // useEffect(() => {
     //     const loggedIn = Cookie.get('token');
     //     setIsLoggedIn(!loggedIn);
@@ -51,12 +65,17 @@ function PrayerRequestForm(props) {
             errors.name = 'Name is required';
         }
 
-        /*if (!email) {
+        if (!email) {
             errors.email = 'Email is required';
         } else if (!validateEmail(email)) {
             errors.email = 'Invalid email format';
-        }*/
+        }
 
+        if (!contact) {
+            errors.contact = 'Phone is required';
+        } else if (!isValidPhoneNumber(contact)) {
+            errors.contact = 'Invalid phone number format';
+        }
         /*if (!contact) {
             errors.contact = 'Contact is required';
         }*/
@@ -182,12 +201,20 @@ function PrayerRequestForm(props) {
                                     <div className="col-md-12 mb-4">
                                         <label htmlFor="">Phone Number</label>
                                         {formErrors.contact && <p className="error">{formErrors.contact}</p>}
+                                        {/*<input*/}
+                                        {/*    type="text"*/}
+                                        {/*    name="contact"*/}
+                                        {/*    className="form-control"*/}
+                                        {/*    value={contact}*/}
+                                        {/*    onChange={(e) => setContact(e.target.value)}*/}
+                                        {/*/>*/}
                                         <input
-                                            type="text"
-                                            name="contact"
-                                            className="form-control"
+                                            type="tel" // Use "tel" to trigger the numeric keyboard on mobile devices
+                                            name="phone"
                                             value={contact}
-                                            onChange={(e) => setContact(e.target.value)}
+                                            onChange={handlePhoneChange}
+                                            className="form-control"
+                                            placeholder=""
                                         />
                                     </div>
                                     {/*<div className="col-md-6 mb-4">

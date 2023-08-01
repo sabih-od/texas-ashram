@@ -183,10 +183,9 @@ function Donate(props) {
                                         speakers, camp improvements, and supplies. You are making a difference directly
                                         into people’s lives. You are able to donate through Venmo or mail your donation
                                         to Texas Christian Ashram.
-                                        <br/>
-                                        Texas Christian Ashram
-                                        2402 Nilelake Ct
-                                        Friendswood, TX 77546.</p>
+                                        </p>
+                                    <p style={{ fontWeight: 'bold' ,marginTop:'-20px'}}>Texas Christian Ashram 2402 Nilelake Ct Friendswood, TX 77546.</p>
+
                                 </div>
                                 <figure>
                                     <Image src={donate} className="img-fluid" alt="donate"/>
