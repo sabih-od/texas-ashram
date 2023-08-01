@@ -4,8 +4,10 @@ import Image from "next/image";
 import speaker from "../images/icon/speaker.png";
 import { get } from "../services/announcementService";
 
-function Announcement(props) {
+const Announcement = (props) => {
     const [announcements, setAnnouncement] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
 
     useEffect(() => {
         async function fetchAnnouncements() {
@@ -13,33 +15,30 @@ function Announcement(props) {
                 const response = await get(1, 15);
                 const announcementsArray = response.data?.data || [];
 
-                // const formattedAnnouncements = announcementsArray.map((announcement) => {
-                //     const parsedDate = parse(announcement.date, 'dd-MM-yyyy', new Date());
-                //     const formattedDate = format(parsedDate, 'MMM dd, yyyy');
-                //     return {
-                //         ...announcement,
-                //         formattedDate: formattedDate,
-                //     };
-                // });
-
                 setAnnouncement(announcementsArray);
             } catch (error) {
                 console.error(error);
             }
         }
 
-        fetchAnnouncements().then((r) => 'error');
+        fetchAnnouncements();
     }, []);
+
+    // Function to handle click on announcement title
+    const handleAnnouncementClick = (announcement) => {
+        setSelectedAnnouncement(announcement);
+        setShowModal(true);
+    };
 
     return (
         <Layout>
-            {/*<!-- Main Heading -->*/}
-            <div className="innertitle">
-                <section className="innerHeading">
-                    <h1 className="mb-5">Announcements</h1>
-                </section>
-            </div>
-            {/*<!-- !Main Heading -->*/}
+
+                         <div className="innertitle">
+                            <section className="innerHeading">
+                                 <h1 className="mb-5">Announcements</h1>
+                           </section>
+                       </div>
+
 
             <section className="announcement-section pb-0">
                 <div className="container custom-container">
@@ -51,6 +50,12 @@ function Announcement(props) {
 
                                 // Construct a valid Date object
                                 const dateObj = new Date(`${year}-${month}-${day}`);
+
+                                // Max characters to display in the description before adding ellipsis
+                                const maxChars = 100;
+                                const truncatedDescription = announcement.description.length > maxChars
+                                    ? `${announcement.description.slice(0, maxChars)}...`
+                                    : announcement.description;
 
                                 return (
                                     <div className="card-items mb-4" key={announcement.id}>
@@ -66,10 +71,12 @@ function Announcement(props) {
                                                     day: 'numeric',
                                                     year: 'numeric'
                                                 })}</p>
-                                                <a href="">
+                                                {/* Add onClick event to the announcement title */}
+                                                <a href="#" onClick={() => handleAnnouncementClick(announcement)}>
                                                     <h4>{announcement.title}</h4>
                                                 </a>
-                                                <p>{announcement.description}</p>
+                                                {/* Display truncated description with ellipsis */}
+                                                <p>{truncatedDescription}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -84,9 +91,28 @@ function Announcement(props) {
                 </div>
             </section>
 
-            {/*<!-- !Announcements Section -->*/}
+            {/* Bootstrap Modal */}
+            {selectedAnnouncement && (
+                <div className={`modal ${showModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">{selectedAnnouncement.title}</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {selectedAnnouncement.description}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setShowModal(false)}>Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </Layout>
     );
-}
-
+};
 export default Announcement;
