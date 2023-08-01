@@ -63,7 +63,7 @@ function Registration(props) {
                             <p className="mb-3">If you have any questions, please email us at <a
                                 href="mailto:registration@texaschristianashram.org">registration@texaschristianashram.org</a> .
                             </p>
-                            <Link data-aos='fade-up' data-aos-delay="150" href="/events"
+                            <Link href="/events"
                                   className="newthemeBtn">
                                 Event</Link>
                             {/*href="mailto:tcaregistrar@gmail.com">tcaregistrar@gmail.com</a> .</p>*/}
