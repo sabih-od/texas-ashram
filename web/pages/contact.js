@@ -3,13 +3,14 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import {useRouter} from 'next/router';
 import {create} from "../services/contactService";
+import Cookie from "js-cookie";
 
 function Contact(props) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [company, setCompany] = useState('');
+    // const [company, setCompany] = useState('');
     const [message, setMessage] = useState('');
     const [formErrors, setFormErrors] = useState({});
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -20,59 +21,72 @@ function Contact(props) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
+    const isValidPhoneNumber = (phone) => {
+        // Replace this validation logic with your desired phone number format
+        // The regular expression allows for digits, spaces, parentheses, hyphens, and plus sign
+        return /^(\+?\d{1,2}\s*)?(\(\d{3}\)|\d{3})[\s-]?\d{3}[\s-]?\d{4}$/.test(phone);
+    };
+
+    const handlePhoneChange = (e) => {
+        const inputValue = e.target.value;
+        setPhone(inputValue);
+
+        // Validate the phone number
+        const isValid = isValidPhoneNumber(inputValue);
+        setFormErrors({ phone: isValid ? '' : 'Invalid phone number format' });
+    };
     const handleContactForm = async (e) => {
         e.preventDefault();
 
-        try {
+        // // Perform form validation
+        const errors = {};
 
-            // Perform form validation
-            const errors = {};
-
-            if (!name) {
-                errors.name = 'Name is required';
-            }
-
-            if (!email) {
-                errors.email = 'Email is required';
-            } else if (!validateEmail(email)) {
-                errors.email = 'Invalid email format';
-            }
-
-            if (!phone) {
-                errors.phone = 'Phone is required';
-            }
-
-            if (!company) {
-                errors.company = 'Company is required';
-            }
-
-            if (Object.keys(errors).length > 0) {
-                setFormErrors(errors);
-                // return;
-            }
-
-            // Clear form errors and submit the form
-            setFormErrors({});
-            setIsFormSubmitted(true);
-
-            const result = await create({name, email, phone, company, message});
-            console.log('contact', result);
-
-            if (result?.data?.success === true) {
-                // Handle success
-                await router.push('/');
-            } else {
-                // Handle error
-                setErrorMessage('Failed to send email.');
-                router.back();
-            }
-        } catch (error) {
-            console.error(error);
-            setErrorMessage('Failed to send email.');
-            router.back();
+        if (!name) {
+            errors.name = 'Name is required';
         }
-    }
 
+        if (!phone) {
+            errors.phone = 'Phone is required';
+        } else if (!isValidPhoneNumber(phone)) {
+            errors.phone = 'Invalid phone number format';
+        }
+
+        if (!email) {
+            errors.email = 'Email is required';
+        } else if (!validateEmail(email)) {
+            errors.email = 'Invalid email format';
+        }
+
+
+        if (!message) {
+            errors.message = 'Message is required';
+        }
+        if (Object.keys(errors).length > 0) {
+            setFormErrors(errors);
+            return;
+        }
+
+        // Clear form errors
+        setFormErrors({});
+
+        // Submit the form
+        setIsFormSubmitted(true);
+
+
+        // Submit the form data to your API route
+                const result = await create({name, email, phone, message});
+        console.log('contact', result);
+
+        if (result?.data?.success === true) {
+                    // Handle success
+                    await router.push('/');
+                } else {
+                    // Handle error
+                    setErrorMessage('Failed to send email.');
+                    router.back();
+                }
+
+    };
     return (
         <Layout>
             {/*<!--Main Heading -->*/}
@@ -198,12 +212,17 @@ function Contact(props) {
                                             </div>
                                             {formErrors.email && <p className="error">{formErrors.email}</p>}
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-12">
                                             <div className="input-group">
                                                 <label htmlFor="">Phone Number</label>
-                                                <input type="text" name="phone" value={phone}
-                                                       onChange={(e) => setPhone(e.target.value)}
-                                                       className="form-control" placeholder=""/>
+                                                <input
+                                                    type="tel" // Use "tel" to trigger the numeric keyboard on mobile devices
+                                                    name="phone"
+                                                    value={phone}
+                                                    onChange={handlePhoneChange}
+                                                    className="form-control"
+                                                    placeholder=""
+                                                />
                                             </div>
                                             {formErrors.phone && <p className="error">{formErrors.phone}</p>}
                                         </div>
@@ -219,12 +238,14 @@ function Contact(props) {
                                         {/*</div>*/}
                                         <div className="col-md-12">
                                             <div className="input-group">
-                                                <label htmlFor="">Your Message</label>
+                                                <label htmlFor="">Request</label>
                                                 <textarea className="form-control" rows="10" value={message}
                                                           onChange={(e) => setMessage(e.target.value)}
                                                           name="message"/>
                                             </div>
                                         </div>
+                                        {formErrors.message && <p className="error">{formErrors.message}</p>}
+
                                         <div className="col-12">
                                             <button className="btn submitbtn" type="submit">Submit</button>
                                         </div>
