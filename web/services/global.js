@@ -4,7 +4,7 @@ import Cookie from "js-cookie";
 // This apiUrls Set Into next.config.js File
 export const apiUrl = () => {
     const {publicRuntimeConfig} = getConfig();
-    return publicRuntimeConfig.apiUrls
+    return publicRuntimeConfig.apiUrl
 };
 
 export const urlWithParam = (path, params = {}) => {

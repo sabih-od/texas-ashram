@@ -1,11 +1,11 @@
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import React from "react";
+import {memo} from "react";
 
-const TextEditor = ({
-                        value,
-                        onChange,
-                    }) => {
+const TextEditor = memo(({
+                             value,
+                             onChange,
+                         }) => {
     return (
         <CKEditor
             editor={ClassicEditor}
@@ -16,6 +16,6 @@ const TextEditor = ({
             }}
         />
     );
-};
+});
 
 export default TextEditor

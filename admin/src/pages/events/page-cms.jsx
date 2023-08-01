@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-     getPage,
+    getPage,
+    createPage,
+    page as EventPage,
     loading as EventLoading,
     errors as EventErrors,
     success as EventSuccess,
@@ -28,6 +30,7 @@ function PageCMS(props) {
     const loading = useSelector(EventLoading)
     const errors = useSelector(EventErrors)
     const success = useSelector(EventSuccess)
+    const page = useSelector(EventPage)
 
     const [successMsg, setSuccessMessage] = useState('')
     const [content, setContent] = useState('')
@@ -42,91 +45,71 @@ function PageCMS(props) {
         // }
     }, [])
 
+    useEffect(() => {
+        console.log("page update", page)
+    }, [page])
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (loading) return
 
         // if (!fileValidation()) return;
+        if (!page) {
+            dispatch(createPage({
+                name: 'web-events-page',
+                content,
+            }))
+        }
 
-        dispatch(getPage({
-            name : 'web-events-page',
-            content: '',
-        }))
 
     }
 
-    const fileValidation = () => {
-        let _errors = [];
-        if (title.trim() === "") {
-            _errors.push("Title is required!");
-        }
-        // Remove other checks for description, location, and image since they are unrequired now.
-
-        // if (date_to.trim() === "") {
-        //     _errors.push("Date To is required!");
-        // }
-        // if (date_from.trim() === "") {
-        //     _errors.push("Date From is required!");
-        // }
-        if (start_time.trim() === "") {
-            _errors.push("Start Time is required!");
-        }
-        if (end_time.trim() === "") {
-            _errors.push("End Time is required!");
-        }
-
-        if (_errors.length > 0) {
-            dispatch(setErrors(_errors));
-        }
-
-        return _errors.length < 1;
-    };
-
     return (
 
-    <Grid container spacing={6}>
-        <Grid item xs={12}>
-            <Typography variant='h5'>
-                Event Page CMS
-            </Typography>
-        </Grid>
+        <Grid container spacing={6}>
+            <Grid item xs={12}>
+                <Typography variant='h5'>
+                    Event Page CMS
+                </Typography>
+            </Grid>
 
-        <Grid item xs={12}>
-            <Card>
-                <CardContent>
-                    {successMsg ? (
-                        <Alert severity="success" sx={{mb: 4}}>
-                            <AlertTitle>Success</AlertTitle>
-                            <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
-                        </Alert>
-                    ) : ''}
-                    {errors && errors.length > 0 ? (
-                        <Alert severity="error" sx={{mb: 4}}>
-                            <AlertTitle>Errors</AlertTitle>
-                            {errors.map((item, ind) => (
-                                <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
-                            ))}
-                        </Alert>
-                    ) : ''}
-                    <form onSubmit={handleSubmit}>
-                        <Grid row>
-                            <Grid item xs={12}>
-                                <Editor value={""} onChange={e => {
-                                    console.log("change", e)
-                                }}/>
-                            </Grid>
+            <Grid item xs={12}>
+                <Card>
+                    <CardContent>
+                        {successMsg ? (
+                            <Alert severity="success" sx={{mb: 4}}>
+                                <AlertTitle>Success</AlertTitle>
+                                <Box component='strong' sx={{display: 'block'}}>{successMsg}</Box>
+                            </Alert>
+                        ) : ''}
+                        {errors && errors.length > 0 ? (
+                            <Alert severity="error" sx={{mb: 4}}>
+                                <AlertTitle>Errors</AlertTitle>
+                                {errors.map((item, ind) => (
+                                    <Box component='strong' sx={{display: 'block'}} key={ind}>{item}</Box>
+                                ))}
+                            </Alert>
+                        ) : ''}
+                        <form onSubmit={handleSubmit}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Editor data="" onChange={val => {
+                                        console.log("val", val)
+                                        setContent(val)
+                                    }}/>
+                                </Grid>
 
-                            <Grid item xs={12} sx={{mt: 5}}>
-                                <Button type='submit' variant='contained' disabled={loading}>
-                                    {loading ? 'Saving' : 'Save'}
-                                </Button>
+                                <Grid item xs={12} sx={{mt: 5}}>
+                                    <Button type='submit' variant='contained' disabled={loading}>
+                                        {loading ? 'Saving' : 'Save'}
+                                    </Button>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </form>
-                </CardContent>
-            </Card>
+                        </form>
+                    </CardContent>
+                </Card>
+            </Grid>
         </Grid>
-    </Grid>
     );
 }
 

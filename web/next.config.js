@@ -10,7 +10,7 @@ module.exports = {
     images: { unoptimized: true },
 
     publicRuntimeConfig: {
-        apiUrls: 'https://localhost:3020',
+        apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
     },
 
     // Add aliases for commonly used directories
