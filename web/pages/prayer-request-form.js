@@ -61,7 +61,7 @@ function PrayerRequestForm(props) {
         // Perform form validation
         const errors = {};
 
-        if (!name) {
+        /*if (!name) {
             errors.name = 'Name is required';
         }
 
@@ -75,7 +75,7 @@ function PrayerRequestForm(props) {
             errors.contact = 'Phone is required';
         } else if (!isValidPhoneNumber(contact)) {
             errors.contact = 'Invalid phone number format';
-        }
+        }*/
         /*if (!contact) {
             errors.contact = 'Contact is required';
         }*/
@@ -92,9 +92,9 @@ function PrayerRequestForm(props) {
             errors.endDate = 'End Date is required';
         }*/
 
-        if (!description) {
-            errors.description = 'Prayer Request is required';
-        }
+        // if (!description) {
+        //     errors.description = 'Prayer Request is required';
+        // }
 
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
@@ -104,7 +104,7 @@ function PrayerRequestForm(props) {
         // Check if the user is logged in
         const loggedIn = Cookie.get('token');
         if (!loggedIn) {
-            setErrorMessage('Please first logged in then submit the form');
+            setErrorMessage('Please first logged in then submit the form! Thank You.');
             return;
         }
 
@@ -178,7 +178,7 @@ function PrayerRequestForm(props) {
                                 <div className="row">
                                     <div className="col-md-6 mb-4">
                                         <label htmlFor="">Name</label>
-                                        {formErrors.name && <p className="error">{formErrors.name}</p>}
+                                        {/*{formErrors.name && <p className="error">{formErrors.name}</p>}*/}
                                         <input
                                             type="text"
                                             name="name"
@@ -189,7 +189,7 @@ function PrayerRequestForm(props) {
                                     </div>
                                     <div className="col-md-6 mb-4">
                                         <label htmlFor="">Email</label>
-                                        {formErrors.email && <p className="error">{formErrors.email}</p>}
+                                        {/*{formErrors.email && <p className="error">{formErrors.email}</p>}*/}
                                         <input
                                             type="email"
                                             name="email"
@@ -200,7 +200,7 @@ function PrayerRequestForm(props) {
                                     </div>
                                     <div className="col-md-12 mb-4">
                                         <label htmlFor="">Phone Number</label>
-                                        {formErrors.contact && <p className="error">{formErrors.contact}</p>}
+                                        {/*{formErrors.contact && <p className="error">{formErrors.contact}</p>}*/}
                                         {/*<input*/}
                                         {/*    type="text"*/}
                                         {/*    name="contact"*/}
@@ -254,7 +254,7 @@ function PrayerRequestForm(props) {
 
                                     <div className="col-md-12 mb-4">
                                         <label htmlFor="">Prayer Request</label>
-                                        {formErrors.description && <p className="error">{formErrors.description}</p>}
+                                        {/*{formErrors.description && <p className="error">{formErrors.description}</p>}*/}
                                         <textarea
                                             rows="10"
                                             className="form-control"
