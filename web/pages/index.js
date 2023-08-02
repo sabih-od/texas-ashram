@@ -12,6 +12,7 @@ import quote from "../images/new-html/quote.png";
 import noPath from "../images/NoPath.png";
 import familyPicture from "../images/imgpsh_fullsize_anim.png";
 import bannerVideo from "../public/banner.mp4";
+import bannerImage from "../images/Shape5.png";
 import {useEffect, useRef} from 'react';
 import Link from "next/link";
 // Import Swiper React components
@@ -38,11 +39,12 @@ export default function Home() {
 
     return (
         <Layout>
-            <PreLoader/>
+            {/*<PreLoader/>*/}
             <section className="mainSlider">
-                <video ref={videoRef} className="video-player" playsInline autoPlay loop muted>
-                    <source src={bannerVideo} type="video/mp4"/>
-                </video>
+                <Image src={bannerImage} className="img-fluid" alt={bannerImage}/>
+                {/*<video ref={videoRef} className="video-player" playsInline autoPlay loop muted>*/}
+                {/*    <source src={bannerVideo} type="video/mp4"/>*/}
+                {/*</video>*/}
                 <div className="slideContent slideOne">
                     <div className="container">
                         <div className="row">
@@ -56,7 +58,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <Image src={shape} className="img-fluid mainImg" alt={shape}/>
+                {/*<Image src={shape} className="img-fluid mainImg" alt={shape}/>*/}
             </section>
 
             <section className="missionSec mt-3">
