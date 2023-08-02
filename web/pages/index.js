@@ -39,7 +39,7 @@ export default function Home() {
 
     return (
         <Layout>
-            {/*<PreLoader/>*/}
+            <PreLoader/>
             <section className="mainSlider">
                 <Image src={bannerImage} className="img-fluid" alt={bannerImage}/>
                 {/*<video ref={videoRef} className="video-player" playsInline autoPlay loop muted>*/}
