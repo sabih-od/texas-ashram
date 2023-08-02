@@ -64,6 +64,7 @@ async function bootstrap() {
         .addTag('Speakers')
         .addTag('Staff Members')
         .addTag('Users')
+        .addTag('Page Media')
         .addSecurity('bearer', {
             type: 'http',
             scheme: 'bearer',

@@ -22,6 +22,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { GroupRequestsModule } from './group-requests/group-requests.module';
 import {AbusiveWordsMiddleware} from "./middlewares/abusiveWords.middleware";
 import { ReportsModule } from './reports/reports.module';
+import { PageMediaModule } from './page-media/page-media.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { ReportsModule } from './reports/reports.module';
       NotificationsModule,
       GroupRequestsModule,
       ReportsModule,
+      PageMediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

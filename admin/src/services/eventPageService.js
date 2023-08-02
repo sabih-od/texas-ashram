@@ -2,19 +2,13 @@ import {apiUrl, errorResponse, exceptionResponse, getToken, successResponse, url
 
 export const create = async (payload) => {
     try {
-        const form = new FormData()
-        for (const payloadKey in payload) {
-            if (payload[payloadKey] != null) {
-                form.append(payloadKey, payload[payloadKey])
-            }
-        }
-
         const response = await fetch(`${apiUrl()}/pages`, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${getToken()}`
             },
-            body: form,
+            body: JSON.stringify(payload),
         });
 
         const data = await response.json();
@@ -32,19 +26,17 @@ export const create = async (payload) => {
 
 export const update = async ({
                                  id,
-                                 title,
-                                 description,
-                                 date
+                                 ...payload
                              }) => {
     try {
 
-        const response = await fetch(`${apiUrl()}/announcements/${id}`, {
-            method: 'POST',
+        const response = await fetch(`${apiUrl()}/pages/${id}`, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${getToken()}`
             },
-            body: JSON.stringify({title, description, date}),
+            body: JSON.stringify(payload),
         });
 
         const data = await response.json();
