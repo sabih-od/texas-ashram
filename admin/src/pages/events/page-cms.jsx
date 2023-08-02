@@ -7,7 +7,7 @@ import {
     loading as EventLoading,
     errors as EventErrors,
     success as EventSuccess,
-    setSuccess, setErrors
+    setSuccess, setErrors, updatePage
 } from '../../store/slices/eventPageSlice'
 
 import {useRouter} from "next/navigation";
@@ -21,9 +21,9 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import dynamic from "next/dynamic";
 
-function PageCMS(props) {
-    const Editor = dynamic(() => import("../../@core/components/TextEditor"), {ssr: false});
+const Editor = dynamic(() => import("../../@core/components/TextEditor"), {ssr: false});
 
+function PageCMS(props) {
     const dispatch = useDispatch()
     const {push} = useRouter()
 
@@ -33,39 +33,47 @@ function PageCMS(props) {
     const page = useSelector(EventPage)
 
     const [successMsg, setSuccessMessage] = useState('')
-    const [content, setContent] = useState('')
+    const [editor, setEditor] = useState(null)
 
     useEffect(() => {
         dispatch(getPage('web-events-page'))
-        // if (!loading && success) {
-        //     setSuccessMessage('Event added successfully!')
-        //     setTimeout(() => {
-        //         push('/events')
-        //     }, 500)
-        // }
     }, [])
 
     useEffect(() => {
-        console.log("page update", page)
-    }, [page])
+        if (!loading && success) {
+            setSuccessMessage('Page updated successfully!')
+            dispatch(setSuccess(false))
+            setTimeout(() => {
+                push('/events')
+            }, 500)
+        }
+    }, [loading, success])
+
+    useEffect(() => {
+        if (page && editor) {
+            editor.setData(page.content)
+        }
+    }, [page, editor])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (loading) return
 
-        // if (!fileValidation()) return;
         if (!page) {
             dispatch(createPage({
                 name: 'web-events-page',
-                content,
+                content: editor.getData()
+            }))
+        } else {
+            dispatch(updatePage({
+                id: page.id,
+                name: page.name,
+                content: editor.getData()
             }))
         }
-
-
     }
 
     return (
-
         <Grid container spacing={6}>
             <Grid item xs={12}>
                 <Typography variant='h5'>
@@ -93,10 +101,7 @@ function PageCMS(props) {
                         <form onSubmit={handleSubmit}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Editor data="" onChange={val => {
-                                        console.log("val", val)
-                                        setContent(val)
-                                    }}/>
+                                    <Editor onInit={setEditor}/>
                                 </Grid>
 
                                 <Grid item xs={12} sx={{mt: 5}}>

@@ -13,7 +13,7 @@ function Events(props) {
 
     const fetchEvents = async (page = 1) => {
         try {
-            const response = await get(page, 15);
+            const response = await get(page, 100);
             const c_page = parseInt(response.data?.currentPage ?? 1)
             const totalPages = response.data?.totalPages ?? 1
             setNextPage(c_page < totalPages ? c_page + 1 : null)
@@ -98,7 +98,7 @@ function Events(props) {
                     {Array.isArray(events) && events.length > 0 ? (
                         events.map((event) => (
                             <tr key={event.id}>
-                                <td>{formatTime(event.start_time)} {event.id}</td>
+                                <td>{formatTime(event.start_time)}</td>
                                 <td>{formatTime(event.end_time)}</td>
                                 <td>{event.title}</td>
                             </tr>

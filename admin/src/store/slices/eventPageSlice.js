@@ -3,21 +3,21 @@ import {HYDRATE} from 'next-redux-wrapper';
 import {update, showByName, create} from '../../services/eventPageService';
 
 export const getPage = createAsyncThunk(
-    'event-page/get',
+    'event_page/get',
     async (name, thunkAPI) => {
         return await showByName(name)
     }
 )
 
 export const createPage = createAsyncThunk(
-    'event-page/create',
-    async (payload, thunkAPI) => {
+    'event_page/create',
+    async (payload, {getState}) => {
         return await create(payload)
     }
 )
 
-export const updateEvent = createAsyncThunk(
-    'event-page/update',
+export const updatePage = createAsyncThunk(
+    'event_page/update',
     async (payload, thunkAPI) => {
         return await update(payload)
     }
@@ -31,7 +31,7 @@ const initialState = {
 };
 
 export const eventPageSlice = createSlice({
-    name: 'event-page',
+    name: 'event_page',
     initialState,
     reducers: {
         setSuccess: (state, {payload}) => {
@@ -55,7 +55,7 @@ export const eventPageSlice = createSlice({
             state.loading = true
             state.errors = null
         })
-        
+
         builder.addCase(getPage.fulfilled, (state, action) => {
             const {data, message} = action.payload
             state.page = data?.data ?? null
@@ -78,12 +78,12 @@ export const eventPageSlice = createSlice({
             state.errors = message
         })
 
-        builder.addCase(updateEvent.pending, (state, action) => {
+        builder.addCase(updatePage.pending, (state, action) => {
             state.loading = true
             state.success = false
             state.errors = null
         })
-        builder.addCase(updateEvent.fulfilled, (state, action) => {
+        builder.addCase(updatePage.fulfilled, (state, action) => {
             const {data, message} = action.payload
 
             state.loading = false
@@ -93,9 +93,9 @@ export const eventPageSlice = createSlice({
     }
 });
 
-export const {setSuccess, setErrors} = eventPageSlice.actions;
-export const page = (state) => state.event.page;
-export const loading = (state) => state.event.loading;
-export const errors = (state) => state.event.errors;
-export const success = (state) => state.event.success;
+export const {setSuccess, setErrors, setEditorContent} = eventPageSlice.actions;
+export const page = (state) => state.event_page.page;
+export const loading = (state) => state.event_page.loading;
+export const errors = (state) => state.event_page.errors;
+export const success = (state) => state.event_page.success;
 export default eventPageSlice.reducer;
