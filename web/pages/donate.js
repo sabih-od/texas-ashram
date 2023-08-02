@@ -200,7 +200,7 @@ function Donate(props) {
                                     <Image src={donate} className="img-fluid" alt="donate"/>
                                 </figure>
                                 <Link className="btn themeBtn mt-5" target="_blank"
-                                      href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
+                                   href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
                                     Venmo <i className="fas fa-chevron-right ml-2"/>
                                 </Link>
                                 {/*<button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
