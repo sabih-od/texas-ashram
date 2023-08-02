@@ -183,15 +183,16 @@ function Donate(props) {
                                         speakers, camp improvements, and supplies. You are making a difference directly
                                         into people’s lives. You are able to donate through Venmo or mail your donation
                                         to Texas Christian Ashram.
-                                        </p>
-                                    <p style={{ fontWeight: 'bold' ,marginTop:'-20px'}}>Texas Christian Ashram 2402 Nilelake Ct Friendswood, TX 77546.</p>
+                                    </p>
+                                    <p style={{fontWeight: 'bold', marginTop: '-20px'}}>{/*Texas Christian Ashram 2402*/}
+                                        Nilelake Ct Friendswood, TX 77546.</p>
 
                                 </div>
                                 <figure>
                                     <Image src={donate} className="img-fluid" alt="donate"/>
                                 </figure>
                                 <Link className="btn themeBtn mt-5" target="_blank"
-                                   href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
+                                      href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
                                     Venmo <i className="fas fa-chevron-right ml-2"/>
                                 </Link>
                                 {/*<button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
