@@ -36,9 +36,9 @@ export class EventsService {
                 where: {
                     date_to: MoreThanOrEqual(new Date().toISOString().slice(0, 10))
                 },
-                order: {id: 'DESC'}
+                order: {id: 'ASC'}
             } : {
-                order: {id: 'DESC'}
+                order: {id: 'ASC'}
             };
 
         const [data, total] = await this.eventRepository.findAndCount({

@@ -18,7 +18,7 @@ import {getRandomFileName, uploadFile} from "../helpers/helper";
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 
-@ApiTags('Posts')
+@ApiTags('Page Media')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('page-media')
