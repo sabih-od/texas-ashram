@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3025",
     "build": "next build",
+    "dev:static": "serve ./out -p 3025",
     "start": "next start",
     "lint": "next lint",
     "export": "next export"
