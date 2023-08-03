@@ -7,10 +7,6 @@ import {
     Delete,
     UseGuards,
     UseInterceptors,
-    UploadedFile,
-    ParseFilePipe,
-    MaxFileSizeValidator,
-    Req,
     Query,
     Injectable,
     NestInterceptor,
@@ -22,7 +18,7 @@ import { CreateSermonDto } from './dto/create-sermon.dto';
 import { UpdateSermonDto } from './dto/update-sermon.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
-import {FileFieldsInterceptor, FileInterceptor} from "@nestjs/platform-express";
+import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {
     deleteFileFromUploads,
     getRandomFileName,
@@ -30,7 +26,6 @@ import {
 } from "../helpers/helper";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {FirebaseService} from "../firebase/firebase.service";

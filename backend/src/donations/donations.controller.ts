@@ -5,7 +5,6 @@ import { UpdateDonationDto } from './dto/update-donation.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {AuthService} from "../auth/auth.service";
-import {CreatePrayerRequestDto} from "../prayer-requests/dto/create-prayer-request.dto";
 
 @ApiTags('Donations')
 @ApiBearerAuth()

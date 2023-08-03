@@ -1,5 +1,4 @@
-import {ApiProperty, PartialType} from '@nestjs/swagger';
-import { CreateGroupDto } from './create-group.dto';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty} from "class-validator";
 
 export class AddUserDto {

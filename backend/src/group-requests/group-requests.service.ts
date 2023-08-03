@@ -2,7 +2,6 @@ import {Inject, Injectable} from '@nestjs/common';
 import { CreateGroupRequestDto } from './dto/create-group-request.dto';
 import { UpdateGroupRequestDto } from './dto/update-group-request.dto';
 import {EntityNotFoundError, QueryFailedError, Repository} from "typeorm";
-import {Group} from "../groups/entities/group.entity";
 import {GroupRequest} from "./entities/group-request.entity";
 
 @Injectable()

@@ -20,7 +20,6 @@ import {
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
-import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {FirebaseService} from "../firebase/firebase.service";

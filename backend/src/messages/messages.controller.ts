@@ -8,7 +8,6 @@ import {GroupsService} from "../groups/groups.service";
 import {UpdateGroupDto} from "../groups/dto/update-group.dto";
 import {socketIoServer} from "../main";
 import {UsersService} from "../users/users.service";
-import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
 import {NotificationsService} from "../notifications/notifications.service";
 import {FirebaseService} from "../firebase/firebase.service";
 import {IsNull} from "typeorm";
