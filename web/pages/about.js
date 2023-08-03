@@ -41,7 +41,7 @@ function AboutUs(props) {
                                 <Image src={aboutMain} className="img-fluid" alt="missionImg 2"/>
                             </figure>
                             <div className="py-4 pr-5">
-                                <h2 className="text-secondary">What is the Texas Christian Ashram</h2>
+                                <h2 className=" heading text-secondary">What is the Texas Christian Ashram</h2>
                                 {/*<h2 className="text-secondary">What is a Christian Ashram?</h2>*/}
                                 <p className="text">It is a family Christian experience (like youth camp, but for the
                                     whole family) held in a retreat setting for the sole purpose of providing a
