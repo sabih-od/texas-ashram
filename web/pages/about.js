@@ -346,12 +346,14 @@ function AboutUs(props) {
                 </div>
 
             </section>
-            <section className="pb-0">
+            <section className="speakerMain pb-0">
                 <div className="container">
-                    <div className="row mx-4">
+                    <h1 className="heading text-center">Speaker</h1>
+                    <div className="row align-items-center mx-4">
                         <div className="col-md-9 px-5">
-                            <h6 className="subheading text-secondary">Speaker</h6>
-                            <h1 className="heading">Dr. Andy Hurst</h1>
+
+                            {/*<h6 className="subheading text-secondary">Speaker</h6>*/}
+                            <h1 className="heading text-center">Dr. Andy Hurst</h1>
                             {/*<p className="text">Andy Hurst was born in Houston, Texas, and is the third generation of*/}
                             {/*    Methodist ministers in his family. Growing up in a Methodist parsonage the call to*/}
                             {/*    ministry came early, and at age 13, Robert gave his life to Christ. He says that his*/}
@@ -370,7 +372,7 @@ function AboutUs(props) {
                             {/*<p className="text">Bob is known as one of the best communicators in the faith and we are*/}
                             {/*    excited to have him back this summer at the Texas Christian Ashram.</p>*/}
                         </div>
-                        <div className="col-md-3 mt-5">
+                        <div className="col-md-3">
                             <Image src={andy} className="img-fluid mt-5" alt="andy" />
                         </div>
                         <div className="col-12">
@@ -389,7 +391,7 @@ function AboutUs(props) {
                     <h2 className="heading text-center mt-4 mb-3">Executive Director</h2>
                     <div className="row mx-4">
                         <div className="col-md-9 px-5">
-                            <h6 className="subheading text-secondary">Evangelist</h6>
+                            {/*<h6 className="subheading text-secondary">Evangelist</h6>*/}
                             <h1 className="heading">Joseph (J.T.) Adkins</h1>
 
 
@@ -409,13 +411,13 @@ function AboutUs(props) {
 
                         </div>
                         <div className="col-md-3 mt-5">
-                            <Image src={speaker} className="img-fluid mt-5" style={{height:'350px'}} alt="speaker"/>
+                            <Image src={speaker} className="img-fluid mt-5" style={{height:'350px; object-fit:cover'}} alt="speaker"/>
                         </div>
 
                         <div className="col-md-12 px-5">
                             <h1 className="heading text-center mt-4 mb-3">Assistant Director</h1>
                             <h2 className="heading">Robert Gay</h2>
-                            <h3 className="">Mindy Florian</h3>
+                            <h2 className="heading">Mindy Florian</h2>
 
                         </div>
                         <div className="col-12">
@@ -424,25 +426,25 @@ function AboutUs(props) {
 
 
 
-                        <div className="col-md-9 px-5 mt-5">
-                            <h6 className="subheading text-secondary">Bible Teacher</h6>
-                            <h1 className="heading">Brian Shimer</h1>
-                            <p className="text">Brian Shimer became involved in the Christian Ashram movement first at
-                                the California Winter Ashram in February 1981.</p>
-                            <p className="text">The movement began to work on his life through the leadership of Mary
-                                Webster, who had traveled with Brother Stanley all over the world. Mary Webster was a
-                                marvel and wanted Brian and his fiancé to marry while at camp! "Love is too precious to
-                                wait," she said.​</p>
-                            <p className="text">Brian and Karen have been married for 39 years and have four grown
-                                daughters and five grandchildren. He has taught as a Bible Teacher and Evangelist at
-                                Christian Ashrams in the USA and Canada over the last 30 years, serves on the Ashram
-                                International Board, and has been director of the California Winter Ashram for two
-                                years.</p>
-                        </div>
-                        <div className="col-md-3 mt-5">
-                            <br/>
-                            <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2"/>
-                        </div>
+                        {/*<div className="col-md-9 px-5 mt-5">*/}
+                        {/*    <h6 className="subheading text-secondary">Bible Teacher</h6>*/}
+                        {/*    <h1 className="heading">Brian Shimer</h1>*/}
+                        {/*    <p className="text">Brian Shimer became involved in the Christian Ashram movement first at*/}
+                        {/*        the California Winter Ashram in February 1981.</p>*/}
+                        {/*    <p className="text">The movement began to work on his life through the leadership of Mary*/}
+                        {/*        Webster, who had traveled with Brother Stanley all over the world. Mary Webster was a*/}
+                        {/*        marvel and wanted Brian and his fiancé to marry while at camp! "Love is too precious to*/}
+                        {/*        wait," she said.​</p>*/}
+                        {/*    <p className="text">Brian and Karen have been married for 39 years and have four grown*/}
+                        {/*        daughters and five grandchildren. He has taught as a Bible Teacher and Evangelist at*/}
+                        {/*        Christian Ashrams in the USA and Canada over the last 30 years, serves on the Ashram*/}
+                        {/*        International Board, and has been director of the California Winter Ashram for two*/}
+                        {/*        years.</p>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-md-3 mt-5">*/}
+                        {/*    <br/>*/}
+                        {/*    <Image src={speaker2} className="img-fluid mt-5" alt="speaker 2"/>*/}
+                        {/*</div>*/}
 
 
                     </div>

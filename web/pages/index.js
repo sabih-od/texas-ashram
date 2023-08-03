@@ -247,6 +247,9 @@ export default function Home() {
                                         <p>It takes a village! If you are going through some tough times, have some
                                             great news to share, and/or need some prayer for others, please submit the
                                             request so we can pray with you!</p>
+                                        <Link data-aos='fade-up' data-aos-delay="150" href="/prayer-request-form"
+                                              className="newthemeBtn mb-3">
+                                            Prayer Request</Link>
                                         {/*<span>
                                             <i className="fas fa-star"/>
                                             <i className="fas fa-star"/>
