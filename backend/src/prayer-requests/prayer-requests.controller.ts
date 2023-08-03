@@ -6,7 +6,6 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {AuthService} from "../auth/auth.service";
 import {CreateNotificationDto} from "../notifications/dto/create-notification.dto";
-import {AnnouncementsService} from "../announcements/announcements.service";
 import {NotificationsService} from "../notifications/notifications.service";
 import {FirebaseService} from "../firebase/firebase.service";
 import {MailService} from "../mail/mail.service";

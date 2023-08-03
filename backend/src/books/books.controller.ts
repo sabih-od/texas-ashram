@@ -8,15 +8,12 @@ import {
     UseInterceptors,
     Query, UseGuards, UploadedFiles
 } from '@nestjs/common';
-import {FileFieldsInterceptor, FileInterceptor} from "@nestjs/platform-express";
+import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {
     deleteFileFromUploads,
-    generateRandomString,
-    getFileExtension,
     getRandomFileName,
     uploadFile
 } from "../helpers/helper";
-import {promises as fsPromises} from "fs";
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 import {
