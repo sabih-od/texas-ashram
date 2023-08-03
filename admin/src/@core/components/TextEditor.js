@@ -1,5 +1,5 @@
 import {CKEditor} from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Editor from "ckeditor5-custom-build";
 import {apiUrl, getToken} from "../../services/global";
 
 async function uploadAdapterPlugin(editor) {
@@ -45,7 +45,21 @@ const TextEditor = ({
                     }) => {
     return (
         <CKEditor
-            editor={ClassicEditor}
+            editor={Editor}
+            config={{
+                image: {
+                    toolbar: [
+                        'imageStyle:block',
+                        'imageStyle:side',
+                        'imageStyle:inline',
+                        '|',
+                        'toggleImageCaption',
+                        'imageTextAlternative',
+                        '|',
+                        'linkImage'
+                    ]
+                }
+            }}
             onReady={editor => {
                 uploadAdapterPlugin(editor)
                 onInit(editor)
