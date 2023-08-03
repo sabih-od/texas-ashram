@@ -44,8 +44,8 @@ function PageCMS(props) {
             setSuccessMessage('Page updated successfully!')
             dispatch(setSuccess(false))
             setTimeout(() => {
-                push('/events')
-            }, 500)
+                setSuccessMessage('')
+            }, 1500)
         }
     }, [loading, success])
 
