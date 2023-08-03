@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import moment from "moment";
-import Image from "next/image";
-import { get } from "../services/eventService";
+import {get, getEventPage} from "../services/eventService";
 
 function Events() {
     const [events, setEvents] = useState([]);
     const [nextPage, setNextPage] = useState(null);
+
+    const [pageCms, setPageCms] = useState(null)
 
     const formatDate = (date) => moment(date, 'YYYY-MM-DD').format('DD MMM, ');
     const formatTime = (time) => moment(time, 'Th:mm a').format('h:mm a');
@@ -25,8 +26,20 @@ function Events() {
         }
     };
 
+    const fetchPage = async () => {
+        try {
+            const {data} = await getEventPage('web-events-page')
+            if (data) {
+                setPageCms(data?.data?.content ?? null)
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     useEffect(() => {
         fetchEvents();
+        fetchPage()
     }, []);
 
     return (
@@ -48,47 +61,12 @@ function Events() {
 
             {/* Monthly Devotional */}
             <section>
-                <div className="container">
+                <div className="container text-center imgCenter">
                     <div className="row justify-content-center">
                         <div className="col-md-10">
-                            <h1 style={{textAlign: 'center', fontWeight: 'bold', color: 'black'}}>Monthly
-                                Devotional</h1>
-                            <p style={{textAlign: 'center', color: 'black'}}>On the first Saturday of every month, a
-                                group of people join
-                                a Zoom meeting for a brief Bible Study/Prayer Request meeting. We would love you to
-                                join. If you are not
-                                getting the email notifications about this meeting, please submit a “Contact Us” request
-                                so we can add
-                                you to our notifications. </p>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center my-4">
-                        <div className="col-md-10">
-                            <div style={{display: 'flex', justifyContent: 'center', height: '500px'}}>
-                                <img src="../images/zoom.png" alt="Placeholder Image"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-md-10">
-                            <h1 style={{textAlign: 'center', fontWeight: 'bold', color: 'black'}}>Main Campus Event</h1>
-                            <p style={{textAlign: 'center', color: 'black'}}>The Texas Christian Ashram (TCA) is in the
-                                heart of beautiful
-                                East Texas at Scottsville Camp and Conference Center. Located near Marshall, TX, just 30
-                                minutes from
-                                the Louisiana board, makes this campsite the perfect location for both Texas and
-                                Louisiana residents.
-                                TCA offers activities and dedicated programs for all ages. The youth enjoy worship and
-                                the Word of God
-                                while playing elaborate games that couple both competition and fun for everyone. The
-                                college and career
-                                program integrates with both the adult and youth programs at different times in order to
-                                meet the needs
-                                of the age group. The adult program incorporates teaching, worship, small group
-                                activities, and rest.
-                                The goal of TCA is to focus on Jesus and each other. Unique to TCA is the Blue Bell ice
-                                cream social
-                                each night where games are played, and ice cream is eaten. </p>
+                            {pageCms ? (
+                                <div dangerouslySetInnerHTML={{__html: pageCms}}/>
+                            ) : null}
                         </div>
                     </div>
                 </div>
@@ -98,7 +76,7 @@ function Events() {
             <section>
                 <div className="container">
                     <div className="row justify-content-center">
-                        <h3 style={{ color: 'black' }}>Typical Schedule for July Event</h3>
+                        <h3 style={{color: 'black'}}>Typical Schedule for July Event</h3>
                         <table className="table table-bordered">
                             <thead>
                             <tr className="table-header">
@@ -118,7 +96,8 @@ function Events() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="3" className="text-center">Events are not available at this moment.</td>
+                                    <td colSpan="3" className="text-center">Events are not available at this moment.
+                                    </td>
                                 </tr>
                             )}
                             </tbody>
@@ -128,7 +107,8 @@ function Events() {
                                 <button className="btn btn-primary" onClick={(e) => {
                                     e.preventDefault();
                                     fetchEvents(nextPage);
-                                }}>Load More</button>
+                                }}>Load More
+                                </button>
                             </div>
                         ) : null}
                     </div>

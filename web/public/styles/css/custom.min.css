@@ -1848,3 +1848,12 @@ button.logoutBtn:focus {
 .pagination-button:focus {
     outline: none !important;
 }
+
+.imgCenter figure {
+    margin: 0 auto;
+
+}
+
+.imgCenter p {
+    color: #000;
+}
