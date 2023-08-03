@@ -41,10 +41,9 @@ function Events() {
         fetchEvents();
         fetchPage()
     }, []);
-
     return (
         <Layout>
-            {/* Main Heading */}
+            {/*!--Main Heading --*/}
             <div className="innertitle">
                 <section className="innerHeading">
                     <h1>Events</h1>
