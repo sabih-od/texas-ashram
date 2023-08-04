@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from "../components/Layout";
 import moment from "moment";
 import {get, getEventPage} from "../services/eventService";
@@ -76,7 +76,7 @@ function Events() {
             <section>
                 <div className="container">
                     <div className="row justify-content-center">
-                        <h3 style={{color: 'black'}}>Typical Schedule for July Event</h3>
+                        <h3 style={{ color: 'black' }}>Typical Schedule for July Event</h3>
                         <table className="table table-bordered">
                             <thead>
                             <tr className="table-header">
@@ -96,8 +96,7 @@ function Events() {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="3" className="text-center">Events are not available at this moment.
-                                    </td>
+                                    <td colSpan="3" className="text-center">Events are not available at this moment.</td>
                                 </tr>
                             )}
                             </tbody>
@@ -107,8 +106,7 @@ function Events() {
                                 <button className="btn btn-primary" onClick={(e) => {
                                     e.preventDefault();
                                     fetchEvents(nextPage);
-                                }}>Load More
-                                </button>
+                                }}>Load More</button>
                             </div>
                         ) : null}
                     </div>
