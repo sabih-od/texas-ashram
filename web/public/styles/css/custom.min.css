@@ -1851,9 +1851,22 @@ button.logoutBtn:focus {
 
 .imgCenter figure {
     margin: 0 auto;
-
 }
 
 .imgCenter p {
     color: #000;
 }
+
+
+button.bg-primary{
+    background-color:  var(--theme-color) !important;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+}
+button.bg-primary:hover{
+    background-color:  var(--theme-color) !important;
+}
+
