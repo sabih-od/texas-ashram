@@ -48,11 +48,15 @@ function Donate(props) {
 
 
     const openFacebookLinks = () => {
-        // Open the first Facebook page in a new tab
-        window.open('https://www.facebook.com/TexasChristianAshram', '_blank');
+        let urls = ['https://www.facebook.com/TexasChristianAshram', 'https://www.facebook.com/groups/135269503228833'];
 
-        // Open the second Facebook page in a new tab
-        window.open('https://www.facebook.com/groups/135269503228833', '_blank');
+        for (let i = 0; i < urls.length; i++) {
+            let newWindow = window.open(urls[i], '_blank');
+            if (!newWindow) {
+                alert('Pop-up blocker prevented opening window ' + (i + 1));
+                break;
+            }
+        }
     };
     // Stripe Work
     /*const stripePromise = loadStripe('pk_test_0rY5rGJ7GN1xEhCB40mAcWjg');
