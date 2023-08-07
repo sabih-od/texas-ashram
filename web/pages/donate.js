@@ -47,17 +47,6 @@ function Donate(props) {
     }, []);
 
 
-    const openFacebookLinks = () => {
-        let urls = ['https://www.facebook.com/TexasChristianAshram', 'https://www.facebook.com/groups/135269503228833'];
-
-        for (let i = 0; i < urls.length; i++) {
-            let newWindow = window.open(urls[i], '_blank');
-            if (!newWindow) {
-                alert('Pop-up blocker prevented opening window ' + (i + 1));
-                break;
-            }
-        }
-    };
     // Stripe Work
     /*const stripePromise = loadStripe('pk_test_0rY5rGJ7GN1xEhCB40mAcWjg');
     const handlePayment = async () => {
@@ -212,15 +201,10 @@ function Donate(props) {
                                     <Image src={donate} className="img-fluid" alt="donate"/>
                                 </figure>
                                 <div className="d-flex align-items-center justify-content-center mt-5">
-
                                     <Link className="btn themeBtn " target="_blank"
                                           href="https://venmo.com/code?user_id=3581549681313252556&created=1689180324.903656&printed=1">
                                         Venmo <i className="fas fa-chevron-right ml-2"/>
                                     </Link>
-
-                                    <button className="btn border ml-4 bg-primary" onClick={openFacebookLinks}>
-                                        <i className="fab fa-facebook-f text-white fa-lg" />
-                                    </button>
                                 </div>
                             </div>
 
