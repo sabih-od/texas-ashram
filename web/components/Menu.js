@@ -24,6 +24,18 @@ const Menu = () => {
     // Show And Hide Work On Members Tab
     const token = Cookie.get('token');
 
+    const openFacebookLinks = () => {
+        let urls = ['https://www.facebook.com/TexasChristianAshram', 'https://www.facebook.com/groups/135269503228833'];
+
+        for (let i = 0; i < urls.length; i++) {
+            let newWindow = window.open(urls[i], '_blank');
+            if (!newWindow) {
+                alert('Pop-up blocker prevented opening window ' + (i + 1));
+                break;
+            }
+        }
+    };
+
     // sidebar work start
     // useEffect(() => {
     //     initializeCustomScripts();
@@ -44,6 +56,9 @@ const Menu = () => {
                                 </div>
                                 <div className="col col-md-8">
                                     <div className="d-flex">
+                                        <button className="btn border ml-4 bg-primary" onClick={openFacebookLinks}>
+                                            <i className="fab fa-facebook-f text-white fa-lg" />
+                                        </button>
                                         <Link href="/donate" className="themeBtn">donate</Link>
                                         {token && (
                                             <button type="submit" onClick={handleLogout} className="nav-link logoutBtn">
