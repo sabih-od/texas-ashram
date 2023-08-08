@@ -6,12 +6,12 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "../auth/auth.guard";
 
 @ApiTags('Pages')
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @Controller('pages')
 export class PagesController {
   constructor(private readonly pagesService: PagesService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   async create(@Body() createPageDto: CreatePageDto) {
       createPageDto.created_at = Date.now().toString();
@@ -24,6 +24,8 @@ export class PagesController {
       }
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get()
   async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
       let res = await this.pagesService.findAll(page, limit);
@@ -35,6 +37,9 @@ export class PagesController {
       }
   }
 
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
       let res = await this.pagesService.findOne(+id);
@@ -46,6 +51,9 @@ export class PagesController {
       }
   }
 
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updatePageDto: UpdatePageDto) {
       let page = await this.pagesService.findOne(+id);
@@ -66,6 +74,9 @@ export class PagesController {
       }
   }
 
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
       let page = await this.pagesService.findOne(+id);
@@ -97,6 +108,9 @@ export class PagesController {
       }
   }
 
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get('home-banner/get')
   async getHomeBanner() {
       let res = await this.pagesService.getByName('home');
@@ -110,6 +124,9 @@ export class PagesController {
       }
   }
 
+
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
     @Get('seeder/seed')
     async seed() {
         let res = await this.pagesService.seed();
