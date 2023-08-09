@@ -323,14 +323,14 @@ export class AuthController {
                 title: 'Test Notification',
                 body: 'Test Body',
             },
-            // topic: 'test', // The topic to which the notification will be sent
-            tokens: ['cK-GQIkDT065HxEaeydpBr:APA91bHZuskTSOaPArpLkRCU3D4iNYtEnRNZsZN-lA2aaEXGwtvbUIMrAN1u0qeOntdRWXVjgbxuE6rt40RBSfbzo21sBMwFCL6KhR7U8vZVHuK_KeMKTP9N6GQqz_O21va2ZvwzeXw6'], // The topic to which the notification will be sent
+            topic: 'test', // The topic to which the notification will be sent
+            // tokens: ['cK-GQIkDT065HxEaeydpBr:APA91bHZuskTSOaPArpLkRCU3D4iNYtEnRNZsZN-lA2aaEXGwtvbUIMrAN1u0qeOntdRWXVjgbxuE6rt40RBSfbzo21sBMwFCL6KhR7U8vZVHuK_KeMKTP9N6GQqz_O21va2ZvwzeXw6'], // The topic to which the notification will be sent
         };
 
         // let response = await firebaseAdmin.messaging().send(message);
-        let response = await firebaseAdmin.messaging().sendMulticast(message);
+        let response = await firebaseAdmin.messaging().send(message);
 
-        console.log(response);
+        console.log('response', response);
 
         return response;
     }
