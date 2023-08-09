@@ -53,4 +53,29 @@ export class FirebaseService {
             };
         }
     }
+
+    async sendMulticastNotification(tokens: string[], body: {}): Promise<any> {
+        try {
+            const notification = {
+                ...body,
+                tokens: tokens, // The topic to which the notification will be sent
+            };
+
+            let response = await firebaseAdmin.messaging().sendMulticast(notification);
+            console.log('----sendNotificationToDevice----');
+            console.log(response);
+
+            return {
+                success: true,
+                message: 'Notification sent successfully',
+                data: response
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: 'Notification not sent',
+                data: error
+            };
+        }
+    }
 }

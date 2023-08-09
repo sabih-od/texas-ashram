@@ -90,14 +90,23 @@ export class MessagesController {
       // }
 
       //send notification
+      let fcm_tokens = await this.getFcmTokensOfGroupMembers(createMessageDto.group_id, createMessageDto.user_id);
       let firebaseService = new FirebaseService();
-      await firebaseService.sendNotification({
-          notification: {
-              title: 'New Message',
-              body: createMessageDto.message,
-              group_id: (createMessageDto.group_id).toString()
-          }
-      });
+      if (fcm_tokens != null && fcm_tokens.length > 0) {
+          let resp = await firebaseService.sendMulticastNotification(fcm_tokens, {
+              notification: {
+                  title: 'New Message',
+                  body: createMessageDto.message
+              },
+              data: {
+                  title: 'New Message',
+                  body: createMessageDto.message,
+                  group_id: (createMessageDto.group_id).toString()
+              },
+          });
+
+          console.log('fcm multicast message', resp);
+      }
 
       return {
           success: !res.error,
@@ -171,5 +180,49 @@ export class MessagesController {
           message: res.error ? res.error : 'Message deleted successfully!',
           data: res.error ? [] : res,
       }
+  }
+
+  async getFcmTokensOfGroupMembers (group_id: number, user_id: number) {
+      let group = await this.groupService.findOne(+group_id);
+      if (group.error) {
+          return [];
+      }
+
+      let sender = await this.usersService.findOne(user_id);
+      if (sender.error) {
+          return [];
+      }
+
+      let group_members = group.members == null ? [] : JSON.parse(group.members);
+      let users_blocked_by_sender = sender.blocked_users == null ? [] : JSON.parse(sender.blocked_users);
+      let users_who_heve_blocked_sender = [];
+
+      for (const group_member of group_members) {
+          let user = await this.usersService.findOne(group_member);
+          if (user.error) {
+              continue;
+          }
+
+          let blocked_users = user.blocked_users == null ? [] : JSON.parse(user.blocked_users);
+          if (blocked_users.includes(sender.id)) {
+              users_who_heve_blocked_sender.push(user.id);
+          }
+      }
+
+      group_members = group_members.filter((group_member) => {
+          return !users_blocked_by_sender.includes(group_member) && !users_who_heve_blocked_sender.includes(group_member);
+      });
+
+      let fcm_tokens = [];
+      for (const group_member of group_members) {
+          let user = await this.usersService.findOne(+group_member);
+          if (user.error || user.fcm_token == null) {
+              continue;
+          }
+
+          fcm_tokens.push(user.fcm_token);
+      }
+
+      return fcm_tokens;
   }
 }
