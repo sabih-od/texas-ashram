@@ -91,6 +91,7 @@ export class MessagesController {
 
       //send notification
       let fcm_tokens = await this.getFcmTokensOfGroupMembers(createMessageDto.group_id, createMessageDto.user_id);
+      console.log('fcm_tokens', fcm_tokens);
       let firebaseService = new FirebaseService();
       if (fcm_tokens != null && fcm_tokens.length > 0) {
           let resp = await firebaseService.sendMulticastNotification(fcm_tokens, {
@@ -195,7 +196,7 @@ export class MessagesController {
 
       let group_members = group.members == null ? [] : JSON.parse(group.members);
       let users_blocked_by_sender = sender.blocked_users == null ? [] : JSON.parse(sender.blocked_users);
-      let users_who_heve_blocked_sender = [];
+      let users_who_have_blocked_sender = [];
 
       for (const group_member of group_members) {
           let user = await this.usersService.findOne(group_member);
@@ -204,7 +205,6 @@ export class MessagesController {
           }
 
           let blocked_users = user.blocked_users == null ? [] : JSON.parse(user.blocked_users);
-          if (blocked_users.includes(sender.id)) {
               users_who_heve_blocked_sender.push(user.id);
           }
       }
