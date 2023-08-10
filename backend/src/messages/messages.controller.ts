@@ -205,13 +205,12 @@ export class MessagesController {
           }
 
           let blocked_users = user.blocked_users == null ? [] : JSON.parse(user.blocked_users);
-          if (blocked_users.includes(sender.id)) {
-              users_who_have_blocked_sender.push(user.id);
+              users_who_heve_blocked_sender.push(user.id);
           }
       }
 
       group_members = group_members.filter((group_member) => {
-          return !users_blocked_by_sender.includes(group_member) && !users_who_have_blocked_sender.includes(group_member);
+          return !users_blocked_by_sender.includes(group_member) && !users_who_heve_blocked_sender.includes(group_member);
       });
 
       let fcm_tokens = [];
