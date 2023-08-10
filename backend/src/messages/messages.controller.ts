@@ -224,6 +224,8 @@ export class MessagesController {
           fcm_tokens.push(user.fcm_token);
       }
 
-      return fcm_tokens;
+      return fcm_tokens.filter((item) => {
+          return item !== '' && item !== null
+      });
   }
 }
