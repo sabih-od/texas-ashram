@@ -46,7 +46,6 @@ function Donate(props) {
         showTab(0);
     }, []);
 
-
     // Stripe Work
     /*const stripePromise = loadStripe('pk_test_0rY5rGJ7GN1xEhCB40mAcWjg');
     const handlePayment = async () => {
@@ -206,6 +205,9 @@ function Donate(props) {
                                         Venmo <i className="fas fa-chevron-right ml-2"/>
                                     </Link>
                                 </div>
+                                {/*<button className="btn themeBtn mt-5" onClick={() => showTab(1)}>
+                                    Venmo <i className="fas fa-chevron-right ml-2"/>
+                                </button>*/}
                             </div>
 
                             {/* choose price work */}
