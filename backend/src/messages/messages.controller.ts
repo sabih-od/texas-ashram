@@ -96,11 +96,11 @@ export class MessagesController {
       if (fcm_tokens != null && fcm_tokens.length > 0) {
           let resp = await firebaseService.sendMulticastNotification(fcm_tokens, {
               notification: {
-                  title: 'New Message',
+                  title: group.name,
                   body: createMessageDto.message
               },
               data: {
-                  title: 'New Message',
+                  title: group.name,
                   body: createMessageDto.message,
                   group_id: (createMessageDto.group_id).toString()
               },
@@ -211,7 +211,7 @@ export class MessagesController {
       }
 
       group_members = group_members.filter((group_member) => {
-          return !users_blocked_by_sender.includes(group_member) && !users_who_have_blocked_sender.includes(group_member);
+          return !users_blocked_by_sender.includes(group_member) && !users_who_have_blocked_sender.includes(group_member) && group_member != user_id;
       });
 
       let fcm_tokens = [];
