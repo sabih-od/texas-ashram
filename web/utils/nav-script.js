@@ -1,4 +1,4 @@
-export const initNav= function () {
+export const initNav = function () {
     let navTimeline;
 
     function headerMenu() {
@@ -7,7 +7,7 @@ export const initNav= function () {
         const navBg = $(target).find('.navigation-bg');
         const navInner = $(target).find('.nav-inner');
         const navLinks = $(target).find('.nav-link');
-        const animationTime = 0.5;
+        const animationTime = 0.3;
         const easeIn = Circ.easeIn;
         const easeOut = Circ.easeOut;
         const easeInOut = Circ.easeInOut;
@@ -16,6 +16,7 @@ export const initNav= function () {
             navTimeline = gsap.timeline({paused: true})
                 .fromTo(
                     target,
+                    animationTime,
                     {top: '-100%', ease: easeIn},
                     {
                         top: '0%',

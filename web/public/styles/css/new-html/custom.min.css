@@ -215,6 +215,7 @@ header.sticky .logo img {
 .navigation-menu .nav-inner {
     position: relative;
     text-align: left;
+    right: -100%;
 }
 
 .navigation-menu .nav-inner .nav-link {
