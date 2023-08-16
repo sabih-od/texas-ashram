@@ -1,5 +1,5 @@
-// export const initNav = function () {
-function initNav () {
+export const initNav = function () {
+// function initNav () {
     let navTimeline;
 
     function headerMenu() {
@@ -72,4 +72,4 @@ function initNav () {
     });
 }
 
-export { initNav };
+// initNav();
