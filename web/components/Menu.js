@@ -37,9 +37,9 @@ const Menu = () => {
     };
 
     // sidebar work start
-    // useEffect(() => {
-    //     initNav();
-    // }, []);
+    useEffect(() => {
+        initNav();
+    }, []);
     // sidebar work end
 
     return (
