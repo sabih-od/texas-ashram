@@ -60,7 +60,7 @@ function MyApp({Component, pageProps}) {
                     {/*<Script src="/styles/js/all.min.js" />*/}
                     {/*<Script src="/styles/js/aos.js" />*/}
                     <Script src="/styles/js/gsap.js"/>
-                    <Script src="/utils/nav-script.js"/>
+                    <Script type="module" src="/utils/nav-script.js"/>
                     {/*<Script src="/styles/js/scrollTrigger.js" />*/}
                 </>
             ) : null}
