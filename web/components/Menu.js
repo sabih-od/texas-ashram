@@ -4,7 +4,7 @@ import Logo from "../images/new-html/logo.png";
 import Link from "next/link";
 import Cookie from "js-cookie";
 import {useRouter} from 'next/router';
-import {initNav} from '../utils/nav-script';
+// import {initNav} from '../utils/nav-script';
 
 const Menu = () => {
 
@@ -37,9 +37,9 @@ const Menu = () => {
     };
 
     // sidebar work start
-    useEffect(() => {
-        initNav();
-    }, []);
+    // useEffect(() => {
+    //     initNav();
+    // }, []);
     // sidebar work end
 
     return (
