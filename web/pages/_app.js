@@ -1,5 +1,5 @@
 // import {initNav} from '../utils/nav-script';
-import {initNav} from '../public/styles/js/nav-script';
+// import {initNav} from '../public/styles/js/custom.min';
 import React, {useEffect, useState} from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}) {
         setTimeout(() => {
             if (routePath !== router.pathname && isJquery && isScrollTrigger) {
                 setRoutePath(router.pathname)
-                initNav();
+                // initNav();
             }
         }, 1000);
     }, [router, routePath, isJquery, isScrollTrigger])
@@ -59,7 +59,7 @@ function MyApp({Component, pageProps}) {
                     {/*<Script src="/styles/js/all.min.js" />*/}
                     {/*<Script src="/styles/js/aos.js" />*/}
                     <Script src="/styles/js/gsap.js"/>
-                    <Script type="module" src="/styles/js/nav-script.js"/>
+                    {/*<Script type="module" src="/styles/js/nav-script.js"/>*/}
                     {/*<Script src="/styles/js/scrollTrigger.js" />*/}
                 </>
             ) : null}
@@ -70,4 +70,4 @@ function MyApp({Component, pageProps}) {
     );
 }
 
-export default MyApp;
+export default MyApp; 
