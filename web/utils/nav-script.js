@@ -1,5 +1,6 @@
 export const initNav = function () {
 // function initNav () {
+
     let navTimeline;
 
     function headerMenu() {
