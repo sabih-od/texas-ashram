@@ -1,17 +1,14 @@
-// import '../public/styles/css/all.min.css';
-// import '../public/styles/css/custom.min.css';
-// import '../public/styles/css/responsive.css';
-// import '../public/styles/css/new-html/custom.min.css';
+// import {initNav} from '../utils/nav-script';
+import {initNav} from '../public/styles/js/nav-script';
 import React, {useEffect, useState} from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Modal from 'react-modal';
 import Script from 'next/script';
 import {useRouter} from "next/router";
-import {initNav} from '../utils/nav-script'
 
 // Request Prayer Work For Error Handling
-Modal.setAppElement('#__next');
+// Modal.setAppElement('#__next');
 
 function MyApp({Component, pageProps}) {
 
@@ -31,10 +28,12 @@ function MyApp({Component, pageProps}) {
     }, []);
 
     useEffect(() => {
-        if (routePath !== router.pathname && isJquery && isScrollTrigger) {
-            setRoutePath(router.pathname)
-            initNav()
-        }
+        setTimeout(() => {
+            if (routePath !== router.pathname && isJquery && isScrollTrigger) {
+                setRoutePath(router.pathname)
+                initNav();
+            }
+        }, 1000);
     }, [router, routePath, isJquery, isScrollTrigger])
 
     return (
@@ -60,7 +59,7 @@ function MyApp({Component, pageProps}) {
                     {/*<Script src="/styles/js/all.min.js" />*/}
                     {/*<Script src="/styles/js/aos.js" />*/}
                     <Script src="/styles/js/gsap.js"/>
-                    <Script type="module" src="/utils/nav-script.js"/>
+                    <Script type="module" src="/styles/js/nav-script.js"/>
                     {/*<Script src="/styles/js/scrollTrigger.js" />*/}
                 </>
             ) : null}
