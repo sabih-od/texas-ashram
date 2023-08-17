@@ -28,12 +28,10 @@ function MyApp({Component, pageProps}) {
     }, []);
 
     useEffect(() => {
-        setTimeout(() => {
-            if (routePath !== router.pathname && isJquery && isScrollTrigger) {
-                setRoutePath(router.pathname)
-                initNav();
-            }
-        }, 1000);
+        if (routePath !== router.pathname && isJquery && isScrollTrigger) {
+            setRoutePath(router.pathname)
+            initNav();
+        }
     }, [router, routePath, isJquery, isScrollTrigger])
 
     return (
