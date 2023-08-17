@@ -84,7 +84,7 @@ const Menu = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="navigation-menu" id="overlayNavigation">
+                                        <div className="navigation-menu d-none" id="overlayNavigation">
                                             <div className="navigation-bg one"/>
                                             {/*<div className="navigation-bg two"/>*/}
                                             <div className="container-fluid h-100">
