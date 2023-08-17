@@ -16,6 +16,7 @@ function MyApp({Component, pageProps}) {
 
     const [routePath, setRoutePath] = useState(null)
     const [isJquery, setIsJquery] = useState(false)
+    const [isCirc, setIsCirc] = useState(false)
     const [isScrollTrigger, setIsScrollTrigger] = useState(false)
     // const [isSwiper, setIsSwiper] = useState(false)
 
@@ -28,11 +29,11 @@ function MyApp({Component, pageProps}) {
     }, []);
 
     useEffect(() => {
-        if (routePath !== router.pathname && isJquery && isScrollTrigger) {
+        if (routePath !== router.pathname && isJquery && isScrollTrigger && isCirc) {
             setRoutePath(router.pathname)
             initNav();
         }
-    }, [router, routePath, isJquery, isScrollTrigger])
+    }, [router, routePath, isJquery, isScrollTrigger, isCirc])
 
     return (
         <>
@@ -56,7 +57,9 @@ function MyApp({Component, pageProps}) {
                     />
                     {/*<Script src="/styles/js/all.min.js" />*/}
                     {/*<Script src="/styles/js/aos.js" />*/}
-                    <Script src="/styles/js/gsap.js"/>
+                    <Script src="/styles/js/gsap.js" onLoad={() => {
+                        setIsCirc(true)
+                    }}/>
                     {/*<Script type="module" src="/styles/js/nav-script.js"/>*/}
                     {/*<Script src="/styles/js/scrollTrigger.js" />*/}
                 </>
