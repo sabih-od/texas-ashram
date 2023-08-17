@@ -1,5 +1,5 @@
 // import {initNav} from '../utils/nav-script';
-// import {initNav} from '../public/styles/js/custom.min';
+import {initNav} from '../public/styles/js/custom.min';
 import React, {useEffect, useState} from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}) {
         setTimeout(() => {
             if (routePath !== router.pathname && isJquery && isScrollTrigger) {
                 setRoutePath(router.pathname)
-                // initNav();
+                initNav();
             }
         }, 1000);
     }, [router, routePath, isJquery, isScrollTrigger])
