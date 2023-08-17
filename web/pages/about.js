@@ -199,9 +199,9 @@ function AboutUs(props) {
                             <Link href="/events" className="newthemeBtn">
                                 Events
                             </Link>
-                            <a href="#" download="">
+                            {/*<a href="#" download="">*/}
                                 {/*<Image src={iconImg} width="70" alt="iconImg"/>*/}
-                            </a>
+                            {/*</a>*/}
                         </div>
                     </div>
                 </div>
