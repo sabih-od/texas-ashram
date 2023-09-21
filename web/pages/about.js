@@ -347,68 +347,7 @@ function AboutUs(props) {
                 </div>
 
             </section>
-            <section className="speakerMain pb-0">
-                <div className="container">
-                    <h1 className="heading text-center">Speaker</h1>
-                    <div className="row align-items-center mx-4">
-                        <div className="col-md-9 px-5">
 
-                            {/*<h6 className="subheading text-secondary">Speaker</h6>*/}
-                            <h1 className="heading">Dr. Andy Hurst</h1>
-                            {/*<p className="text">Andy Hurst was born in Houston, Texas, and is the third generation of*/}
-                            {/*    Methodist ministers in his family. Growing up in a Methodist parsonage the call to*/}
-                            {/*    ministry came early, and at age 13, Robert gave his life to Christ. He says that his*/}
-                            {/*    life was shaped by his father's preaching and his mother's knowledge of the great hymns*/}
-                            {/*    of the faith.</p>*/}
-                            {/*<p className="text">Bob is married to Deliliah "Dee” Hayes and is the proud father of three*/}
-                            {/*    grown children: Joya, Robert III, and Ryan. After retiring from his service as a United*/}
-                            {/*    Methodist bishop he joined the staff of The Woodlands Methodist Church and was recently*/}
-                            {/*    elected to serve the United Christian Ashram ministry as a member of The Four, the*/}
-                            {/*    governing staff of the UCA that was set up by E. Stanley Jones when the ministry began.*/}
-                            {/*    ​</p>*/}
-                            {/*<p className="text">Bob completed his undergraduate studies at Huston-Tillotson College in*/}
-                            {/*    Austin, Texas, majoring in English, and did his seminary graduate work at Perkins School*/}
-                            {/*    of Theology, SMU, Dallas, Texas. He later completed his D.Min. at Drew University in*/}
-                            {/*    Madison, New Jersey.</p>*/}
-                            {/*<p className="text">Bob is known as one of the best communicators in the faith and we are*/}
-                            {/*    excited to have him back this summer at the Texas Christian Ashram.</p>*/}
-                        </div>
-                        <div className="col-md-3">
-                            <Image src={andy} className="img-fluid mt-5" alt="andy" />
-                        </div>
-                    </div>
-                    <div className="row mx-4">
-                        <div className="col-md-9 px-5">
-                            <h6 className="subheading text-secondary">Evangelist</h6>
-                            <h1 className="heading">Bob Hayes</h1>
-                            <p className="text mt-5">Bob Hayes was born in Houston, Texas, and is the third generation of
-                                Methodist ministers in his family. Growing up in a Methodist parsonage the call to
-                                ministry came early, and at age 13, Robert gave his life to Christ. He says that his
-                                life was shaped by his father's preaching and his mother's knowledge of the great hymns
-                                of the faith.</p>
-                            <p className="text">Bob is married to Deliliah "Dee” Hayes and is the proud father of three
-                                grown children: Joya, Robert III, and Ryan. After retiring from his service as a United
-                                Methodist bishop he joined the staff of The Woodlands Methodist Church and was recently
-                                elected to serve the United Christian Ashram ministry as a member of The Four, the
-                                governing staff of the UCA that was set up by E. Stanley Jones when the ministry began.
-                                ​</p>
-                            <p className="text">Bob completed his undergraduate studies at Huston-Tillotson College in
-                                Austin, Texas, majoring in English, and did his seminary graduate work at Perkins School
-                                of Theology, SMU, Dallas, Texas. He later completed his D.Min. at Drew University in
-                                Madison, New Jersey.</p>
-                            <p className="text">Bob is known as one of the best communicators in the faith and we are
-                                excited to have him back this summer at the Texas Christian Ashram.</p>
-                        </div>
-                        <div className="col-md-3 mt-5">
-                            <Image src={speaker1} className="img-fluid mt-5 w-100" alt="speaker"/>
-                        </div>
-                        <div className="col-12">
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
 
 

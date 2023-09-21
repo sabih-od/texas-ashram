@@ -25,7 +25,8 @@ const Menu = () => {
     const token = Cookie.get('token');
 
     const openFacebookLinks = () => {
-        let urls = ['https://www.facebook.com/TexasChristianAshram', 'https://www.facebook.com/groups/135269503228833'];
+    // , 'https://www.facebook.com/groups/135269503228833'
+        let urls = ['https://www.facebook.com/TexasChristianAshram'];
 
         for (let i = 0; i < urls.length; i++) {
             let newWindow = window.open(urls[i], '_blank');
