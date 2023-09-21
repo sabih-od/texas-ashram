@@ -133,7 +133,7 @@ function Events() {
             <section>
                 <div className="container">
                     <div className="row justify-content-center">
-                        <h3 style={{color: 'black'}}>Typical Schedule for July Event</h3>
+                        <h3 style={{color: 'black'}}>Typical Daily Schedule for Main Event</h3>
                         <table className="table table-bordered">
                             <thead>
                             <tr className="table-header">
