@@ -12,7 +12,8 @@ import quote from "../images/new-html/quote.png";
 import noPath from "../images/NoPath.png";
 import familyPicture from "../images/imgpsh_fullsize_anim.png";
 import bannerVideo from "../public/banner.mp4";
-import bannerImage from "../images/Shape5.png";
+// import bannerImage from "../images/Shape5.png";
+import bannerImage from "../images/family.jpeg";
 import {useEffect, useRef} from 'react';
 import Link from "next/link";
 // Import Swiper React components

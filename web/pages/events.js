@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import moment from "moment";
 import {get, getEventPage} from "../services/eventService";
+import Image from "next/image";
+import andy from "../images/dr.andy.jpg";
+import speaker1 from "../images/speaker1.png";
 
 function Events() {
     const [events, setEvents] = useState([]);
@@ -71,6 +74,60 @@ function Events() {
                     </div>
                 </div>
             </section>
+
+            <section className="speakerMain eventMain pb-0">
+                <div className="container">
+                    <h1 className="heading mainHeading text-center">Program Event Description</h1>
+                    <div className="row mx-4">
+                        <div className="col-12">
+                            <h6 className="subheading text-secondary">Evangelist</h6>
+                            <h1 className="heading">Introductions and Prayer Requests</h1>
+                            <p>
+                                This is the first activity that kicks off the conference. This conference is unique, so
+                                the “Introductions and Prayer Request” time includes our history, overview of scheduled
+                                events, program times, and other unique features of the event. We include a time for
+                                individual prayer requests if you so choose. We believe that God wants to meet our
+                                needs.
+                            </p>
+
+                            <h1 className="heading">Morning Lakeside Devotion</h1>
+                            <p>
+                                For those of you who have been attending for a while, this event was formerly named
+                                “Morning Watch”. This was confusing because we don’t just watch a morning. We do more
+                                than that. We have a devotional time by the Lake. This event is the first event of each
+                                day. This event takes place at 7:00am and is geared for those early risers. For those of
+                                you who need a bit more sleep, breakfast is at 8:00am, and if you don’t need food, the
+                                morning event starts at 9:00am.
+                            </p>
+                            <h1 className='heading'>Morning, Afternoon, and Evening Sessions</h1>
+                            <p>
+                                These sessions are similar to church services, but with announcements, singing, and preaching. Ok,
+                                exactly like a church service. Throughout the conference, we will offer communion, opportunities to
+                                receive prayer, witness times, special music, choir, and occasionally the stupid human trick or two.
+                            </p>
+
+                            <h1 className='heading'>Small Groups</h1>
+                            <p>
+                                We love breaking the large group up into smaller groups to give people the chance to get to know one
+                                another. We have heard our introverted people like this time the best. During small groups, there is
+                                Q&A on what is being preached, prayer requests, and getting to know one another.
+                            </p>
+
+                            <h1 className='heading'>Closing Remarks and Thanksgivings</h1>
+                            <p>
+                                During this time, we close the event. We give an opportunity for folks to talk about their
+                                experience during the conference if they so choose. We discuss the upcoming future events. The last
+                                event is where we say our goodbyes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            {/*<div className="event-container">*/}
+            {/*    <h2>Program Event Description – This is a new section title</h2>*/}
+            {/*</div>*/}
 
 
             <section>
